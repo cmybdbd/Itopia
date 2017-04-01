@@ -1,0 +1,10 @@
+/node_modules
+/public/storage
+vendor/.git
+/.idea
+Homestead.json
+Homestead.yaml
+.env
+.env.example
+_ide_helper.php
+_ide_helper_models.php
