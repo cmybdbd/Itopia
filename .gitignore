@@ -1,6 +1,10 @@
 /node_modules
 /public/storage
-vendor/.git
+/storage/*.key
+
+/vendor
+
+产品原型/
 /.idea
 Homestead.json
 Homestead.yaml
