@@ -26,6 +26,7 @@ class CreateRoomTable extends Migration
             $table -> double('hourPrice');
             $table -> double('nightPrice');
 
+            $table -> integer('phoneOfManager');
             $table -> integer('state');
             $table->timestamps();
         });
@@ -38,6 +39,6 @@ class CreateRoomTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('room');
+        Schema::dropIfExists('rooms');
     }
 }

@@ -15,3 +15,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/home', 'HomeController@index');
+Route::get('/create/{id}', 'OrderController@createOrder');
+Route::get('/room', 'RoomController@manageRoom');

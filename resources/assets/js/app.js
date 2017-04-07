@@ -12,9 +12,17 @@ require('./bootstrap');
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
+/*
 Vue.component('example', require('./components/Example.vue'));
 
 const app = new Vue({
     el: '#app'
 });
+*/
+//require('jquery-mobile');
+//$.mobile = require('jquery-mobile');
+//require('mobiscroll');
+//require('../../../node_modules/mobiscroll');
+window.Picker = require('better-picker');
+//require('wheel-picker');
+dateFormat = require('dateformat');

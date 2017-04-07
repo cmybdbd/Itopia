@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Room;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -14,7 +15,17 @@ class OrderController extends Controller
     {
 
     }
-    function createOrder()
+    /*
+     * show
+     */
+    function createOrder($id)
+    {
+        return view('order.create')->withRoom(Room::find($id));
+    }
+    /*
+     * create
+     */
+    function storeOrder()
     {
 
     }

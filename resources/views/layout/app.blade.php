@@ -11,14 +11,18 @@
     <link rel="stylesheet" href="/css/app.css">
     <style type="text/css">
         @font-face { font-family:Noto-Sans; src: url('font/NotoSans-Bold.ttf'); }
-
+        body{
+            background-color: white;
+        }
         .mybox {
             box-shadow: 1vmin  1vmin  4vmin #dddddd;
             margin: 2vh;
             /*margin-bottom: 2vh;*/
             padding: 5vmin;
+            /*
             display: flex;
             flex-wrap: wrap;
+            */
         }
         .mybox .myrow{
             flex-basis: 100%;
@@ -61,6 +65,12 @@
         }
         .mybtn-group button:hover{
             background: #8c8b8b;
+        }
+        .scrollPicker, .present{
+            float: right;
+        }
+        .scrollPicker:after{
+            content:">";
         }
     </style>
     @yield('style')

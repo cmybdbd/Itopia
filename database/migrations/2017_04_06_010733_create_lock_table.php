@@ -14,7 +14,7 @@ class CreateLockTable extends Migration
     public function up()
     {
         //
-        Schema::create('rooms', function(Blueprint $table){
+        Schema::create('locks', function(Blueprint $table){
             $table -> uuid('id');
             $table -> primary('id');
             $table -> string('roomId');
@@ -32,6 +32,6 @@ class CreateLockTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lock');
+        Schema::dropIfExists('locks');
     }
 }
