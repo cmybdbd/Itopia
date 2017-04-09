@@ -9,16 +9,16 @@
 namespace App;
 
 define('DOMAIN', 'wjllance.cn');
-
+define('URL', 'http://www.wjllance.cn');
 
 class Constant
 {
 
-    public static $DOMAIN=DOMAIN;
+    public static $DOMAIN=URL;
 
 
-    public static $HOME_URL=DOMAIN.":1024/home";
-    public static $LOGIN_URL=DOMAIN.":1024/login";
+    public static $HOME_URL=URL."/home";
+    public static $LOGIN_URL=URL."/login";
 
 
 

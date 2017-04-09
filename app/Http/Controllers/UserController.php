@@ -63,6 +63,8 @@ class UserController extends Controller
         $redirectUrl = Constant::$LOGIN_URL;
         $weinxinAuth = new WeiXinAuth();
         $redirectUrl = $weinxinAuth->getAuthorizeURL($redirectUrl);
+        var_dump($redirectUrl);
+
         header("Location: $redirectUrl");
         exit();
     }
