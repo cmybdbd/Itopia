@@ -179,6 +179,8 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+
+        Overtrue\LaravelWechat\ServiceProvider::class
     ],
 
     /*
@@ -229,6 +231,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Uuid' => Webpatser\Uuid\Uuid::class,
+        'EasyWeChat' => Overtrue\LaravelWechat\Facade::class
     ],
 
 ];

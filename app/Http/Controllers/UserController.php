@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Constant;
 use App\WeiXinAuth;
+use EasyWeChat\Foundation\Application;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -11,62 +12,48 @@ class UserController extends Controller
 
     public function login()
     {
-        $code = @$_GET['code'];
-        if (empty($code))
-        {
-            $this->error('获取微信code失败');
+        $config = require ('../../../config/wechat.php');
+
+        $app = new Application($config);
+        $oauth = $app->oauth;
+        // 未登录
+        if (empty($_SESSION['wechat_user'])) {
+            $_SESSION['target_url'] = '/home';
+            return $oauth->redirect();
+            // 这里不一定是return，如果你的框架action不是返回内容的话你就得使用
+            // $oauth->redirect()->send();
         }
+        // 已经登录过
 
-        $weixinAuth = new WeiXinAuth();
-        $data = $weixinAuth->getAccessToken($code);
-
-        $accessToken = $data['access_token'];
-        $openId=$data['openid'];
-
-        /*
-        if (empty($data) || !isset($data['access_token']) || !isset($data['openid']))
-        {
-            // 有可能存在用户点击返回因而重新刷新了该URL
-            $userLogin = new UserLogin();
-            $user = $userLogin->userinfo();
-            $uid = @$user['uid'];
-            if (empty($uid))
-            {
-                $this->error("获取微信access_token失败|$code");
-            }
-        }
-        else
-        {
-            $openId = $data['openid'];
-            $userInfo = new UserinfoModel();
-            $channel = 'wx';
-            $user = $userInfo->getUser($channel, $openId);
-        }
-        */
-        
-
-        $user = $weixinAuth->getUserInfo($accessToken, $openId);
-
-        if (empty($user))
-        {
-            $this->error("获取微信用户信息失败|$accessToken|$openId");
-        }
+        $user = $_SESSION['wechat_user'];
 
 
-        var_dump($user);
+        $response = $app->oauth->scopes(['snsapi_userinfo'])
+            ->redirect();
 
-        //header("Location: ".Constant::$HOME_URL);
+//        $redirectUrl = Constant::$LOGIN_URL;
+//        $weinxinAuth = new WeiXinAuth();
+//        $redirectUrl = $weinxinAuth->getAuthorizeURL($redirectUrl);
+//        var_dump($redirectUrl);
+//
+//        header("Location: $redirectUrl");
+//        exit();
     }
 
-    public function wxAuth()
+    public function oauth_callback()
     {
-        $redirectUrl = Constant::$LOGIN_URL;
-        $weinxinAuth = new WeiXinAuth();
-        $redirectUrl = $weinxinAuth->getAuthorizeURL($redirectUrl);
-        var_dump($redirectUrl);
 
-        header("Location: $redirectUrl");
-        exit();
+        $config = require ('../../../config/wechat.php');
+        $app = new Application($config);
+        $oauth = $app->oauth;
+        // 获取 OAuth 授权结果用户信息
+        $user = $oauth->user();
+        $_SESSION['wechat_user'] = $user->toArray();
+        $targetUrl = empty($_SESSION['target_url']) ? '/home' : $_SESSION['target_url'];
+
+
+        var_dump($user).
+        //header('location:'. $targetUrl); // 跳转到 user/profile
     }
 
 }
