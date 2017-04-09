@@ -15,11 +15,10 @@ class Constant
 {
 
     public static $DOMAIN=DOMAIN;
-    public static $ROOT_URL=DOMAIN.":1024/";
 
 
-    public static $HOME_URL=DOMAIN."home";
-    public static $LOGIN_URL=DOMAIN."login";
+    public static $HOME_URL=DOMAIN.":1024/home";
+    public static $LOGIN_URL=DOMAIN.":1024/login";
 
 
 
