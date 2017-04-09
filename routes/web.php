@@ -18,5 +18,5 @@ Route::get('/home', 'HomeController@index');
 Route::get('/create/{id}', 'OrderController@createOrder');
 Route::get('/room', 'RoomController@manageRoom');
 
-Route::get('/wxAuth', 'UserController@wxAuth');
+Route::get('/oauth_callback', 'UserController@oauth_callback');
 Route::get('/login', 'UserController@login');

@@ -52,7 +52,7 @@ class UserController extends Controller
         $targetUrl = empty($_SESSION['target_url']) ? '/home' : $_SESSION['target_url'];
 
 
-        var_dump($user).
+        var_dump($user);
         //header('location:'. $targetUrl); // 跳转到 user/profile
     }
 
