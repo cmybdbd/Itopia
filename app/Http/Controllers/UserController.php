@@ -12,7 +12,7 @@ class UserController extends Controller
 
     public function login()
     {
-        $config = require ('../../../config/wechat.php');
+        $config = require('../../../config/wechat.php');
 
         $app = new Application($config);
         $oauth = $app->oauth;
@@ -43,7 +43,7 @@ class UserController extends Controller
     public function oauth_callback()
     {
 
-        $config = require ('../../../config/wechat.php');
+        $config = require('../../../config/wechat.php');
         $app = new Application($config);
         $oauth = $app->oauth;
         // 获取 OAuth 授权结果用户信息
