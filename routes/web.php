@@ -23,6 +23,6 @@ Route::get('/login', 'UserController@login');
 
 Route::get('/server', function(){
 	//return URL::asset('server.php');
-	include('server.php');
+	return view('server');
 });
 
