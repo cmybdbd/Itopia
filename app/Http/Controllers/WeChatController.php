@@ -40,7 +40,7 @@ class WeChatController extends Controller
         $oauth = $wechat->oauth;
         // 未登录
         if (empty($_SESSION['wechat_user'])) {
-            $_SESSION['target_url'] = 'home';
+            $_SESSION['target_url'] = '/home';
             return $oauth->redirect();
             // 这里不一定是return，如果你的框架action不是返回内容的话你就得使用
             // $oauth->redirect()->send();
@@ -56,8 +56,8 @@ class WeChatController extends Controller
         // 获取 OAuth 授权结果用户信息
         $user = $oauth->user();
         $_SESSION['wechat_user'] = $user->toArray();
-        $targetUrl = empty($_SESSION['target_url']) ? 'home' : $_SESSION['target_url'];
-        Redirect::to($targetUrl);
-        header('location:'. $targetUrl); // 跳转到目标url
+        $targetUrl = empty($_SESSION['target_url']) ? '/home' : $_SESSION['target_url'];
+        return Redirect::to($targetUrl);
+        //header('location:'. $targetUrl); // 跳转到目标url
     }
 }
