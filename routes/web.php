@@ -20,3 +20,5 @@ Route::get('/room', 'RoomController@manageRoom');
 
 Route::get('/oauth_callback', 'UserController@oauth_callback');
 Route::get('/login', 'UserController@login');
+
+Route::get('/server', 'server.php');
