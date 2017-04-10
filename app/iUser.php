@@ -18,9 +18,20 @@ class iUser extends Model
 
     protected $table='i_users';
 
-    public static function saveNewUser(string $json)
+    public static function saveNewUser($userInfo)
     {
-        $info = \GuzzleHttp\json_decode($json);
+        $user = new iUser();
+        $user->openid = $userInfo['openid'];
+        $user->nickname = $userInfo['nickname'];
+        $user->sex = $userInfo['sex'];
+        $user->province = $userInfo['province'];
+        $user->city = $userInfo['city'];
+        $user->country = $userInfo['country'];
+        $user->headimgurl = $userInfo['headimgurl'];
+        $user->privilege = $userInfo['privilege'];
+        $user->unionid = $userInfo['unionid'];
+        $user->save();
+
     }
 
 }
