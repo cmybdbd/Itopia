@@ -7,7 +7,7 @@
  */
 
 
-include __DIR__ . '/vendor/autoload.php'; // 引入 composer 入口文件
+include __DIR__ . '/../vendor/autoload.php'; // 引入 composer 入口文件
 use EasyWeChat\Foundation\Application;
 $options = [
     'debug'  => true,
