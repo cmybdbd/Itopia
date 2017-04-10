@@ -10,7 +10,7 @@ namespace App\Http\Controllers;
 
 
 use EasyWeChat\Foundation\Application;
-class WxController extends Controller
+class WeChatController extends Controller
 {
     public function check_server()
     {
@@ -26,27 +26,19 @@ class WxController extends Controller
             ],
             //...
         ];
-        $app = new Application($options);
-        $response = $app->server->serve();
+        $wechat = app('wechat');
+        $response = $wechat->server->serve();
 // 将响应输出
         return $response;
     }
 
     public function auth()
     {
-        $config = [
-            // ...
-            'oauth' => [
-                'scopes'   => ['snsapi_userinfo'],
-                'callback' => '/oauth_callback',
-            ],
-            // ..
-        ];
-        $app = new Application($config);
-        $oauth = $app->oauth;
+        $wechat = app('wechat');
+        $oauth = $wechat->oauth;
         // 未登录
         if (empty($_SESSION['wechat_user'])) {
-            $_SESSION['target_url'] = 'user/profile';
+            $_SESSION['target_url'] = '/home';
             return $oauth->redirect();
             // 这里不一定是return，如果你的框架action不是返回内容的话你就得使用
             // $oauth->redirect()->send();
@@ -57,15 +49,12 @@ class WxController extends Controller
 
     public function call_back()
     {
-        $config = [
-            // ...
-        ];
-        $app = new Application($config);
-        $oauth = $app->oauth;
+        $wechat = app('wechat');
+        $oauth = $wechat->oauth;
         // 获取 OAuth 授权结果用户信息
         $user = $oauth->user();
         $_SESSION['wechat_user'] = $user->toArray();
-        $targetUrl = empty($_SESSION['target_url']) ? '/' : $_SESSION['target_url'];
-        header('location:'. $targetUrl); // 跳转到 user/profile
+        $targetUrl = empty($_SESSION['target_url']) ? '/home' : $_SESSION['target_url'];
+        header('location:'. $targetUrl); // 跳转到目标url
     }
 }

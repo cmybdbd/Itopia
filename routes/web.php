@@ -18,8 +18,8 @@ Route::get('/home', 'HomeController@index');
 Route::get('/create/{id}', 'OrderController@createOrder');
 Route::get('/room', 'RoomController@manageRoom');
 
-Route::get('/oauth_callback', 'UserController@oauth_callback');
-Route::get('/login', 'UserController@login');
+Route::get('/oauth_callback', 'WeChatController@call_back');
+Route::get('/login', 'WeChatController@auth');
 
-Route::get('/server', 'WxController@check_server');
+Route::get('/server', 'WeChatController@check_server');
 
