@@ -21,4 +21,8 @@ Route::get('/room', 'RoomController@manageRoom');
 Route::get('/oauth_callback', 'UserController@oauth_callback');
 Route::get('/login', 'UserController@login');
 
-Route::get('/server', 'server.php');
+Route::get('/server', function(){
+	//return URL::asset('server.php');
+	include('server.php');
+});
+
