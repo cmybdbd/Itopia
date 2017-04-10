@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    function getOrderDetail()
+    function getOrderDetail($id)
     {
-
+        return view('order.result');
     }
     function getOrderList()
     {

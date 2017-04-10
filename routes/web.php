@@ -17,3 +17,4 @@ Route::get('/', function () {
 Route::get('/home', 'HomeController@index');
 Route::get('/create/{id}', 'OrderController@createOrder');
 Route::get('/room', 'RoomController@manageRoom');
+Route::get('/result/{id}','OrderController@getOrderDetail');
