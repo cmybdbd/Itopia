@@ -18,3 +18,5 @@ Route::get('/home', 'HomeController@index');
 Route::get('/create/{id}', 'OrderController@createOrder');
 Route::get('/room', 'RoomController@manageRoom');
 Route::get('/result/{id}','OrderController@getOrderDetail');
+Route::get('/comment/{id}', 'CommentController@create');
+Route::get('/commentResult', 'CommentController@finish');

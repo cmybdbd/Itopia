@@ -174,7 +174,7 @@
                 startTime.text(selectedDay + ' ' + time[selectedIndex[1]].text)
                     .attr("data-content", new Date((d === 0 ? today : tomorrow) + ' ' + time[selectedIndex[1]].value +
                 ':30:00').getTime());
-                
+
                 updateEndTime();
             });
             durationPicker.on('picker.select', function(selectedVal, selectedIndex){
