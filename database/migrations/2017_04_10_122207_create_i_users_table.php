@@ -18,14 +18,14 @@ class CreateIUsersTable extends Migration
             $table -> uuid('id');
             $table -> primary('id');
             $table->string('nickname');
-            $table->decimal('sex',1);
+            $table->decimal('sex',1,0);
             $table->string('province');
             $table->string('city');
             $table->string('country');
             $table->string('headimgurl');
             $table->string('privilege');
             $table->string('unionid');
-            $table->decimal('phonenumber', 11);
+            $table->decimal('phonenumber', 11,0);
             $table->string('idnumber', 18);
             $table->timestamps();
         });
