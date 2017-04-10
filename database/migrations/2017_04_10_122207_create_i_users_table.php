@@ -17,6 +17,7 @@ class CreateIUsersTable extends Migration
 
             $table -> uuid('id');
             $table -> primary('id');
+            $table->string('openid');
             $table->string('nickname');
             $table->decimal('sex',1,0);
             $table->string('province');

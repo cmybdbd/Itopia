@@ -59,9 +59,9 @@ class WeChatController extends Controller
         $_SESSION['wechat_user'] = $user->toArray();
 
 
-        $userMod = iUser::where('openid', $user->getId());
+        $count = iUser::where('openid', $user->getId())->count();
 
-        if(empty($userMod))
+        if($count == 0))
         {
             iUser::saveNewUser($user->getOriginal());
         }

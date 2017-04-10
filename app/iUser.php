@@ -29,7 +29,7 @@ class iUser extends Model
         $user->country = $userInfo['country'];
         $user->headimgurl = $userInfo['headimgurl'];
         $user->privilege = $userInfo['privilege'];
-        $user->unionid = $userInfo['unionid'];
+        $user->unionid = empty($userInfo['unionid'])?'':$userInfo['unionid'];
         $user->save();
 
     }
