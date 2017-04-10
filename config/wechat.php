@@ -18,7 +18,7 @@ return [
      */
     'app_id'  => env('WECHAT_APPID', 'wxd5494fb1aa9c9dbf'),         // AppID
     'secret'  => env('WECHAT_SECRET', 'bd332bb8aa7bbebf0710983c5f4a092e'),     // AppSecret
-    'token'   => env('WECHAT_TOKEN', 'your-token'),          // Token
+    'token'   => env('WECHAT_TOKEN', 'whatapity'),          // Token
     'aes_key' => env('WECHAT_AES_KEY', ''),                    // EncodingAESKey
 
     /**
@@ -76,15 +76,15 @@ return [
      *
      * 当 enable_mock 为 true 则会启用模拟微信授权，用于开发时使用，开发完成请删除或者改为 false 即可
      */
-    // 'enable_mock' => env('WECHAT_ENABLE_MOCK', true),
-    // 'mock_user' => [
-    //     "openid" =>"odh7zsgI75iT8FRh0fGlSojc9PWM",
-    //     // 以下字段为 scope 为 snsapi_userinfo 时需要
-    //     "nickname" => "overtrue",
-    //     "sex" =>"1",
-    //     "province" =>"北京",
-    //     "city" =>"北京",
-    //     "country" =>"中国",
-    //     "headimgurl" => "http://wx.qlogo.cn/mmopen/C2rEUskXQiblFYMUl9O0G05Q6pKibg7V1WpHX6CIQaic824apriabJw4r6EWxziaSt5BATrlbx1GVzwW2qjUCqtYpDvIJLjKgP1ug/0",
-    // ],
+     'enable_mock' => env('WECHAT_ENABLE_MOCK', true),
+     'mock_user' => [
+         "openid" =>"odh7zsgI75iT8FRh0fGlSojc9PWM",
+         // 以下字段为 scope 为 snsapi_userinfo 时需要
+         "nickname" => "overtrue",
+         "sex" =>"1",
+         "province" =>"北京",
+         "city" =>"北京",
+         "country" =>"中国",
+         "headimgurl" => "http://wx.qlogo.cn/mmopen/C2rEUskXQiblFYMUl9O0G05Q6pKibg7V1WpHX6CIQaic824apriabJw4r6EWxziaSt5BATrlbx1GVzwW2qjUCqtYpDvIJLjKgP1ug/0",
+     ],
 ];
