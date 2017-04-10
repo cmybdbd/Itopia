@@ -19,7 +19,7 @@ class WxController
             'app_id' => 'wxd5494fb1aa9c9dbf',
             'secret' => 'bd332bb8aa7bbebf0710983c5f4a092e',
             'token'  => 'whatapity',
-            'aes_key' => 'fxFIPtESqJHeNHbwb7jOdJiBLP7tTjtni1JIbcVnzus', // 可选
+            'aes_key' => 'BcgOSFxOGe04PF5IdhVrMzSSMyn2NHYRdI20LaJZvcf', // 可选
             'log' => [
                 'level' => 'debug',
                 'file'  => '/tmp/easywechat.log', // XXX: 绝对路径！！！！
