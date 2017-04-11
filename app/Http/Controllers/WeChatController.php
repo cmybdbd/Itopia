@@ -58,19 +58,13 @@ class WeChatController extends Controller
         $user = $oauth->user();
         $_SESSION['wechat_user'] = $user->toArray();
 
-        $openid = $user->getId();
-        $userMod = iUser::where('openid', $user->getId());
 
-        echo $user->getOriginal();
+        $count = iUser::where('openid', $user->getId())->count();
 
-        exit;
-        /*
-        if(empty($userMod))
+        if($count == 0)
         {
-            $newUser = new iUser();
-            $newUser->openid = $user->
+            iUser::saveNewUser($user->getOriginal());
         }
-        */
 
         $targetUrl = empty($_SESSION['target_url']) ? '/home' : $_SESSION['target_url'];
         return Redirect::to($targetUrl);
