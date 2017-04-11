@@ -9,6 +9,8 @@
         "barryvdh/laravel-ide-helper": "v2.3.2",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
+        "overtrue/laravel-wechat": "~3.0",
+        "overtrue/wechat": "~3.1",
         "webpatser/laravel-uuid": "2.0.1"
     },
     "require-dev": {

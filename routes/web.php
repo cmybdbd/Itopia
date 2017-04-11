@@ -20,3 +20,8 @@ Route::get('/room', 'RoomController@manageRoom');
 Route::get('/result/{id}','OrderController@getOrderDetail');
 Route::get('/comment/{id}', 'CommentController@create');
 Route::get('/commentResult', 'CommentController@finish');
+
+Route::get('/oauth_callback', 'WeChatController@call_back');
+Route::get('/login', 'WeChatController@auth');
+
+Route::get('/server', 'WeChatController@check_server');
