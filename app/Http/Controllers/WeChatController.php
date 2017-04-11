@@ -63,7 +63,12 @@ class WeChatController extends Controller
 
         if($count == 0)
         {
+            Log::info("new user");
             iUser::saveNewUser($user->getOriginal());
+        }
+        else {
+
+            Log::info("old user");
         }
 
         $targetUrl = empty($_SESSION['target_url']) ? '/home' : $_SESSION['target_url'];
