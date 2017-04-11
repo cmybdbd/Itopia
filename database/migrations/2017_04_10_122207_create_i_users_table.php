@@ -26,8 +26,8 @@ class CreateIUsersTable extends Migration
             $table->string('headimgurl');
             $table->string('privilege');
             $table->string('unionid');
-            $table->string('phonenumber', 11);
-            $table->string('idnumber', 18);
+            $table->string('phonenumber', 11)->nullable();
+            $table->string('idnumber', 18)->nullable();
             $table->timestamps();
         });
     }
