@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 
+use App\iUser;
 use EasyWeChat\Foundation\Application;
 use Illuminate\Support\Facades\Redirect;
 
@@ -56,6 +57,15 @@ class WeChatController extends Controller
         // 获取 OAuth 授权结果用户信息
         $user = $oauth->user();
         $_SESSION['wechat_user'] = $user->toArray();
+
+
+        $count = iUser::where('openid', $user->getId())->count();
+
+        if($count == 0)
+        {
+            iUser::saveNewUser($user->getOriginal());
+        }
+
         $targetUrl = empty($_SESSION['target_url']) ? '/home' : $_SESSION['target_url'];
         return Redirect::to($targetUrl);
         //header('location:'. $targetUrl); // 跳转到目标url
