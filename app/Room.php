@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Room extends Model
 {
+    use Uuids;
     //
     public $incrementing = false;
     protected $fillable = [
