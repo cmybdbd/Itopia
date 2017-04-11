@@ -3,9 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Uuids;
 class iUser extends Model
 {
+    use Uuids;
     //
     /**
      * The attributes that are mass assignable.
