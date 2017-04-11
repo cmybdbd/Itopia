@@ -10,6 +10,9 @@
     <title>Itopia</title>
     <link rel="stylesheet" href="/css/app.css">
     <style type="text/css">
+        :root {
+            --main-color: #1dccb8;
+        }
         @font-face { font-family:Noto-Sans; src: url('font/NotoSans-Bold.ttf'); }
         body{
             background-color: white;
@@ -30,9 +33,9 @@
         }
         hr.mysplit {
             border: 0;
-            height: 1vh;
-            background-image: -webkit-linear-gradient(left, transparent , #aeecc7 20% , #aeecc7 80%, transparent 100%);
-            background-image: -moz-linear-gradient(left, transparent ,#aeecc7 20%, #aeecc7 80%, transparent 100%);
+            height: 1px;
+            background-image: -webkit-gradient(linear,0 0, 100% 0 ,from(transparent), to(transparent),color-stop(20%, var(--main-color)) , color-stop(80%, var(--main-color)));
+            -moz-background-image: -moz-linear-gradient(left, transparent ,var(--main-color) 20%, var(--main-color) 80%, transparent 100%);
         }
         .mybtn-group{
             width: 100%;

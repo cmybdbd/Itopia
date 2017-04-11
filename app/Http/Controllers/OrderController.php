@@ -25,7 +25,7 @@ class OrderController extends Controller
     /*
      * create
      */
-    function storeOrder()
+    function storeOrder(Request $request)
     {
 
     }
