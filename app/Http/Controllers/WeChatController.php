@@ -11,6 +11,7 @@ namespace App\Http\Controllers;
 
 use App\iUser;
 use EasyWeChat\Foundation\Application;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 
 class WeChatController extends Controller
