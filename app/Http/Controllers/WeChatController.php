@@ -61,7 +61,7 @@ class WeChatController extends Controller
 
         $count = iUser::where('openid', $user->getId())->count();
 
-        if($count == 0))
+        if($count == 0)
         {
             iUser::saveNewUser($user->getOriginal());
         }
