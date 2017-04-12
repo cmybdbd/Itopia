@@ -230,7 +230,7 @@
             })
             $("#toPay").parent().on('click', function(){
                 if(checkToPay())
-                    window.location.href = '/result/0';
+                    window.location.href = 'result/0';
             })
         });
     </script>

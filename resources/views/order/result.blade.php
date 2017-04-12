@@ -23,7 +23,7 @@
     <div class="mybox">
         <div class="mybtn-group">
             <button>遇到问题</button>
-            <a href="/comment/0" class="btn btn-block">结束使用</a>
+            <a href="{{url('comment/0')}}" class="btn btn-block">结束使用</a>
         </div>
     </div>
 @endsection

@@ -5,12 +5,13 @@
     <div class="header" style="margin-bottom: 2vh;box-shadow:0 1px 4px #dddddd">
         <div class="mybtn-group">
             <button>
-                <i class="fa fa-user-circle fa-fw" style="color:#aeecc7"></i>
+                <i class="fa fa-user-circle fa-fw" style="color:var(--main-color)"></i>
+
                 <br>
                 我的订单
             </button>
             <button>
-                <i class="fa fa-phone fa-fw" style="color:#aeecc7"></i>
+                <i class="fa fa-phone fa-fw" style="color:var(--main-color)"></i>
                 <br>
                 反馈意见
             </button>
