@@ -33,6 +33,8 @@ class IDAuthController extends Controller
         );
         $params['signature'] = $this->getSignature($params);
         $query_url = $this->api_url.$this->source."?".http_build_query($params);
+        die($query_url);
+
         $ret = ApiHandle::httpGet($query_url);
         if($ret)
         {
