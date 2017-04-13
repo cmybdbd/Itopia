@@ -19,6 +19,7 @@ class IDAuthController extends Controller
 
     public function IDauth()
     {
+
         $name = $_GET['name'];
         $idnumber = $_GET['id_card'];
         $timestamp = $this->getMillisecond();
@@ -33,13 +34,23 @@ class IDAuthController extends Controller
         );
         $params['signature'] = $this->getSignature($params);
         $query_url = $this->api_url.$this->source."?".http_build_query($params);
-        die($query_url);
-
         $ret = ApiHandle::httpGet($query_url);
         if($ret)
         {
-            //$ret = json_decode($ret, true);
-            var_dump($ret);
+            $ret = json_decode($ret, true);
+            if($ret['success'])
+            {
+
+                //save
+            }
+            else
+            {
+                return Response::json(array(
+                    "code" => 502,
+                    "content" => "不匹配"
+                ));
+            }
+//            var_dump($ret);
         }
         else
         {
@@ -57,7 +68,6 @@ class IDAuthController extends Controller
         $arr[] = $this->key;
         $arr[] = $this->source;
         sort($arr);
-        var_dump($arr);
         $sig="";
         foreach ($arr as $var)
         {
