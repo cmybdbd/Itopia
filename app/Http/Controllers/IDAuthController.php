@@ -57,6 +57,7 @@ class IDAuthController extends Controller
         $arr[] = $this->key;
         $arr[] = $this->source;
         sort($arr);
+        var_dump($arr);
         $sig="";
         foreach ($arr as $var)
         {
