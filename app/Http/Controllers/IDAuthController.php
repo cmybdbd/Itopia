@@ -53,8 +53,9 @@ class IDAuthController extends Controller
     private function getSignature($params)
     {
         $arr = array_values($params);
-        var_dump($arr);
+        //var_dump($arr);
         $arr[] = $this->key;
+        $arr[] = $this->source;
         sort($arr);
         $sig="";
         foreach ($arr as $var)
