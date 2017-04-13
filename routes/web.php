@@ -27,3 +27,4 @@ Route::get('/server', 'WeChatController@check_server');
 Route::get('/lock/callback', 'LockController@callback');
 
 Route::get('/sendCode', 'SMSController@sendCode');
+Route::get('/idAuth', 'IDAuthController@IDauth');
