@@ -11,9 +11,9 @@ class IDAuthController extends Controller
 {
     //
 //      线上
-//    private $api_url = 'https://open.wecash.net/query/v1/';
+    private $api_url = 'https://open.wecash.net/query/v1/';
 //  线下
-    private $api_url = "http://open-test.wecash.net:8180/query/v1/";
+//    private $api_url = "http://open-test.wecash.net:8180/query/v1/";
     private $source = "100302";
     private $key = "839B8DDB-5812-4103-BF1B-12B9C4E68022-20170407161502722-100302";
 
