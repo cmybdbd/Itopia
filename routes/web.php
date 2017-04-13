@@ -26,4 +26,4 @@ Route::get('/server', 'WeChatController@check_server');
 
 Route::get('/lock/callback', 'LockController@callback');
 
-Route::get('/sendCode/{mblNo}', 'SMSController@sendCode');
+Route::get('/sendCode', 'SMSController@sendCode');

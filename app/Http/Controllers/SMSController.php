@@ -11,14 +11,14 @@ class SMSController extends Controller
 {
     //
 
-    private $accountNo = 'accountNo:rent2';
+    private $accountNo = 'rent2';
     private $pwd = 'bcv86vcs9ip11m';
 
     private $smsUrl = 'http://sms.wecash.net/sms-platform/sms/sendSMSCode';
 
     public function sendCode()
     {
-        $mblNo = Input::get('mblNo');
+        $mblNo = $_GET['phonenumber'];
         $templateNo = 'MNY001';
         $repVar = '8807';
         $ret = $this->sendMessage($templateNo, $repVar, $mblNo);
@@ -46,8 +46,8 @@ class SMSController extends Controller
             "mblNo" => $mblNo,
             "repVar" => $repVar
         );
-        $query_url = $this->smsUrl."?".http_build_query($params);
-        die($query_url);
+//        $query_url = $this->smsUrl."?".http_build_query($params);
+//        die($query_url);
 
         return ApiHandle::httpGet($query_url);
     }
