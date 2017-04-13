@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ApiHandle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
@@ -46,6 +47,6 @@ class SMSController extends Controller
             "repVar" => $repVar
         );
         $query_url = $this->smsUrl.http_build_query($params);
-        return http_get($query_url);
+        return ApiHandle::httpGet($query_url);
     }
 }
