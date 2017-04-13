@@ -23,3 +23,7 @@ Route::get('/oauth_callback', 'WeChatController@call_back');
 Route::get('/login', 'WeChatController@auth');
 
 Route::get('/server', 'WeChatController@check_server');
+
+Route::get('/lock/callback', 'LockController@callback');
+
+Route::get('/sendCode/{mblNo}', 'SMSController@sendCode');
