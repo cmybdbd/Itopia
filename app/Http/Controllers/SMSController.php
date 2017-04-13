@@ -46,8 +46,8 @@ class SMSController extends Controller
             "mblNo" => $mblNo,
             "repVar" => $repVar
         );
-        $query_url = $this->smsUrl.http_build_query($params);
-        die($query_url);
+        $query_url = $this->smsUrl."?".http_build_query($params);
+        //die($query_url);
 
         return ApiHandle::httpGet($query_url);
     }
