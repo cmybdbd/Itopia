@@ -17,7 +17,7 @@ class Constant
 
     public static $HOME_URL=URL."/home";
     public static $LOGIN_URL=URL."/login";
-
+    public static $REPORT_PHONE=17302175859;
 
     public static $ORDER_STATE = array(
         'REMOVE'   => 0,

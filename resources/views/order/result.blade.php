@@ -44,7 +44,7 @@
             主人的私人空间地址
         </div>
         <div class="b-color">
-            地址：{{$room->address}}
+            地址：{{$orders->hasRoom->address}}
         </div>
         <div class="myrow" style="margin-bottom: 1vh;display:block;text-align:center" >
             <img src="{{asset('storage/arch.jpg')}}" style="width: 100%" >

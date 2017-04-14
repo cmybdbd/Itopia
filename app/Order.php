@@ -11,4 +11,7 @@ class Order extends Model
     protected $fillable = [
         'userId', 'roomId', 'state',
     ];
+    public function hasRoom(){
+        return $this->belongsTo('App\Room','roomId', 'id');
+    }
 }

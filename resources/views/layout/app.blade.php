@@ -94,13 +94,55 @@
         .mybtn-group button:last-child::after{
             content:"";
         }
+        #param{
+            display: none;
+        }
 
+        .modal {
+            text-align: center;
+        }
+
+        @media screen and (min-width: 768px) {
+            .modal:before {
+                display: inline-block;
+                top: 30%;
+
+                content: " ";
+                height: 100%;
+            }
+        }
+
+        .modal-dialog {
+            display: inline-block;
+            text-align: left;
+            top:40%
+        }
     </style>
     @yield('style')
 </head>
 <body>
 @yield('content')
+<div class="modal fade bs-example-modal-sm report-content" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+        <div class="modal-body" style="text-align: center;">
+            <div style="margin-left:5%;margin-right:5%;">
+                主人莫生气，电话联系小@ ({{\App\Utils\Constant::$REPORT_PHONE}}),或在后台留言，小@会神速回复
+            </div>
+            <hr class="mysplit" style="margin: 0.5em;">
+            <button class="m-color font-b"
+                    data-dismiss="modal"
+                    style="border:none;width:100%;height:100%;background-color:white;">朕知道了</button>
+        </div>
+    </div>
+    </div>
+</div>
 <script src="{{url('js/app.js')}}"></script>
+<script>
+    $("#report").on('click',function () {
+        $(".report-content").modal();
+    });
+</script>
 @yield('scripts')
 </body>
 </html>

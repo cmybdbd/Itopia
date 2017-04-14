@@ -29,7 +29,7 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('/result/{id}','OrderController@getOrderDetail');
     Route::get('/comment/{id}', 'CommentController@create');
     Route::get('/commentResult', 'CommentController@finish');
-
+    Route::get('/orderList/{id}', 'OrderController@getOrderList');
 });
 Route::group(['middleware' => ['web','wechat.oauth']], function () {
     Route::get('/login', 'WeChatController@auth')->name('login');

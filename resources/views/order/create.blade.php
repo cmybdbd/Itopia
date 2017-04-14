@@ -168,7 +168,7 @@
     <div id="toPay" class="myTail font-b m-color" style="height:3em;margin-top: 2vh;box-shadow:0 -1px 6px #eeeeee">
         <button style="width: 100%;height: 100%; border:none;background:transparent">去支付</button>
     </div>
-    <div id="param" style="display:none">
+    <div id="param">
         <div id="userId" data-content="{{\Illuminate\Support\Facades\Auth::user()->id}}"></div>
         <div id="roomId" data-content="{{$room->id}}"></div>
         <div id="exs" data-content="{{$olderOrder}}"></div>
@@ -366,7 +366,14 @@
                         type: 'POST',
                         success: function(param){
                             console.log(param);
-                          //  window.location.href = '/result/0';
+                            if(param['code'] == '200')
+                            {
+                                window.location.href = window.location.href.replace(
+                                    /create.*/,
+                                    'result/'+param['orderId']
+                                );
+                            }
+
                         },
                         error: function (e){
                             console.log(e.responseText);

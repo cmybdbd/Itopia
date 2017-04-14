@@ -24,7 +24,14 @@
         </div>
         <br>
         <div>
-            <button class="btn btn-lg btn-default">返回首页</button>
+            <button class="btn btn-lg btn-default" id="return">返回首页</button>
         </div>
     </div>
+@endsection
+@section('scripts')
+    <script>
+    $("#return").on('click',function () {
+        window.location.href = window.location.href.replace('commentResult', 'home');
+    })
+    </script>
 @endsection

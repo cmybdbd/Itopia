@@ -16,13 +16,15 @@ class OrderController extends Controller
 {
     function getOrderDetail($id)
     {
-        $order = Order::find($id);
-        $room = Room::find($order->roomId);
-        return view('order.result')->withRoom($room);
+        return view('order.result')->withOrders(Order::with('hasRoom')->where('id','=',$id)->first());
     }
-    function getOrderList()
+    function getOrderList($id)
     {
-
+        $orders = Order::where('userId' ,'=', $id) ->get();
+        return view('order.list')->withOrders(Order::with('hasRoom')->where([
+            ['userId','=',$id],
+        ['state' ,'>',Constant::$ORDER_STATE['UNPAY']]
+        ])->get());
     }
     /*
      * show
@@ -163,7 +165,7 @@ class OrderController extends Controller
     function completeOrder()
     {}
 
-
+/*
     private function getWeChatPayParam($p)
     {
         date_default_timezone_set('PRC');
@@ -227,6 +229,6 @@ class OrderController extends Controller
         return $response;
 
     }
-
+*/
 
 }
