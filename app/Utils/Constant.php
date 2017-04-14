@@ -18,6 +18,10 @@ class Constant
     public static $HOME_URL=URL."/home";
     public static $LOGIN_URL=URL."/login";
 
+    public static $STATUS_CODE = array(
+        "OK" => 200,
+        "PARAMS_MISS" => 400,
+    );
 
     public static $ORDER_STATE = array(
         'REMOVE'   => 0,

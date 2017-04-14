@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\ApiHandle;
-use App\Constant;
 use App\EventCallback;
+use App\Lock;
 use App\LockToken;
+use App\Utils\Constant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
@@ -19,6 +20,7 @@ define('LOCK_API', 'http://115.28.141.204：8090/openapi/v1/');
 class LockController extends Controller
 {
     //线下
+    private $home_id = 'lkjl0011170300183734';
     private $client_id='c23b578799413d777340d7d2';
     private $client_secret='741a9ea72cf5c5c5f3051c8471de90c0';
 
@@ -47,6 +49,61 @@ class LockController extends Controller
             }
         }
         return $token;
+    }
+
+    public function add_password()
+    {
+        $room_id = $_GET['room_id'];
+//        $is_default = $_GET['is_default'];
+        $password = $_GET['password'];
+        $permisson_begin = $_GET['permission_begin'];
+        $permisson_end = $_GET['permission_end'];
+
+        $is_default = isset($_GET['is_default'])?$_GET['is_default']:0;
+
+        if(empty($room_id) || empty($password) || empty($permisson_begin) || empty($permisson_end))
+        {
+            $ret = array(
+                "code" => Constant::$STATUS_CODE['PARAMS_MISS'],
+                "content" => "params miss"
+            );
+            return Response::json($ret);
+        }
+
+        $params = array(
+            "access_token" => $this->access_token(),
+            "home_id" => $this->home_id,
+            "room_id" => $room_id,
+            "is_default" => $is_default,
+            "is_send_location" => true,
+            "password" => $password,
+            "permission_begin" => $permisson_begin,
+            "permission_end" => $permisson_end
+        );
+
+        $phone = $_GET['phone'];
+        if(isset($phone))
+        {
+            $params['phonenumber'] = $phone;
+        }
+
+        $query_url = LOCK_API.'add_password';
+        $res = ApiHandle::httpPostJson($query_url, $params);
+        $res = json_decode($res, true);
+        if(isset($res['ErrNo']))
+        {
+            return Response::json($res);
+        }
+        else
+        {
+            $pwd_id = $res['id'];
+            Lock::add_password($room_id, $pwd_id, $password, $permisson_begin, $permisson_end);
+            $ret = array(
+                'code' => Constant::$STATUS_CODE['OK']
+            );
+            return Response::json($ret);
+        }
+
     }
 
     /*todo...*/
