@@ -20,8 +20,8 @@ class CreateLockTable extends Migration
             $table -> string('room_id');
             $table -> string('password_id');
             $table -> string('password', 6);
-            $table -> timestamp('permission_begin')->default(\DB::raw('CURRENT_TIMESTAMP'));
-            $table -> timestamp('permission_end')->default(\DB::raw('CURRENT_TIMESTAMP') + 3600);
+            $table -> timestamp('permission_begin')->nullable();
+            $table -> timestamp('permission_end')->nullable();
 //            $table -> integer('state');
             $table->timestamps();
         });
