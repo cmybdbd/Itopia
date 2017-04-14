@@ -51,7 +51,7 @@ class LockController extends Controller
         return $token;
     }
 
-    public function add_password()
+    public function addPassword()
     {
         $room_id = $_GET['room_id'];
 //        $is_default = $_GET['is_default'];

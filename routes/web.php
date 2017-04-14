@@ -40,3 +40,6 @@ Route::get('/lock/callback', 'LockController@callback');
 
 Route::get('/sendCode', 'SMSController@sendCode');
 Route::get('/idAuth', 'IDAuthController@IDauth');
+Route::group(['prefix' => 'lock'], function(){
+    Route::get('add_password', "LockController@addPassword");
+});
