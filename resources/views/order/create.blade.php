@@ -7,7 +7,7 @@
             box-shadow: 0 1px 10px #eeeeee;
         }
         .nav-pills > li.active > a{
-            color: var(--main-color);
+            color: var(--main-color) !important;
             background: transparent !important;
         }
         .nav-pills > li{
@@ -112,7 +112,7 @@
                 </div>
             </div>
             <div role="tabpanel" class="tab-pane " id="byNight">
-                <div class="mybox">
+                <div class="mybox selectPanel">
                     日期
                     <div id="dateTime" class="scrollPicker" data-content="{{$startNightTime}}">
 
@@ -121,16 +121,19 @@
             </div>
         </div>
 
-        <div>
+        <div class="m-color" style="margin-top: 3vw;">
             订单结算
         </div>
-        <div class="mybox">
+        <div class="mybox selectPanel">
             总计
-            <div id="totalPrice" class="present"></div>
+            <div class="present" style="color: var(--price-color)">
+                <span id="totalPrice"></span>元
+            </div>
         </div>
     </div>
-    <div>
-        <input type="checkbox" id="agreement">本人已获悉并同意《ITOPIA即时私人空间用户服务协议》
+    <div style="margin: 3vw;">
+        <input type="checkbox" id="agreement">
+        <label for=""></label>本人已获悉并同意《ITOPIA即时私人空间用户服务协议》
     </div>
     <div class="mybox">
         <div id="toPay">
