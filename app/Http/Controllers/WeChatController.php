@@ -9,9 +9,10 @@
 namespace App\Http\Controllers;
 
 
-use App\iUser;
+//use App\iUser;
 use App\Order;
 use App\User;
+use App\Utils\Constant;
 use EasyWeChat\Foundation\Application;
 use Illuminate\Support\Facades\Redirect;
 
@@ -44,14 +45,15 @@ class WeChatController extends Controller
         if (empty($user)) {
             $wechat = app('wechat');
             $oauth = $wechat->oauth;
-
+            $user = $oauth->user();
             // 这里不一定是return，如果你的框架action不是返回内容的话你就得使用
             // $oauth->redirect()->send();
         }
         $u = \App\User::find($user->id);
         if(!$u)
         {
-            $u = \App\User::create(['id'=>$user->id]);
+            //$u = \App\User::create(['id'=>$user->id]);
+            $u = User::saveNewUser($user->getOriginal());
         }
         \Illuminate\Support\Facades\Auth::login($u, true);
         $_SESSION['target_url'] = '/home';
@@ -69,11 +71,11 @@ class WeChatController extends Controller
         $_SESSION['wechat_user'] = $user->toArray();
 
 
-        $count = iUser::where('openid', $user->getId())->count();
+        $count = User::where('openid', $user->getId())->count();
 
         if($count == 0)
         {
-            iUser::saveNewUser($user->getOriginal());
+            User::saveNewUser($user->getOriginal());
         }
 
         $targetUrl = empty($_SESSION['target_url']) ? '/home' : $_SESSION['target_url'];
@@ -95,16 +97,16 @@ class WeChatController extends Controller
             }
             // 如果订单存在
             // 检查订单是否已经更新过支付状态
-            if ($order->state > \Constant::$ORDER_STATE['UNPAY']) { // 假设订单字段“支付时间”不为空代表已经支付
+            if ($order->state > Constant::$ORDER_STATE['UNPAY']) { // 假设订单字段“支付时间”不为空代表已经支付
                 return true; // 已经支付成功了就不再更新了
             }
             // 用户是否支付成功
             if ($successful) {
                 // 不是已经支付状态则修改为已经支付状态
 //                $order->paid_at = time(); // 更新支付时间为当前时间
-                $order->state = \Constant::$ORDER_STATE['TOUSE'];
+                $order->state = Constant::$ORDER_STATE['TOUSE'];
             } else { // 用户支付失败
-                $order->state = \Constant::$ORDER_STATE['FAILED'];
+                $order->state = Constant::$ORDER_STATE['FAILED'];
             }
             $order->save(); // 保存订单
 
