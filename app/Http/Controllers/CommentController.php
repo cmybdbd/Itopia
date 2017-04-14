@@ -13,4 +13,12 @@ class CommentController extends Controller
     {
 
     }
+    function create()
+    {
+        return view('comment.create');
+    }
+    function finish()
+    {
+        return view('comment.finish');
+    }
 }
