@@ -2,7 +2,7 @@
 @extends('layout.app')
 
 @section('content')
-    <div class="header" style="margin-bottom: 2vh;box-shadow:0 1px 4px #dddddd">
+    <div class="myHeader" style="margin-bottom: 2vh;box-shadow:0 1px 6px #eeeeee">
         <div class="mybtn-group">
             <button>
                 <i class="fa fa-user-circle fa-fw m-color font-b"></i>
@@ -20,7 +20,7 @@
     <div class="content">
         @foreach($rooms as $key => $room)
             <div class="mybox">
-                <a class="btn" href="{{'create/'.$room->id}}">
+                <a class="btn" href="{{'create/'.\Illuminate\Support\Facades\Auth::id().'/'.$room->id}}">
                 <div class="myrow" style="margin-bottom: 1vh;display:block;text-align:center" >
                     <img src="{{asset('storage/arch.jpg')}}" style="width: 100%" >
                 </div>

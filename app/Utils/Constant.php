@@ -5,7 +5,7 @@
  * Date: 4/9/17
  * Time: 6:00 PM
  */
-
+namespace App\Utils;
 define('DOMAIN', 'wjllance.cn');
 define('URL', 'http://www.wjllance.cn');
 

@@ -5,7 +5,7 @@
  * Date: 4/12/17
  * Time: 9:28 PM
  */
-
+namespace App\Utils;
 class Utils{
     static public function my_buid_query($prestring, $encodeUrl=false){
         $pstr= '';

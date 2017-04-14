@@ -18,10 +18,13 @@ Route::get('/', function () {
 Route::get('/oauth_callback', 'WeChatController@call_back');
 Route::get('/payment/callback', 'WeChatController@payment_call_back');
 Route::get('/server', 'WeChatController@check_server');
-Route::group(['middleware' => 'auth'], function (){
 
+
+Route::post('/order/create', 'OrderController@storeOrder');
+
+Route::group(['middleware' => 'auth'], function (){
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/create/{id}', 'OrderController@createOrder');
+    Route::get('/create/{uid}/{rid}', 'OrderController@createOrder');
     Route::get('/room', 'RoomController@manageRoom');
     Route::get('/result/{id}','OrderController@getOrderDetail');
     Route::get('/comment/{id}', 'CommentController@create');

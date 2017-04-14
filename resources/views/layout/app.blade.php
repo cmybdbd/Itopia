@@ -25,14 +25,9 @@
             margin: 4.2vw 3.2vw 3.2vw 3.2vw;
         }
         .mybox {
-            box-shadow: 1vmin  1vmin  4vmin var(--used-color);
-            margin: 4.2vw 3.2vw 3.2vw 3.2vw;
-            /*margin-bottom: 2vh;*/
-            padding: 5vmin;
-            /*
-            display: flex;
-            flex-wrap: wrap;
-            */
+            box-shadow: 0 0 6px #dddddd;
+            margin: 4.2vw 4.2vw 4.2vw 4.2vw;
+            padding: 2vmin;
         }
         .flex-center{
             display: flex;
@@ -76,38 +71,28 @@
         }
         .mybtn-group button{
             border: none;
-            border-right: 1px solid;
             background: transparent;
             cursor: pointer;
-            border-image:
-                    linear-gradient(transparent , var(--main-color) , transparent) 10% 100%;
-            -moz-border-image:
-                    -moz-linear-gradient(transparent, var(--main-color),transparent) 10% 100%;
-            -webkit-border-image:
-                    -webkit-linear-gradient(transparent, var(--main-color),transparent) 10% 100%;
+            position: relative;
             margin: 0 0 0 0;
             padding: 0;
             width: 50%;
             height: 100%;
             float: left;
         }
-        .mybtn-group button:last-child{
-            border-right: none;
-        }
-        .mybtn-group:after{
+        .mybtn-group button::after{
+            position: absolute;
             content: "";
-            clear:both;
-            display: table;
+            top: 8%;
+            right: -1px;
+            width: 1px;
+            height: 84%;
+            background-image: -webkit-gradient(linear,0 0, 0 100% ,from(transparent), to(transparent),color-stop(20%, var(--main-color)) , color-stop(80%, var(--main-color)));
         }
-        .mybtn-group button:hover{
-            background: #8c8b8b;
+        .mybtn-group button:last-child::after{
+            content:"";
         }
-        .scrollPicker, .present{
-            float: right;
-        }
-        .scrollPicker:after{
-            content:">";
-        }
+
     </style>
     @yield('style')
 </head>
