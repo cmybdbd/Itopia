@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ApiHandle;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
@@ -34,30 +35,35 @@ class IDAuthController extends Controller
         );
         $params['signature'] = $this->getSignature($params);
         $query_url = $this->api_url.$this->source."?".http_build_query($params);
-        $ret = ApiHandle::httpGet($query_url);
-        if($ret)
+        $res = ApiHandle::httpGet($query_url);
+        if($res)
         {
-            $ret = json_decode($ret, true);
-            if($ret['success'])
+            $res = json_decode($res, true);
+            if($res['success'])
             {
+                User::saveIDcard($idnumber);
+                $ret = array(
+                    "code" => 200
+                );
                 //save id number and name
             }
             else
             {
-                return Response::json(array(
+                $ret = array(
                     "code" => 502,
                     "content" => "不匹配"
-                ));
+                );
             }
 //            var_dump($ret);
         }
         else
         {
-            return Response::json(array(
+            $ret = array(
                 "code" => 501,
                 "content" => "认证失败！"
-            ));
+            );
         }
+        return Response::json($ret);
     }
 
     private function getSignature($params)

@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -42,5 +43,28 @@ class User extends Authenticatable
         $user->unionid = empty($userInfo['unionid'])?'':$userInfo['unionid'];
         $user->save();
         return $user;
+    }
+
+    public static function savePhone($phone, $id = null)
+    {
+        $user = User::getUser($id);
+        $user->phonenumber = $phone;
+        $user->save();
+    }
+
+    public static function saveIDcard($idnumber, $id)
+    {
+        $user = User::getUser($id);
+        $user->idnumber = $idnumber;
+        $user->save();
+    }
+
+    public static function getUser($id = null)
+    {
+        if($id == null)
+        {
+            $id = Auth::id();
+        }
+        return User::find($id);
     }
 }

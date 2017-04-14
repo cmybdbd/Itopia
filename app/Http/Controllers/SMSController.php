@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\ApiHandle;
+use App\Session;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
@@ -19,8 +21,12 @@ class SMSController extends Controller
     public function sendCode()
     {
         $mblNo = $_GET['phonenumber'];
+        Session::write('phonenumber', $mblNo);
         $templateNo = 'RNT002';
-        $repVar = '8807';
+
+        $dynCode = rand(1000,9999);
+        Session::write("dynCode", $dynCode);
+        $repVar = (string)$dynCode;
         $ret = array(
             'code' => "501",
             "content" => "发送失败，请重试"
@@ -46,9 +52,11 @@ class SMSController extends Controller
         $ret = array();
         if(isset($_SESSION["dynCode"]))
         {
-            if($_GET['dynCode'] == $_SESSION['dynCode'])
+            if(intval($_GET['dynCode']) == intval($_SESSION['dynCode']))
             {
 //  save phonenumber
+                User::savePhone(Session::read('phonenumber'));
+
                 $ret = array(
                     "code" => 200,
                     "content" => "验证通过"
