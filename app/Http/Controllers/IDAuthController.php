@@ -40,8 +40,7 @@ class IDAuthController extends Controller
             $ret = json_decode($ret, true);
             if($ret['success'])
             {
-
-                //save
+                //save id number and name
             }
             else
             {

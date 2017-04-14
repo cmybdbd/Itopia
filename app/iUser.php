@@ -18,6 +18,7 @@ class iUser extends Model
 
     protected $table='i_users';
 
+
     public static function saveNewUser($userInfo)
     {
         $user = new iUser();
