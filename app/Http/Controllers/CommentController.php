@@ -15,10 +15,12 @@ class CommentController extends Controller
     }
     function create()
     {
+        PageViewController::updatePageView('comment');
         return view('comment.create');
     }
     function finish()
     {
+        PageViewController::updatePageView('commentResult');
         return view('comment.finish');
     }
 }

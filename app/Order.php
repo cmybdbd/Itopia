@@ -14,4 +14,7 @@ class Order extends Model
     public function hasRoom(){
         return $this->belongsTo('App\Room','roomId', 'id');
     }
+    public function hasUser(){
+        return $this->belongsTo('App\User', 'userId', 'id');
+    }
 }

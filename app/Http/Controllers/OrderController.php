@@ -16,14 +16,23 @@ class OrderController extends Controller
 {
     function getOrderDetail($id)
     {
+        PageViewController::updatePageView('result');
         return view('order.result')->withOrders(Order::with('hasRoom')->where('id','=',$id)->first());
     }
     function getOrderList($id)
     {
-        $orders = Order::where('userId' ,'=', $id) ->get();
+        PageViewController::updatePageView('orderList');
         return view('order.list')->withOrders(Order::with('hasRoom')->where([
             ['userId','=',$id],
         ['state' ,'>',Constant::$ORDER_STATE['UNPAY']]
+        ])->get());
+    }
+    function manageOrder()
+    {
+        return view('manage.order')->withOrders(Order::with('hasRoom')
+            ->with('hasUser')
+        ->where([
+            ['state', '>', 2],
         ])->get());
     }
     /*
@@ -63,6 +72,7 @@ class OrderController extends Controller
         {
             $nightTime = time();
         }
+        PageViewController::updatePageView('create');
         return view('order.create')->with([
             'room'=>Room::find($rid),
             'startDayTime'=>$dayTime,

@@ -12,6 +12,7 @@ class RoomController extends Controller
     }
     function manageRoom()
     {
+
         return view('manage.room')->withRooms(Room::all());
     }
     function getRoomList()
