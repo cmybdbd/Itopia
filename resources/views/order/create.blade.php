@@ -49,6 +49,36 @@
             position: relative;
             left: 1em;
         }
+        .cbox{
+            position: relative;
+        }
+        .cbox label{
+            position: absolute;
+            width: 1.2em;
+            height: 1.2em;
+            top: 0.3em;
+            left: 0em;
+            background: white;
+            border: 1px solid var(--b-font-color);
+            border-radius:5px;
+        }
+        .cbox label:after{
+            opacity : 0;
+            content: '';
+            position: absolute;
+            width: 0.85em;
+            height: 0.4em;
+            background: transparent;
+            top: 0.22em;
+            left: 0.15em;
+            border: 1px solid var(--main-color);
+            border-top: none;
+            border-right: none;
+            transform:rotate(-45deg);
+        }
+        .cbox input[type=checkbox]:checked + label:after{
+            opacity: 1;
+        }
     </style>
 @endsection
 @section('content')
@@ -131,16 +161,14 @@
             </div>
         </div>
     </div>
-    <div style="margin: 3vw;">
+    <div class="cbox" style="margin: 3vw;">
         <input type="checkbox" id="agreement">
-        <label for=""></label>本人已获悉并同意《ITOPIA即时私人空间用户服务协议》
+        <label for="agreement"></label>本人已获悉并同意《ITOPIA即时私人空间用户服务协议》
     </div>
-    <div class="mybox">
-        <div id="toPay">
-            去支付
-        </div>
+    <div id="toPay" class="myTail font-b m-color" style="height:3em;margin-top: 2vh;box-shadow:0 -1px 6px #eeeeee">
+        <button style="width: 100%;height: 100%; border:none;background:transparent">去支付</button>
     </div>
-    <div id="param">
+    <div id="param" style="display:none">
         <div id="userId" data-content="{{\Illuminate\Support\Facades\Auth::user()->id}}"></div>
         <div id="roomId" data-content="{{$room->id}}"></div>
         <div id="exs" data-content="{{$olderOrder}}"></div>
@@ -311,7 +339,7 @@
                 'csrfToken' => csrf_token(),
             ]); ?>;
 
-            $("#toPay").parent().on('click', function(){
+            $("#toPay").on('click', function(){
                 if(checkToPay())
                 {
                     $data = {

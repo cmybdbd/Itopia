@@ -16,7 +16,9 @@ class OrderController extends Controller
 {
     function getOrderDetail($id)
     {
-        return view('order.result');
+        $order = Order::find($id);
+        $room = Room::find($order->roomId);
+        return view('order.result')->withRoom($room);
     }
     function getOrderList()
     {

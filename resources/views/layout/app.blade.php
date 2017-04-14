@@ -27,7 +27,7 @@
         .mybox {
             box-shadow: 0 0 6px #dddddd;
             margin: 4.2vw 4.2vw 4.2vw 4.2vw;
-            padding: 2vmin;
+            padding: 1em;
         }
         .flex-center{
             display: flex;
@@ -55,12 +55,14 @@
         }
         hr.mysplit-color {
             border: 0;
+            margin: 0;
             height: 1px;
             background-image: -webkit-gradient(linear,0 0, 100% 0 ,from(transparent), to(transparent),color-stop(20%, var(--main-color)) , color-stop(80%, var(--main-color)));
             -moz-background-image: -moz-linear-gradient(left, transparent ,var(--main-color) 20%, var(--main-color) 80%, transparent 100%);
         }
         hr.mysplit {
             border: 0;
+            margin: 0;
             height: 1px;
             background-image: -webkit-gradient(linear,0 0, 100% 0 ,from(transparent), to(transparent),color-stop(20%, var(--used-color)) , color-stop(80%, var(--used-color)));
             -moz-background-image: -moz-linear-gradient(left, transparent ,var(--used-color) 20%, var(--used-color) 80%, transparent 100%);
