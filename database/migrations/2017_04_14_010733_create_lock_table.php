@@ -15,9 +15,10 @@ class CreateLockTable extends Migration
     {
         //
         Schema::create('locks', function(Blueprint $table){
-            $table -> string('id');
+            $table -> uuid('id');
             $table -> primary('id');
             $table -> string('room_id');
+            $table -> string('password_id');
             $table -> string('password', 6);
             $table -> timestamp('permission_begin')->nullable();
             $table -> timestamp('permission_end')->nullable();

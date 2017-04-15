@@ -88,8 +88,8 @@ class LockController extends Controller
     {
 
         $query_url = '/update_password';
-        $pwd_id = Lock::find_spare_password($room_id);
-        if(empty($pwd_id))
+        $lock_password = Lock::find_spare_password($room_id);
+        if(empty($lock_password))
         {
             $ret = $this->addPassword($room_id, $password, $phonenumber, $permission_begin, $permission_end);
         }
@@ -99,7 +99,7 @@ class LockController extends Controller
                 "home_id" => $this->home_id,
                 "room_id" => $room_id,
                 "is_send_location" => true,
-                "password_id" => $pwd_id,
+                "password_id" => $lock_password->password_id,
                 "password" => $password,
                 "permission_begin" => $permission_begin,
                 "permission_end" => $permission_end,
@@ -113,7 +113,9 @@ class LockController extends Controller
                     'code' => Constant::$STATUS_CODE['FAIL_UPDATE_PASSWORD'],
                     'content' => $res
                 );
-            } else {
+            }
+            else {
+                $lock_password->update_password($password, $permission_begin, $permission_end);
                 $ret = array(
                     'code' => Constant::$STATUS_CODE['OK'],
                     'content' => "更新密码成功"
@@ -144,6 +146,7 @@ class LockController extends Controller
         }
         return Response::json($ret);
     }
+
     public function callback()
     {
         $event = $_POST['event'];
