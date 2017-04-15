@@ -84,7 +84,7 @@ class LockController extends Controller
         return $ret;
     }
 
-    private function updatePassword($room_id, $password, $phonenumber, $phonenumber, $permission_begin, $permission_end)
+    private function updatePassword($room_id, $password, $phonenumber, $permission_begin, $permission_end)
     {
 
         $query_url = '/update_password';
@@ -125,12 +125,23 @@ class LockController extends Controller
 
     public function api_update_password()
     {
-        $room_id = $_GET['room_id'],
+        $room_id = $_GET['room_id'];
         $password = $_GET['password'];
         $phonenumber = $_GET['phonenumber'];
         $permission_begin = $_GET['permission_begin'];
         $permission_end = $_GET['permission_end'];
-        $ret = $this->updatePassword($room_id, $password, $phonenumber, $permission_begin, $permission_end);
+
+        if(empty($room_id) || empty($password) || empty($phonenumber) || empty($permission_begin) || empty($permission_end))
+        {
+            $ret = array(
+                'code' => Constant::$STATUS_CODE['PARAMS_MISS'],
+                'content' => "参数错误"
+            );
+        }
+        else
+        {
+            $ret = $this->updatePassword($room_id, $password, $phonenumber, $permission_begin, $permission_end);
+        }
         return Response::json($ret);
     }
     public function callback()
