@@ -46,7 +46,7 @@ class LockController extends Controller
                 die($ret);
             }
             else {
-                $token = LockToken::save_access_token(json_decode($ret, true));
+                $token = LockToken::save_access_token($ret);
             }
         }
         return $token;

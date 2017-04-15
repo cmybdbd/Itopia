@@ -34,6 +34,6 @@ class PayController extends Controller
             'phone' => $phone,
             'money' => $money_aes
         );
-
+    }
 
 }
