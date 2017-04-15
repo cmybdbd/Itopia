@@ -18,9 +18,9 @@ class CreateOrderTable extends Migration
             $table -> primary('id');
             $table -> string('userId');
             $table -> string('roomId');
-            $table -> timestamp('startDate');
-            $table -> timestamp('startTime');
-            $table -> timestamp('endTime');
+            $table -> timestamp('startDate')->nullable();
+            $table -> timestamp('startTime')->nullable();
+            $table -> timestamp('endTime')->nullable();
             $table -> double('duration');
             $table -> boolean('isDay');
             $table -> integer('state');
