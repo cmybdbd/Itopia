@@ -18,8 +18,8 @@ class Lock extends Model
         $lock->room_id = $room_id;
         $lock->password_id = $password_id;
         $lock->password = $password;
-        $lock->permission_begin = $permission_begin;
-        $lock->permission_end = $permission_end;
+        $lock->permission_begin = date('Y-m-d H:i:s', $permission_begin);
+        $lock->permission_end = date('Y-m-d H:i:s', $permission_end);
         $lock->save();
     }
 }
