@@ -21,7 +21,7 @@
         @foreach($rooms as $key => $room)
             <div class="mybox roomItem" data-content="{{$room->id}}">
                     <div class="myrow" style="margin-bottom: 1vh;display:block;text-align:center" >
-                        <img src="{{asset('storage/arch.jpg')}}" style="width: 100%" >
+                        <img src="{{asset('itopia/storage/arch.jpg')}}" style="width: 100%" >
                     </div>
                     <div class="myrow"  style="justify-content: space-between">
                         <span class="item">{{$room->address}}</span>
