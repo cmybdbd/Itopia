@@ -52,10 +52,11 @@ class User extends Authenticatable
         $user->save();
     }
 
-    public static function saveIDcard($idnumber, $id)
+    public static function saveIDcard($idnumber, $name, $id = null)
     {
         $user = User::getUser($id);
         $user->idnumber = $idnumber;
+        $user->name = $name;
         $user->save();
     }
 

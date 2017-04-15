@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table -> primary('id');
             $table->string('openid');
             $table->string('nickname');
+            $table->string('name');
             $table->smallInteger('sex');
             $table->string('province');
             $table->string('city');

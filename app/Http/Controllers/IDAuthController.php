@@ -41,20 +41,18 @@ class IDAuthController extends Controller
             $res = json_decode($res, true);
             if($res['success'])
             {
-                User::saveIDcard($idnumber);
+                User::saveIDcard($idnumber, $name);
                 $ret = array(
                     "code" => 200
                 );
-                //save id number and name
             }
             else
             {
                 $ret = array(
                     "code" => 502,
-                    "content" => "不匹配"
+                    "content" => $res
                 );
             }
-//            var_dump($ret);
         }
         else
         {
