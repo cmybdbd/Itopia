@@ -18,6 +18,7 @@ class CreateLockTable extends Migration
             $table -> uuid('id');
             $table -> primary('id');
             $table -> string('room_id');
+            $table -> string('room_name');
             $table -> string('password_id');
             $table -> string('password', 6);
             $table -> timestamp('permission_begin')->nullable();

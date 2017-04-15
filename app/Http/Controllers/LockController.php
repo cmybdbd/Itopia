@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Response;
 class LockController extends Controller
 {
     //线下
-    private $home_id = 'lkjl0011170300183734';
+    private $home_id = '58cfc78d67df5d3251f0131d';
     private $client_id='c23b578799413d777340d7d2';
     private $client_secret='741a9ea72cf5c5c5f3051c8471de90c0';
     private $api_url = 'https://lockapi.dding.net/openapi/v1';
