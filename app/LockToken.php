@@ -19,7 +19,9 @@ class LockToken extends Model
         else
         {
             $token = $token->first();
-            if($token->expires_time < time())
+            var_dump($token);
+            exit;
+            if(strtotime($token->expires_time) < time())
             {
                 $token->delete();
                 return null;
