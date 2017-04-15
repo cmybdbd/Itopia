@@ -19,7 +19,7 @@ class CreateCommentsTable extends Migration
             $table->string('userId');
             $table->string('orderId');
             $table->integer('starNum');
-            $table->text('content');
+            $table->text('content')->nullable;
             $table->integer('state');
             $table->timestamps();
         });

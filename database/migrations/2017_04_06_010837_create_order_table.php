@@ -18,7 +18,7 @@ class CreateOrderTable extends Migration
             $table -> primary('id');
             $table -> string('userId');
             $table -> string('roomId');
-            $table -> timestamp('date');
+            $table -> timestamp('startDate');
             $table -> timestamp('startTime');
             $table -> timestamp('endTime');
             $table -> double('duration');
@@ -26,6 +26,7 @@ class CreateOrderTable extends Migration
 
             $table -> integer('state');
             $table -> string('payNum');
+            $table -> double('price');
 
             $table->timestamps();
         });

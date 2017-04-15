@@ -8,9 +8,26 @@ use Illuminate\Support\Facades\DB;
 
 class PageViewController extends Controller
 {
+
     public static function updatePageView($page)
     {
-        DB::update('update `pageView` set ? = ? + 1 where `date`= ?',
-        [$page,$page, time()-time()%(24*60*60)]);
+        $time = time() - time() %(24*60*60) - 8*60*60;
+        $date = date('Y-m-d H:i:s',$time);
+        $pageView =PageView::where('curDate' ,'=', $date)->first();
+        if(!count($pageView))
+        {
+            $pageView = new PageView();
+
+            $pageView->home = 0;
+            $pageView->create = 0;
+            $pageView->result = 0;
+            $pageView->comment = 0;
+            $pageView->commentResult = 0;
+            $pageView->orderList = 0;
+        }
+        $pageView->curDate = $date;
+        $pageView->$page += 1;
+        $pageView->save();
+        //DB::update('update pageView set `'.$page.'` = `'.$page.'` + 1 where `date`= "'.$date.'"');
     }
 }

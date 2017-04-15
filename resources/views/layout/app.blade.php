@@ -36,6 +36,9 @@
         .m-color {
             color: var(--main-color);
         }
+        .u-color{
+            color: var(--used-color);
+        }
         .font-b {
             font-size: 1.4em;
         }

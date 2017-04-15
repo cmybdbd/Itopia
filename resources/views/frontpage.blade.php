@@ -25,11 +25,20 @@
                     </div>
                     <div class="myrow"  style="justify-content: space-between">
                         <span class="item">{{$room->address}}</span>
-                        <span class="room-used" style="padding:0 2vw;border: 1px solid;border-radius: 3px">使用中</span>
+                        <span class="room-used {{$room->isUsing()? 'u-color':'m-color'}}" style="padding:0 2vw;border: 1px solid;border-radius: 3px">
+                            {{$room->isUsing() ? '使用中':'可使用'}}</span>
                     </div>
                     <div class="myrow"  style="justify-content: space-between">
                         <span class="m-color" style="font-weight: bold;">¥ {{$room->hourPrice}}/时 ¥ {{$room->nightPrice}}/夜</span>
-                        <span class="room-state">可预约<span class="m-color">19:00</span>使用</span>
+                        @if($room->isUsing())
+                            @if($room->nextTime() != -1)
+                                <span class="room-state b-color">可预约<span class="m-color">{{$room->nextTime()}}</span>使用</span>
+                            @else
+                                <span class="room-state b-color">今日已约满</span>
+                            @endif
+                        @else
+                            <span class="room-state b-color">即时使用</span>
+                        @endif
                     </div>
             </div>
         @endforeach

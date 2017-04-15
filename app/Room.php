@@ -2,7 +2,9 @@
 
 namespace App;
 
+use App\Utils\Constant;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Response;
 
 class Room extends Model
 {
@@ -12,4 +14,63 @@ class Room extends Model
     protected $fillable = [
         'address', 'type', 'hourPrice', 'nightPrice',
     ];
+    public function hasManyOrders(){
+        return $this->hasMany('App\Order','roomId','id');
+    }
+    public function isUsing(){
+
+        if(time() % (24*60*60) > 12 * 60*60)
+        {
+            //night
+            $time = date('Y-m-d H:i:s', time());
+            $dayStartTime = time() - time() % (24*60*60) - 8*60*60;
+            $used = $this->hasManyOrders()->where([
+                ['startDate', '<', $dayStartTime + 24*60*60],
+                ['startDate', '>=', $dayStartTime],
+                ['isDay' ,'=', false],
+                ['state', '>=', Constant::$ORDER_STATE['TOUSE']],
+            ])->get();
+            if(count($used))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            $time = date('Y-m-d H:i:s', time());
+            $used = $this->hasManyOrders()->where([
+                ['startTime', '<=', $time],
+                ['endTime', '>=', $time],
+                ['isDay', '=', true],
+                ['state', '>=', Constant::$ORDER_STATE['TOUSE']],
+            ])->get();
+
+            if (count($used))
+            {
+                return true;
+            } else
+            {
+                return false;
+            }
+        }
+    }
+    public function nextTime(){
+        $nextTime = $this -> hasManyOrders()->where([
+            ['state','>=', Constant::$ORDER_STATE['TOUSE']],
+            ['isDay', '=', true],
+        ])->max('endTime');
+        $nextTime= strtotime($nextTime) + 30*60;
+        $dayStartTime = time() - time() % (24*60*60) - 8*60*60;
+        $dayMaxTime = $dayStartTime + 22*60*60;
+
+        if($dayMaxTime > $nextTime && $dayMaxTime > time())
+        {
+            return date('H:i',$nextTime);
+        }
+        return -1;
+    }
 }

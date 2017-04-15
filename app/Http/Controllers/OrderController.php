@@ -102,7 +102,7 @@ class OrderController extends Controller
         $order = Uuid::generate()->string;
         DB::beginTransaction();
         DB::insert('insert into `orders` '.
-            '(`userId`, `roomId`, `date`, `startTime`, `endTime`, `duration`, `payNum`,`isDay`, `state`, `id`, `updated_at`, `created_at`)' .
+            '(`userId`, `roomId`, `startDate`, `startTime`, `endTime`, `duration`, `payNum`,`isDay`, `state`, `id`, `updated_at`, `created_at`)' .
             'select ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? from users '.
             'where ((select max(endTime) from orders where `state` > 0) is null or (select max(endTime) from orders where `roomId` = ? and `state` > 0) < ? )and id= ?',
             [
@@ -174,71 +174,4 @@ class OrderController extends Controller
     {}
     function completeOrder()
     {}
-
-/*
-    private function getWeChatPayParam($p)
-    {
-        date_default_timezone_set('PRC');
-        $orderStartTime = time();
-        $order = array(
-            // need sort
-            "appid" => Constant::$WECHAT_PARAM['APPID'],
-            "body" => $p['body'],
-            "mch_id" => Constant::$WECHAT_PARAM['MCH_ID'],
-            "nonce_str" => md5(time() . mt_rand(0, 1000)),
-            "notify_url" => url(Constant::$WECHAT_PARAM['CALLBACK_URL']),
-            "out_trade_no" => $p['out_trade_no'],
-            "spbill_create_ip" => Utils::get_server_ip(),
-            "time_expire" => date("YmdHis", $orderStartTime + Constant::$WECHAT_PARAM['EXPIRE_TIME']),
-            "time_start"  => date("YmdHis", $orderStartTime),
-            "total_fee" => $p['total_fee'],
-            "trade_type" => Constant::$WECHAT_PARAM['TRADE_TYPE']
-        );
-        $stringA = Utils::my_buid_query($order);
-        $stringSignTemp = $stringA .'&key='. Constant::$WECHAT_PARAM['KEY'];
-        $sign = strtoupper(md5($stringSignTemp));
-
-        $order['sign'] = $sign;
-        $xml = Utils::createxml($order);
-
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, Constant::$WECHAT_PARAM['UNIFIEDORDER_URL']);
-        curl_setopt($ch, CURLOPT_POSTFIELDS,
-            "xmlRequest=" . $xml);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 300);
-        $data = curl_exec($ch);
-        curl_close($ch);
-
-        //convert the XML result into array
-        $array_data = simplexml_load_string($data, 'SimpleXMLElement', LIBXML_NOCDATA);
-
-        if ($array_data->return_code != "SUCCESS" || $array_data->result_code != "SUCCESS")
-        {
-            //return $array_data;
-            //ResponseHelper::sendPositive(array('fail' => 'true','data' =>$array_data));
-            return $array_data->result_code;
-        }
-
-        $response = array(
-            "appid" => $order['appid'],
-            "noncestr" => $order['nonce_str'],
-            "package" => 'prepay_id=' . $array_data->prepay_id,
-            "signType" => "MD5",
-            "timestamp" => '' . time()
-        );
-
-        $stringA = Utils::my_buid_query($response);
-        $stringSignTemp = $stringA . '&key='. Swoole::$php->constant['wechatpay_config']['key'];
-
-        $sign = strtoupper(md5($stringSignTemp));
-        $response['sign'] = $sign;
-        //$ret_data = Utils::my_buid_query($response);
-        //ResponseHelper::sendPositive($ret_data);
-        return $response;
-
-    }
-*/
-
 }

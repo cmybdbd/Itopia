@@ -21,6 +21,12 @@ Route::get('/server', 'WeChatController@check_server');
 
 
 Route::post('/order/create', 'OrderController@storeOrder');
+Route::post('comment/create', 'CommentController@store');
+Route::get('/test', function (){
+    $date = date('Y-m-d H:i:s', time()-time()%(24*60*60));
+    echo $date;
+    return ;
+});
 
 Route::group(['middleware' => 'auth'], function (){
     Route::get('/home', 'HomeController@index')->name('home');

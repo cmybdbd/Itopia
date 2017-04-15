@@ -22,7 +22,8 @@ class CreatePageViewTable extends Migration
             $table->integer('commentResult');
             $table->integer('orderList');
 
-            $table->timestamp('date');
+            $table->primary('curDate');
+            $table->string('curDate');
             $table->timestamps();
         });
     }

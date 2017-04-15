@@ -10,7 +10,7 @@ class HomeController extends Controller
     //
     function index(){
         PageViewController::updatePageView('home');
-        return view('frontpage')->withRooms(Room::limit(5)->get());
+        return view('frontpage')->withRooms(Room::get());
 
     }
 }
