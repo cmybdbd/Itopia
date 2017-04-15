@@ -89,7 +89,7 @@ class LockController extends Controller
 
         $query_url = '/update_password';
         $pwd_id = Lock::find_spare_password($room_id);
-        if(empty($lock_id))
+        if(empty($pwd_id))
         {
             $ret = $this->addPassword($room_id, $password, $phonenumber, $permission_begin, $permission_end);
         }
