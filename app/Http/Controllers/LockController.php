@@ -69,7 +69,7 @@ class LockController extends Controller
         {
             $ret = array(
                 'code' => Constant::$STATUS_CODE['FAIL_ADD_PASSWORD'],
-                'content' => "新增密码失败"
+                'content' => $res
             );
         }
         else
@@ -111,7 +111,7 @@ class LockController extends Controller
             if ($res['ErrNo'] != 0) {
                 $ret = array(
                     'code' => Constant::$STATUS_CODE['FAIL_UPDATE_PASSWORD'],
-                    'content' => "更新密码失败"
+                    'content' => $res
                 );
             } else {
                 $ret = array(
