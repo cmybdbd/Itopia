@@ -29,7 +29,7 @@ class Lock extends Model
             ['permission_end', '<=', date('Y-m-d H:i:s', time())],
             ['room_id', '=', $room_id]
         );
-        if($lock->count == 0)
+        if($lock->count() == 0)
         {
             return null;
         }
