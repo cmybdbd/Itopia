@@ -91,7 +91,7 @@ class OrderController extends Controller
             'startTime' => 'required',
             'endTime' => 'required',
             'duration' => 'required',
-            'payNum' => 'required',
+            'prcie' => 'required',
             'isDay'  => 'required'
         ]);
 
@@ -102,7 +102,7 @@ class OrderController extends Controller
         $order = Uuid::generate()->string;
         DB::beginTransaction();
         DB::insert('insert into `orders` '.
-            '(`userId`, `roomId`, `startDate`, `startTime`, `endTime`, `duration`, `payNum`,`isDay`, `state`, `id`, `updated_at`, `created_at`)' .
+            '(`userId`, `roomId`, `startDate`, `startTime`, `endTime`, `duration`, `price`,`isDay`, `state`, `id`, `updated_at`, `created_at`)' .
             'select ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? from users '.
             'where ((select max(endTime) from orders where `state` > 0) is null or (select max(endTime) from orders where `roomId` = ? and `state` > 0) < ? )and id= ?',
             [
@@ -112,7 +112,7 @@ class OrderController extends Controller
                 date('Y-m-d H:i:s', $request->startTime),
                 date('Y-m-d H:i:s', $request->endTime),
                 $request->duration,
-                $request->payNum,
+                $request->price,
                 $request->isDay ? 1: 0,
                 Constant::$ORDER_STATE['UNPAY'],
                 $order,
@@ -158,7 +158,7 @@ class OrderController extends Controller
             $param = $this->getWeChatPayParam([
                 'body' => 'Itopia',
                 'out_trade_no' => $order,
-                'total_fee' => $request->payNum
+                'total_fee' => $request->price
             ]);
         }
 

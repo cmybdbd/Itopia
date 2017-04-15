@@ -52,7 +52,8 @@ class Room extends Model
             if (count($used))
             {
                 return true;
-            } else
+            }
+            else
             {
                 return false;
             }
@@ -63,13 +64,15 @@ class Room extends Model
             ['state','>=', Constant::$ORDER_STATE['TOUSE']],
             ['isDay', '=', true],
         ])->max('endTime');
-        $nextTime= strtotime($nextTime) + 30*60;
-        $dayStartTime = time() - time() % (24*60*60) - 8*60*60;
-        $dayMaxTime = $dayStartTime + 22*60*60;
+        $nextTime = strtotime($nextTime) + 30 * 60;
 
-        if($dayMaxTime > $nextTime && $dayMaxTime > time())
+        $dayStartTime = time() - time() % (24 * 60 * 60) - 8 * 60 * 60;
+        $dayMaxTime = $dayStartTime + 22 * 60 * 60;
+
+        $time = time() - time() % (30*60) + 30*60;
+        if ($dayMaxTime > $nextTime && $dayMaxTime > $time)
         {
-            return date('H:i',$nextTime);
+            return $nextTime > $time ? $nextTime:$time;
         }
         return -1;
     }

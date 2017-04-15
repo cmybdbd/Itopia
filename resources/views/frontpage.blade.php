@@ -32,7 +32,7 @@
                         <span class="m-color" style="font-weight: bold;">¥ {{$room->hourPrice}}/时 ¥ {{$room->nightPrice}}/夜</span>
                         @if($room->isUsing())
                             @if($room->nextTime() != -1)
-                                <span class="room-state b-color">可预约<span class="m-color">{{$room->nextTime()}}</span>使用</span>
+                                <span class="room-state b-color">可预约<span class="m-color">{{date('H:i',$room->nextTime())}}</span>使用</span>
                             @else
                                 <span class="room-state b-color">今日已约满</span>
                             @endif

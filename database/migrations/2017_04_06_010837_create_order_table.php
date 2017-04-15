@@ -25,7 +25,7 @@ class CreateOrderTable extends Migration
             $table -> boolean('isDay');
 
             $table -> integer('state');
-            $table -> string('payNum');
+            $table -> string('payNum')->nullable();
             $table -> double('price');
 
             $table->timestamps();
