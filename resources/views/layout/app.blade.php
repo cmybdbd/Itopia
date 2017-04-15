@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Itopia-随时随地的私人空间</title>
-    <link rel="stylesheet" href="{{url('css/app.css')}}">
+    <link rel="stylesheet" href="{{url('itopia/css/app.css')}}">
     <style type="text/css">
         :root {
             --main-color: #1dccb8;
@@ -140,7 +140,7 @@
     </div>
     </div>
 </div>
-<script src="{{url('js/app.js')}}"></script>
+<script src="{{url('itopia/js/app.js')}}"></script>
 <script>
     $("#report").on('click',function () {
         $(".report-content").modal();
