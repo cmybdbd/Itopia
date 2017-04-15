@@ -11,10 +11,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
 //线上
-//define('LOCK_API', 'https://lockapi.dding.net/openapi/v1/');
+define('LOCK_API', 'https://lockapi.dding.net/openapi/v1');
 
 //线下
-define('LOCK_API', 'http://115.28.141.204：8090/openapi/v1/');
+//define('LOCK_API', 'http://dev-lockapi.dding.net:8090/openapi/v1');
 
 
 class LockController extends Controller
@@ -39,8 +39,9 @@ class LockController extends Controller
                 'client_secret' => $this->client_secret
             );
             $ret = ApiHandle::httpPostJson(LOCK_API.$url, $params);
+
             $ret = json_decode($ret, true);
-            if(isset($ret['ErrNo']))
+            if($ret['ErrNo'] != 0 )
             {
                 die($ret);
             }
@@ -107,7 +108,7 @@ class LockController extends Controller
     }
 
     /*todo...*/
-    public function update_password($access_token, $home_id, $room_id, $lock_uuid, $password_id, $password, $is_send_location, $phonenumber, $name, $permission_begin, $permission_end)
+    public function update_password($room_id, $password_id, $password, $phonenumber, $permission_begin, $permission_end)
     {
 
         $url = '/update_password';
