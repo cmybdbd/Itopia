@@ -7,7 +7,7 @@
             box-shadow: 0 1px 10px #eeeeee;
         }
         .nav-pills > li.active > a{
-            color: var(--main-color);
+            color: var(--main-color) !important;
             background: transparent !important;
         }
         .nav-pills > li{
@@ -48,6 +48,36 @@
             color: white;
             position: relative;
             left: 1em;
+        }
+        .cbox{
+            position: relative;
+        }
+        .cbox label{
+            position: absolute;
+            width: 1.2em;
+            height: 1.2em;
+            top: 0.3em;
+            left: 0em;
+            background: white;
+            border: 1px solid var(--b-font-color);
+            border-radius:5px;
+        }
+        .cbox label:after{
+            opacity : 0;
+            content: '';
+            position: absolute;
+            width: 0.85em;
+            height: 0.4em;
+            background: transparent;
+            top: 0.22em;
+            left: 0.15em;
+            border: 1px solid var(--main-color);
+            border-top: none;
+            border-right: none;
+            transform:rotate(-45deg);
+        }
+        .cbox input[type=checkbox]:checked + label:after{
+            opacity: 1;
         }
     </style>
 @endsection
@@ -100,7 +130,7 @@
 
                 <div class="mybox selectPanel">
                     使用时长
-                    <div id="durationTime" class="scrollPicker" data-content="1">
+                    <div id="durationTime" class="scrollPicker" data-content="3600000">
                         1 小时
                     </div>
                 </div>
@@ -112,7 +142,7 @@
                 </div>
             </div>
             <div role="tabpanel" class="tab-pane " id="byNight">
-                <div class="mybox">
+                <div class="mybox selectPanel">
                     日期
                     <div id="dateTime" class="scrollPicker" data-content="{{$startNightTime}}">
 
@@ -121,26 +151,29 @@
             </div>
         </div>
 
-        <div>
+        <div class="m-color" style="margin-top: 3vw;">
             订单结算
         </div>
-        <div class="mybox">
+        <div class="mybox selectPanel">
             总计
-            <div id="totalPrice" class="present"></div>
+            <div class="present" style="color: var(--price-color)">
+                <span id="totalPrice"></span>元
+            </div>
         </div>
     </div>
-    <div>
-        <input type="checkbox" id="agreement">本人已获悉并同意《ITOPIA即时私人空间用户服务协议》
+    <div class="cbox" style="margin: 3vw;">
+        <input type="checkbox" id="agreement">
+        <label for="agreement"></label>本人已获悉并同意《ITOPIA即时私人空间用户服务协议》
     </div>
-    <div class="mybox">
-        <div id="toPay">
-            去支付
-        </div>
+    <div id="toPay" class="myTail font-b m-color" style="height:3em;margin-top: 2vh;box-shadow:0 -1px 6px #eeeeee">
+        <button style="width: 100%;height: 100%; border:none;background:transparent">去支付</button>
     </div>
     <div id="param">
         <div id="userId" data-content="{{\Illuminate\Support\Facades\Auth::user()->id}}"></div>
         <div id="roomId" data-content="{{$room->id}}"></div>
         <div id="exs" data-content="{{$olderOrder}}"></div>
+        <div id="isUsing">{{$room->isUsing()}}</div>
+        <div id="nextTime" data-content="{{$room->nextTime()}}"></div>
     </div>
 @endsection
 @section('scripts')
@@ -153,7 +186,8 @@
                 endTime = $("#endTime"),
                 dateTime = $("#dateTime");
             console.log(startTime.attr('data-content'));
-            var startts = startTime.attr('data-content')*1000;
+            //var startts = startTime.attr('data-content')*1000;
+            var startts = $("#nextTime").attr('data-content')*1000;
             var start = new Date(startts);
             function showHumanDay(ts)
             {
@@ -163,12 +197,16 @@
             {
                 return dateFormat(ts, 'yyyy年mm月dd日 HH:MM');
             }
-
+            function showHumanHour(ts)
+            {
+                return dateFormat(ts, 'HH:MM');
+            }
             var todayts = startts - startts % (24*60*60*1000) - 8*60*60*1000;
             var tomorrowts = todayts + 24 * 60 * 60 * 1000;
             console.log(showHumanTime(todayts));
             var selectedDay = todayts, selectedTime;
 
+            /*
             if(start.getMinutes() > 30)
             {
                 ts = todayts + (start.getHours()+1.5)*60*60*1000;
@@ -181,6 +219,9 @@
                 startTime.text(showHumanTime(ts))
                     .attr("data-content", ts);
             }
+            */
+            startTime.text(showHumanTime(startts))
+                .attr("data-content", startts);
             updateEndTime();
             updatePrice(0);
 
@@ -200,6 +241,14 @@
                 };
             }
             var time = [];
+            for(i = -1; i< 4; i++)
+            {
+                time[i+1] = {
+                    text: showHumanHour(startts + i * 30*60*1000),
+                    value: i * 30*60*1000
+                };
+            }
+            /*
             for(i = 11;i <23;i++ )
             {
                 time[(i-11)*2] = {
@@ -211,22 +260,23 @@
                     value: i+0.5
                 }
             }
+            */
             var duration = [
                 {
                     text: "1 小时",
-                    value: 1
+                    value: 60*60*1000
                 },
                 {
                     text: "1.5 小时",
-                    value: 1.5
+                    value: 1.5*60*60*1000
                 },
                 {
                     text: "2 小时",
-                    value: 2
+                    value: 2*60*60*1000
                 }
             ];
             dateTime.text(date[0].text.split(' ')[1])
-                .attr('data-content', duration[0].value);
+                .attr('data-content', date[0].value);
 
             var startPicker = new Picker({
                 data: [day, time],
@@ -248,7 +298,7 @@
                 var d = day[selectedIndex[0]].value;
                 selectedDay = d === 0 ? showHumanDay(todayts) : showHumanDay(tomorrowts);
                 startTime.text(selectedDay + ' ' + time[selectedIndex[1]].text)
-                    .attr("data-content", (d===0 ? todayts : tomorrowts) + (time[selectedIndex[1]].value+0.5)*60*60*1000);
+                    .attr("data-content", (d===0 ? startts : tomorrowts) + time[selectedIndex[1]].value);
 
                 updateEndTime();
             });
@@ -265,13 +315,13 @@
                 updatePrice(1);
             })
             function updateEndTime(){
-                endTime.text(dateFormat((+startTime.attr("data-content")) + (+durationTime.attr("data-content")) * 60 * 60 * 1000,
+                endTime.text(dateFormat((+startTime.attr("data-content")) + (+durationTime.attr("data-content")),
                     'yyyy年mm月dd日 HH:MM'))
-                    .attr('data-content', (+startTime.attr("data-content")) + (+durationTime.attr("data-content")) * 60 * 60 * 1000);
+                    .attr('data-content', (+startTime.attr("data-content")) + (+durationTime.attr("data-content")));
             }
             function updatePrice(page) {
                 if(page === 0)
-                    $("#totalPrice").text((+durationTime.attr("data-content")) * (+$("#hourPrice").attr("data-content")) );
+                    $("#totalPrice").text((+durationTime.attr("data-content"))/(3600*1000) * (+$("#hourPrice").attr("data-content")) );
                 else
                     $("#totalPrice").text($("#nightPrice").attr("data-content"));
             }
@@ -308,7 +358,7 @@
                 'csrfToken' => csrf_token(),
             ]); ?>;
 
-            $("#toPay").parent().on('click', function(){
+            $("#toPay").on('click', function(){
                 if(checkToPay())
                 {
                     $data = {
@@ -317,8 +367,8 @@
                         'roomId': $("#roomId").attr('data-content'),
                         'startTime': (+startTime.attr('data-content'))/1000|0,
                         'endTime'  : (+endTime.attr('data-content'))/1000|0,
-                        'duration' : +durationTime.attr('data-content'),
-                        'payNum'   : +($('#totalPrice').text()),
+                        'duration' : +durationTime.attr('data-content')/3600000,
+                        'price'   : +($('#totalPrice').text()),
                         'date'     : new Date().getTime()/1000|0,
                         'isDay'    : $('#byHour').hasClass('active')
                     };
@@ -335,7 +385,14 @@
                         type: 'POST',
                         success: function(param){
                             console.log(param);
-                          //  window.location.href = '/result/0';
+                            if(param['code'] == '200')
+                            {
+                                window.location.href = window.location.href.replace(
+                                    /create.*/,
+                                    'result/'+param['orderId']
+                                );
+                            }
+
                         },
                         error: function (e){
                             console.log(e.responseText);
@@ -343,7 +400,12 @@
                     });
                 }
                     //window.location.href = 'result/0';
-            })
+            });
+
+
+            $("[data-val='"+ -1*30*60*1000+"']").css(
+                "color","red"
+            );
         });
     </script>
     @endsection

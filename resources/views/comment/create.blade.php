@@ -27,14 +27,62 @@
             <textarea class="form-control custom-textarea" name="" id="" cols="30" rows="6"></textarea>
         </div>
         <div class="lr">
-            <button class="btn btn-block btn-cancel m-color font-b">提 交</button>
-            <button class="btn btn-block btn-default font-b">返 回</button>
+            <button id="commit" class="btn btn-block btn-cancel m-color font-b">提 交</button>
+            <button id="return" class="btn btn-block btn-default font-b">返 回</button>
         </div>
+    </div>
+    <div id="param">
+        <div id="userId" data-content="{{\Illuminate\Support\Facades\Auth::user()->id}}"></div>
+        <div id="orderId" data-content="{{$oid}}"></div>
     </div>
 @endsection
 @section('scripts')
     <script src="{{url('/js/starrr.js')}}"></script>
     <script>
-    $('.starrr').starrr();
+        $(function () {
+            var starNum = 0;
+            $('.starrr').starrr({
+                change: function(e, value){
+                    starNum = value;
+                    console.log(starNum);
+                }
+            });
+            window.Laravel = <?php echo json_encode([
+                'csrfToken' => csrf_token(),
+            ]); ?>;
+
+            $("#commit").on('click', function () {
+                $.ajax({
+                    url: 'create',
+                    data: {
+                        _token: Laravel.csrfToken,
+                        'userId': $("#userId").attr("data-content"),
+                        'orderId': $("#orderId").attr('data-content'),
+                        'starNum': starNum,
+                        'text': $("textarea").val()
+                    },
+                    type: 'POST',
+                    success:function (res) {
+                        console.log(res);
+                        if(res.code == 200)
+                        {
+                            window.location.href = window.location.href.replace(
+                                /comment.*/,
+                                'commentResult'
+                            );
+                        }
+                    }
+                });
+
+            });
+            $("#return").on("click",function () {
+                window.location.href = window.location.href.replace(
+                    /comment.*/,
+                    'home'
+                );
+            });
+        });
+
+
     </script>
 @endsection

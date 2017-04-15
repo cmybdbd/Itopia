@@ -17,13 +17,7 @@ class Constant
 
     public static $HOME_URL=URL."/home";
     public static $LOGIN_URL=URL."/login";
-
-    public static $STATUS_CODE = array(
-        "OK" => 200,
-        "PARAMS_MISS" => 400,
-        "FAIL_ADD_PASSWORD" => 401,
-        "FAIL_ADD_PASSWORD" => 402,
-    );
+    public static $REPORT_PHONE=17302175859;
 
     public static $ORDER_STATE = array(
         'REMOVE'   => 0,

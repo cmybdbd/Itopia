@@ -27,7 +27,7 @@
         .mybox {
             box-shadow: 0 0 6px #dddddd;
             margin: 4.2vw 4.2vw 4.2vw 4.2vw;
-            padding: 2vmin;
+            padding: 1em;
         }
         .flex-center{
             display: flex;
@@ -35,6 +35,9 @@
         }
         .m-color {
             color: var(--main-color);
+        }
+        .u-color{
+            color: var(--used-color);
         }
         .font-b {
             font-size: 1.4em;
@@ -55,12 +58,14 @@
         }
         hr.mysplit-color {
             border: 0;
+            margin: 0;
             height: 1px;
             background-image: -webkit-gradient(linear,0 0, 100% 0 ,from(transparent), to(transparent),color-stop(20%, var(--main-color)) , color-stop(80%, var(--main-color)));
             -moz-background-image: -moz-linear-gradient(left, transparent ,var(--main-color) 20%, var(--main-color) 80%, transparent 100%);
         }
         hr.mysplit {
             border: 0;
+            margin: 0;
             height: 1px;
             background-image: -webkit-gradient(linear,0 0, 100% 0 ,from(transparent), to(transparent),color-stop(20%, var(--used-color)) , color-stop(80%, var(--used-color)));
             -moz-background-image: -moz-linear-gradient(left, transparent ,var(--used-color) 20%, var(--used-color) 80%, transparent 100%);
@@ -92,13 +97,55 @@
         .mybtn-group button:last-child::after{
             content:"";
         }
+        #param{
+            display: none;
+        }
 
+        .modal {
+            text-align: center;
+        }
+
+        @media screen and (min-width: 768px) {
+            .modal:before {
+                display: inline-block;
+                top: 30%;
+
+                content: " ";
+                height: 100%;
+            }
+        }
+
+        .modal-dialog {
+            display: inline-block;
+            text-align: left;
+            top:40%
+        }
     </style>
     @yield('style')
 </head>
 <body>
 @yield('content')
+<div class="modal fade bs-example-modal-sm report-content" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+        <div class="modal-body" style="text-align: center;">
+            <div style="margin-left:5%;margin-right:5%;">
+                主人莫生气，电话联系小@ ({{\App\Utils\Constant::$REPORT_PHONE}}),或在后台留言，小@会神速回复
+            </div>
+            <hr class="mysplit" style="margin: 0.5em;">
+            <button class="m-color font-b"
+                    data-dismiss="modal"
+                    style="border:none;width:100%;height:100%;background-color:white;">朕知道了</button>
+        </div>
+    </div>
+    </div>
+</div>
 <script src="{{url('js/app.js')}}"></script>
+<script>
+    $("#report").on('click',function () {
+        $(".report-content").modal();
+    });
+</script>
 @yield('scripts')
 </body>
 </html>

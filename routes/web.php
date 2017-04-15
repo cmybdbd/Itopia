@@ -21,15 +21,23 @@ Route::get('/server', 'WeChatController@check_server');
 
 
 Route::post('/order/create', 'OrderController@storeOrder');
+Route::post('comment/create', 'CommentController@store');
+Route::get('/test', function (){
+    echo (time() % (24*60*60) > 12 * 60*60 )? 't':'f';
+    echo (time() % (24*60*60));
+    return ;
+});
 
 Route::group(['middleware' => 'auth'], function (){
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/create/{uid}/{rid}', 'OrderController@createOrder');
-    Route::get('/room', 'RoomController@manageRoom');
     Route::get('/result/{id}','OrderController@getOrderDetail');
     Route::get('/comment/{id}', 'CommentController@create');
     Route::get('/commentResult', 'CommentController@finish');
+    Route::get('/orderList/{id}', 'OrderController@getOrderList');
 
+    Route::get('/manage/room', 'RoomController@manageRoom');
+    Route::get('/manage/order', 'OrderController@manageOrder');
 });
 Route::group(['middleware' => ['web','wechat.oauth']], function () {
     Route::get('/login', 'WeChatController@auth')->name('login');
