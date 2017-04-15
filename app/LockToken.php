@@ -35,7 +35,7 @@ class LockToken extends Model
     {
         $token = new LockToken();
         $token->access_token=$params['access_token'];
-        $token->expires_time=$params['expires_time'];
+        $token->expires_time=date('Y-m-d H:i:s', $params['expires_time']);
         $token->save();
         return $token->access_token;
     }
