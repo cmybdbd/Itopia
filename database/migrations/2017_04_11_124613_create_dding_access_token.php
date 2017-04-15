@@ -15,6 +15,7 @@ class CreateDdingAccessToken extends Migration
     {
         Schema::create('dding_access_token', function (Blueprint $table) {
             $table->string('access_token');
+            $table->primary('access_token');
             $table->timestamp('expires_time');
         });
     }
