@@ -22,4 +22,21 @@ class Lock extends Model
         $lock->permission_end = date('Y-m-d H:i:s', $permission_end);
         $lock->save();
     }
+
+    public static function find_spare_password($room_id)
+    {
+        $lock = Lock::where(
+            ['permission_end', '<=', date('Y-m-d H:i:s', time())],
+            ['room_id', '=', $room_id]
+        );
+        if($lock->count == 0)
+        {
+            return null;
+        }
+        else
+        {
+            return $lock->first()->id;
+        }
+
+    }
 }

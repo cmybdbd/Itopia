@@ -47,73 +47,92 @@ class LockController extends Controller
         return $token;
     }
 
-    public function addPassword()
+    private function addPassword($room_id, $password, $phonenumber, $permission_begin, $permission_end)
     {
         $query_url = $this->api_url.'/add_password';
-
-        $room_id = $_GET['room_id'];
-//        $is_default = $_GET['is_default'];
-        $password = $_GET['password'];
-        $permisson_begin = $_GET['permission_begin'];
-        $permisson_end = $_GET['permission_end'];
-
-        $is_default = isset($_GET['is_default'])?$_GET['is_default']:0;
-
-        if(empty($room_id) || empty($password) || empty($permisson_begin) || empty($permisson_end))
-        {
-            $ret = array(
-                "code" => Constant::$STATUS_CODE['PARAMS_MISS'],
-                "content" => "params miss"
-            );
-            return Response::json($ret);
-        }
 
         $params = array(
             "access_token" => $this->access_token(),
             "home_id" => $this->home_id,
             "room_id" => $room_id,
-            "is_default" => $is_default,
+            "is_default" => 0,
             "is_send_location" => true,
             "password" => $password,
-            "permission_begin" => $permisson_begin,
-            "permission_end" => $permisson_end
+            "permission_begin" => $permission_begin,
+            "permission_end" => $permission_end,
+            'phonenumber' => $phonenumber
         );
-
-        $phone = $_GET['phone'];
-        if(isset($phone))
-        {
-            $params['phonenumber'] = $phone;
-        }
 
         $res = ApiHandle::httpPostJson($query_url, $params);
         $res = json_decode($res, true);
         if($res['ErrNo'] != 0)
         {
-            return Response::json($res);
+            $ret = array(
+                'code' => Constant::$STATUS_CODE['FAIL_ADD_PASSWORD'],
+                'content' => "新增密码失败"
+            );
         }
         else
         {
             $pwd_id = $res['id'];
-            Lock::add_password($room_id, $pwd_id, $password, $permisson_begin, $permisson_end);
+            Lock::add_password($room_id, $pwd_id, $password, $permission_begin, $permission_end);
             $ret = array(
-                'code' => Constant::$STATUS_CODE['OK']
+                'code' => Constant::$STATUS_CODE['OK'],
+                'content' => "新增密码成功"
             );
-            return Response::json($ret);
         }
-
+        return $ret;
     }
 
-    /*todo...*/
-    public function update_password($room_id, $password_id, $password, $phonenumber, $permission_begin, $permission_end)
+    private function updatePassword($room_id, $password, $phonenumber, $phonenumber, $permission_begin, $permission_end)
     {
 
-        $url = '/update_password';
-        $params = array(
-            'access_token' => $this->access_token(),
-            'permisson_begin' => $permission_begin,
-        );
+        $query_url = '/update_password';
+        $pwd_id = Lock::find_spare_password($room_id);
+        if(empty($lock_id))
+        {
+            $ret = $this->addPassword($room_id, $password, $phonenumber, $permission_begin, $permission_end);
+        }
+        else {
+            $params = array(
+                "access_token" => $this->access_token(),
+                "home_id" => $this->home_id,
+                "room_id" => $room_id,
+                "is_send_location" => true,
+                "password_id" => $pwd_id,
+                "password" => $password,
+                "permission_begin" => $permission_begin,
+                "permission_end" => $permission_end,
+                'phonenumber' => $phonenumber
+            );
+
+            $res = ApiHandle::httpPostJson($query_url, $params);
+            $res = json_decode($res, true);
+            if ($res['ErrNo'] != 0) {
+                $ret = array(
+                    'code' => Constant::$STATUS_CODE['FAIL_UPDATE_PASSWORD'],
+                    'content' => "更新密码失败"
+                );
+            } else {
+                $ret = array(
+                    'code' => Constant::$STATUS_CODE['OK'],
+                    'content' => "更新密码成功"
+                );
+            }
+        }
+        return $ret;
     }
 
+    public function api_update_password()
+    {
+        $room_id = $_GET['room_id'],
+        $password = $_GET['password'];
+        $phonenumber = $_GET['phonenumber'];
+        $permission_begin = $_GET['permission_begin'];
+        $permission_end = $_GET['permission_end'];
+        $ret = $this->updatePassword($room_id, $password, $phonenumber, $permission_begin, $permission_end);
+        return Response::json($ret);
+    }
     public function callback()
     {
         $event = $_POST['event'];

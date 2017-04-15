@@ -21,6 +21,8 @@ class Constant
     public static $STATUS_CODE = array(
         "OK" => 200,
         "PARAMS_MISS" => 400,
+        "FAIL_ADD_PASSWORD" => 401,
+        "FAIL_ADD_PASSWORD" => 402,
     );
 
     public static $ORDER_STATE = array(
