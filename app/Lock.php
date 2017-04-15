@@ -43,8 +43,8 @@ class Lock extends Model
     public function update_password($password, $permission_begin, $permission_end)
     {
         $this->password = $password;
-        $this->permission_begin = $permission_begin;
-        $this->permission_end = $permission_end;
+        $this->permission_begin = date('Y-m-d H:i:s', $permission_begin);
+        $this->permission_end = date('Y-m-d H:i:s', $permission_end);
         $this->save();
     }
 }
