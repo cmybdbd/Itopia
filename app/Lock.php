@@ -16,7 +16,7 @@ class Lock extends Model
     {
         $lock = new Lock();
         $lock->room_id = $room_id;
-        $lock->password_id = $password_id;
+        $lock->id = $password_id;
         $lock->password = $password;
         $lock->permission_begin = date('Y-m-d H:i:s', $permission_begin);
         $lock->permission_end = date('Y-m-d H:i:s', $permission_end);
