@@ -10,12 +10,6 @@ use App\Utils\Constant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
-//线上
-define('LOCK_API', 'https://lockapi.dding.net/openapi/v1');
-
-//线下
-//define('LOCK_API', 'http://dev-lockapi.dding.net:8090/openapi/v1');
-
 
 class LockController extends Controller
 {
@@ -23,6 +17,7 @@ class LockController extends Controller
     private $home_id = 'lkjl0011170300183734';
     private $client_id='c23b578799413d777340d7d2';
     private $client_secret='741a9ea72cf5c5c5f3051c8471de90c0';
+    private $api_url = 'https://lockapi.dding.net/openapi/v1';
 
     //线上
 //    private $client_id='c23b578799413d777340d7d2';
@@ -30,7 +25,7 @@ class LockController extends Controller
 
     public function access_token()
     {
-        $url = '/access_token';
+        $query_url = $this->api_url.'/access_token';
         $token = LockToken::get_access_token();
         if(empty($token))
         {
@@ -38,7 +33,7 @@ class LockController extends Controller
                 'client_id' => $this->client_id,
                 'client_secret' => $this->client_secret
             );
-            $ret = ApiHandle::httpPostJson(LOCK_API.$url, $params);
+            $ret = ApiHandle::httpPostJson($query_url, $params);
 
             $ret = json_decode($ret, true);
             if($ret['ErrNo'] != 0 )
@@ -54,6 +49,8 @@ class LockController extends Controller
 
     public function addPassword()
     {
+        $query_url = $this->api_url.'/add_password';
+
         $room_id = $_GET['room_id'];
 //        $is_default = $_GET['is_default'];
         $password = $_GET['password'];
@@ -88,10 +85,9 @@ class LockController extends Controller
             $params['phonenumber'] = $phone;
         }
 
-        $query_url = LOCK_API.'add_password';
         $res = ApiHandle::httpPostJson($query_url, $params);
         $res = json_decode($res, true);
-        if(isset($res['ErrNo']))
+        if($res['ErrNo'] != 0)
         {
             return Response::json($res);
         }
