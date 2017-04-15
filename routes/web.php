@@ -27,20 +27,24 @@ Route::get('/test', function (){
     echo (time() % (24*60*60));
     return ;
 });
+Route::get('test2', function (){
+    echo (time() % (24*60*60));
+    return ;
+});
 
 Route::group(['middleware' => 'auth'], function (){
-    Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/create/{uid}/{rid}', 'OrderController@createOrder');
-    Route::get('/result/{id}','OrderController@getOrderDetail');
-    Route::get('/comment/{id}', 'CommentController@create');
-    Route::get('/commentResult', 'CommentController@finish');
-    Route::get('/orderList/{id}', 'OrderController@getOrderList');
+    Route::get('home', 'HomeController@index')->name('home');
+    Route::get('create/{uid}/{rid}', 'OrderController@createOrder');
+    Route::get('result/{id}','OrderController@getOrderDetail');
+    Route::get('comment/{id}', 'CommentController@create');
+    Route::get('commentResult', 'CommentController@finish');
+    Route::get('orderList/{id}', 'OrderController@getOrderList');
 
-    Route::get('/manage/room', 'RoomController@manageRoom');
-    Route::get('/manage/order', 'OrderController@manageOrder');
+    Route::get('manage/room', 'RoomController@manageRoom');
+    Route::get('manage/order', 'OrderController@manageOrder');
 });
 Route::group(['middleware' => ['web','wechat.oauth']], function () {
-    Route::get('/login', 'WeChatController@auth')->name('login');
+    Route::get('login', 'WeChatController@auth')->name('login');
 });
 
 
