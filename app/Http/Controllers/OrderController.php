@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Utils\Constant;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -91,7 +92,7 @@ class OrderController extends Controller
             'startTime' => 'required',
             'endTime' => 'required',
             'duration' => 'required',
-            'prcie' => 'required',
+            'price' => 'required',
             'isDay'  => 'required'
         ]);
 
@@ -124,7 +125,7 @@ class OrderController extends Controller
             ]
         );
         DB::commit();
-
+        $user =User::find($request->userId);
         $succ = Order::find($order);
 
         /*
@@ -152,17 +153,23 @@ class OrderController extends Controller
                     $order->save();
                 }
         */
-        $param = '';
+        $json = '';
+
         if (!empty($succ))
         {
-            $param = $this->getWeChatPayParam([
-                'body' => 'Itopia',
-                'out_trade_no' => $order,
-                'total_fee' => $request->price
-            ]);
+            $pay =new PayController();
+            $json = $pay->generateOrder($order,
+                $succ->price,
+                $user->id,
+                $user->name,
+                $user->idnumber,
+                '',
+                $user->phonenumber
+            );
+            $json = json_decode($json,true);
         }
 
-        if (is_array($param))
+        if (is_array($json))
         {
             return Response::json(['code' => '200', 'param' => $param]);
         } else
