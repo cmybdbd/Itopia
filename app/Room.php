@@ -28,7 +28,7 @@ class Room extends Model
                 ['startDate', '<', $dayStartTime + 24*60*60],
                 ['startDate', '>=', $dayStartTime],
                 ['isDay' ,'=', false],
-                ['state', '>=', Constant::$ORDER_STATE['TOUSE']],
+                ['state', '>=', Constant::$ORDER_STATE['UNPAY']],
             ])->get();
             if(count($used))
             {
@@ -46,7 +46,7 @@ class Room extends Model
                 ['startTime', '<=', $time],
                 ['endTime', '>=', $time],
                 ['isDay', '=', true],
-                ['state', '>=', Constant::$ORDER_STATE['TOUSE']],
+                ['state', '>=', Constant::$ORDER_STATE['UNPAY']],
             ])->get();
 
             if (count($used))
@@ -61,7 +61,7 @@ class Room extends Model
     }
     public function nextTime(){
         $nextTime = $this -> hasManyOrders()->where([
-            ['state','>=', Constant::$ORDER_STATE['TOUSE']],
+            ['state','>=', Constant::$ORDER_STATE['UNPAY']],
             ['isDay', '=', true],
         ])->max('endTime');
         $nextTime = strtotime($nextTime) + 30 * 60;
