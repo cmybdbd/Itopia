@@ -66,7 +66,6 @@ class PayController extends Controller
             $order = Order::find($tenantOrder);
             $order->orderno = $orderno;
             $order->save();
-
             $ret = array(
                 'code' => 200,
                 'content' => array(
