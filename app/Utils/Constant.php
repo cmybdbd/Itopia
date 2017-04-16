@@ -26,6 +26,7 @@ class Constant
         "FAIL_UPDATE_PASSWORD" => 402,
         "GENERATE_ORDER_FAIL" => 403
     );
+    public static $PAY_SEED = 'aec29485267adfef090913c9298f5628';
 
     public static $ORDER_STATE = array(
         'REMOVE'   => 0,

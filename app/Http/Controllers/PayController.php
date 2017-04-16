@@ -66,8 +66,8 @@ class PayController extends Controller
         return Response::json($ret);
     }
 
-    private function doAES($str)
+    public static function doAES($str)
     {
-
+        return exec('java -jar ../java/AESUtils.jar e '.Constant::$PAY_SEED. ' '. $str);
     }
 }
