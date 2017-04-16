@@ -22,27 +22,35 @@ class OrderController extends Controller
 
         if(!empty($order->payNum ))
         {
-            $payNum = json_decode($order->payNum, true);
-            if($payNum['resultCode'] == 'SUCCESS')
+            if(empty($order->passwd))
             {
-                $strpol = '0123456789';
-                $passwd = '';
-                for ($i = 0;$i < 6; $i ++)
+                $payNum = json_decode($order->payNum, true);
+                if ($payNum['resultCode'] == 'SUCCESS')
                 {
-                    $passwd .= $strpol[mt_rand(0, strlen($strpol) -1)];
+                    $strpol = '0123456789';
+                    $passwd = '';
+                    for ($i = 0; $i < 6; $i++)
+                    {
+                        $passwd .= $strpol[mt_rand(0, strlen($strpol) - 1)];
+                    }
+                    $lc = new LockController();
+                    $ret = $lc->updatePassword(
+                        $order->hasRoom->roomLockId,
+                        $passwd,
+                        '18811792605',
+                        strtotime($order->startTime),
+                        strtotime($order->endTime)
+                    );
+                    if ($ret['code'] == Constant::$STATUS_CODE['OK'])
+                    {
+                        $order->passwd = $passwd;
+                        $order->save();
+                    }
                 }
-                $lc = new LockController();
-                $ret = $lc->updatePassword(
-                    $order->hasRoom->roomLockId,
-                    $passwd,
-                    '18811792605',
-                    strtotime($order->startTime),
-                    strtotime($order->endTime)
-                );
-                if($ret['code'] == Constant::$STATUS_CODE['OK'])
-                {
-                    return view('order.result')->with(['order'=>$order, 'passwd'=>$passwd]);
-                }
+            }
+            if(!empty($order->passwd))
+            {
+                return view('order.result')->with(['order' => $order]);
             }
         }
         return "someting error";

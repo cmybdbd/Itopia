@@ -96,7 +96,7 @@
         </div>
     </div>
     <div id="param">
-        <div id="passwd" data-content="{{$passwd}}"></div>
+        <div id="passwd" data-content="{{$order->passwd}}"></div>
     </div>
 @endsection
 @section('scripts')
