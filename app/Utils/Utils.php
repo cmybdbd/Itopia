@@ -70,7 +70,7 @@ class Utils{
 
 
 
-    public static function sign($arr, $sort = false)
+    public static function sign($arr, $sort = false, $uppercase = false)
     {
         if($sort)
         {
@@ -81,6 +81,11 @@ class Utils{
         {
             $sig.=$var;
         }
-        return strtoupper(md5($sig));
+        $ret = md5($sig);
+        if($uppercase)
+        {
+            $ret = strtoupper($ret);
+        }
+        return $ret;
     }
 }

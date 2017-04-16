@@ -37,7 +37,7 @@ class IDAuthController extends Controller
         $sign_arr = array_values($params);
         $sign_arr[] = $this->source;
         $sign_arr[] = $this->key;
-        $params['signature'] = Utils::sign($sign_arr, true);
+        $params['signature'] = Utils::sign($sign_arr, true, true);
         $query_url = $this->api_url.$this->source."?".http_build_query($params);
         $res = ApiHandle::httpGet($query_url);
         if($res)
