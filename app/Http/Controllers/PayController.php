@@ -24,7 +24,7 @@ class PayController extends Controller
 
     public function apitestGenerateOrder()
     {
-        $tenantOrder = '123456789';
+        $tenantOrder = '0000000000000000000000000001';
         $money = '0.01';
         $userId = '123';
         $userName = 'wjl';
@@ -49,17 +49,15 @@ class PayController extends Controller
             'idcard' => $this->doAES($idcard),
             'productInfo' => $productInfo,
             'phone' => $phone,
+            'deadTime' => date('Y-m-d H:i:s', time() + 300)
         );
         $sign_arr = array_values($params);
         $sign_arr[] = $this->seed;
         $params['sign'] = Utils::sign($sign_arr);
 
 
-        var_dump($params);
         $res = ApiHandle::httpPostJson($query_url, $params);
         $res = json_decode($res, true);
-
-        var_dump($res);
 
 
         if($res['successful'] == 1)
