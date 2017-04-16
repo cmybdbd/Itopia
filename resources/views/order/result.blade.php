@@ -44,7 +44,7 @@
             主人的私人空间地址
         </div>
         <div class="b-color">
-            地址：{{$orders->hasRoom->address}}
+            地址：{{$order->hasRoom->address}}
         </div>
         <div class="myrow" style="margin-bottom: 1vh;display:block;text-align:center" >
             <img src="{{asset('storage/arch.jpg')}}" style="width: 100%" >
@@ -95,15 +95,19 @@
             <a href="{{url('comment/0')}}" class="btn btn-block">结束使用</a>
         </div>
     </div>
+    <div id="param">
+        <div id="passwd" data-content="{{$passwd}}"></div>
+    </div>
 @endsection
 @section('scripts')
     <script>
         var gatepwd = $(".gatepwd>.pwd-group");
         var roompwd = $(".roompwd>.pwd-group");
+        var passwd = $("#passwd").attr("data-content");
         for (i = 0; i< 6; i++)
         {
             $(gatepwd.children()[i]).text(i);
-            $(roompwd.children()[i]).text(i);
+            $(roompwd.children()[i]).text(passwd[i]);
         }
     </script>
 
