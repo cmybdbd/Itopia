@@ -38,7 +38,7 @@ class WeChatController extends Controller
             // 这里不一定是return，如果你的框架action不是返回内容的话你就得使用
             // $oauth->redirect()->send();
         }
-        $u = \App\User::find($user->id);
+        $u = \App\User::where('openid','=',$user->id)->first();
         if(!$u)
         {
             //$u = \App\User::create(['id'=>$user->id]);

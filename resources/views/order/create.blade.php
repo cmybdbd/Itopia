@@ -398,6 +398,7 @@
 
                         },
                         error: function (e){
+                            alert(e.responseText);
                             console.log(e.responseText);
                         }
                     });
