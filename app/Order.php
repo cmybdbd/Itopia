@@ -17,4 +17,6 @@ class Order extends Model
     public function hasUser(){
         return $this->belongsTo('App\User', 'userId', 'id');
     }
+
+
 }
