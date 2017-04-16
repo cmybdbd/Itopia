@@ -32,17 +32,20 @@ class OrderController extends Controller
                     $passwd .= $strpol[mt_rand(0, strlen($strpol) -1)];
                 }
                 $lc = new LockController();
-                $lc->updatePassword(
+                $ret = $lc->updatePassword(
                     $order->roomId,
                     $passwd,
                     '18811792605',
                     strtotime($order->startTime),
                     strtotime($order->endTime)
                 );
-                return view('order.result')->with(['order'=>$order, 'passwd'=>$passwd]);
+                if($ret['code'] == Constant::$STATUS_CODE['OK'])
+                {
+                    return view('order.result')->with(['order'=>$order, 'passwd'=>$passwd]);
+                }
             }
         }
-
+        return "someting error";
     }
     function getOrderList($id)
     {
