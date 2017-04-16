@@ -20,15 +20,14 @@ Route::get('/payment/callback', 'WeChatController@payment_call_back');
 Route::get('/server', 'WeChatController@check_server');
 
 
-Route::post('/order/create', 'OrderController@storeOrder');
-Route::post('/comment/create', 'CommentController@store');
-Route::get('/test', 'PayController@apitestGenerateOrder');
-    Route::get('test2', function (){
-    echo (time() % (24*60*60));
-    return ;
-});
-
 Route::group(['middleware' => 'auth'], function (){
+
+    Route::post('/order/create', 'OrderController@storeOrder');
+    Route::post('/comment/create', 'CommentController@store');
+    Route::post('/savePhone/{phone}', function($phone){
+        \App\User::savePhone($phone, \Illuminate\Support\Facades\Auth::id());
+    });
+
     Route::get('/home', 'HomeController@index');
     Route::get('/create/{uid}/{rid}', 'OrderController@createOrder');
     Route::get('/result/{id}','OrderController@getOrderDetail');
@@ -38,6 +37,8 @@ Route::group(['middleware' => 'auth'], function (){
 
     Route::get('/manage/room', 'RoomController@manageRoom');
     Route::get('/manage/order', 'OrderController@manageOrder');
+    Route::get('/idAuth', 'IDAuthController@IDauth');
+
 });
 Route::group(['middleware' => ['web','wechat.oauth']], function () {
     Route::get('/login', 'WeChatController@auth');
@@ -46,8 +47,8 @@ Route::group(['middleware' => ['web','wechat.oauth']], function () {
 
 Route::get('/lock/callback', 'LockController@callback');
 
-Route::get('/sendCode', 'SMSController@sendCode');
-Route::get('/idAuth', 'IDAuthController@IDauth');
+//Route::get('/sendCode', 'SMSController@sendCode');
+
 Route::group(['prefix' => 'lock'], function(){
     Route::get('updatep_assword', "LockController@apiUpdatePassword");
 });

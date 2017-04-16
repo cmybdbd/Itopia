@@ -359,16 +359,13 @@
             });
             dateTime.parent().on('click', function () {
                 datePicker.show();
-            })
-            window.Laravel = <?php echo json_encode([
-                'csrfToken' => csrf_token(),
-            ]); ?>;
+            });
 
             $("#toPay").on('click', function(){
                 if(checkToPay())
                 {
                     $data = {
-                        _token: Laravel.csrfToken,
+                        _token: $("meta[name='csrf-token']").attr('content'),
                         'userId': $("#userId").attr('data-content'),
                         'roomId': $("#roomId").attr('data-content'),
                         'startTime': (+startTime.attr('data-content'))/1000|0,

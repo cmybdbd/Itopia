@@ -48,6 +48,7 @@
     </div>
     <div id="param">
         <div class="uid" data-content="{{\Illuminate\Support\Facades\Auth::id()}}"></div>
+        <div class="uphoneN" data-content="{{\Illuminate\Support\Facades\Auth::user()->phonenumber}}"></div>
         <div class="uidN" data-content="{{\Illuminate\Support\Facades\Auth::user()->idnumber}}"></div>
     </div>
 
@@ -85,12 +86,12 @@
                 <div class="modal-body">
                     <div class="input-group input-group-lg">
                         <input type="number" class="form-control" id="RealId" placeholder="请输入身份证号">
-                        <input type="number" class="form-control" id="RealName" placeholder="请输入姓名">
+                        <input type="text" class="form-control" id="RealName" placeholder="请输入姓名">
                     </div>
                 </div>
                 <hr class="mysplit">
                 <div>
-                    <button class="btn btn-default form-control"></button>
+                    <button class="btn btn-default form-control" id="validateID">确认</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -104,25 +105,26 @@
             validatePhone.on('shown.bs.modal', function () {
                 phoneN.focus();
             });
-            if(!$("#param .uidN").attr("data-content"))
-            {
-                var wait=60;
+            if(!$("#param .uphoneN").attr("data-content")) {
+                var wait = 60;
+
                 function time(o) {
                     if (wait === 0) {
                         o.removeAttribute("disabled");
-                        o.textContent="获取验证码";
+                        o.textContent = "获取验证码";
                         wait = 60;
                     } else {
 
                         o.setAttribute("disabled", true);
-                        o.textContent="重新发送(" + wait + ")";
+                        o.textContent = "重新发送(" + wait + ")";
                         wait--;
-                        setTimeout(function() {
+                        setTimeout(function () {
                                 time(o)
                             },
                             1000)
                     }
                 }
+
                 //alert('no idnumber');
                 var inp0 = $("#inp0"),
                     inp1 = $("#inp1"),
@@ -130,12 +132,12 @@
                     inp3 = $("#inp3");
 
                 validatePhone.modal('show');
-                $("#sendCode").on('click',function(){
+                $("#sendCode").on('click', function () {
                     phone = phoneN.val();
-                    if(phone.match(/^\d{11}$/)) {
+                    if (phone.match(/^\d{11}$/)) {
                         $.ajax({
                             type: 'get',
-                            dataType:'jsonp',
+                            dataType: 'jsonp',
                             jsonpCallback: 'callback',
                             url: 'http://renthouse.wecash.net/itopia/checkphone.php?m=sendCode&' +
                             'p=' + phone,
@@ -151,19 +153,19 @@
                     }
                 });
 
-                inp0.bind('input', function(){
+                inp0.bind('input', function () {
                     inp1.focus();
                 });
-                inp1.bind('input', function(){
+                inp1.bind('input', function () {
                     inp2.focus();
                 });
-                inp2.bind('input', function(){
+                inp2.bind('input', function () {
                     inp3.focus();
                 });
-                inp3.bind('input', function(){
-                    if(inp3.val().match(/^\d$/)) {
+                inp3.bind('input', function () {
+                    if (inp3.val().match(/^\d$/)) {
                         console.log('http://renthouse.wecash.net/itopia/checkphone.php?m=checkCode&' +
-                        'p=' + inp0.val() + inp1.val() + inp2.val() + inp3.val());
+                            'p=' + inp0.val() + inp1.val() + inp2.val() + inp3.val());
                         $.ajax({
                             dataType: 'jsonp',
                             jsonpCallback: "jsonp",
@@ -173,7 +175,16 @@
                                 console.log(e);
                                 if (e.code == 200) {
                                     $("#validatePhone").modal('hide');
-                                    $("#validateIdNumber").modal('show');
+                                    $.ajax({
+                                        url: '/savePhone/' + phoneN.val(),
+                                        data: {
+                                            _token:$("meta[name='csrf-token']").attr('content')
+                                        },
+                                        type: 'POST',
+                                        success: function () {
+                                            console.log('save phone');
+                                        }
+                                    });
                                 }
                                 else {
                                     $(".errormsg").text('验证码有误');
@@ -191,7 +202,27 @@
                         });
                     }
                 });
+            };
+            if(!$("#param .uidN").attr("data-content")) {
+                var validateID = $("#validateID");
 
+                validateID.on("click",function(){
+                    var RealName = $("#RealName").val();
+                    var RealId = $("#RealId").val();
+
+                    if(RealId.match(/^\d{18}$/)) {
+                        $.ajax({
+                            url: '/idAuth?name=' + RealName + "&id_card="+RealId,
+                            success:function(e){
+                                console.log(e);
+                                if(e.code == 200)
+                                {
+                                    validateId.modal('hide');
+                                }
+                            }
+                        })
+                    }
+                })
             }
             var uid = $("#param .uid").attr('data-content');
             $("#myOrder").on('click',function () {
