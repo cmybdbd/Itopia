@@ -24,7 +24,7 @@ class PayController extends Controller
 
     public function apitestGenerateOrder()
     {
-        $tenantOrder = '0000000000000000000000000001';
+        $tenantOrder = '6ab5a6fe-2254-11e7-b33b-00163e028974';
         $money = '0.01';
         $userId = '123';
         $userName = 'wjl';
@@ -65,6 +65,9 @@ class PayController extends Controller
         {
             var_dump($res);
             $orderno = $res['data']['orderno'];
+
+            var_dump($tenantOrder);
+
             $order = Order::find($tenantOrder);
 
             var_dump($order);
