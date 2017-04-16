@@ -24,9 +24,9 @@ class CreateOrderTable extends Migration
             $table -> double('duration');
             $table -> boolean('isDay');
             $table -> integer('state');
-            $table -> string('payNum');
+            $table -> string('payNum')->nullable();
             $table -> double('price');
-            $table -> string("orderno"); //for quickpass
+            $table -> string("orderno")->nullable(); //for quickpass
 
             $table->timestamps();
         });
