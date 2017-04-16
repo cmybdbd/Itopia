@@ -15,8 +15,8 @@ class PayController extends Controller
 {
     //线下
     private $api_url = 'https://new-beta.wecash.net/paymentKuaijie/payment/quick/payOrder';
-    private $front_url = "";
-    private $back_url = "";
+    private $front_url = "http://wjllance.cn/pay/syncResponse";
+    private $back_url = "http://wjllance.cn/pay/asyncResponse";
 
     private $tenanId = "11";
     private $seed = "aec29485267adfef090913c9298f5628";
