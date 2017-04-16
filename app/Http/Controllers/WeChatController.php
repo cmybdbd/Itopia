@@ -45,7 +45,7 @@ class WeChatController extends Controller
             $u = User::saveNewUser($user->getOriginal());
         }
         \Illuminate\Support\Facades\Auth::login($u, true);
-        $_SESSION['target_url'] = '/home';
+        $_SESSION['target_url'] = '/itopia/home';
         return redirect('home');
         // 已经登录过
       //  $user = $_SESSION['wechat_user'];
@@ -71,7 +71,7 @@ class WeChatController extends Controller
             Log::info("old user");
         }
 
-        $targetUrl = empty($_SESSION['target_url']) ? '/home' : $_SESSION['target_url'];
+        $targetUrl = empty($_SESSION['target_url']) ? '/itopis/home' : $_SESSION['target_url'];
         return Redirect::to($targetUrl);
         //header('location:'. $targetUrl); // 跳转到目标url
     }

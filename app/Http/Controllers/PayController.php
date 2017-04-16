@@ -14,7 +14,10 @@ use Illuminate\Support\Facades\Response;
 class PayController extends Controller
 {
     //线下
-    private $api_url = 'https://new-beta.wecash.net/paymentKuaijie/payment/quick/payOrder';
+    //private $api_url = 'https://new-beta.wecash.net/paymentKuaijie/payment/quick/payOrder';
+
+    //线上
+    private  $api_url = 'https://m.wecash.net/paymentKuaijie/payment/quick/payOrder';
     private $front_url = "http://wjllance.cn/pay/syncResponse";
     private $back_url = "http://wjllance.cn/pay/asyncResponse";
 
