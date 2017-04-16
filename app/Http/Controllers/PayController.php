@@ -93,13 +93,19 @@ class PayController extends Controller
         return Utils::AES_encrypt($str, $this->seed);
     }
 
-    public function paySyncResponse()
+    public function paySyncResponse(Request $request)
     {
+        return redirect()->action(
+            'OrderController@getOrderDetail', ['id'=> $request->tenantOrder]
+        );
+        /*
+        return Response::json($request->all());
         $ret = array(
             'code' => 200,
             'content' => "OK"
         );
         return Response::json($ret);
+        */
     }
     public function payAsyncResponse()
     {
