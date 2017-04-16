@@ -6,6 +6,7 @@
  * Time: 9:28 PM
  */
 namespace App\Utils;
+
 class Utils{
     static public function my_buid_query($prestring, $encodeUrl=false){
         $pstr= '';
@@ -61,4 +62,30 @@ class Utils{
     }
 
 
+    public static function AES_encrypt($str, $seed)
+    {
+        $res = exec('java -jar ../java/AESUtils.jar e '.$seed. ' '. $str);
+        return $res;
+    }
+
+
+
+    public static function sign($arr, $sort = false, $uppercase = false)
+    {
+        if($sort)
+        {
+            sort($arr);
+        }
+        $sig="";
+        foreach ($arr as $var)
+        {
+            $sig.=$var;
+        }
+        $ret = md5($sig);
+        if($uppercase)
+        {
+            $ret = strtoupper($ret);
+        }
+        return $ret;
+    }
 }

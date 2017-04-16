@@ -50,8 +50,20 @@ Route::get('/lock/callback', 'LockController@callback');
 Route::get('/sendCode', 'SMSController@sendCode');
 Route::get('/idAuth', 'IDAuthController@IDauth');
 Route::group(['prefix' => 'lock'], function(){
-    Route::get('updatePassword', "LockController@api_update_password");
+    Route::get('updatep_assword', "LockController@apiUpdatePassword");
 });
+Route::group(['prefix' => 'pay'], function(){
+    Route::get('generate_order', "PayController@apitestGenerateOrder");
+    Route::get('sync_response', "PayController@paySyncResponse");
+    Route::get('async_response', "PayController@payAsyncResponse");
+
+});
+
+
+
+
+
+
 
 Route::group(['prefix' => 'itopia'], function()
 {
@@ -89,5 +101,6 @@ Route::get('/idAuth', 'IDAuthController@IDauth');
 });
 Route::group(['prefix' => 'itopia/lock'], function(){
     Route::get('updatePassword', "LockController@api_update_password");
+
 });
 
