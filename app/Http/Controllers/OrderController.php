@@ -159,19 +159,19 @@ class OrderController extends Controller
         {
             $pay =new PayController();
             $json = $pay->generateOrder($order,
-                $succ->price,
+                '0.01',
                 $user->id,
-                $user->name,
-                $user->idnumber,
-                '',
-                $user->phonenumber
+                'tyq',
+                '362323199504260013',
+                'info',
+                '18811792605'
             );
-            $json = json_decode($json,true);
+           // $json = json_decode($json,true);
         }
 
         if (is_array($json))
         {
-            return Response::json(['code' => '200', 'param' => $param]);
+            return Response::json(['code' => '200', 'param' => $json]);
         } else
         {
             return Response::json(['code' => '300']);

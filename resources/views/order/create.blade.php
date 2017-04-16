@@ -385,12 +385,15 @@
                         type: 'POST',
                         success: function(param){
                             console.log(param);
-                            if(param['code'] == '200')
+                            if(param['code'] == '200' && param['param']['code'] == 200)
                             {
+                                window.location.href = param['param']['content']['payUrl'];
+                                /*
                                 window.location.href = window.location.href.replace(
-                                    /create.*/,
+                                    /create.* /,
                                     'result/'+param['orderId']
                                 );
+                               */
                             }
 
                         },

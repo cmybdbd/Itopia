@@ -22,9 +22,8 @@ Route::get('/server', 'WeChatController@check_server');
 
 Route::post('/order/create', 'OrderController@storeOrder');
 Route::post('/comment/create', 'CommentController@store');
-Route::get('/test', function (){
-});
-Route::get('test2', function (){
+Route::get('/test', 'PayController@apitestGenerateOrder');
+    Route::get('test2', function (){
     echo (time() % (24*60*60));
     return ;
 });
