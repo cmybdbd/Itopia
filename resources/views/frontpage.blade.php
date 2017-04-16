@@ -48,12 +48,126 @@
     </div>
     <div id="param">
         <div class="uid" data-content="{{\Illuminate\Support\Facades\Auth::id()}}"></div>
-
+        <div class="uidN" data-content="{{\Illuminate\Support\Facades\Auth::user()->idnumber}}"></div>
     </div>
+
+    <div id="validatePhone" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="m-color">
+                    <h4 style="text-align: center;line-height:2em">注册/登录</h4>
+                </div>
+                <hr class="mysplit">
+                <div class="modal-body">
+                    <div class="input-group input-group-lg">
+                        <input type="number" class="form-control" id="phoneN" max="99999999999" placeholder="请输入你的手机号">
+                        <span class="input-group-btn">
+                            <button class="btn btn-secondary" id="sendCode" type="button">获取验证码</button>
+                        </span>
+                    </div>
+                </div>
+                <div class="" style="margin-bottom: 2em;display:flex; justify-content: space-around;">
+                    @for($i = 0; $i < 4; $i ++)
+                        <input type="number" id="inp{{$i}}" style="text-align: center; width: 2em">
+                    @endfor
+                    <p class="errormsg"></p>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <div id="validateIdNumber" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="m-color">
+                    <h4 style="text-align: center;line-height:2em">身份验证</h4>
+                </div>
+                <hr class="mysplit">
+                <div class="modal-body">
+                    <div class="input-group input-group-lg">
+                        <input type="number" class="form-control" id="RealId" placeholder="请输入身份证号">
+                        <input type="number" class="form-control" id="RealName" placeholder="请输入姓名">
+                    </div>
+                </div>
+                <hr class="mysplit">
+                <div>
+                    <button class="btn btn-default form-control"></button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 @endsection
 @section('scripts')
     <script>
         $(function () {
+            if(!$("#param .uidN").attr("data-content"))
+            {
+                var wait=60;
+                function time(o) {
+                    if (wait === 0) {
+                        o.removeAttribute("disabled");
+                        o.textContent="获取验证码";
+                        wait = 60;
+                    } else {
+
+                        o.setAttribute("disabled", true);
+                        o.textContent="重新发送(" + wait + ")";
+                        wait--;
+                        setTimeout(function() {
+                                time(o)
+                            },
+                            1000)
+                    }
+                }
+                //alert('no idnumber');
+                $("#validatePhone").modal('show');
+                $("#sendCode").on('click',function(){
+                    phone = $("#phoneN").val();
+                    if(phone.match(/^\d{11}$/)) {
+                        $.ajax({
+                            type: 'get',
+                            url: 'http://renthouse.wecash.net/itopia/checkphone.php?m=sendCode&' +
+                            'p=' + phone,
+                            success: function (e) {
+                                console.log(e);
+                            }
+                        });
+                        time(this);
+                    }
+                    else {
+                        $("#phoneN").focus();
+                    }
+                });
+                var inp0 = $("#inp0"),
+                    inp1 = $("#inp1"),
+                    inp2 = $("#inp2"),
+                    inp3 = $("#inp3");
+                inp0.bind('input', function(){
+                    inp1.focus();
+                });
+                inp1.bind('input', function(){
+                    inp2.focus();
+                });
+                inp2.bind('input', function(){
+                    inp3.focus();
+                });
+                inp3.bind('input', function(){
+                    $.ajax({
+                        url:'http://renthouse.wecash.net/itopia/checkphone.php?m=checkCode&' +
+                        'p=' + inp0.val() + inp1.val() + inp2.val()+inp3.val(),
+                        success: function(e){
+                            if(e.code == 200){
+                                $("#validatePhone").modal('hide');
+                                $("#validateIdNumber").modal('show');
+                            }
+                            else {
+                                $(".errormsg").text('验证码有误');
+                                setTimeout(function(){$(".errormsg").text('');},1000);
+                            }
+                        }
+                    });
+                });
+
+            }
             var uid = $("#param .uid").attr('data-content');
             $("#myOrder").on('click',function () {
                 window.location.href = window.location.href.replace('home','orderList/'+uid);
