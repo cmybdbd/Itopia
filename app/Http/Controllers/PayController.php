@@ -31,7 +31,9 @@ class PayController extends Controller
         $idcard = '500227199512173512';
         $productInfo = "test product";
         $phone = '13021941487';
-        $this->generateOrder($tenantOrder, $money, $userId, $userName, $idcard, $productInfo, $phone);
+        $ret = $this->generateOrder($tenantOrder, $money, $userId, $userName, $idcard, $productInfo, $phone);
+
+        return Response::json($ret);
      }
 
     public function generateOrder($tenantOrder, $money, $userId, $userName, $idcard, $productInfo, $phone)
@@ -80,7 +82,7 @@ class PayController extends Controller
                 'content' => $res
             );
         }
-        return Response::json($ret);
+        return $ret;
     }
 
     private function doAES($str)
