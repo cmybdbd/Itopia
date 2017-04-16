@@ -33,7 +33,7 @@ class OrderController extends Controller
                 }
                 $lc = new LockController();
                 $ret = $lc->updatePassword(
-                    $order->roomId,
+                    $order->hasRoom->roomLockId,
                     $passwd,
                     '18811792605',
                     strtotime($order->startTime),
