@@ -64,7 +64,10 @@ class Utils{
 
     public static function AES_encrypt($str, $seed)
     {
-        return exec('java -jar ../java/AESUtils.jar e '.$seed. ' '. $str);
+        var_dump($str);
+        $res = exec('java -jar ../java/AESUtils.jar e '.$seed. ' '. $str);
+        var_dump($res);
+        return $res;
     }
 
 

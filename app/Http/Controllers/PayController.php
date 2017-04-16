@@ -46,7 +46,7 @@ class PayController extends Controller
             'backUrl' => $this->doAES($this->back_url),
             'customerId' => $userId,
             'userNmae' => $userName,
-            'idcard' => $idcard,
+            'idcard' => $this->doAES($idcard),
             'productInfo' => $productInfo,
             'phone' => $phone,
         );
