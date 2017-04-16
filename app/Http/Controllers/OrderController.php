@@ -18,7 +18,31 @@ class OrderController extends Controller
     function getOrderDetail($id)
     {
         PageViewController::updatePageView('result');
-        return view('order.result')->withOrders(Order::with('hasRoom')->where('id','=',$id)->first());
+        $order = Order::with('hasRoom')->find($id);
+
+        if(!empty($order->payNum ))
+        {
+            $payNum = json_decode($order->payNum, true);
+            if($payNum['resultCode'] == 'SUCCESS')
+            {
+                $strpol = '0123456789';
+                $passwd = '';
+                for ($i = 0;$i < 6; $i ++)
+                {
+                    $passwd .= $strpol[mt_rand(0, strlen($strpol) -1)];
+                }
+                $lc = new LockController();
+                $lc->updatePassword(
+                    $order->roomId,
+                    $passwd,
+                    '18811792605',
+                    strtotime($order->startTime),
+                    strtotime($order->endTime)
+                );
+                return view('order.result')->with(['order'=>$order, 'passwd'=>$passwd]);
+            }
+        }
+
     }
     function getOrderList($id)
     {

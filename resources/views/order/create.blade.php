@@ -52,12 +52,15 @@
         .cbox{
             position: relative;
         }
+        #agreement{
+            opacity:0;
+        }
         .cbox label{
             position: absolute;
             width: 1.2em;
             height: 1.2em;
-            top: 0.3em;
-            left: 0em;
+            top: 0.2em;
+            left: -1px;
             background: white;
             border: 1px solid var(--b-font-color);
             border-radius:5px;
@@ -280,18 +283,21 @@
 
             var startPicker = new Picker({
                 data: [day, time],
-                selectedIndex: [0, 0],
-                title: '开始时间'
+                selectedIndex: [0, 1],
+                title: '开始时间',
+                id: 'startPicker'
             });
             var durationPicker = new Picker({
                 data: [duration],
                 selectIndex: [0],
-                title: '使用时长'
+                title: '使用时长',
+                id: 'durationPicker'
             });
-             datePicker = new Picker({
+            var datePicker = new Picker({
                 data:[date],
                 selectedIndex: [0],
-                title: '选择日期'
+                title: '选择日期',
+                id:'datePicker'
             });
 
             startPicker.on('picker.select', function (selectedVal, selectedIndex) {
@@ -407,9 +413,11 @@
             });
 
 
-            $("[data-val='"+ -1*30*60*1000+"']").css(
-                "color","red"
-            );
+            $("#startPicker [data-val='"+ -1*30*60*1000+"']").addClass('disable');
+            for (i = 0; i< 2; i++)
+            {
+                $("#startPicker [data-val='" + (i+2) * 30*60*1000+"']").addClass('disable');
+            }
         });
     </script>
     @endsection

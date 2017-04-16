@@ -95,6 +95,16 @@ class PayController extends Controller
 
     public function paySyncResponse(Request $request)
     {
+        $oid = $request->tenantOrder;
+        $order = Order::where([
+            ['id','=',$oid],
+            ['orderno','=',$request->orderno]
+        ])->first();
+        if(!empty($order))
+        {
+            $order->payNum = json_encode($request->all());
+            $order->save();
+        }
         return redirect()->action(
             'OrderController@getOrderDetail', ['id'=> $request->tenantOrder]
         );
