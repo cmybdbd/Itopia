@@ -63,15 +63,8 @@ class PayController extends Controller
 
         if($res['successful'] == 1)
         {
-            var_dump($res);
             $orderno = $res['data']['orderno'];
-
-            var_dump($tenantOrder);
-
             $order = Order::find($tenantOrder);
-
-            var_dump($order);
-
             $order->orderno = $orderno;
             $order->save();
 
