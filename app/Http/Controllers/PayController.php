@@ -22,7 +22,7 @@ class PayController extends Controller
     private $seed = "aec29485267adfef090913c9298f5628";
 
 
-    public function apitest_generateOrder()
+    public function apitestGenerateOrder()
     {
         $tenantOrder = '123456789';
         $money = '0.01';

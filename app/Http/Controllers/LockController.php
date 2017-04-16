@@ -125,7 +125,7 @@ class LockController extends Controller
         return $ret;
     }
 
-    public function api_update_password()
+    public function apiUpdatePassword()
     {
         $room_id = $_GET['room_id'];
         $password = $_GET['password'];
