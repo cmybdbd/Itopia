@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\ApiHandle;
 use App\User;
+use App\Utils\Utils;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
@@ -33,7 +34,10 @@ class IDAuthController extends Controller
             "service_type" => $service_type,
             "data_format_type" => $data_format_type
         );
-        $params['signature'] = $this->getSignature($params);
+        $sign_arr = array_values($params);
+        $sign_arr[] = $this->source;
+        $sign_arr[] = $this->key;
+        $params['signature'] = Utils::sign($sign_arr, true);
         $query_url = $this->api_url.$this->source."?".http_build_query($params);
         $res = ApiHandle::httpGet($query_url);
         if($res)
@@ -64,20 +68,6 @@ class IDAuthController extends Controller
         return Response::json($ret);
     }
 
-    private function getSignature($params)
-    {
-        $arr = array_values($params);
-        //var_dump($arr);
-        $arr[] = $this->key;
-        $arr[] = $this->source;
-        sort($arr);
-        $sig="";
-        foreach ($arr as $var)
-        {
-            $sig.=$var;
-        }
-        return strtoupper(md5($sig));
-    }
 
     function getMillisecond() {
         list($t1, $t2) = explode(' ', microtime());
