@@ -66,12 +66,12 @@
                         </span>
                     </div>
                 </div>
-                <div class="" style="margin-bottom: 2em;display:flex; justify-content: space-around;">
+                <div class="" style="padding-bottom: 2.5em;display:flex; justify-content: space-around;">
                     @for($i = 0; $i < 4; $i ++)
                         <input type="number" id="inp{{$i}}" style="text-align: center; width: 2em">
                     @endfor
-                    <p class="errormsg"></p>
                 </div>
+                <p class="errormsg" style="color: red; position: absolute;left:1em;bottom: 0em;"></p>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
@@ -99,6 +99,11 @@
 @section('scripts')
     <script>
         $(function () {
+            var validatePhone =$("#validatePhone");
+            var phoneN = $("#phoneN");
+            validatePhone.on('shown.bs.modal', function () {
+                phoneN.focus();
+            });
             if(!$("#param .uidN").attr("data-content"))
             {
                 var wait=60;
@@ -119,16 +124,24 @@
                     }
                 }
                 //alert('no idnumber');
-                $("#validatePhone").modal('show');
+                var inp0 = $("#inp0"),
+                    inp1 = $("#inp1"),
+                    inp2 = $("#inp2"),
+                    inp3 = $("#inp3");
+
+                validatePhone.modal('show');
                 $("#sendCode").on('click',function(){
-                    phone = $("#phoneN").val();
+                    phone = phoneN.val();
                     if(phone.match(/^\d{11}$/)) {
                         $.ajax({
                             type: 'get',
+                            dataType:'jsonp',
+                            jsonpCallback: 'callback',
                             url: 'http://renthouse.wecash.net/itopia/checkphone.php?m=sendCode&' +
                             'p=' + phone,
                             success: function (e) {
                                 console.log(e);
+                                inp0.focus();
                             }
                         });
                         time(this);
@@ -137,10 +150,7 @@
                         $("#phoneN").focus();
                     }
                 });
-                var inp0 = $("#inp0"),
-                    inp1 = $("#inp1"),
-                    inp2 = $("#inp2"),
-                    inp3 = $("#inp3");
+
                 inp0.bind('input', function(){
                     inp1.focus();
                 });
@@ -151,20 +161,35 @@
                     inp3.focus();
                 });
                 inp3.bind('input', function(){
-                    $.ajax({
-                        url:'http://renthouse.wecash.net/itopia/checkphone.php?m=checkCode&' +
-                        'p=' + inp0.val() + inp1.val() + inp2.val()+inp3.val(),
-                        success: function(e){
-                            if(e.code == 200){
-                                $("#validatePhone").modal('hide');
-                                $("#validateIdNumber").modal('show');
+                    if(inp3.val().match(/^\d$/)) {
+                        console.log('http://renthouse.wecash.net/itopia/checkphone.php?m=checkCode&' +
+                        'p=' + inp0.val() + inp1.val() + inp2.val() + inp3.val());
+                        $.ajax({
+                            dataType: 'jsonp',
+                            jsonpCallback: "jsonp",
+                            url: 'http://renthouse.wecash.net/itopia/checkphone.php?m=checkCode&' +
+                            'p=' + inp0.val() + inp1.val() + inp2.val() + inp3.val(),
+                            success: function (e) {
+                                console.log(e);
+                                if (e.code == 200) {
+                                    $("#validatePhone").modal('hide');
+                                    $("#validateIdNumber").modal('show');
+                                }
+                                else {
+                                    $(".errormsg").text('验证码有误');
+                                    setTimeout(function () {
+                                        $(".errormsg").text('');
+                                    }, 3000);
+                                    inp0.val('');
+                                    inp1.val('');
+                                    inp2.val('');
+                                    inp3.val('');
+                                    inp0.focus();
+                                }
+
                             }
-                            else {
-                                $(".errormsg").text('验证码有误');
-                                setTimeout(function(){$(".errormsg").text('');},1000);
-                            }
-                        }
-                    });
+                        });
+                    }
                 });
 
             }
