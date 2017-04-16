@@ -89,9 +89,8 @@
                         <input type="text" class="form-control" id="RealName" placeholder="请输入姓名">
                     </div>
                 </div>
-                <hr class="mysplit">
                 <div>
-                    <button class="btn btn-default form-control" id="validateID">确认</button>
+                    <button class="btn btn-default form-control font-b" style="height: 3em" id="validateID">确 认</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -204,9 +203,9 @@
                 });
             };
             if(!$("#param .uidN").attr("data-content")) {
-                var validateID = $("#validateID");
-
-                validateID.on("click",function(){
+                var validateID = $("#validateIdNumber");
+                validateID.modal('show');
+                $("#validateID").on("click",function(){
                     var RealName = $("#RealName").val();
                     var RealId = $("#RealId").val();
 
@@ -217,7 +216,7 @@
                                 console.log(e);
                                 if(e.code == 200)
                                 {
-                                    validateId.modal('hide');
+                                    validateID.modal('hide');
                                 }
                             }
                         })

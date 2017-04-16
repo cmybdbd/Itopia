@@ -37,7 +37,7 @@ class OrderController extends Controller
                     $ret = $lc->updatePassword(
                         $order->hasRoom->roomLockId,
                         $passwd,
-                        '18811792605',
+                        Auth::user()->phonenumber,
                         strtotime($order->startTime),
                         strtotime($order->endTime)
                     );
@@ -196,10 +196,10 @@ class OrderController extends Controller
             $json = $pay->generateOrder($order,
                 '0.01',
                 $user->id,
-                'tyq',
-                '362323199504260013',
+                $user->name,
+            $user->idnumber,
                 'info',
-                '18811792605'
+                $user->phonenumber
             );
            // $json = json_decode($json,true);
         }
