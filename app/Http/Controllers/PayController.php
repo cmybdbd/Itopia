@@ -103,6 +103,7 @@ class PayController extends Controller
         if(!empty($order))
         {
             $order->payNum = json_encode($request->all());
+            $order->state= Constant::$ORDER_STATE['TOUSE'];
             $order->save();
         }
         return redirect()->action(
