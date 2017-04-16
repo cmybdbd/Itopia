@@ -54,15 +54,17 @@ class PayController extends Controller
         $sign_arr[] = $this->seed;
         $params['sign'] = Utils::sign($sign_arr);
 
+
+        var_dump($params);
         $res = ApiHandle::httpPostJson($query_url, $params);
         $res = json_decode($res, true);
 
         var_dump($res);
 
 
-        if($res['resultCode'] == '000')
+        if($res['successful'] == 1)
         {
-            $orderno = $res['orderno'];
+            $orderno = $res['data']['orderno'];
             $order = Order::find($tenantOrder);
             $order->orderno = $orderno;
             $order->save();
@@ -70,7 +72,7 @@ class PayController extends Controller
             $ret = array(
                 'code' => 200,
                 'content' => array(
-                    'payUrl' => $res['payUrl']
+                    'payUrl' => $res['data']['payUrl']
                 )
             );
         }
