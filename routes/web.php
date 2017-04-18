@@ -42,6 +42,11 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('/manage/order', 'OrderController@manageOrder');
     Route::get('/idAuth', 'IDAuthController@IDauth');
 
+    Route::post('/session/vcode','SMSController@storeCode');
+    Route::post('/vcode/validate','SMSController@checkCode');
+    Route::get('test',function(){
+        return session('dynCode');
+    });
 });
 Route::group(['middleware' => ['web','wechat.oauth']], function () {
     Route::get('/login', 'WeChatController@auth');

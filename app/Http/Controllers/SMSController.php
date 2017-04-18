@@ -45,40 +45,32 @@ class SMSController extends Controller
         }
         return Response::json($ret);
     }
-
-    public function checkCode()
+    public function storeCode(Request $request)
     {
-        session_start();
-        $ret = array();
-        if(isset($_SESSION["dynCode"]))
-        {
-            if(intval($_GET['dynCode']) == intval($_SESSION['dynCode']))
-            {
-//  save phonenumber
-                User::savePhone(Session::read('phonenumber'));
+        session(['dynCode'=>$request->code]);
+        return Response::json(['code'=>200, 'key'=>session('dynCode')]);
+    }
 
-                $ret = array(
-                    "code" => 200,
-                    "content" => "验证通过"
-                );
-            }
-            else
-            {
-                $ret = array(
-                    "code" => 504,
-                    "content" => "验证码错误"
-                );
-            }
+    public function checkCode(Request $request)
+    {
+
+        if(($request->dynCode) == session('dynCode'))
+        {
+//  save phonenumber
+            User::savePhone($request->phone);
+            $ret = array(
+                "code" => 200,
+                "content" => "验证通过"
+            );
         }
         else
         {
             $ret = array(
-                "code" => 503,
-                "content" => "服务器错误，请重新发送验证码"
+                "code" => 504,
+                "content" => "验证码错误"
             );
         }
-        session_destroy();
-        Response::json($ret);
+        return Response::json($ret);
 
     }
 

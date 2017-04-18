@@ -152,15 +152,37 @@
                 $("#sendCode").on('click', function () {
                     phone = phoneN.val();
                     if (phone.match(/^\d{11}$/)) {
+                        strpol = '0123456789';
+                        pwd = '';
+                        for (i = 0; i < 4; i++) {
+                            pwd += strpol.charAt(Math.floor(Math.random() * 10));
+                        }
+                        param = {
+                            'mblNo': phone,
+                            'repVar': pwd + '|10|17302175859',
+                        };
+
                         $.ajax({
                             type: 'get',
                             dataType: 'jsonp',
                             jsonpCallback: 'callback',
                             url: 'http://renthouse.wecash.net/itopia/checkphone.php?m=sendCode&' +
-                            'p=' + phone,
+                            'p=' + JSON.stringify(param),
                             success: function (e) {
                                 console.log(e);
                                 inp0.focus();
+
+                                $.ajax({
+                                    type: 'POST',
+                                    url: '/session/vcode',
+                                    data:{
+                                        'code': pwd,
+                                        _token:$("meta[name='csrf-token']").attr('content')
+                                    },
+                                    success: function(e){
+                                        console.log(e);
+                                    }
+                                });
                             }
                         });
                         time(this);
@@ -184,8 +206,45 @@
                 });
                 inp3.bind('input', function () {
                     if (inp3.val().match(/^\d$/)) {
-                        console.log('http://renthouse.wecash.net/itopia/checkphone.php?m=checkCode&' +
-                            'p=' + inp0.val() + inp1.val() + inp2.val() + inp3.val());
+                        $.ajax({
+                            url: '/vcode/validate',
+                            type:'POST',
+                            data:{
+                                'dynCode': inp0.val() + inp1.val() + inp2.val() + inp3.val(),
+                                'phone': phone,
+                                _token:$("meta[name='csrf-token']").attr('content')
+                            },
+                            success: function (e) {
+                                console.log(e);
+                                if (e.code == 200) {
+                                    $("#validatePhone").modal('hide');
+                                    /*
+                                    $.ajax({
+                                        url: '/savePhone/' + phoneN.val(),
+                                        data: {
+                                            _token:$("meta[name='csrf-token']").attr('content')
+                                        },
+                                        type: 'POST',
+                                        success: function () {
+                                            console.log('save phone');
+                                        }
+                                    });
+                                    */
+                                }
+                                else {
+                                    $(".errormsg").text('验证码有误');
+                                    setTimeout(function () {
+                                        $(".errormsg").text('');
+                                    }, 3000);
+                                    inp0.val('');
+                                    inp1.val('');
+                                    inp2.val('');
+                                    inp3.val('');
+                                    inp0.focus();
+                                }
+                            }
+                        })
+                        /*
                         $.ajax({
                             dataType: 'jsonp',
                             jsonpCallback: "jsonp",
@@ -220,6 +279,7 @@
 
                             }
                         });
+                        */
                     }
                 });
             };

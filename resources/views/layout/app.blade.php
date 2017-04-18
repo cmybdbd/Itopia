@@ -142,7 +142,7 @@
     <div class="modal-content">
         <div class="modal-body" style="text-align: center;">
             <div style="margin-left:5%;margin-right:5%;">
-                主人莫生气，电话联系小@ ({{\App\Utils\Constant::$REPORT_PHONE}}),或在后台留言，小@会神速回复
+                主人莫生气，电话联系小i ({{\App\Utils\Constant::$REPORT_PHONE}}),或在后台留言，小i会神速回复
             </div>
             <hr class="mysplit" style="margin: 0.5em;">
             <button class="m-color font-m"
