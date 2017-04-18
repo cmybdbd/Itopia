@@ -39,7 +39,17 @@ class Utils{
         return $xml;
     }
 
-
+    static public function curNight(){
+        $time = time();
+        if(date('H',$time) <= 5)
+        {
+            return strtotime(date('Y-m-d 00:00:00'));
+        }
+        else
+        {
+            return strtotime(date('Y-m-d 00:00:00'))+ 24 * 60 * 60;
+        }
+    }
     static function get_server_ip()
     {
         if (!empty($_SERVER['SERVER_ADDR']))

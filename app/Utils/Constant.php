@@ -31,11 +31,12 @@ class Constant
     public static $ORDER_STATE = array(
         'REMOVE'   => 0,
         'FAILED'   => 1,
-        'UNPAY'    => 2,
-        'TOUSE'    => 3,
-        'USING'    => 4,
-        'USED'     => 5,
-        'COMPLETE' => 6,
+        'USED'     => 2,
+        'COMPLETE' => 3,
+        'UNPAY'    => 4,
+        'TOUSE'    => 5,
+        'USING'    => 6,
+
     );
     public static $WECHAT_PARAM = array(
         'APPID'  => '111111111',

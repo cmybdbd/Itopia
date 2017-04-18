@@ -102,11 +102,11 @@ class OrderController extends Controller
         }
         if(!empty($maxNightTime))
         {
-            $nightTime = $maxNightTime;
+            $nightTime = $maxNightTime + 24*60*60*1000;
         }
         else
         {
-            $nightTime = time();
+            $nightTime = Utils::curNight();
         }
         PageViewController::updatePageView('create');
         return view('order.create')->with([
@@ -136,30 +136,64 @@ class OrderController extends Controller
             Order::where('id', $request->uuid)->update(['state' => Constant::$ORDER_STATE['REMOVE']]);
         }
         $order = Uuid::generate()->string;
-        DB::beginTransaction();
-        DB::insert('insert into `orders` '.
-            '(`userId`, `roomId`, `startDate`, `startTime`, `endTime`, `duration`, `price`,`isDay`, `state`, `id`, `updated_at`, `created_at`)' .
-            'select ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? from users '.
-            'where ((select max(endTime) from orders where `state` > 0) is null or (select max(endTime) from orders where `roomId` = ? and `state` > 0) < ? )and id= ?',
-            [
-                $request->userId,
-                $request->roomId,
-                date('Y-m-d H:i:s', $request->date),
-                date('Y-m-d H:i:s', $request->startTime),
-                date('Y-m-d H:i:s', $request->endTime),
-                $request->duration,
-                $request->price,
-                $request->isDay ? 1: 0,
-                Constant::$ORDER_STATE['UNPAY'],
-                $order,
-                date('Y-m-d H:i:s', time()),
-                date('Y-m-d H:i:s', time()),
-                $request->roomId,
-                date('Y-m-d H:i:s', $request->startTime),
-                $request->userId
-            ]
-        );
-        DB::commit();
+        if($request->isDay)
+        {
+            DB::beginTransaction();
+            DB::insert('insert into `orders` ' .
+                '(`userId`, `roomId`, `startDate`, `startTime`, `endTime`, `duration`, `price`,`isDay`, `state`, `id`, `updated_at`, `created_at`)' .
+                'select ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? from users ' .
+                'where ((select max(endTime) from orders where `isDay` = 1 and `state` > 0 and `roomId` = ?) is null or '.
+                ' (select max(endTime) from orders where `roomId` = ? and `isDay`=1 and `state` > 0) < ? )and id= ?',
+                [
+                    $request->userId,
+                    $request->roomId,
+                    date('Y-m-d H:i:s', $request->date),
+                    date('Y-m-d H:i:s', $request->startTime),
+                    date('Y-m-d H:i:s', $request->endTime),
+                    $request->duration,
+                    $request->price,
+                    $request->isDay ? 1 : 0,
+                    Constant::$ORDER_STATE['UNPAY'],
+                    $order,
+                    date('Y-m-d H:i:s', time()),
+                    date('Y-m-d H:i:s', time()),
+                    $request->roomId,
+                    $request->roomId,
+                    date('Y-m-d H:i:s', $request->startTime),
+                    $request->userId
+                ]
+            );
+            DB::commit();
+        }
+        else
+        {
+            DB::beginTransaction();
+            DB::insert('insert into `orders` ' .
+                '(`userId`, `roomId`, `startDate`, `startTime`, `endTime`, `duration`, `price`,`isDay`, `state`, `id`, `updated_at`, `created_at`)' .
+                'select ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? from users ' .
+                'where (select id from orders where `state` > 0 and `isDay`=0 and `roomId` = ? and `startDate` = ?) is null and id= ?',
+                [
+                    $request->userId,
+                    $request->roomId,
+                    date('Y-m-d H:i:s', $request->date),
+                    date('Y-m-d H:i:s', $request->startTime),
+                    date('Y-m-d H:i:s', $request->endTime),
+                    $request->duration,
+                    $request->price,
+                    $request->isDay ? 1 : 0,
+                    Constant::$ORDER_STATE['UNPAY'],
+                    $order,
+                    date('Y-m-d H:i:s', time()),
+                    date('Y-m-d H:i:s', time()),
+
+                    $request->roomId,
+                    date('Y-m-d H:i:s', $request->date),
+
+                    $request->userId
+                ]
+            );
+            DB::commit();
+        }
         $user =User::find($request->userId);
         $succ = Order::find($order);
 
