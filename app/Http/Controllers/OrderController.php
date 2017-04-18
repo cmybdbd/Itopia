@@ -249,6 +249,12 @@ class OrderController extends Controller
     }
     function cancelOrder()
     {}
-    function completeOrder()
-    {}
+    function completeOrder(Request $request)
+    {
+        $this->validate($request,[
+            'oid' => 'required'
+        ]);
+        $oid = $request->oid;
+        Order::find($oid)->update(['state'=> Constant::$ORDER_STATE['COMPLETE']]);
+    }
 }

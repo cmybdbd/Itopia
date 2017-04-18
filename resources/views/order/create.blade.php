@@ -463,22 +463,38 @@
                     if(dateFormat(new Date(), 'HH') > 5)
                     {
                         temptime += 24*60*60*1000;
+
                     }
                     if(!$('#byHour').hasClass('active'))
                     {
                         temptime = tomorrowts + dateTime.attr('data-content') * 24*60*60*1000;
+                        data = {
+                            _token: $("meta[name='csrf-token']").attr('content'),
+                            'userId': $("#userId").attr('data-content'),
+                            'roomId': $("#roomId").attr('data-content'),
+                            'startTime': (temptime-30*60*1000)/1000|0,
+                            'endTime'  : (temptime+21*30*60*1000)/1000|0,
+                            'duration' : +durationTime.attr('data-content')/3600000,
+                            'price'   : +($('#totalPrice').text()),
+                            'date'     : temptime /1000|0,
+                            'isDay'    : $('#byHour').hasClass('active') ? 1:0
+                        };
                     }
-                    data = {
-                        _token: $("meta[name='csrf-token']").attr('content'),
-                        'userId': $("#userId").attr('data-content'),
-                        'roomId': $("#roomId").attr('data-content'),
-                        'startTime': (+startTime.attr('data-content'))/1000|0,
-                        'endTime'  : (+endTime.attr('data-content'))/1000|0,
-                        'duration' : +durationTime.attr('data-content')/3600000,
-                        'price'   : +($('#totalPrice').text()),
-                        'date'     : temptime /1000|0,
-                        'isDay'    : $('#byHour').hasClass('active') ? 1:0
-                    };
+                    else
+                    {
+                        data = {
+                            _token: $("meta[name='csrf-token']").attr('content'),
+                            'userId': $("#userId").attr('data-content'),
+                            'roomId': $("#roomId").attr('data-content'),
+                            'startTime': (+startTime.attr('data-content'))/1000|0,
+                            'endTime'  : (+endTime.attr('data-content'))/1000|0,
+                            'duration' : +durationTime.attr('data-content')/3600000,
+                            'price'   : +($('#totalPrice').text()),
+                            'date'     : temptime /1000|0,
+                            'isDay'    : $('#byHour').hasClass('active') ? 1:0
+                        };
+                    }
+
                     exs =$("#exs").attr("data-content");
                     if( exs != "")
                     {
