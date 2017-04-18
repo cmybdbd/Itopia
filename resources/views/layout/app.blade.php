@@ -42,6 +42,12 @@
         .font-b {
             font-size: 1.4em;
         }
+        .font-m{
+            font-size: 1.2em;
+        }
+        .font-s{
+            font-size: 0.85em;
+        }
         .b-color {
             color: var(--b-font-color);
         }
@@ -72,7 +78,7 @@
         }
         .mybtn-group{
             width: 100%;
-            height: 10vh;
+            height: 12vh;
         }
         .mybtn-group button{
             border: none;
@@ -84,6 +90,11 @@
             width: 50%;
             height: 100%;
             float: left;
+
+            display: flex;
+            flex-direction:column;
+            justify-content: center;
+            align-items: center;
         }
         .mybtn-group button::after{
             position: absolute;
@@ -133,7 +144,7 @@
                 主人莫生气，电话联系小@ ({{\App\Utils\Constant::$REPORT_PHONE}}),或在后台留言，小@会神速回复
             </div>
             <hr class="mysplit" style="margin: 0.5em;">
-            <button class="m-color font-b"
+            <button class="m-color font-m"
                     data-dismiss="modal"
                     style="border:none;width:100%;height:100%;background-color:white;">朕知道了</button>
         </div>

@@ -11,7 +11,7 @@
             background: transparent !important;
         }
         .nav-pills > li{
-            width: 40%;
+            width: 44%;
 
             border: 1px var(--used-color) solid;
             border-radius: 4px;
@@ -24,15 +24,21 @@
         .nav-pills > li >a >div{
             text-align: center;
         }
-        .scrollPicker, .present{
-            float: right;
+        .present{
+            text-align: right;
         }
-        .scrollPicker:after{
+            /*
+            .scrollPicker:after{
 
-            position: relative;
-            left: 1em;
-            content:">";
+                position: relative;
+                left: 1em;
+                content:">";
 
+            }
+            */
+        .scrollPicker, .noPicker{
+            flex-grow: 1;
+            text-align:right;
         }
         .selectPanel{
 
@@ -40,15 +46,18 @@
             padding-left:0.8em;
             padding-top: 1em;
             padding-bottom: 1em;
-            padding-right: 1.5em;
+            padding-right: 0.8em;
             position: relative;
+            display: flex;
         }
+        /*
         .noPicker:after{
             content: ">";
             color: white;
             position: relative;
             left: 1em;
         }
+        */
         .cbox{
             position: relative;
         }
@@ -82,6 +91,13 @@
         .cbox input[type=checkbox]:checked + label:after{
             opacity: 1;
         }
+
+        i.fa{
+            display: flex;
+            align-items:center;
+            margin-left:0.5em;
+            color: var(--used-color)
+        }
     </style>
 @endsection
 @section('content')
@@ -95,11 +111,11 @@
     </div>
 
     <div style="margin: 3vw;">
-        <div class="m-color">
+        <div class="m-color font-m">
             选择使用方式
         </div>
         <ul class="nav nav-pills" role="tablist" style="margin-top: 2vh;display:flex;justify-content: space-between">
-            <li role="presentation" class="active custom-li">
+            <li role="presentation" class="active custom-li ">
                 <a href="#byHour" aria-controls="byHour" role="tab" id="useHour"
                 data-toggle="pill">
                     <div>分时使用</div>
@@ -113,7 +129,7 @@
                 <a href="#byNight" aria-controls="byNight" role="tab" id="useNight"
                 data-toggle="pill">
                     <div>预约包夜</div>
-                    <div>(23:30 - 次日10:30)</div>
+                    <div>(23:30-次日10:30)</div>
                     <div id="nightPrice" data-content="{{$room->nightPrice}}">
                         {{$room->nightPrice}}/夜
                     </div>
@@ -121,7 +137,7 @@
             </li>
         </ul>
         <div class="tab-content" style="margin-top: 3vw;">
-            <div class="m-color">选择使用时间</div>
+            <div class="m-color font-m">选择使用时间</div>
             <div role="tabpanel" class="tab-pane active" id="byHour">
 
                 <div class="mybox selectPanel">
@@ -129,41 +145,45 @@
                     <div id="startTime" class="scrollPicker" data-content="{{$startDayTime}}">
 
                     </div>
+                    <i class="fa fa-chevron-right" ></i>
                 </div>
 
-                <div class="mybox selectPanel">
+                <div class="mybox selectPanel" style="display:flex;">
                     使用时长
-                    <div id="durationTime" class="scrollPicker" data-content="3600000">
+                    <div id="durationTime" class="scrollPicker" data-content="3600000" >
                         1 小时
                     </div>
+                    <i class="fa fa-chevron-right" ></i>
                 </div>
                 <div class="mybox selectPanel">
                     结束时间
                     <div id="endTime" class="present noPicker">
 
                     </div>
+                    <i class="fa fa-chevron-right"></i>
                 </div>
             </div>
             <div role="tabpanel" class="tab-pane " id="byNight">
                 <div class="mybox selectPanel">
                     日期
                     <div id="dateTime" class="scrollPicker" data-content="{{$startNightTime}}"></div>
+                    <i class="fa fa-chevron-right" ></i>
                 </div>
             </div>
         </div>
 
-        <div class="m-color" style="margin-top: 3vw;">
+        <div class="m-color font-m" style="margin-top: 3vw;">
             订单结算
         </div>
         <div class="mybox selectPanel">
-            总计
-            <div class="present" style="color: var(--price-color)">
+            <span>总计</span>
+            <div class="present" style="color: var(--price-color);flex-grow:1">
                 <span id="totalPrice"></span>元
             </div>
         </div>
     </div>
-    <div class="cbox" style="margin: 3vw;">
-        <input type="checkbox" id="agreement">
+    <div class="cbox b-color font-s" style="margin: 3vw;">
+        <input type="checkbox" id="agreement" style="margin:0">
         <label for="agreement"></label>本人已获悉并同意《ITOPIA即时私人空间用户服务协议》
     </div>
     <div id="toPay" class="myTail font-b m-color" style="height:3em;margin-top: 2vh;box-shadow:0 -1px 6px #eeeeee">
@@ -188,6 +208,7 @@
             }
             function showHumanTime(ts)
             {
+
                 return dateFormat(ts, 'yyyy年mm月dd日 HH:MM');
             }
             function showHumanHour(ts)
@@ -220,11 +241,12 @@
             }
 
             tomorrowts = todayts + 24 * 60 * 60 * 1000;
+            console.log(istomorrow)
             console.log(showHumanTime(startts));
             console.log(showHumanTime(todayts));
 
 
-            startTime.text(showHumanTime(startts))
+            startTime.text((istomorrow?'明天 ':'今天 ')+ showHumanHour(startts))
                 .attr("data-content", startts);
             updateEndTime();
             updatePrice(0);
@@ -321,6 +343,22 @@
                 {
                     text: "2 小时",
                     value: 2*60*60*1000
+                },
+                {
+                    text: "2.5 小时",
+                    value: 2.5*60*60*1000
+                },
+                {
+                    text: "3 小时",
+                    value: 3*60*60*1000
+                },
+                {
+                    text: "3.5 小时",
+                    value: 3.5 * 60 * 60 * 1000
+                },
+                {
+                    text: "4 小时",
+                    value: 4*60*60*1000
                 }
             ];
 
@@ -364,7 +402,7 @@
 
             startPicker.on('picker.select', function (selectedVal, selectedIndex) {
                 var d = day[selectedIndex[0]].value;
-                selectedDay = d === 0 ? showHumanDay(startts) : showHumanDay(tomorrowts);
+                selectedDay = d === 0 ? '今天' : '明天';
                 startTime.text(selectedDay + ' ' + time[selectedIndex[1]].text)
                     .attr("data-content", (d===0 ? startts :tomorrowts) + time[selectedIndex[1]].value);
 
@@ -415,8 +453,8 @@
                 updatePrice(1);
             })
             function updateEndTime(){
-                endTime.text(dateFormat((+startTime.attr("data-content")) + (+durationTime.attr("data-content")),
-                    'yyyy年mm月dd日 HH:MM'))
+                endTime.text((istomorrow?'明天':'今天')+dateFormat((+startTime.attr("data-content")) + (+durationTime.attr("data-content")),
+                    ' HH:MM'))
                     .attr('data-content', (+startTime.attr("data-content")) + (+durationTime.attr("data-content")));
             }
             function updatePrice(page) {
@@ -548,6 +586,16 @@
                 }
             }
 
+            // disable duration
+            for(i = 0;i < duration.length;i++)
+            {
+                if( dateFormat(startts+duration[i].value,'HH')>= 23)
+                {
+                    for (j = i; j< duration.length; j++)
+                        $($("#durationPicker li")[j]).addClass('disable');
+                    break;
+                }
+            }
 
             // disable time
             if(istomorrow)

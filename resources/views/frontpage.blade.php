@@ -3,17 +3,18 @@
 
 @section('content')
     <div class="myHeader" style="margin-bottom: 2vh;box-shadow:0 1px 6px #eeeeee">
-        <div class="mybtn-group">
+        <div class="mybtn-group" style="">
             <button id="myOrder">
                 <i class="fa fa-user-circle fa-fw m-color font-b"></i>
-
-                <br>
+                <span style="margin-top: 1vh">
                 我的订单
+                </span>
             </button>
             <button id="report">
                 <i class="fa fa-phone fa-fw m-color font-b"></i>
-                <br>
-                反馈意见
+                <span style="margin-top: 1vh">
+                    反馈意见
+                </span>
             </button>
         </div>
     </div>
@@ -25,8 +26,9 @@
                     </div>
                     <div class="myrow"  style="justify-content: space-between">
                         <span class="item">{{$room->address}}</span>
-                        <span class="room-used {{$room->isUsing()? 'u-color':'m-color'}}" style="padding:0 2vw;border: 1px solid;border-radius: 3px">
-                            {{$room->isUsing() ? '使用中':'可使用'}}</span>
+                        <span class="room-used {{$room->isUsing()? 'u-color':'m-color'}}" style="padding:0 2vw;border: 1px solid;border-radius: 3px;display:flex;flex-direction: row;justify-content: center">
+                            {{$room->isUsing() ? '使用中':'可使用'}}
+                        </span>
                     </div>
                     <div class="myrow"  style="justify-content: space-between">
                         <span class="m-color" style="font-weight: bold;">¥ {{$room->hourPrice}}/时 ¥ {{$room->nightPrice}}/夜</span>
@@ -169,12 +171,15 @@
                 });
 
                 inp0.bind('input', function () {
-                    inp1.focus();
+                    if(inp0.val().match(/^\d$/))
+                        inp1.focus();
                 });
                 inp1.bind('input', function () {
+                    if(inp1.val().match(/^\d$/))
                     inp2.focus();
                 });
                 inp2.bind('input', function () {
+                    if(inp2.val().match(/^\d$/))
                     inp3.focus();
                 });
                 inp3.bind('input', function () {

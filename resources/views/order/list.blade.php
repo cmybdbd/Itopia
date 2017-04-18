@@ -3,8 +3,6 @@
 @section('style')
     <style>
         .center> div{
-            width: 80%;
-            margin-left: 10%;
             text-align: center;
         }
         .room-touse, .room-used{
@@ -53,7 +51,7 @@
                 </div>
                 <div>
                     <span>消费金额：</span>
-                    <span>{{$order->payNum}}元</span>
+                    <span>{{$order->price}}元</span>
                 </div>
                 </div>
             @endforeach

@@ -52,10 +52,10 @@
 
     </div>
     <div style="margin:3vw">
-        <div class="m-color font-b">
+        <div class="m-color font-m">
         <div class="gatepwd">
             <div >大门密码</div>
-            <div class="pwd-group">
+            <div class="pwd-group font-b">
                 <div></div>
                 <div></div>
                 <div></div>
@@ -68,7 +68,7 @@
             <div>
                 房间密码
             </div>
-            <div class="pwd-group">
+            <div class="pwd-group font-b">
                 <div></div>
                 <div></div>
                 <div></div>

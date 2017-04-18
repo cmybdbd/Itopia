@@ -2,8 +2,12 @@
 @section('style')
     <link rel="stylesheet" href="{{url('css/starrr.css')}}">
     <style>
+        .starrr{
+            margin-top: 1em;
+            margin-bottom: 1em;
+        }
         .starrr  a{
-            font-size:4em;
+            font-size:3em;
             color: var(--main-color);
         }
     </style>
@@ -27,8 +31,7 @@
             <textarea class="form-control custom-textarea" name="" id="" cols="30" rows="6"></textarea>
         </div>
         <div class="lr">
-            <button id="commit" class="btn btn-block btn-cancel m-color font-b">提 交</button>
-            <button id="return" class="btn btn-block btn-default font-b">返 回</button>
+            <button id="commit" class="btn btn-block btn-default m-color font-b">提 交</button>
         </div>
     </div>
     <div id="param">
