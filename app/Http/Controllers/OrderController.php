@@ -41,6 +41,7 @@ class OrderController extends Controller
                         strtotime($order->startTime),
                         strtotime($order->endTime)
                     );
+                    //return json_encode($ret);
                     if ($ret['code'] == Constant::$STATUS_CODE['OK'])
                     {
                         $order->passwd = $passwd;
