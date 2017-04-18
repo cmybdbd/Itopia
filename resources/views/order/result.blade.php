@@ -138,9 +138,13 @@
             var wait = -(+$("#startTime").attr("data-content")*1000- (new Date().getTime()));
             console.log(wait);
             function time(o, w) {
-                if(wait <= 0)
+                if(w <= 0)
                 {
-                    o.text = "00:00:00";
+                    o.text("00:00:00");
+                    setTimeout(function () {
+                            time(o,w)
+                        },
+                        1000)
                 }
                 else
                 {
