@@ -27,15 +27,6 @@
         .present{
             text-align: right;
         }
-            /*
-            .scrollPicker:after{
-
-                position: relative;
-                left: 1em;
-                content:">";
-
-            }
-            */
         .scrollPicker, .noPicker{
             flex-grow: 1;
             text-align:right;
@@ -50,14 +41,7 @@
             position: relative;
             display: flex;
         }
-        /*
-        .noPicker:after{
-            content: ">";
-            color: white;
-            position: relative;
-            left: 1em;
-        }
-        */
+
         .cbox{
             position: relative;
         }
@@ -603,7 +587,7 @@
                 $($("#startPicker [data-val='0']")[0]).addClass('disable');
             }
             else {
-                $($("#startPicker [data-val='1']")[1]).addClass('disable');
+                $($("#startPicker [data-val='1']")[0]).addClass('disable');
             }
 
             var lis = $($("#startPicker ul")[1]).children();
