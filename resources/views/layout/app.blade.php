@@ -17,7 +17,8 @@
             --used-color: #cccccc;
             --price-color: #ff0000;
         }
-        @font-face { font-family:Noto-Sans; src: url('font/NotoSans-Bold.ttf'); }
+        /*@font-face { font-family:Noto-Sans; src: url('font/NotoSans-Bold.ttf'); }*/
+
         body{
             background-color: white;
         }

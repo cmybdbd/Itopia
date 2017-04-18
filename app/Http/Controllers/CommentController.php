@@ -23,6 +23,7 @@ class CommentController extends Controller
         $comment -> orderId = $request->orderId;
         $comment -> starNum = $request->starNum;
         $comment -> content = $request->text;
+        $comment-> tags = $request->tags;
         $comment->state = 1;
         $res = $comment->save();
         if($res)

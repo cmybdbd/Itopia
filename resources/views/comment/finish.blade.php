@@ -14,9 +14,8 @@
              style="margin-top: 1em;height: 2em;display:flex;align-items: center;justify-content: center">使用结束</div>
         <hr class="mysplit-color">
         <div class="font-b m-color">
-            <div style="font-size: 4em;">
-                <i class="fa fa-check"></i>
-                <img src="{{asset('storage/check.jpg')}}" >
+            <div style="margin-top: 3em">
+                <img src="{{asset('storage/check.png')}}" width="50px" >
             </div>
             提交成功
         </div>
