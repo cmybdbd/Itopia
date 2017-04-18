@@ -85,12 +85,27 @@
                 <hr class="mysplit">
                 <div class="modal-body">
                     <div class="input-group input-group-lg">
-                        <input type="number" class="form-control" id="RealId" placeholder="请输入身份证号">
+                            <input type="number" class="form-control" id="RealId" placeholder="请输入身份证号">
+
                         <input type="text" class="form-control" id="RealName" placeholder="请输入姓名">
+
                     </div>
                 </div>
                 <div>
                     <button class="btn btn-default form-control font-b" style="height: 3em" id="validateID">确 认</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <div id="idNumberError" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="b-color" style="padding:1em 2em">主人, 你输入的身份证号有误哦！</div>
+                </div>
+
+                <div>
+                    <button class="btn btn-default form-control m-color" style="height: 3em" id="">朕重新输入一遍</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -104,6 +119,7 @@
             validatePhone.on('shown.bs.modal', function () {
                 phoneN.focus();
             });
+
             if(!$("#param .uphoneN").attr("data-content")) {
                 var wait = 60;
 
@@ -204,6 +220,9 @@
             };
             if(!$("#param .uidN").attr("data-content")) {
                 var validateID = $("#validateIdNumber");
+                validateID.on("shown.bs.modal", function(){
+                    $("#RealId").focus();
+                })
                 validateID.modal('show');
                 $("#validateID").on("click",function(){
                     var RealName = $("#RealName").val();
@@ -218,9 +237,25 @@
                                 {
                                     validateID.modal('hide');
                                 }
+                                else
+                                {
+                                    validateID.modal('hide');
+                                    $("#idNumberError").modal('show');
+                                }
                             }
                         })
                     }
+                    else
+                    {
+                        $("#RealId").attr('placeholder','请输入正确的身份证号')
+                            .val('')
+                            .focus();
+                    }
+                })
+                $("#idNumberError button").on("click",function(){
+                    $("#idNumberError").modal('hide');
+                    validateID.find('input').val('');
+                    validateID.modal('show');
                 })
             }
             var uid = $("#param .uid").attr('data-content');
