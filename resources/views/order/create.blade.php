@@ -513,10 +513,10 @@
                                 //window.location.href = param['param']['content']['payUrl'];
 
                                 window.location.href = window.location.href.replace(
-                                    /create.* /,
+                                    /create.*/,
                                     'result/'+param['orderId']
                                 );
-                               
+
                             }
 
                         },
