@@ -27,7 +27,7 @@
                     </div>
                     <div class="myrow"  style="justify-content: space-between">
                         <span class="item">{{$room->address}}</span>
-                        <span class="room-used {{$room->isUsing()? 'u-color':'m-color'}}" style="padding:0 2vw;border: 1px solid;border-radius: 3px;display:flex;flex-direction: row;justify-content: center">
+                        <span class="room-state room-used {{$room->isUsing()? 'u-color':'m-color'}}" style="padding:0 2vw;border: 1px solid;border-radius: 3px;display:flex;flex-direction: row;justify-content: center">
                             {{$room->isUsing() ? '使用中':'可使用'}}
                         </span>
                     </div>
@@ -178,6 +178,12 @@
         }
         .equipment-content p > span{
             text-align: center;
+        }
+        span.item{
+            width: 16em;
+        }
+        span.room-state{
+            height: 1.6em;
         }
     </style>
     @endsection

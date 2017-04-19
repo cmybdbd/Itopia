@@ -119,7 +119,7 @@
             <textarea class="form-control custom-textarea" name="" id="" cols="30" rows="6"></textarea>
         </div>
         <div class="lr">
-            <button id="commit" class="btn btn-block btn-default m-color font-b">提 交</button>
+            <button id="commit" class="btn btn-block btn-default font-b">提 交</button>
         </div>
     </div>
 
@@ -135,9 +135,16 @@
     <script src="{{url('/js/starrr.js')}}"></script>
     <script>
         $(function () {
-            var starNum = 0;
+            var starNum = -1;
+            idCommit =$("#commit");
+            idCommit.addClass('disabled');
             $('.starrr').starrr({
                 change: function(e, value){
+                    if(idCommit.hasClass('disabled'))
+                    {
+                        idCommit.removeClass('disabled');
+                        idCommit.addClass('m-color');
+                    }
                     starNum = value;
                     console.log(starNum);
                     if(value != 5)
@@ -153,6 +160,10 @@
                 }
             });
             $("#commit").on('click', function () {
+                if(starNum == -1)
+                {
+                    return;
+                }
                 seletedp =$("p.selected");
                 selectedTag = [];
                 for (i = 0 ;i < seletedp.length;i++)
