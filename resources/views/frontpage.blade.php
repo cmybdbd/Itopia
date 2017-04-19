@@ -121,7 +121,7 @@
                 <div class="modal-body">
                     <div style="margin-left:5%;margin-right:5%;">
                         <div>
-                        <div>基础设施</div>
+                        <div class="font-m m-color">基础设施</div>
                         <p><img src="{{asset('storage/u340.png')}}" alt="">懒人沙发</p>
                         <p><img src="{{asset('storage/u342.png')}}" alt="">榻榻米</p>
                         <p><img src="{{asset('storage/u354.png')}}" alt="">智能蓝牙投影</p>
@@ -136,7 +136,7 @@
                         <p><img src="{{asset('storage/u384.png')}}" alt="">Wi-Fi</p>
                         </div>
                         <div>
-                            <div>有偿服务</div>
+                            <div class="font-m m-color">有偿服务</div>
                             <p><img src="{{asset('storage/u398.png')}}" alt="">桌游棋牌</p>
                             <p><img src="{{asset('storage/u396.png')}}" alt="">零食饮料</p>
                             <p><img src="{{asset('storage/u392.png')}}" alt="">一次性洗漱用品</p>
@@ -159,13 +159,16 @@
         }
 
         .equipment-content p {
-            font-size: 0.9em;
+            font-size: 0.8em;
             display: inline-block;
 
             line-height: 1.2em;
             padding: 0.4em 0em;
             margin: 0.25em;
             width: 45%;
+        }
+        .equipment-content p > img{
+            margin-right: 0.4em;
         }
     </style>
     @endsection
