@@ -147,6 +147,7 @@
                     else
                     {
                         $(".show").removeClass('show');
+                        $(".selected").removeClass('selected');
                         $(".mainTag").css('display','none');
                     }
                 }
