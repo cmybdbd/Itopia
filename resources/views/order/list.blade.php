@@ -26,6 +26,8 @@
             <i class="fa fa-user-circle fa-fw m-color font-b"></i>
             <div style="margin-top: 0.6em">我的订单</div>
         </div>
+        
+        @if(count($orders))
         <div class="mybox" style="text-align: left">
             @foreach($orders as $key => $order)
                 @if($key != 0)
@@ -58,5 +60,10 @@
                 </div>
             @endforeach
         </div>
+        @else
+            <div style="width: 90%; margin-left: 5%; text-align:center">
+                您还没有订单哟，快来体验吧！
+            </div>
+        @endif
     </div>
 @endsection
