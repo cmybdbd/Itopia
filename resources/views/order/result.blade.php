@@ -179,6 +179,10 @@
                 $(roompwd.children()[i]).text(passwd[i]);
             }
             $("#finish").on('click',function(){
+                if($("#startTime").attr('data-content')*1000 > (new Date().getTime()))
+                {
+                    return;
+                }
                 $(".confirm-content").modal();
             })
 
@@ -203,10 +207,15 @@
             });
             var wait = -(+$("#startTime").attr("data-content")*1000- (new Date().getTime()));
             console.log(wait);
+            var finish = $("#finish");
             function time(o, w) {
                 if(w <= 0)
                 {
-                    o.text("00:00:00");
+                    if(!finish.hasClass('disabled'))
+                    {
+                        finish.addClass('disabled');
+                    }
+                    o.text("00:00:00");2
                     setTimeout(function () {
                             time(o,w)
                         },

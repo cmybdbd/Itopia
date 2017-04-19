@@ -37,6 +37,8 @@
                     <span>{{date('m月d日',strtotime($order->startDate))}}</span>
                     -
                     <span>{{$order->isDay?'分时使用':'包夜使用'}}</span>
+                    -
+                    <span>{{$order->hasRoom->title}}</span>
                     @if($order->state < 4)
                         <span class="room-used" >已结束</span>
                     @elseif($order->state <6)
