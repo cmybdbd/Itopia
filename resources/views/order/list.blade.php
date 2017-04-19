@@ -26,7 +26,7 @@
             <i class="fa fa-user-circle fa-fw m-color font-b"></i>
             <div style="margin-top: 0.6em">我的订单</div>
         </div>
-        
+
         @if(count($orders))
         <div class="mybox" style="text-align: left">
             @foreach($orders as $key => $order)
@@ -34,7 +34,7 @@
                     <hr class="mysplit">
                 @endif
                 <div class="f-color">
-                    <span>{{date('m月d日',strtotime($order->date))}}</span>
+                    <span>{{date('m月d日',strtotime($order->startDate))}}</span>
                     -
                     <span>{{$order->isDay?'分时使用':'包夜使用'}}</span>
                     @if($order->state < 4)

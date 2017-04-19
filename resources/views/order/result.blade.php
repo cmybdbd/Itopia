@@ -74,7 +74,7 @@
 @section('content')
     <div class="mybox">
         <div class="f-color font-b">
-            主人的私人空间地址
+            {{$order->hasRoom->title}}
         </div>
         <div class="b-color">
             地址：{{$order->hasRoom->address}}
@@ -117,6 +117,7 @@
             </div>
             <div>私人空间密码仅在主人使用时段有效哦～</div>
             <div>主人要爱惜空间，尽量保持安静哦！</div>
+            <div>iTOPIA是无烟空间哦，请主人不要在屋内吸烟</div>
             <div class="mybox" id="countDown">
                 使用计时
                 <span class="cd m-color" style="float:right;"></span>

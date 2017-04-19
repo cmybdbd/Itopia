@@ -57,14 +57,14 @@
     <div>
         <div class="mybox">
             <div class="flex-center m-color font-b">
-                感谢主人使用ITOPIA空间
+                感谢主人使用iTOPIA空间
             </div>
             <hr class="mysplit">
             <div class="flex-center b-color">
-            希望主人能留下对ITopia的意见建议(*￣︶￣*)
+            希望主人能留下对iTOPIA的意见建议(*￣︶￣*)
             </div>
             <div class="flex-center b-color">
-            填写就有机会获得小@送出的多小时免费体验哦
+            填写就有机会获得小 i 送出的多小时免费体验哦
             </div>
             <div class="flex-center">
                 <div class="starrr"></div>

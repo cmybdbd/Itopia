@@ -402,7 +402,7 @@
             for(i = 0;i < 2; i++)
             {
                 date[i] = {
-                    text: daytime[i].text + ' ' + dateFormat(startts+i*24*60*60*1000,'mm月dd日'),
+                    text: daytime[i].text + ' ' + dateFormat(todayts+i*24*60*60*1000,'mm月dd日'),
                     value: i
                 };
             }
@@ -688,8 +688,9 @@
             //   disable date
             for (i = 0; i < 7; i++)
             {
-
-                if(usingNight.indexOf(dateFormat(startts + (i+1)*24*60*60*1000, 'yyyy-mm-dd 00:00:00')) != -1)
+                //console.log('date='+dateFormat(startts + (i+1)*24*60*60*1000, 'yyyy-mm-dd 00:00:00'))
+                //console.log(usingNight.indexOf(dateFormat(todayts + (i+1)*24*60*60*1000, 'yyyy-mm-dd 00:00:00')))
+                if(usingNight.indexOf(dateFormat(todayts + (i+1)*24*60*60*1000, 'yyyy-mm-dd 00:00:00')) != -1)
                 {
                     $("#datePicker [data-val='"+(i)+"']").addClass('disable');
                 }
