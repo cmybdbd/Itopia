@@ -34,7 +34,7 @@ class User extends Authenticatable
         //todo emoji name
         $user = new User();
         $user->openid = $userInfo['openid'];
-        $user->nickname = empty($userInfo['nickname'])?'':$userInfo['nickname'];
+        $user->nickname = empty($userInfo['nickname'])?'':base64_encode($userInfo['nickname']);
         $user->sex = empty($userInfo['sex'])?0:$userInfo['sex'];
         $user->province = empty($userInfo['province'])?'':$userInfo['province'];
         $user->city = empty($userInfo['city'])?'':$userInfo['city'];
