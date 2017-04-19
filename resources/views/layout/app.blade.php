@@ -94,6 +94,12 @@
             height: 100%;
             float: left;
 
+
+            display: -webkit-box;
+            -webkit-box-pack: center;
+            -webkit-box-align: center;
+            -webkit-box-orient: horizontal;
+
             display: flex;
             flex-direction:column;
             justify-content: center;
