@@ -147,6 +147,7 @@
                     else
                     {
                         $(".show").removeClass('show');
+                        $(".mainTag").css('display','none');
                     }
                 }
             });
