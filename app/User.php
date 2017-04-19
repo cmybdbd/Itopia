@@ -40,7 +40,7 @@ class User extends Authenticatable
         $user->city = empty($userInfo['city'])?'':$userInfo['city'];
         $user->country = empty($userInfo['country'])?'':$userInfo['country'];
         $user->headimgurl = empty($userInfo['headimgurl'])?'':$userInfo['headimgurl'];
-        $user->privilege = empty($userInfo['privilege'])?'':$userInfo['privilege'];
+        $user->privilege = empty($userInfo['privilege'])?'':json_encode($userInfo['privilege']);
         $user->unionid = empty($userInfo['unionid'])?'':$userInfo['unionid'];
         $user->save();
         return $user;
