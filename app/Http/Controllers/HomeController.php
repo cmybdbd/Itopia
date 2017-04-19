@@ -26,4 +26,9 @@ class HomeController extends Controller
         return view('frontpage')->withRooms(Room::where('state','<>',0)->get());
 
     }
+    function orderList()
+    {
+        $id = Auth::id();
+        return redirect()->action('OrderController@getOrderList',['id'=>$id]);
+    }
 }
