@@ -122,25 +122,25 @@
                     <div style="margin-left:5%;margin-right:5%;">
                         <div>
                         <div class="font-m m-color">基础设施</div>
-                        <p><img src="{{asset('storage/u340.png')}}" alt="">懒人沙发</p>
-                        <p><img src="{{asset('storage/u342.png')}}" alt="">榻榻米</p>
-                        <p><img src="{{asset('storage/u354.png')}}" alt="">智能蓝牙投影</p>
-                        <p><img src="{{asset('storage/u356.png')}}" alt="">双人床</p>
-                        <p><img src="{{asset('storage/u362.png')}}" alt="">智能门锁</p>
-                        <p><img src="{{asset('storage/u364.png')}}" alt="">冰箱</p>
-                        <p><img src="{{asset('storage/u370.png')}}" alt="">空调</p>
-                        <p><img src="{{asset('storage/u372.png')}}" alt="">电吹风</p>
-                        <p><img src="{{asset('storage/u374.png')}}" alt="">洗衣机</p>
-                        <p><img src="{{asset('storage/u376.png')}}" alt="">饮水机</p>
-                        <p><img src="{{asset('storage/u382.png')}}" alt="">24小时热水</p>
-                        <p><img src="{{asset('storage/u384.png')}}" alt="">Wi-Fi</p>
+                            <p><img src="{{asset('storage/u340.png')}}" alt=""><span>懒人沙发</span></p>
+                            <p><img src="{{asset('storage/u342.png')}}" alt=""><span>榻榻米</span></p>
+                            <p><img src="{{asset('storage/u354.png')}}" alt=""><span>智能蓝牙投影</span></p>
+                            <p><img src="{{asset('storage/u356.png')}}" alt=""><span>双人床</span></p>
+                            <p><img src="{{asset('storage/u362.png')}}" alt=""><span>智能门锁</span></p>
+                            <p><img src="{{asset('storage/u364.png')}}" alt=""><span>冰箱</span></p>
+                            <p><img src="{{asset('storage/u370.png')}}" alt=""><span>空调</span></p>
+                            <p><img src="{{asset('storage/u372.png')}}" alt=""><span>电吹风</span></p>
+                            <p><img src="{{asset('storage/u374.png')}}" alt=""><span>洗衣机</span></p>
+                            <p><img src="{{asset('storage/u376.png')}}" alt=""><span>饮水机</span></p>
+                            <p><img src="{{asset('storage/u382.png')}}" alt=""><span>24小时热水</span></p>
+                            <p><img src="{{asset('storage/u384.png')}}" alt=""><span>Wi-Fi</span></p>
                         </div>
                         <div>
                             <div class="font-m m-color">有偿服务</div>
-                            <p><img src="{{asset('storage/u398.png')}}" alt="">桌游棋牌</p>
-                            <p><img src="{{asset('storage/u396.png')}}" alt="">零食饮料</p>
-                            <p><img src="{{asset('storage/u392.png')}}" alt="">一次性洗漱用品</p>
-                            <p><img src="{{asset('storage/u394.png')}}" alt="">床品四件套</p>
+                            <p><img src="{{asset('storage/u398.png')}}" alt=""><span>桌游棋牌</span></p>
+                            <p><img src="{{asset('storage/u396.png')}}" alt=""><span>零食饮料</span></p>
+                            <p><img src="{{asset('storage/u392.png')}}" alt=""><span>一次性洗漱用品</span></p>
+                            <p><img src="{{asset('storage/u394.png')}}" alt=""><span>床品四件套</span></p>
                         </div>
                     </div>
                     <hr class="mysplit" style="margin: 0.5em;">
@@ -169,6 +169,9 @@
         }
         .equipment-content p > img{
             margin-right: 0.4em;
+        }
+        .equipment-content p > span{
+            text-align: center;
         }
     </style>
     @endsection

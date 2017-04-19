@@ -144,6 +144,10 @@
                     {
                         $(".mainTag").css('display','flex');
                     }
+                    else
+                    {
+                        $(".show").removeClass('show');
+                    }
                 }
             });
             $("#commit").on('click', function () {
