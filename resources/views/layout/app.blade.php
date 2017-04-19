@@ -114,7 +114,7 @@
             height: 84%;
             background-image: -webkit-gradient(linear,0 0, 0 100% ,from(transparent), to(transparent),color-stop(20%, var(--main-color)) , color-stop(80%, var(--main-color)));
         }
-        .mybtn-group button:last-child::after{
+        .mybtn-group button:last-child::after, .mybtn-group div:last-child::after {
             content:"";
         }
         #param{

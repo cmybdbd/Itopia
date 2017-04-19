@@ -34,7 +34,40 @@
             content:"";
             width: 0px;
         }
-    
+        .newbtn-group{
+            width: 100%;
+            height: 2em;
+        }
+        .newbtn-group button{
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            position: relative;
+            margin: 0 0 0 0;
+            padding: 0;
+            width: 50%;
+            height: 100%;
+            float: left;
+
+            display: -webkit-flex;
+            -webkit-flex-direction:column;
+            -webkit-justify-content: center;
+            -webkit-align-items: center;
+            -webkit-box-flex: 1;
+            display: flex;
+            flex-direction:column;
+            justify-content: center;
+            align-items: center;
+        }
+        .newbtn-group button:first-child::after{
+            position: absolute;
+            content: "";
+            top: 8%;
+            right: -1px;
+            width: 1px;
+            height: 84%;
+            background-image: -webkit-gradient(linear,0 0, 0 100% ,from(transparent), to(transparent),color-stop(20%, var(--main-color)) , color-stop(80%, var(--main-color)));
+        }
 
     </style>
 @endsection
@@ -92,11 +125,37 @@
     </div>
     <div style="width:100%;box-shadow:0 -1px 6px #eeeeee ">
         <div class="mybtn-group">
-            <button class="btn btn-default" id="report">遇到问题</button>
-            <button class="btn btn-default m-color" id="finish">结束使用</button>
+            <div class="btn btn-default" id="report">遇到问题</div>
+            <div class="btn btn-default m-color" id="finish">结束使用</div>
 
         </div>
     </div>
+
+
+    <div class="modal fade bs-example-modal-sm confirm-content" role="dialog" style="">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div style="width: 70vw">
+                        <div>
+                            <div style="text-align:center">
+                                <p>主人确认结束使用？</p>
+                                <p>房间密码将失效，小 i 马上就到</p>
+                            </div>
+                            <hr class="mysplit">
+                            <div class="newbtn-group">
+                                <button class="btn btn-default m-color"  data-dismiss="modal">否</button>
+                                <button class="btn btn-default m-color" id="confirmFinish">是</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
     <div id="param">
         <div id="oid" data-content="{{$order->id}}"></div>
         <div id="passwd" data-content="{{$order->passwd}}"></div>
@@ -116,7 +175,11 @@
                 $(gatepwd.children()[i]).text(i);
                 $(roompwd.children()[i]).text(passwd[i]);
             }
-            $("#finish").on('click', function () {
+            $("#finish").on('click',function(){
+                $(".confirm-content").modal();
+            })
+
+            $("#confirmFinish").on('click', function () {
                 $.ajax({
                     url:'/order/complete',
                     type: 'POST',
