@@ -88,7 +88,7 @@
                 <hr class="mysplit">
                 <div class="modal-body">
                     <div class="input-group input-group-lg">
-                            <input type="number" class="form-control" id="RealId" placeholder="请输入身份证号">
+                            <input type="text" class="form-control" id="RealId" placeholder="请输入身份证号">
 
                         <input type="text" class="form-control" id="RealName" placeholder="请输入姓名">
 
@@ -354,7 +354,7 @@
                     var RealName = $("#RealName").val();
                     var RealId = $("#RealId").val();
 
-                    if(RealId.match(/^\d{18}$/)) {
+                    if(RealId.match(/^\d{17}\w$/)) {
                         $.ajax({
                             url: '/idAuth?name=' + RealName + "&id_card="+RealId,
                             success:function(e){
