@@ -31,6 +31,7 @@ class User extends Authenticatable
 
     public static function saveNewUser($userInfo)
     {
+        //todo emoji name
         $user = new User();
         $user->openid = $userInfo['openid'];
         $user->nickname = empty($userInfo['nickname'])?'':$userInfo['nickname'];

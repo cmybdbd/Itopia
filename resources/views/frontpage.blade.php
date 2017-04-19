@@ -10,10 +10,10 @@
                 我的订单
                 </span>
             </button>
-            <button id="report">
+            <button id="equipment">
                 <i class="fa fa-phone fa-fw m-color font-b"></i>
                 <span style="margin-top: 1vh">
-                    反馈意见
+                    小屋设施
                 </span>
             </button>
         </div>
@@ -112,10 +112,53 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+
+
+    <div class="modal fade bs-example-modal-sm equipment-content" role="dialog">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-body" style="text-align: center;">
+                    <div style="margin-left:5%;margin-right:5%;">
+                        <div>
+                        <div>基础设施</div>
+                        <p>懒人沙发</p>
+                        <p>榻榻米</p>
+                        <p>智能蓝牙投影</p>
+                        <p>双人床</p>
+                        <p>智能门锁</p>
+                        <p>冰箱</p>
+                        <p>空调</p>
+                        <p>电吹风</p>
+                        <p>洗衣机</p>
+                        <p>饮水机</p>
+                        <p>24小时热水</p>
+                        <p>Wi-Fi</p>
+                        </div>
+                        <div>
+                            <div>有偿服务</div>
+                            <p>桌游棋牌</p>
+                            <p>零食饮料</p>
+                            <p>一次性洗漱用品</p>
+                            <p>床品四件套</p>
+                        </div>
+                    </div>
+                    <hr class="mysplit" style="margin: 0.5em;">
+                    <button class="m-color font-m"
+                            data-dismiss="modal"
+                            style="border:none;width:100%;height:100%;background-color:white;">朕知道了</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @section('scripts')
     <script>
         $(function () {
+
+            $("#equipment").on('click',function () {
+                $(".equipment-content").modal();
+            });
+
             var validatePhone =$("#validatePhone");
             var phoneN = $("#phoneN");
             validatePhone.on('shown.bs.modal', function () {

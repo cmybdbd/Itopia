@@ -209,6 +209,15 @@
             var startts = $("#nextTime").attr('data-content')*1000;
             var isUsing = $("#isUsing").attr('data-content');
             var usingNight = JSON.parse($("#usingNight").attr("data-content"));
+            if(startts == 0)
+            {
+                $("#useNight").click();
+                $("#useHour").parent().click(function(e){
+                    e.preventDefault();
+                    return false;
+                })
+                startts = new Date(dateFormat(new Date(), 'yyyy-mm-dd 00:00:00')).getTime();
+            }
 
             var todayts, tomorrowts;
             var selectedDay = todayts, selectedTime;
@@ -264,13 +273,16 @@
                     value: i
                 };
             }
+            console.log(startts);
             for(i = 2;i < 7; i++)
             {
                 temp = new Date(startts + i * 24*60*60*1000);
+
                 date[i] = {
                     text: weekday[temp.getDay()] + ' ' + dateFormat(temp,'mm月dd日'),
                     value: i
                 };
+                console.log(date[i]);
             }
 
             if(!istomorrow)
@@ -433,7 +445,7 @@
             });
             datePicker.on('picker.select', function (selectedVal, selectedIndex) {
                 dateTime.text(date[selectedIndex[0]].text.split(' ')[1])
-                    .attr('data-content', duration[selectedIndex[0]].value);
+                    .attr('data-content', date[selectedIndex[0]].value);
                 updatePrice(1);
             })
             function updateEndTime(){
@@ -478,9 +490,9 @@
             });
 
             $("#toPay").on('click', function(){
-                if(checkToPay())
+                if(checkToPay() && $("#toPay button").text()!= '下单中...')
                 {
-
+                    $("#toPay button").text('下单中...');
                     temptime = new Date(dateFormat(new Date(), 'yyyy-mm-dd 00:00:00')).getTime();
                     if(dateFormat(new Date(), 'HH') > 5)
                     {
@@ -532,13 +544,7 @@
                             console.log(param);
                             if(param['code'] == '200' && param['param']['code'] == 200)
                             {
-                                window.location.href = param['param']['content']['payUrl'];
-                                /*
-                                window.location.href = window.location.href.replace(
-                                    /create.* /,
-                                    'result/'+param['orderId']
-                                );
-*/
+                                //window.location.href = param['param']['content']['payUrl'];
                             }
 
                         },
@@ -556,9 +562,11 @@
             //   disable date
             for (i = 0; i < 7; i++)
             {
-                if(usingNight.indexOf(dateFormat(todayts + (i+1)*24*60*60*1000, 'yyyy-mm-dd 00:00:00')) != -1)
+                console.log(usingNight);
+                console.log(dateFormat(todayts + (i+1)*24*60*60*1000, 'yyyy-mm-dd 00:00:00'))
+                if(usingNight.indexOf(dateFormat(startts + (i+1)*24*60*60*1000, 'yyyy-mm-dd 00:00:00')) != -1)
                 {
-                    $("#datePicker [data-val='"+i+"']").addClass('disable');
+                    $("#datePicker [data-val='"+(i)+"']").addClass('disable');
                 }
                 else
                 {

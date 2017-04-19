@@ -38,7 +38,7 @@ class OrderController extends Controller
                         $order->hasRoom->roomLockId,
                         $passwd,
                         Auth::user()->phonenumber,
-                        strtotime($order->startTime),
+                        strtotime($order->startTime) - 15*60,
                         strtotime($order->endTime)
                     );
                     //return json_encode($ret);
@@ -134,7 +134,7 @@ class OrderController extends Controller
 
         if (isset($request->uuid))
         {
-            Order::where('id', $request->uuid)->update(['state' => Constant::$ORDER_STATE['REMOVE']]);
+            Order::where([['id', $request->uuid],['isDay',$request->isDay]])->update(['state' => Constant::$ORDER_STATE['REMOVE']]);
         }
         $order = Uuid::generate()->string;
         if($request->isDay)

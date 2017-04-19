@@ -40,10 +40,19 @@ class Room extends Model
         }
         else
         {
-            $time = date('Y-m-d H:i:s', time());
+            if($hour < 11)
+            {
+                $time =  strtotime(date('Y-m-d 00:00:00',time()))+11*60*60;
+            }
+            else
+            {
+                $time = time();
+            }
+            $starttime = date('Y-m-d H:i:s', $time+30*60);
+            $endtime = date('Y-m-d H:i:s', $time - 30*60);
             $used = $this->hasManyOrders()->where([
-                ['startTime', '<=', $time],
-                ['endTime', '>=', $time],
+                ['startTime', '<=', $starttime],
+                ['endTime', '>=', $endtime],
                 ['isDay', '=', 1],
                 ['state', '>=', Constant::$ORDER_STATE['UNPAY']],
             ])->get();
@@ -69,7 +78,8 @@ class Room extends Model
         $dayMaxTime = $dayStartTime + 22 * 60 * 60;
 
         $time = time() - time() % (30*60) + 30*60;
-        $time = $time > 11*60*60 ? $time : 11*60*60;
+        $time = $time > $dayStartTime + 11*60*60 ? $time : $dayStartTime + 11*60*60;
+
         if ($dayMaxTime > $nextTime && $dayMaxTime > $time)
         {
             return $nextTime > $time ? $nextTime:$time;
