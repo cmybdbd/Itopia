@@ -17,8 +17,7 @@ class Constant
 
     public static $HOME_URL=URL."/home";
     public static $LOGIN_URL=URL."/login";
-    public static $REPORT_PHONE=17302175859;
-
+    public static $REPORT_PHONE=13161953877;
     public static $STATUS_CODE = array(
         "OK" => 200,
         "PARAMS_MISS" => 400,
@@ -28,6 +27,7 @@ class Constant
     );
     public static $PAY_SEED = 'aec29485267adfef090913c9298f5628';
 
+    public static $GATE_ID = 'aa50f8da-0000-11e7-b33b-000000000000';
     public static $ORDER_STATE = array(
         'REMOVE'   => 0,
         'FAILED'   => 1,

@@ -22,6 +22,27 @@ class OrderController extends Controller
 
         if(!empty($order->payNum ))
         {
+            $gateDoor = Room::find(Constant::$GATE_ID);
+            if(strtotime($gateDoor->updated_at) < Utils::curDay() || empty($gateDoor->passwd ))
+            {
+                $passwd = Utils::generatePasswd(6);
+                $lc = new LockController();
+                $ret = $lc->updatePassword(
+                    '',
+                    $passwd,
+                    Constant::$REPORT_PHONE,
+                    Utils::curDay(),
+                    Utils::curDay()+ 24*60*60
+                );
+                if ($ret['code'] == Constant::$STATUS_CODE['OK'])
+                {
+                    $gatePasswd = $passwd;
+                }
+            }
+            else
+            {
+                $gatePasswd = $gateDoor-> passwd;
+            }
             if(empty($order->passwd))
             {
                 $payNum = json_decode($order->payNum, true);
@@ -51,7 +72,7 @@ class OrderController extends Controller
             }
             if(!empty($order->passwd))
             {
-                return view('order.result')->with(['order' => $order]);
+                return view('order.result')->with(['order' => $order, 'gatepass'=>$gatePasswd]);
             }
         }
         return "someting error";

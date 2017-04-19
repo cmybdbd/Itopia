@@ -27,6 +27,7 @@ class CreateRoomTable extends Migration
             $table -> double('nightPrice');
 
             $table -> string('roomLockId');
+            $table -> string('passwd')->nullable();
             $table -> integer('phoneOfManager');
             $table -> integer('state');
             $table->timestamps();

@@ -158,6 +158,7 @@
 
     <div id="param">
         <div id="oid" data-content="{{$order->id}}"></div>
+        <div id="gatepass" data-content="{{$gatepass}}"></div>
         <div id="passwd" data-content="{{$order->passwd}}"></div>
         <div id="startTime" data-content="{{strtotime($order->startTime)}}"></div>
         <div id="endTime" data-content="{{strtotime($order->endTime)}}"></div>
@@ -170,9 +171,10 @@
 
             var gatepwd = $(".gatepwd>.pwd-group");
             var roompwd = $(".roompwd>.pwd-group");
+            var gatepass =$("#gatepass").attr("data-content");
             var passwd = $("#passwd").attr("data-content");
             for (i = 0; i < 6; i++) {
-                $(gatepwd.children()[i]).text(i);
+                $(gatepwd.children()[i]).text(gatepass[i]);
                 $(roompwd.children()[i]).text(passwd[i]);
             }
             $("#finish").on('click',function(){
