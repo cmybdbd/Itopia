@@ -672,6 +672,11 @@
                             {
                                 window.location.href = param['param']['content']['payUrl'];
                             }
+                            else
+                            {
+                                $("#toPay button").text('下单失败');
+                                window.location.href=window.location.href;
+                            }
 
                         },
                         error: function (e){
