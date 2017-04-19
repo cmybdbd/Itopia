@@ -37,6 +37,8 @@ class OrderController extends Controller
                 if ($ret['code'] == Constant::$STATUS_CODE['OK'])
                 {
                     $gatePasswd = $passwd;
+                    $gateDoor->passwd = $passwd;
+                    $gateDoor->save();
                 }
             }
             else
