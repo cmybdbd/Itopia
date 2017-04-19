@@ -87,11 +87,11 @@
                 </div>
                 <hr class="mysplit">
                 <div class="modal-body">
+                    <div class="input-group input-group-lg" >
+                        <input type="text" class="form-control" id="RealId" placeholder="请输入身份证号">
+                    </div>
                     <div class="input-group input-group-lg">
-                            <input type="text" class="form-control" id="RealId" placeholder="请输入身份证号">
-
                         <input type="text" class="form-control" id="RealName" placeholder="请输入姓名">
-
                     </div>
                 </div>
                 <div>
@@ -279,18 +279,8 @@
                                 console.log(e);
                                 if (e.code == 200) {
                                     $("#validatePhone").modal('hide');
-                                    /*
-                                    $.ajax({
-                                        url: '/savePhone/' + phoneN.val(),
-                                        data: {
-                                            _token:$("meta[name='csrf-token']").attr('content')
-                                        },
-                                        type: 'POST',
-                                        success: function () {
-                                            console.log('save phone');
-                                        }
-                                    });
-                                    */
+                                    validateID.modal('show');
+
                                 }
                                 else {
                                     $(".errormsg").text('验证码有误');
@@ -305,42 +295,7 @@
                                 }
                             }
                         })
-                        /*
-                        $.ajax({
-                            dataType: 'jsonp',
-                            jsonpCallback: "jsonp",
-                            url: 'http://renthouse.wecash.net/itopia/checkphone.php?m=checkCode&' +
-                            'p=' + inp0.val() + inp1.val() + inp2.val() + inp3.val(),
-                            success: function (e) {
-                                console.log(e);
-                                if (e.code == 200) {
-                                    $("#validatePhone").modal('hide');
-                                    $.ajax({
-                                        url: '/savePhone/' + phoneN.val(),
-                                        data: {
-                                            _token:$("meta[name='csrf-token']").attr('content')
-                                        },
-                                        type: 'POST',
-                                        success: function () {
-                                            console.log('save phone');
-                                        }
-                                    });
-                                }
-                                else {
-                                    $(".errormsg").text('验证码有误');
-                                    setTimeout(function () {
-                                        $(".errormsg").text('');
-                                    }, 3000);
-                                    inp0.val('');
-                                    inp1.val('');
-                                    inp2.val('');
-                                    inp3.val('');
-                                    inp0.focus();
-                                }
 
-                            }
-                        });
-                        */
                     }
                 });
             };
@@ -349,7 +304,8 @@
                 validateID.on("shown.bs.modal", function(){
                     $("#RealId").focus();
                 })
-                validateID.modal('show');
+                if($("#param .uphoneN").attr("data-content"))
+                    validateID.modal('show');
                 $("#validateID").on("click",function(){
                     var RealName = $("#RealName").val();
                     var RealId = $("#RealId").val();
