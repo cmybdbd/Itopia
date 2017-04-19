@@ -83,7 +83,7 @@
             width: 100%;
             height: 12vh;
         }
-        .mybtn-group button{
+        .mybtn-group button, .mybtn-group div{
             border: none;
             background: transparent;
             cursor: pointer;
@@ -95,17 +95,17 @@
             float: left;
 
 
-            display: -webkit-box;
-            -webkit-box-pack: center;
-            -webkit-box-align: center;
-            -webkit-box-orient: horizontal;
-
+            display: -webkit-flex;
+            -webkit-flex-direction:column;
+            -webkit-justify-content: center;
+            -webkit-align-items: center;
+            -webkit-box-flex: 1;
             display: flex;
             flex-direction:column;
             justify-content: center;
             align-items: center;
         }
-        .mybtn-group button::after{
+        .mybtn-group button::after, .mybtn-group div::after{
             position: absolute;
             content: "";
             top: 8%;

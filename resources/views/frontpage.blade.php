@@ -4,19 +4,19 @@
 @section('content')
     <div class="myHeader" style="margin-bottom: 2vh;box-shadow:0 1px 6px #eeeeee">
         <div class="mybtn-group" style="">
-            <button id="myOrder">
+            <div id="myOrder">
                 <i class="fa fa-user-circle fa-fw m-color font-b"></i>
                 <span style="margin-top: 1vh">
                 我的订单
                 </span>
-            </button>
-            <button id="equipment">
+            </div>
+            <div id="equipment">
                 <img src="{{asset('storage/u329.png')}}" style="width:1.4em" alt="">
 
                 <span style="margin-top: 1vh">
                     小屋设施
                 </span>
-            </button>
+            </div>
         </div>
     </div>
     <div class="content">
