@@ -349,7 +349,7 @@
                     e.preventDefault();
                     return false;
                 })
-                startts = new Date(dateFormat(new Date(), 'yyyy-mm-dd 00:00:00')).getTime();
+                startts = new Date(dateFormat(new Date(), 'yyyy/mm/dd 00:00:00')).getTime();
             }
 
             var todayts, tomorrowts;
@@ -360,7 +360,7 @@
                 istomorrow = true;
             }
 
-            todayts = new Date(dateFormat(startts, 'yyyy-mm-dd 00:00:00')).getTime();
+            todayts = new Date(dateFormat(startts, 'yyyy/mm/dd 00:00:00')).getTime();
             if(istomorrow)
             {
                 todayts = todayts -24*60*60*1000;
@@ -442,7 +442,7 @@
             else {
                 for(i = 0; i< 5; i++)
                 {
-                    temp = new Date('2000-01-01 20:00:00').getTime() + i * 30*60*1000;
+                    temp = new Date('2000/01/01 20:00:00').getTime() + i * 30*60*1000;
 
                     daytime[0].sub[i] = {
                         text: showHumanHour(temp),
@@ -616,12 +616,14 @@
                 if(checkToPay() && $("#toPay button").text()!= '下单中...')
                 {
                     $("#toPay button").text('下单中...');
-                    temptime = new Date(dateFormat(new Date(), 'yyyy-mm-dd 00:00:00')).getTime();
+
+                    temptime = new Date(dateFormat(new Date(), 'yyyy/mm/dd 00:00:00')).getTime();
                     if(dateFormat(new Date(), 'HH') > 5)
                     {
                         temptime += 24*60*60*1000;
 
                     }
+                    console.log('temptime='+temptime);
                     if(!$('#byHour').hasClass('active'))
                     {
                         temptime = tomorrowts + dateTime.attr('data-content') * 24*60*60*1000;
@@ -674,7 +676,7 @@
                         },
                         error: function (e){
                             alert(e.responseText);
-                            console.log(e.responseText);
+                            //console.log(e.responseText);
                         }
                     });
                 }
@@ -686,8 +688,7 @@
             //   disable date
             for (i = 0; i < 7; i++)
             {
-                console.log(usingNight);
-                console.log(dateFormat(todayts + (i+1)*24*60*60*1000, 'yyyy-mm-dd 00:00:00'))
+
                 if(usingNight.indexOf(dateFormat(startts + (i+1)*24*60*60*1000, 'yyyy-mm-dd 00:00:00')) != -1)
                 {
                     $("#datePicker [data-val='"+(i)+"']").addClass('disable');
