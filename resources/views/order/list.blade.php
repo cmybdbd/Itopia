@@ -33,6 +33,7 @@
                 @if($key != 0)
                     <hr class="mysplit">
                 @endif
+            <div class="order-item" data-content="{{$order->id}}">
                 <div class="f-color">
                     <span>{{date('m月d日',strtotime($order->startDate))}}</span>
                     -
@@ -60,6 +61,7 @@
                     <span>{{$order->price}}元</span>
                 </div>
                 </div>
+            </div>
             @endforeach
         </div>
         @else
@@ -68,4 +70,14 @@
             </div>
         @endif
     </div>
+@endsection
+@section('scripts')
+    <script>
+        $(function () {
+            $(".order-item").on('click',function(){
+                window.location.href = '/result/'+$(this).attr("data-content");
+            });
+        })
+    </script>
+
 @endsection
