@@ -25,8 +25,8 @@ class PageViewController extends Controller
             $pageView->comment = 0;
             $pageView->commentResult = 0;
             $pageView->orderList = 0;
-            $pageView-> byHour = 0;
-            $pageView->byNight = 0;
+            $pageView-> useHour = 0;
+            $pageView-> useNight = 0;
         }
         $pageView->curDate = $date;
         $pageView->$page += 1;

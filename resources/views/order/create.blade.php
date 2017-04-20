@@ -321,7 +321,7 @@
             });
             $("#useHour").parent().click(function(e){
                 $.ajax({
-                    url: '/updatePageView/byHour',
+                    url: '/updatePageView/useHour',
                     type:'POST',
                     data: {
                         _token: $("meta[name='csrf-token']").attr('content')
@@ -330,7 +330,7 @@
             })
             $("#useNight").parent().click(function(e){
                 $.ajax({
-                    url: '/updatePageView/byNight',
+                    url: '/updatePageView/useNight',
                     type:'POST',
                     data: {
                         _token: $("meta[name='csrf-token']").attr('content')
