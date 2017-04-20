@@ -47,15 +47,11 @@
                     console.log(starNum);
                 }
             });
-            window.Laravel = <?php echo json_encode([
-                'csrfToken' => csrf_token(),
-            ]); ?>;
-
             $("#commit").on('click', function () {
                 $.ajax({
                     url: 'create',
                     data: {
-                        _token: Laravel.csrfToken,
+                        _token:$("meta[name='csrf-token']").attr('content'),
                         'userId': $("#userId").attr("data-content"),
                         'orderId': $("#orderId").attr('data-content'),
                         'starNum': starNum,

@@ -84,7 +84,7 @@ class LockController extends Controller
         return $ret;
     }
 
-    private function updatePassword($room_id, $password, $phonenumber, $permission_begin, $permission_end)
+    public function updatePassword($room_id, $password, $phonenumber, $permission_begin, $permission_end)
     {
 
         $query_url = '/update_password';

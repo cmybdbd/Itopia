@@ -38,14 +38,14 @@ class WeChatController extends Controller
             // 这里不一定是return，如果你的框架action不是返回内容的话你就得使用
             // $oauth->redirect()->send();
         }
-        $u = \App\User::find($user->id);
+        $u = \App\User::where('openid','=',$user->id)->first();
         if(!$u)
         {
             //$u = \App\User::create(['id'=>$user->id]);
             $u = User::saveNewUser($user->getOriginal());
         }
         \Illuminate\Support\Facades\Auth::login($u, true);
-        $_SESSION['target_url'] = '/home';
+        $_SESSION['target_url'] = '/itopia/home';
         return redirect('home');
         // 已经登录过
       //  $user = $_SESSION['wechat_user'];
@@ -71,7 +71,7 @@ class WeChatController extends Controller
             Log::info("old user");
         }
 
-        $targetUrl = empty($_SESSION['target_url']) ? '/home' : $_SESSION['target_url'];
+        $targetUrl = empty($_SESSION['target_url']) ? '/itopis/home' : $_SESSION['target_url'];
         return Redirect::to($targetUrl);
         //header('location:'. $targetUrl); // 跳转到目标url
     }

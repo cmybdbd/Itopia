@@ -11,7 +11,7 @@
 @section('content')
     <div class="center">
         <div class="font-b"
-             style="height: 4em;display:flex;align-items: center;justify-content: center">使用结束</div>
+             style="margin-top: 2em;height: 2em;display:flex;align-items: center;justify-content: center">使用结束</div>
         <hr class="mysplit-color">
         <div class="font-b m-color">
             <div style="font-size: 5.6em;">

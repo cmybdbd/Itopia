@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Utils\Constant;
+use App\Utils\Utils;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Response;
 
@@ -17,27 +18,25 @@ class Room extends Model
     public function hasManyOrders(){
         return $this->hasMany('App\Order','roomId','id');
     }
-    public function isUsing(){
 
-        if(time() % (24*60*60) > 12 * 60*60)
+    public function usingNight(){
+        $night = $this->hasManyOrders()->where([
+            ['isDay' , '=', 0],
+            ['startDate', ">=", Utils::curNight()],
+            ['state', '>=', Constant::$ORDER_STATE['UNPAY']],
+        ])->pluck('startDate');
+        $res = [];
+        foreach ($night as $n)
+            $res[] = $n;
+        return json_encode($res);
+    }
+    public function isUsing()
+    {
+        $hour = date('H',time());
+        if($hour <=  5 || $hour == 23)
         {
-            //night
-            $time = date('Y-m-d H:i:s', time());
-            $dayStartTime = time() - time() % (24*60*60) - 8*60*60;
-            $used = $this->hasManyOrders()->where([
-                ['startDate', '<', $dayStartTime + 24*60*60],
-                ['startDate', '>=', $dayStartTime],
-                ['isDay' ,'=', false],
-                ['state', '>=', Constant::$ORDER_STATE['TOUSE']],
-            ])->get();
-            if(count($used))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            //return json_encode([Utils::curNight(),$this->usingNight()]);
+            return in_array(date('Y-m-d H:i:s',Utils::curNight()), json_decode($this->usingNight()));
         }
         else
         {
@@ -45,35 +44,40 @@ class Room extends Model
             $used = $this->hasManyOrders()->where([
                 ['startTime', '<=', $time],
                 ['endTime', '>=', $time],
-                ['isDay', '=', true],
-                ['state', '>=', Constant::$ORDER_STATE['TOUSE']],
+                ['isDay', '=', 1],
+                ['state', '>=', Constant::$ORDER_STATE['UNPAY']],
             ])->get();
 
-            if (count($used))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return count($used);
         }
     }
     public function nextTime(){
         $nextTime = $this -> hasManyOrders()->where([
-            ['state','>=', Constant::$ORDER_STATE['TOUSE']],
-            ['isDay', '=', true],
+            ['state','>=', Constant::$ORDER_STATE['UNPAY']],
+            ['isDay', '=', 1],
         ])->max('endTime');
-        $nextTime = strtotime($nextTime) + 30 * 60;
+        if(empty($nextTime))
+        {
+            $nextTime= 0;
+        }
+        else
+        {
+            $nextTime = strtotime($nextTime) + 30 * 60;
+        }
 
-        $dayStartTime = time() - time() % (24 * 60 * 60) - 8 * 60 * 60;
+        $dayStartTime = strtotime(date('Y-m-d 00:00:00', time()));
         $dayMaxTime = $dayStartTime + 22 * 60 * 60;
 
         $time = time() - time() % (30*60) + 30*60;
+        $time = $time > 11*60*60 ? $time : 11*60*60;
         if ($dayMaxTime > $nextTime && $dayMaxTime > $time)
         {
             return $nextTime > $time ? $nextTime:$time;
         }
-        return -1;
+        else if($time > $dayMaxTime && $nextTime < $time)
+        {
+            return $dayStartTime + 35*60*60;
+        }
+        return 0;
     }
 }

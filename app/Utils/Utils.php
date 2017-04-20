@@ -39,7 +39,17 @@ class Utils{
         return $xml;
     }
 
-
+    static public function curNight(){
+        $time = time();
+        if(date('H',$time) <= 5)
+        {
+            return strtotime(date('Y-m-d 00:00:00'));
+        }
+        else
+        {
+            return strtotime(date('Y-m-d 00:00:00'))+ 24 * 60 * 60;
+        }
+    }
     static function get_server_ip()
     {
         if (!empty($_SERVER['SERVER_ADDR']))
@@ -64,12 +74,13 @@ class Utils{
 
     public static function AES_encrypt($str, $seed)
     {
-        return exec('java -jar ../java/AESUtils.jar e '.$seed. ' '. $str);
+        $res = exec('java -jar ../java/AESUtils.jar e '.$seed. ' '. $str);
+        return $res;
     }
 
 
 
-    public static function sign($arr, $sort = false)
+    public static function sign($arr, $sort = false, $uppercase = false)
     {
         if($sort)
         {
@@ -80,6 +91,11 @@ class Utils{
         {
             $sig.=$var;
         }
-        return strtoupper(md5($sig));
+        $ret = md5($sig);
+        if($uppercase)
+        {
+            $ret = strtoupper($ret);
+        }
+        return $ret;
     }
 }

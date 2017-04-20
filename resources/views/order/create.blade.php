@@ -52,12 +52,15 @@
         .cbox{
             position: relative;
         }
+        #agreement{
+            opacity:0;
+        }
         .cbox label{
             position: absolute;
             width: 1.2em;
             height: 1.2em;
-            top: 0.3em;
-            left: 0em;
+            top: 0.2em;
+            left: -1px;
             background: white;
             border: 1px solid var(--b-font-color);
             border-radius:5px;
@@ -144,9 +147,7 @@
             <div role="tabpanel" class="tab-pane " id="byNight">
                 <div class="mybox selectPanel">
                     日期
-                    <div id="dateTime" class="scrollPicker" data-content="{{$startNightTime}}">
-
-                    </div>
+                    <div id="dateTime" class="scrollPicker" data-content="{{$startNightTime}}"></div>
                 </div>
             </div>
         </div>
@@ -169,26 +170,18 @@
         <button style="width: 100%;height: 100%; border:none;background:transparent">去支付</button>
     </div>
     <div id="param">
-        <div id="userId" data-content="{{\Illuminate\Support\Facades\Auth::user()->id}}"></div>
+        <div id="userId" data-content="{{\Illuminate\Support\Facades\Auth::id()}}"></div>
         <div id="roomId" data-content="{{$room->id}}"></div>
         <div id="exs" data-content="{{$olderOrder}}"></div>
-        <div id="isUsing">{{$room->isUsing()}}</div>
+        <div id="isUsing" data-content="{{$room->isUsing()}}"></div>
         <div id="nextTime" data-content="{{$room->nextTime()}}"></div>
+        <div id="usingNight" data-content="{{$room->usingNight()}}"></div>
     </div>
 @endsection
 @section('scripts')
 
     <script>
         $(function() {
-
-            var startTime = $('#startTime'),
-                durationTime = $('#durationTime'),
-                endTime = $("#endTime"),
-                dateTime = $("#dateTime");
-            console.log(startTime.attr('data-content'));
-            //var startts = startTime.attr('data-content')*1000;
-            var startts = $("#nextTime").attr('data-content')*1000;
-            var start = new Date(startts);
             function showHumanDay(ts)
             {
                 return dateFormat(ts, "yyyy年mm月dd日");
@@ -201,66 +194,121 @@
             {
                 return dateFormat(ts, 'HH:MM');
             }
-            var todayts = startts - startts % (24*60*60*1000) - 8*60*60*1000;
-            var tomorrowts = todayts + 24 * 60 * 60 * 1000;
-            console.log(showHumanTime(todayts));
-            var selectedDay = todayts, selectedTime;
 
-            /*
-            if(start.getMinutes() > 30)
+            var startTime = $('#startTime'),
+                durationTime = $('#durationTime'),
+                endTime = $("#endTime"),
+                dateTime = $("#dateTime");
+            console.log(startTime.attr('data-content'));
+            //var startts = startTime.attr('data-content')*1000;
+            var startts = $("#nextTime").attr('data-content')*1000;
+            var isUsing = $("#isUsing").attr('data-content');
+            var usingNight = JSON.parse($("#usingNight").attr("data-content"));
+
+            var todayts, tomorrowts;
+            var selectedDay = todayts, selectedTime;
+            var istomorrow = false;
+            if(dateFormat(startts, 'dd') > dateFormat(new Date(), 'dd'))
             {
-                ts = todayts + (start.getHours()+1.5)*60*60*1000;
-                startTime.text(showHumanTime(ts))
-                    .attr("data-content", ts);
+                istomorrow = true;
             }
-            else
+
+            todayts = new Date(dateFormat(startts, 'yyyy-mm-dd 00:00:00')).getTime();
+            if(istomorrow)
             {
-                ts = todayts  + (start.getHours()+0.5)*60*60*1000;
-                startTime.text(showHumanTime(ts))
-                    .attr("data-content", ts);
+                todayts = todayts -24*60*60*1000;
             }
-            */
+
+            tomorrowts = todayts + 24 * 60 * 60 * 1000;
+            console.log(showHumanTime(startts));
+            console.log(showHumanTime(todayts));
+
+
             startTime.text(showHumanTime(startts))
                 .attr("data-content", startts);
             updateEndTime();
             updatePrice(0);
 
-            var day = [{
+            var daytime = [{
                 text: '今天',
-                value: 0
+                value: 0,
+                sub: [
+                ]
             },{
                 text: '明天',
-                value: 1
+                value: 1,
+                sub: [
+
+                ]
             }];
+            var weekday = [
+                '星期天',
+                '星期一',
+                '星期二',
+                '星期三',
+                '星期四',
+                '星期五',
+                '星期六'
+            ];
             var date = [];
             for(i = 0;i < 2; i++)
             {
                 date[i] = {
-                    text: day[i].text + ' ' + dateFormat(startts+(day[i].value)*24*60*60*1000,'mm月dd日'),
+                    text: daytime[i].text + ' ' + dateFormat(startts+i*24*60*60*1000,'mm月dd日'),
                     value: i
                 };
             }
-            var time = [];
-            for(i = -1; i< 4; i++)
+            for(i = 2;i < 7; i++)
             {
-                time[i+1] = {
-                    text: showHumanHour(startts + i * 30*60*1000),
-                    value: i * 30*60*1000
-                };
-            }
-            /*
-            for(i = 11;i <23;i++ )
-            {
-                time[(i-11)*2] = {
-                    text: i +":00",
+                temp = new Date(startts + i * 24*60*60*1000);
+                date[i] = {
+                    text: weekday[temp.getDay()] + ' ' + dateFormat(temp,'mm月dd日'),
                     value: i
                 };
-                time[(i-11)*2+1] = {
-                    text: i + ":30" ,
-                    value: i+0.5
+            }
+
+            if(!istomorrow)
+            {
+                for(i = 0; i< 4; i++)
+                {
+                    temp = startts + i * 30*60*1000;
+                    if(dateFormat(temp, 'HH') > 22)
+                        break;
+                    daytime[0].sub[i+1] = {
+                        text: showHumanHour(temp),
+                        value: i * 30*60*1000
+                    };
                 }
+                for (i = 0; i< 4; i++)
+                {
+                    daytime[1].sub[i] = {
+                        text: showHumanHour(tomorrowts + (22 + i) * 30*60*1000),
+                        value: (22+i) * 30*60*1000
+                    }
+                }
+
             }
-            */
+            else {
+                for(i = 0; i< 5; i++)
+                {
+                    temp = new Date('2000-01-01 20:00:00').getTime() + i * 30*60*1000;
+
+                    daytime[0].sub[i] = {
+                        text: showHumanHour(temp),
+                        value: i * 30*60*1000
+                    };
+                }
+                console.log(daytime);
+                for (i = 0; i< 4; i++)
+                {
+                    daytime[1].sub[i] = {
+                        text: showHumanHour(tomorrowts + (22 + i) * 30*60*1000),
+                        value: (22+i) * 30*60*1000
+                    }
+                }
+
+            }
+
             var duration = [
                 {
                     text: "1 小时",
@@ -275,33 +323,85 @@
                     value: 2*60*60*1000
                 }
             ];
-            dateTime.text(date[0].text.split(' ')[1])
-                .attr('data-content', date[0].value);
+
+
+            function creatList(obj, list){
+                obj.forEach(function(item, index, arr){
+                    var temp = {};
+                    temp.text = item.text;
+                    temp.value = item.value;
+                    list.push(temp);
+                })
+            }
+            var day = [];
+            var time = [];
+
+            creatList(daytime, day);
+
+            creatList(daytime[istomorrow|0].sub, time);
+            console.log(day);
+            console.log(time);
 
             var startPicker = new Picker({
                 data: [day, time],
-                selectedIndex: [0, 0],
-                title: '开始时间'
+                selectedIndex: [istomorrow|0, 0],
+                title: '开始时间',
+                id: 'startPicker'
             });
             var durationPicker = new Picker({
                 data: [duration],
                 selectIndex: [0],
-                title: '使用时长'
+                title: '使用时长',
+                id: 'durationPicker'
             });
-             datePicker = new Picker({
+            var datePicker = new Picker({
                 data:[date],
-                selectedIndex: [0],
-                title: '选择日期'
+                selectedIndex: [isUsing|0],
+                title: '选择日期',
+                id:'datePicker'
             });
+            console.log('isusing='+isUsing);
 
             startPicker.on('picker.select', function (selectedVal, selectedIndex) {
                 var d = day[selectedIndex[0]].value;
-                selectedDay = d === 0 ? showHumanDay(todayts) : showHumanDay(tomorrowts);
+                selectedDay = d === 0 ? showHumanDay(startts) : showHumanDay(tomorrowts);
                 startTime.text(selectedDay + ' ' + time[selectedIndex[1]].text)
-                    .attr("data-content", (d===0 ? startts : tomorrowts) + time[selectedIndex[1]].value);
+                    .attr("data-content", (d===0 ? startts :tomorrowts) + time[selectedIndex[1]].value);
 
                 updateEndTime();
             });
+            startPicker.on('picker.change', function (index, selectedIndex) {
+                if (index === 0){
+                    firstChange();
+                }
+
+                function firstChange() {
+                    time = [];
+                    checked = [];
+                    checked[0] = selectedIndex;
+                    var firstDay = daytime[selectedIndex];
+                    creatList(firstDay.sub, time);
+
+                    startPicker.refillColumn(1, time);
+                    if(selectedIndex != istomorrow)
+                    {
+                        $($("#startPicker ul")[1]).children().addClass('disable');
+                    }
+                    else
+                    {
+                        var lis = $($("#startPicker ul")[1]).children();
+                        for(i =2 ;i < lis.length;i++)
+                        {
+                            $(lis[i]).addClass('disable');
+                        }
+                    }
+                    startPicker.scrollColumn(1, 0);
+                }
+
+            });
+
+
+
             durationPicker.on('picker.select', function(selectedVal, selectedIndex){
                 durationTime.text(duration[selectedIndex[0]].text)
                     .attr('data-content', duration[selectedIndex[0]].value);
@@ -353,48 +453,75 @@
             });
             dateTime.parent().on('click', function () {
                 datePicker.show();
-            })
-            window.Laravel = <?php echo json_encode([
-                'csrfToken' => csrf_token(),
-            ]); ?>;
+            });
 
             $("#toPay").on('click', function(){
                 if(checkToPay())
                 {
-                    $data = {
-                        _token: Laravel.csrfToken,
-                        'userId': $("#userId").attr('data-content'),
-                        'roomId': $("#roomId").attr('data-content'),
-                        'startTime': (+startTime.attr('data-content'))/1000|0,
-                        'endTime'  : (+endTime.attr('data-content'))/1000|0,
-                        'duration' : +durationTime.attr('data-content')/3600000,
-                        'price'   : +($('#totalPrice').text()),
-                        'date'     : new Date().getTime()/1000|0,
-                        'isDay'    : $('#byHour').hasClass('active')
-                    };
+
+                    temptime = new Date(dateFormat(new Date(), 'yyyy-mm-dd 00:00:00')).getTime();
+                    if(dateFormat(new Date(), 'HH') > 5)
+                    {
+                        temptime += 24*60*60*1000;
+
+                    }
+                    if(!$('#byHour').hasClass('active'))
+                    {
+                        temptime = tomorrowts + dateTime.attr('data-content') * 24*60*60*1000;
+                        data = {
+                            _token: $("meta[name='csrf-token']").attr('content'),
+                            'userId': $("#userId").attr('data-content'),
+                            'roomId': $("#roomId").attr('data-content'),
+                            'startTime': (temptime-30*60*1000)/1000|0,
+                            'endTime'  : (temptime+21*30*60*1000)/1000|0,
+                            'duration' : +durationTime.attr('data-content')/3600000,
+                            'price'   : +($('#totalPrice').text()),
+                            'date'     : temptime /1000|0,
+                            'isDay'    : $('#byHour').hasClass('active') ? 1:0
+                        };
+                    }
+                    else
+                    {
+                        data = {
+                            _token: $("meta[name='csrf-token']").attr('content'),
+                            'userId': $("#userId").attr('data-content'),
+                            'roomId': $("#roomId").attr('data-content'),
+                            'startTime': (+startTime.attr('data-content'))/1000|0,
+                            'endTime'  : (+endTime.attr('data-content'))/1000|0,
+                            'duration' : +durationTime.attr('data-content')/3600000,
+                            'price'   : +($('#totalPrice').text()),
+                            'date'     : temptime /1000|0,
+                            'isDay'    : $('#byHour').hasClass('active') ? 1:0
+                        };
+                    }
+
                     exs =$("#exs").attr("data-content");
                     if( exs != "")
                     {
-                        $data['uuid'] = JSON.parse(exs)['id'];
+                        data['uuid'] = JSON.parse(exs)['id'];
                     }
-                    console.log($data);
+                    console.log(data);
                     console.log(startTime.attr('data-content'));
                     $.ajax({
                         url:'/order/create',
-                        data: $data,
+                        data: data,
                         type: 'POST',
                         success: function(param){
                             console.log(param);
-                            if(param['code'] == '200')
+                            if(param['code'] == '200' && param['param']['code'] == 200)
                             {
+                                //window.location.href = param['param']['content']['payUrl'];
+                                /*
                                 window.location.href = window.location.href.replace(
-                                    /create.*/,
+                                    /create.* /,
                                     'result/'+param['orderId']
                                 );
+                               */
                             }
 
                         },
                         error: function (e){
+                            alert(e.responseText);
                             console.log(e.responseText);
                         }
                     });
@@ -403,9 +530,40 @@
             });
 
 
-            $("[data-val='"+ -1*30*60*1000+"']").css(
-                "color","red"
-            );
+            // ******************************
+            //   disable date
+            for (i = 0; i < 7; i++)
+            {
+                if(usingNight.indexOf(dateFormat(todayts + (i+1)*24*60*60*1000, 'yyyy-mm-dd 00:00:00')) != -1)
+                {
+                    $("#datePicker [data-val='"+i+"']").addClass('disable');
+                }
+                else
+                {
+                    if(dateTime.text() == '')
+                    {
+                        dateTime.text(date[i].text.split(' ')[1])
+                            .attr('data-content', date[i].value);
+                    }
+                }
+            }
+
+
+            // disable time
+            if(istomorrow)
+            {
+                $($("#startPicker [data-val='0']")[0]).addClass('disable');
+            }
+            else {
+                $($("#startPicker [data-val='1']")[1]).addClass('disable');
+            }
+
+            var lis = $($("#startPicker ul")[1]).children();
+            for(i =2 ;i < lis.length;i++)
+            {
+                $(lis[i]).addClass('disable');
+            }
+
         });
     </script>
     @endsection
