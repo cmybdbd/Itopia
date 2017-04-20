@@ -86,6 +86,7 @@ class LockController extends Controller
 
     private function deleteSparePasword($room_id)
     {
+        $query_url = $this->api_url.'/delete_password';
         $spare_pswds = Lock::where([
             ['room_id', '=', $room_id],
             ['permission_end', '<', date('Y-m-d H:i:s', time())],
@@ -93,10 +94,26 @@ class LockController extends Controller
         ]);
         if($spare_pswds->count() > 0)
         {
+            if($spare_pswds->count() > 2 )
+            {
+                $spare_pswds = $spare_pswds->get(2);
+            }
+            $params = array(
+                'room_id' => $room_id,
+                'access_token' => $this->access_token(),
+                'home_id' => $this->home_id
+            );
             foreach($spare_pswds->cursor() as $pswd)
             {
-                $pswd->state = 0;
-                $pswd->save();
+                $params['password_id'] = $pswd->password_id;
+                $res = ApiHandle::httpPostJson($query_url, $params);
+                $res = json_decode($res, true);
+//                var_dump($res);
+                if($res['ErrNo'] == 0)
+                {
+                    $pswd->state = 0;
+                    $pswd->save();
+                }
             }
         }
     }
@@ -112,11 +129,11 @@ class LockController extends Controller
     /*fortest*/
     public function apiUpdatePassword()
     {
-        $room_id = $_GET['room_id'];
-        $password = $_GET['password'];
-        $phonenumber = $_GET['phonenumber'];
-        $permission_begin = $_GET['permission_begin'];
-        $permission_end = $_GET['permission_end'];
+        $room_id = '58cff65e67df5d3251f0f356';
+        $password = '324156';
+        $phonenumber = '13021941487';
+        $permission_begin = '1492707742';
+        $permission_end = '1492707800';
 
         if(empty($room_id) || empty($password) || empty($phonenumber) || empty($permission_begin) || empty($permission_end))
         {
