@@ -103,7 +103,7 @@ Route::get('/sendCode', 'SMSController@sendCode');
 Route::get('/idAuth', 'IDAuthController@IDauth');
 });
 Route::group(['prefix' => 'itopia/lock'], function(){
-    Route::get('updatePassword', "LockController@api_update_password");
+    Route::get('updatePassword', "LockController@apiUpdatePassword");
 
 });
 

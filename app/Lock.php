@@ -14,15 +14,31 @@ class Lock extends Model
 
     public static function add_password($room_id, $password_id, $password, $permission_begin, $permission_end)
     {
-        $lock = new Lock();
-        $lock->room_id = $room_id;
-        $lock->password_id = $password_id;
+        $find_lock = Lock::where([
+            ['room_id', '=', $room_id],
+            ['password_id', '=', $password_id]
+        ]);
+        if($find_lock->count() == 0)
+        {
+            $lock = new Lock();
+            $lock->room_id = $room_id;
+            $lock->password_id = $password_id;
+        }
+        else
+        {
+            $lock = $find_lock->first();
+        }
+
+        $lock->state = 1;  //有效
         $lock->password = $password;
         $lock->permission_begin = date('Y-m-d H:i:s', $permission_begin);
         $lock->permission_end = date('Y-m-d H:i:s', $permission_end);
         $lock->save();
     }
 
+
+
+    /*unuse*/
     public static function find_spare_password($room_id)
     {
         $lock = Lock::where([
@@ -40,6 +56,7 @@ class Lock extends Model
 
     }
 
+    /*unuse*/
     public function update_password($password, $permission_begin, $permission_end)
     {
         $this->password = $password;
