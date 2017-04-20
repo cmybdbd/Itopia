@@ -86,7 +86,7 @@ class Room extends Model
         {
             return $nextTime > $time ? $nextTime:$time;
         }
-        else if($time > $dayMaxTime && $nextTime < $time)
+        else if($time > $dayMaxTime && ($nextTime-60*60) < $time)
         {
             return $dayStartTime + 35*60*60;
         }
