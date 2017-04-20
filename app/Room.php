@@ -33,7 +33,7 @@ class Room extends Model
     public function isUsing()
     {
         $hour = date('H',time());
-        if($hour <=  5 || $hour == 23)
+        if($hour <=  5 || $hour >= 22)
         {
             //return json_encode([Utils::curNight(),$this->usingNight()]);
             return in_array(date('Y-m-d H:i:s',Utils::curNight()), json_decode($this->usingNight()));
