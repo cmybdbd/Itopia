@@ -94,26 +94,20 @@ class LockController extends Controller
         ]);
         if($spare_pswds->count() > 0)
         {
-            if($spare_pswds->count() > 2 )
-            {
-                $spare_pswds = $spare_pswds->get(2);
-            }
+            $spare_pswd = $spare_pswds->first();
             $params = array(
                 'room_id' => $room_id,
                 'access_token' => $this->access_token(),
-                'home_id' => $this->home_id
+                'home_id' => $this->home_id,
+                'password_id' => $spare_pswd->password_id
             );
-            foreach($spare_pswds->cursor() as $pswd)
+            $res = ApiHandle::httpPostJson($query_url, $params);
+            $res = json_decode($res, true);
+            if($res['ErrNo'] == 0)
             {
-                $params['password_id'] = $pswd->password_id;
-                $res = ApiHandle::httpPostJson($query_url, $params);
-                $res = json_decode($res, true);
-//                var_dump($res);
-                if($res['ErrNo'] == 0)
-                {
-                    $pswd->state = 0;
-                    $pswd->save();
-                }
+                $spare_pswd->state = 0;
+                $spare_pswd->save();
+                return $spare_pswd->password_id;
             }
         }
     }
@@ -130,10 +124,10 @@ class LockController extends Controller
     public function apiUpdatePassword()
     {
         $room_id = '58cff65e67df5d3251f0f356';
-        $password = '324156';
+        $password = '324157';
         $phonenumber = '13021941487';
-        $permission_begin = '1492707742';
-        $permission_end = '1492707800';
+        $permission_begin = '1492709809';
+        $permission_end = '1492709969';
 
         if(empty($room_id) || empty($password) || empty($phonenumber) || empty($permission_begin) || empty($permission_end))
         {
