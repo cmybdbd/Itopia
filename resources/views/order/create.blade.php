@@ -318,7 +318,25 @@
         $(function() {
             $("#tos").on('click',function(){
                 $(".tos-content").modal();
+            });
+            $("#useHour").parent().click(function(e){
+                $.ajax({
+                    url: '/updatePageView/byHour',
+                    type:'POST',
+                    data: {
+                        _token: $("meta[name='csrf-token']").attr('content')
+                    }
+                });
             })
+            $("#useNight").parent().click(function(e){
+                $.ajax({
+                    url: '/updatePageView/byNight',
+                    type:'POST',
+                    data: {
+                        _token: $("meta[name='csrf-token']").attr('content')
+                    }
+                });
+            });
             function showHumanDay(ts)
             {
                 return dateFormat(ts, "yyyy年mm月dd日");

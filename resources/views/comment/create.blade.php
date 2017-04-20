@@ -134,6 +134,7 @@
 @section('scripts')
     <script src="{{url('/js/starrr.js')}}"></script>
     <script>
+
         $(function () {
             var starNum = -1;
             idCommit =$("#commit");

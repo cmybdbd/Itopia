@@ -44,6 +44,8 @@ Route::group(['middleware' => 'auth'], function (){
 
     Route::post('/session/vcode','SMSController@storeCode');
     Route::post('/vcode/validate','SMSController@checkCode');
+
+    Route::post('/updatePageView/{page}', 'PageViewController@updatePageView');
     Route::get('test',function(){
         return session('dynCode');
     });

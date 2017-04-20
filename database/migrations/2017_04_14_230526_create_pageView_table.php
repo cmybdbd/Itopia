@@ -21,6 +21,8 @@ class CreatePageViewTable extends Migration
             $table->integer('comment');
             $table->integer('commentResult');
             $table->integer('orderList');
+            $table->integer('useHour');
+            $table->integer('useNight');
 
             $table->primary('curDate');
             $table->string('curDate');
