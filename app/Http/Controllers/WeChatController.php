@@ -45,7 +45,7 @@ class WeChatController extends Controller
             $u = User::saveNewUser($user->getOriginal());
         }
         \Illuminate\Support\Facades\Auth::login($u, true);
-        $_SESSION['target_url'] = '/itopia/home';
+        $_SESSION['target_url'] = '/home';
         return redirect('home');
         // 已经登录过
       //  $user = $_SESSION['wechat_user'];
