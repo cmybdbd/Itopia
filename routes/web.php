@@ -38,8 +38,12 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('/commentResult', 'CommentController@finish');
     Route::get('/orderList/{id}', 'OrderController@getOrderList');
     Route::get('/getOrderList', 'HomeController@orderList');
+
     Route::get('/manage/room', 'RoomController@manageRoom');
+    Route::post('/manage/room', 'RoomController@updateRoomInfo');
     Route::get('/manage/order', 'OrderController@manageOrder');
+
+
     Route::get('/idAuth', 'IDAuthController@IDauth');
 
     Route::post('/session/vcode','SMSController@storeCode');

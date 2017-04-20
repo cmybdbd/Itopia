@@ -40,6 +40,7 @@ class Room extends Model
         }
         else
         {
+            /*
             if($hour < 11)
             {
                 $time =  strtotime(date('Y-m-d 00:00:00',time()))+11*60*60;
@@ -56,8 +57,9 @@ class Room extends Model
                 ['isDay', '=', 1],
                 ['state', '>=', Constant::$ORDER_STATE['UNPAY']],
             ])->get();
-
-            return count($used);
+*/
+            //return count($used);
+            return ($this->nextTime() - time())<= 30*60;
         }
     }
     public function nextTime(){

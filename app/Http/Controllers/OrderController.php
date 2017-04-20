@@ -89,11 +89,14 @@ class OrderController extends Controller
     }
     function manageOrder()
     {
-        return view('manage.order')->withOrders(Order::with('hasRoom')
-            ->with('hasUser')
-        ->where([
-            ['state', '>', 2],
-        ])->get());
+        return view('manage.order')->with(
+            [
+
+                'orders' => Order::/*with('hasRoom','hasUser')
+                    ->*/where(
+                        'state', '>=', 2
+                    )->get(),
+                'rooms' => Room::where('state','<>',0)->get()]);
     }
     /*
      * show
@@ -221,31 +224,6 @@ class OrderController extends Controller
         $user =User::find($request->userId);
         $succ = Order::find($order);
 
-        /*
-                $order = new Order();
-                $order->userId = $request->userId;
-                $order->roomId =$request->roomId;
-                $order->date =  date('Y-m-d H:i:s',$request->date);
-                $order->startTime =  date('Y-m-d H:i:s',$request->startTime);
-                $order->endTime =  date('Y-m-d H:i:s',$request->endTime);
-                $order->duration =$request->duration;
-                $order->payNum = $request->payNum;
-
-                $existOrder = Order::where([
-                    ['userId', '=', $order->userId],
-                    ['roomId', '=', $order->roomId],
-                    ['state',  '=', Constant::$ORDER_STATE['UNPAY']],
-                ])->first();
-                if(!empty($existOrder))
-                {
-                    $order = $existOrder;
-                }
-                else
-                {
-                    $order->state = Constant::$ORDER_STATE['UNPAY'];
-                    $order->save();
-                }
-        */
         $json = '';
 
         if (!empty($succ))
