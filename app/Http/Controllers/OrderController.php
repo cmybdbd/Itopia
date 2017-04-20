@@ -166,8 +166,8 @@ class OrderController extends Controller
             DB::insert('insert into `orders` ' .
                 '(`userId`, `roomId`, `startDate`, `startTime`, `endTime`, `duration`, `price`,`isDay`, `state`, `id`, `updated_at`, `created_at`)' .
                 'select ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? from users ' .
-                'where ((select max(endTime) from orders where `isDay` = 1 and `state` > 0 and `roomId` = ?) is null or '.
-                ' (select max(endTime) from orders where `roomId` = ? and `isDay`=1 and `state` > 0) < ? )and id= ?',
+                'where ((select max(endTime) from orders where `isDay` = 1 and `state` > 3 and `roomId` = ?) is null or '.
+                ' (select max(endTime) from orders where `roomId` = ? and `isDay`=1 and `state` > 3) < ? )and id= ?',
                 [
                     $request->userId,
                     $request->roomId,
@@ -195,7 +195,7 @@ class OrderController extends Controller
             DB::insert('insert into `orders` ' .
                 '(`userId`, `roomId`, `startDate`, `startTime`, `endTime`, `duration`, `price`,`isDay`, `state`, `id`, `updated_at`, `created_at`)' .
                 'select ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? from users ' .
-                'where (select id from orders where `state` > 0 and `isDay`=0 and `roomId` = ? and `startDate` = ?) is null and id= ?',
+                'where (select id from orders where `state` > 3 and `isDay`=0 and `roomId` = ? and `startDate` = ?) is null and id= ?',
                 [
                     $request->userId,
                     $request->roomId,
