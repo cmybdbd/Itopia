@@ -44,8 +44,10 @@
                         @if($room->isUsing())
                             @if($room->nextTime() != 0)
                                 <span class="room-state b-color">可预约<span class="m-color">{{(date('H',$room->nextTime())== 11? '明早':'' ). date('H:i',$room->nextTime())}}</span>使用</span>
-                            @else
+                            @elseif(in_array(date('Y-m-d 00:00:00',\App\Utils\Utils::curNight()), json_decode($room->usingNight())))
                                 <span class="room-state b-color">今日已约满</span>
+                            @else
+                                <span class="room-state m-color">可预约包夜</span>
                             @endif
                         @else
                             <span class="room-state b-color">现在使用</span>

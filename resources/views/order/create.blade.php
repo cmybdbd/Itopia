@@ -597,6 +597,7 @@
             datePicker.on('picker.select', function (selectedVal, selectedIndex) {
                 dateTime.text(date[selectedIndex[0]].text.split(' ')[1])
                     .attr('data-content', date[selectedIndex[0]].value);
+
                 updatePrice(1);
             })
             function updateEndTime(){
@@ -608,7 +609,23 @@
                 if(page === 0)
                     $("#totalPrice").text((+durationTime.attr("data-content"))/(3600*1000) * (+$("#hourPrice").attr("data-content")) );
                 else
-                    $("#totalPrice").text($("#nightPrice").attr("data-content"));
+                    if(dateTime.attr('data-content') + dateFormat(new Date(),'dd') >= 27)
+                    {
+                        var pprice = 149;
+                        var roomId =$("#roomId").attr('data-content');
+                        if(roomId === 'ae50f8da-225e-11e7-b33a-00163e028324')
+                        {
+                            pprice = 179;
+                        }
+                        else if(roomId === 'ae50f8da-225e-11e7-b33b-00163e028324')
+                        {
+                            pprice = 159;
+                        }
+                        $("#totalPrice").text(pprice);
+                    }
+                    else {
+                        $("#totalPrice").text($("#nightPrice").attr("data-content"));
+                    }
             }
             function checkToPay(){
                 return $("#agreement").is(':checked') && $("#totalPrice").text() != undefined;
