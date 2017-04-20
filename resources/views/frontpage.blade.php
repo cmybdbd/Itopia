@@ -34,7 +34,7 @@
                         </div>
                     </div>
                     <div class="myrow"  style="justify-content: space-between">
-                        <span class="item">{{$room->address}}</span>
+                        <span class="item">{{$room->title}}</span>
                         <span class="room-state room-used {{$room->isUsing()? 'u-color':'m-color'}}" style="padding:0 2vw;border: 1px solid;border-radius: 3px;display:flex;flex-direction: row;justify-content: center">
                             {{$room->isUsing() ? '使用中':'可使用'}}
                         </span>
@@ -48,7 +48,7 @@
                                 <span class="room-state b-color">今日已约满</span>
                             @endif
                         @else
-                            <span class="room-state b-color">即时使用</span>
+                            <span class="room-state b-color">现在使用</span>
                         @endif
                     </div>
             </div>
