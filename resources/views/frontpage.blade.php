@@ -22,8 +22,16 @@
     <div class="content">
         @foreach($rooms as $key => $room)
             <div class="mybox roomItem" data-content="{{$room->id}}">
-                    <div class="myrow" style="margin-bottom: 1vh;display:block;text-align:center" >
-                        <img src="{{asset('storage/arch.jpg')}}" style="width: 100%" >
+                    <div class="myrow"  id="slide_{{$key}}" style="margin-bottom: 1vh;margin-left:auto;margin-right:auto;display:block;text-align:center;width: 300px;height: 200px;overflow:hidden;visibility:hidden;position:relative;top:0px;left:0px;" >
+                        <div data-u="slides" style="width: 300px;height: 200px; overflow:hidden;position:relative;top:0px;left:0px;">
+                            <?php $imgFiles = \Illuminate\Support\Facades\File::files('storage/room'.($key+1));?>
+                            @foreach($imgFiles as $img)
+                               <!-- <img src="{{asset('storage/arch.jpg')}}" style="width: 100%" >-->
+                               <div>
+                                   <img src="{{$img}}" data-u="image" alt="" width="300px">
+                               </div>
+                            @endforeach
+                        </div>
                     </div>
                     <div class="myrow"  style="justify-content: space-between">
                         <span class="item">{{$room->address}}</span>
@@ -188,8 +196,67 @@
     </style>
     @endsection
 @section('scripts')
+    <script src="{{url('js/jssor.slider.min.js')}}"></script>
     <script>
         $(function () {
+
+            var jssor_1_SlideshowTransitions = [
+                {
+                    $Duration:1000,
+                    x:-0.3,
+                    $During:{$Left:[0.3,0.7]},
+                    $Easing:{$Left:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},
+                    $Opacity:0
+                },
+                {
+                    $Duration:1000,
+                    x:0.3,
+                    $SlideOut:true,
+                    $Easing:{$Left:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},
+                    $Opacity:0
+                }
+            ];
+
+            var jssor_1_options = {
+                $AutoPlay: 1
+            };
+            var jssor_slider = [];
+            for (i =0 ;i< $(".roomItem").length;i++) {
+                jssor_slider[i] = new $JssorSlider$("slide_"+i, jssor_1_options);
+            }
+           // var jssor_2_slider = new $JssorSlider$("jssor_2", jssor_1_options);
+
+            /*responsive code begin*/
+            /*remove responsive code if you don't want the slider scales while window resizing*/
+            function ScaleSlider() {
+                var uload = false;
+                for(i=0; i< $(".roomItem").length;i++) {
+                    var refwidth = jssor_slider[i].$Elmt.parentNode.clientWidth;
+                    var refheight = jssor_slider[i].$Elmt.parentNode.clientHeight;
+                    if (refwidth) {
+                        if(refheight / refwidth > 1)
+                        {
+                            jssor_slider[i].$ScaleHeight(Math.min(refheight,200));
+                        }
+                        else
+                        {
+                            jssor_slider[i].$ScaleWidth(Math.min(refwidth,300));
+                        }
+                    }
+                    else {
+                        uload =true;
+                    }
+                }
+                if(uload)
+                    window.setTimeout(ScaleSlider, 30);
+            }
+            ScaleSlider();
+            $(window).bind("load", ScaleSlider);
+            $(window).bind("resize", ScaleSlider);
+            $(window).bind("orientationchange", ScaleSlider);
+
+
+
 
             $("#equipment").on('click',function () {
                 $(".equipment-content").modal();
@@ -369,6 +436,7 @@
                     'create/' + uid + '/' + $(this).attr('data-content')
             )
             });
+
         });
 
     </script>

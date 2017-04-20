@@ -82,8 +82,15 @@
         <div class="font-s b-color">
             您可以在微信公众号“查看我的地理位置”中获得精确导航
         </div>
-        <div class="myrow" style="margin-bottom: 1vh;display:block;text-align:center" >
-            <img src="{{asset('storage/arch.jpg')}}" style="width: 100%" >
+        <div class="myrow"  id="slide" style="margin-bottom: 1vh;margin-left:auto;margin-right:auto;display:block;text-align:center;width: 300px;height: 200px;overflow:hidden;visibility:hidden;position:relative;top:0px;left:0px;" >
+            <div data-u="slides" style="width: 300px;height: 200px; overflow:hidden;position:relative;top:0px;left:0px;">
+                <div>
+                    <img src="{{asset('storage/map/0.jpg')}}" data-u="image" alt="" width="300px">
+                </div>
+                <div>
+                    <img src="{{asset('storage/map/1.jpg')}}" data-u="image" alt="" width="300px">
+                </div>
+            </div>
         </div>
 
     </div>
@@ -169,8 +176,62 @@
     </div>
 @endsection
 @section('scripts')
+    <script src="{{url('js/jssor.slider.min.js')}}"></script>
     <script>
         $(function() {
+            var jssor_1_SlideshowTransitions = [
+                {
+                    $Duration:1000,
+                    x:-0.3,
+                    $During:{$Left:[0.3,0.7]},
+                    $Easing:{$Left:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},
+                    $Opacity:0
+                },
+                {
+                    $Duration:1000,
+                    x:0.3,
+                    $SlideOut:true,
+                    $Easing:{$Left:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},
+                    $Opacity:0
+                }
+            ];
+
+            var jssor_1_options = {
+                $AutoPlay: 1
+            };
+            var jssor_slider = [];
+                jssor_slider= new $JssorSlider$("slide", jssor_1_options);
+
+            // var jssor_2_slider = new $JssorSlider$("jssor_2", jssor_1_options);
+
+            /*responsive code begin*/
+            /*remove responsive code if you don't want the slider scales while window resizing*/
+            function ScaleSlider() {
+                var uload = false;
+                    var refwidth = jssor_slider.$Elmt.parentNode.clientWidth;
+                    var refheight = jssor_slider.$Elmt.parentNode.clientHeight;
+                    if (refwidth) {
+                        if(refheight / refwidth > 1)
+                        {
+                            jssor_slider.$ScaleHeight(Math.min(refheight,200));
+                        }
+                        else
+                        {
+                            jssor_slider.$ScaleWidth(Math.min(refwidth,300));
+                        }
+                    }
+                    else {
+                        uload =true;
+                    }
+                if(uload)
+                    window.setTimeout(ScaleSlider, 30);
+            }
+            ScaleSlider();
+            $(window).bind("load", ScaleSlider);
+            $(window).bind("resize", ScaleSlider);
+            $(window).bind("orientationchange", ScaleSlider);
+
+
 
 
             var gatepwd = $(".gatepwd>.pwd-group");
