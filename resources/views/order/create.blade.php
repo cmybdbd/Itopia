@@ -620,7 +620,7 @@
                         if (roomId === 'ae50f8da-225e-11e7-b33a-00163e028324') {
                             pprice = 179;
                         }
-                        else if (roomId === 'ae50f8da-225e-11e7-b33b-00163e028324') {
+                        else if (roomId === 'ae50f8da-225e-11e7-b33b-00163e028924') {
                             pprice = 159;
                         }
                         $("#totalPrice").text(pprice);
