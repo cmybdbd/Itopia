@@ -268,173 +268,186 @@
                 phoneN.focus();
             });
 
-            if(!$("#param .uphoneN").attr("data-content")) {
-                var wait = 60;
 
-                function time(o) {
-                    if (wait === 0) {
-                        o.removeAttribute("disabled");
-                        o.textContent = "获取验证码";
-                        wait = 60;
-                    } else {
-
-                        o.setAttribute("disabled", true);
-                        o.textContent = "重新发送(" + wait + ")";
-                        wait--;
-                        setTimeout(function () {
-                                time(o)
-                            },
-                            1000)
-                    }
-                }
-
-                //alert('no idnumber');
-                var inp0 = $("#inp0"),
-                    inp1 = $("#inp1"),
-                    inp2 = $("#inp2"),
-                    inp3 = $("#inp3");
-
-                validatePhone.modal('show');
-                $("#sendCode").on('click', function () {
-                    phone = phoneN.val();
-                    if (phone.match(/^\d{11}$/)) {
-                        strpol = '0123456789';
-                        pwd = '';
-                        for (i = 0; i < 4; i++) {
-                            pwd += strpol.charAt(Math.floor(Math.random() * 10));
-                        }
-                        param = {
-                            'mblNo': phone,
-                            'repVar': pwd + '|10|17302175859',
-                        };
-
-                        $.ajax({
-                            type: 'get',
-                            dataType: 'jsonp',
-                            jsonpCallback: 'callback',
-                            url: 'http://renthouse.wecash.net/itopia/checkphone.php?m=sendCode&' +
-                            'p=' + JSON.stringify(param),
-                            success: function (e) {
-                                console.log(e);
-                                inp0.focus();
-
-                                $.ajax({
-                                    type: 'POST',
-                                    url: '/session/vcode',
-                                    data:{
-                                        'code': pwd,
-                                        _token:$("meta[name='csrf-token']").attr('content')
-                                    },
-                                    success: function(e){
-                                        console.log(e);
-                                    }
-                                });
-                            }
-                        });
-                        time(this);
-                    }
-                    else {
-                        $("#phoneN").focus();
-                    }
-                });
-
-                inp0.bind('input', function () {
-                    if(inp0.val().match(/^\d$/))
-                        inp1.focus();
-                });
-                inp1.bind('input', function () {
-                    if(inp1.val().match(/^\d$/))
-                    inp2.focus();
-                });
-                inp2.bind('input', function () {
-                    if(inp2.val().match(/^\d$/))
-                    inp3.focus();
-                });
-                inp3.bind('input', function () {
-                    if (inp3.val().match(/^\d$/)) {
-                        $.ajax({
-                            url: '/vcode/validate',
-                            type:'POST',
-                            data:{
-                                'dynCode': inp0.val() + inp1.val() + inp2.val() + inp3.val(),
-                                'phone': phone,
-                                _token:$("meta[name='csrf-token']").attr('content')
-                            },
-                            success: function (e) {
-                                console.log(e);
-                                if (e.code == 200) {
-                                    $("#validatePhone").modal('hide');
-                                    validateID.modal('show');
-
-                                }
-                                else {
-                                    $(".errormsg").text('验证码有误');
-                                    setTimeout(function () {
-                                        $(".errormsg").text('');
-                                    }, 3000);
-                                    inp0.val('');
-                                    inp1.val('');
-                                    inp2.val('');
-                                    inp3.val('');
-                                    inp0.focus();
-                                }
-                            }
-                        })
-
-                    }
-                });
-            };
-            if(!$("#param .uidN").attr("data-content")) {
-                var validateID = $("#validateIdNumber");
-                validateID.on("shown.bs.modal", function(){
-                    $("#RealId").focus();
-                })
-                if($("#param .uphoneN").attr("data-content"))
-                    validateID.modal('show');
-                $("#validateID").on("click",function(){
-                    var RealName = $("#RealName").val();
-                    var RealId = $("#RealId").val();
-
-                    if(RealId.match(/^\d{17}\w$/)) {
-                        $.ajax({
-                            url: '/idAuth?name=' + RealName + "&id_card="+RealId,
-                            success:function(e){
-                                console.log(e);
-                                if(e.code == 200)
-                                {
-                                    validateID.modal('hide');
-                                }
-                                else
-                                {
-                                    validateID.modal('hide');
-                                    $("#idNumberError").modal('show');
-                                }
-                            }
-                        })
-                    }
-                    else
-                    {
-                        $("#RealId").attr('placeholder','请输入正确的身份证号')
-                            .val('')
-                            .focus();
-                    }
-                })
-                $("#idNumberError button").on("click",function(){
-                    $("#idNumberError").modal('hide');
-                    validateID.find('input').val('');
-                    validateID.modal('show');
-                })
-            }
             var uid = $("#param .uid").attr('data-content');
             $("#myOrder").on('click',function () {
                 window.location.href = window.location.href.replace('home','orderList/'+uid);
             });
             $(".roomItem").on('click', function () {
+                var t1 =false,t2=false;
+                if(!$("#param .uphoneN").attr("data-content")) {
+                    var wait = 60;
 
-                window.location.href = window.location.href.replace(
-                    'home',
-                    'create/' + uid + '/' + $(this).attr('data-content')
-            )
+                    function time(o) {
+                        if (wait === 0) {
+                            o.removeAttribute("disabled");
+                            o.textContent = "获取验证码";
+                            wait = 60;
+                        } else {
+
+                            o.setAttribute("disabled", true);
+                            o.textContent = "重新发送(" + wait + ")";
+                            wait--;
+                            setTimeout(function () {
+                                    time(o)
+                                },
+                                1000)
+                        }
+                    }
+
+                    //alert('no idnumber');
+                    var inp0 = $("#inp0"),
+                        inp1 = $("#inp1"),
+                        inp2 = $("#inp2"),
+                        inp3 = $("#inp3");
+
+                    validatePhone.modal('show');
+                    $("#sendCode").on('click', function () {
+                        phone = phoneN.val();
+                        if (phone.match(/^\d{11}$/)) {
+                            strpol = '0123456789';
+                            pwd = '';
+                            for (i = 0; i < 4; i++) {
+                                pwd += strpol.charAt(Math.floor(Math.random() * 10));
+                            }
+                            param = {
+                                'mblNo': phone,
+                                'repVar': pwd + '|10|17302175859',
+                            };
+
+                            $.ajax({
+                                type: 'get',
+                                dataType: 'jsonp',
+                                jsonpCallback: 'callback',
+                                url: 'http://renthouse.wecash.net/itopia/checkphone.php?m=sendCode&' +
+                                'p=' + JSON.stringify(param),
+                                success: function (e) {
+                                    console.log(e);
+                                    inp0.focus();
+
+                                    $.ajax({
+                                        type: 'POST',
+                                        url: '/session/vcode',
+                                        data:{
+                                            'code': pwd,
+                                            _token:$("meta[name='csrf-token']").attr('content')
+                                        },
+                                        success: function(e){
+                                            console.log(e);
+                                            $("#param .uphoneN").attr("data-content",phone);
+                                        }
+                                    });
+                                }
+                            });
+                            time(this);
+                        }
+                        else {
+                            $("#phoneN").focus();
+                        }
+                    });
+
+                    inp0.bind('input', function () {
+                        if(inp0.val().match(/^\d$/))
+                            inp1.focus();
+                    });
+                    inp1.bind('input', function () {
+                        if(inp1.val().match(/^\d$/))
+                            inp2.focus();
+                    });
+                    inp2.bind('input', function () {
+                        if(inp2.val().match(/^\d$/))
+                            inp3.focus();
+                    });
+                    inp3.bind('input', function () {
+                        if (inp3.val().match(/^\d$/)) {
+                            $.ajax({
+                                url: '/vcode/validate',
+                                type:'POST',
+                                data:{
+                                    'dynCode': inp0.val() + inp1.val() + inp2.val() + inp3.val(),
+                                    'phone': phone,
+                                    _token:$("meta[name='csrf-token']").attr('content')
+                                },
+                                success: function (e) {
+                                    console.log(e);
+                                    if (e.code == 200) {
+                                        $("#validatePhone").modal('hide');
+                                        validateID.modal('show');
+
+                                    }
+                                    else {
+                                        $(".errormsg").text('验证码有误');
+                                        setTimeout(function () {
+                                            $(".errormsg").text('');
+                                        }, 3000);
+                                        inp0.val('');
+                                        inp1.val('');
+                                        inp2.val('');
+                                        inp3.val('');
+                                        inp0.focus();
+                                    }
+                                }
+                            })
+
+                        }
+                    });
+                }
+                else{
+                    t1 =true;
+                };
+                if(!$("#param .uidN").attr("data-content")) {
+                    var validateID = $("#validateIdNumber");
+                    validateID.on("shown.bs.modal", function(){
+                        $("#RealId").focus();
+                    })
+                    if($("#param .uphoneN").attr("data-content"))
+                        validateID.modal('show');
+                    $("#validateID").on("click",function(){
+                        var RealName = $("#RealName").val();
+                        var RealId = $("#RealId").val();
+
+                        if(RealId.match(/^\d{17}\w$/)) {
+                            $.ajax({
+                                url: '/idAuth?name=' + RealName + "&id_card="+RealId,
+                                success:function(e){
+                                    console.log(e);
+                                    $("#param .uidN").attr("data-content", RealId);
+                                    if(e.code == 200)
+                                    {
+                                        validateID.modal('hide');
+                                    }
+                                    else
+                                    {
+                                        validateID.modal('hide');
+                                        $("#idNumberError").modal('show');
+                                    }
+                                }
+                            })
+                        }
+                        else
+                        {
+                            $("#RealId").attr('placeholder','请输入正确的身份证号')
+                                .val('')
+                                .focus();
+                        }
+                    })
+                    $("#idNumberError button").on("click",function(){
+                        $("#idNumberError").modal('hide');
+                        validateID.find('input').val('');
+                        validateID.modal('show');
+                    })
+                }
+                else
+                {
+                    t2 = true;
+                }
+                if(t1  && t2)
+                {
+                    window.location.href = window.location.href.replace(
+                        'home',
+                        'create/' + uid + '/' + $(this).attr('data-content')
+                    )
+                }
             });
 
         });
