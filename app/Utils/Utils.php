@@ -98,7 +98,7 @@ class Utils{
     {
         if($sort)
         {
-            sort($arr);
+            sort($arr, SORT_STRING);
         }
         $sig="";
         foreach ($arr as $var)
