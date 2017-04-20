@@ -80,7 +80,7 @@
             -moz-background-image: -moz-linear-gradient(left, transparent ,var(--used-color) 20%, var(--used-color) 80%, transparent 100%);
         }
         .mybtn-group{
-            width: 100%;
+            width: 99%;
             height: 12vh;
         }
         .mybtn-group button, .mybtn-group div{
@@ -116,6 +116,7 @@
         }
         .mybtn-group button:last-child::after, .mybtn-group div:last-child::after {
             content:"";
+            background-image: none;
         }
         #param{
             display: none;
