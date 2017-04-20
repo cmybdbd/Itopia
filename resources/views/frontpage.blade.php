@@ -180,7 +180,7 @@
             text-align: center;
         }
         span.item{
-            width: 16em;
+            width: 15em;
         }
         span.room-state{
             height: 1.6em;

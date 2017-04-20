@@ -80,7 +80,7 @@
             地址：{{$order->hasRoom->address}}
         </div>
         <div class="font-s b-color">
-            您可以在微信公众号“查看我的地理位置”中精确导航
+            您可以在微信公众号“查看我的地理位置”中获得精确导航
         </div>
         <div class="myrow" style="margin-bottom: 1vh;display:block;text-align:center" >
             <img src="{{asset('storage/arch.jpg')}}" style="width: 100%" >
