@@ -92,8 +92,7 @@ class OrderController extends Controller
         return view('manage.order')->with(
             [
 
-                'orders' => Order::/*with('hasRoom','hasUser')
-                    ->*/where(
+                'orders' => Order::where(
                         'state', '>=', 2
                     )->get(),
                 'rooms' => Room::where('state','<>',0)->get()]);
