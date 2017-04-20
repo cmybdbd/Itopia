@@ -80,7 +80,7 @@
                 </div>
                 <div class="" style="padding-bottom: 2.5em;display:flex; justify-content: space-around;">
                     @for($i = 0; $i < 4; $i ++)
-                        <input type="number" id="inp{{$i}}" style="text-align: center;font-size:3em; width: 1.4em;">
+                        <input type="number" id="inp{{$i}}" style="text-align: center;font-size:2em; width: 1.6em;">
                     @endfor
                 </div>
                 <p class="errormsg" style="color: red; position: absolute;left:1em;bottom: 0em;"></p>
