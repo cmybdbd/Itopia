@@ -252,7 +252,7 @@ class OrderController extends Controller
         {
             $pay =new PayController();
             $json = $pay->generateOrder($order,
-                '0.01',
+                $request->price,
                 $user->id,
                 $user->name,
             $user->idnumber,
