@@ -11,7 +11,7 @@
                 <p class="input-group-addon" style="position: absolute;opacity:0">
                     <span style="opacity: 0;">12-31</span>
                 </p>
-                <input type="text" style="width:4em" value="{{date('mm-dd',time())}}">
+                <input type="text" style="width:4em" id="time" value="{{date('m-d',time())}}">
             </div>
             <ul class="nav nav-pills" roll="tablist">
                 <li role="presentation" class="active" data-content="all">
@@ -65,7 +65,7 @@
                     </div>
                     <div>
                         <span>房间：</span><span>{{$order->hasRoom->title}}</span>
-                        <span>预约时间：</span><span>{{$order->startTime}}</span>
+                        <span>预约时间：</span><span id="startTime">{{$order->startTime}}</span>
                     </div>
                     <div>
                         <span>时长：</span><span>{{$order->duration}}小时</span>
@@ -74,8 +74,9 @@
                     <div>
                         <span>密码：</span><span>{{$order->passwd}}</span>
                     </div>
+                    <hr class="mysplit-color">
                 </div>
-                <hr class="mysplit-color">
+
             @endforeach
         </div>
     </div>
@@ -89,6 +90,11 @@
             opacity: 0;
             position: absolute;
         }
+        .hideTime{
+            visibility: hidden;
+            position:absolute;
+            top: -10em;
+        }
     </style>
 @endsection
 @section('scripts')
@@ -100,6 +106,23 @@
                     format: 'MM-DD'
                 }
             );
+            $("#date").on("dp.change",function(){
+                console.log($("#time").val());
+                time = $("#time").val();
+                list = $(".order");
+                list.removeClass('hideTime');
+                for (i=0;i<list.length;i++)
+                {
+                    console.log(new RegExp(time,'g'));
+                    if(!$(list[i]).find("#startTime").text().match(new RegExp(time,'g')))
+                    {
+                        console.log(i);
+                        $(list[i]).addClass('hideTime');
+                    }
+                }
+
+            })
+
             $(".room").click(function(){
                 console.log('click room');
 

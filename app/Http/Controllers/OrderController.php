@@ -94,7 +94,7 @@ class OrderController extends Controller
 
                 'orders' => Order::where(
                         'state', '>=', 2
-                    )->get(),
+                    )->orderBy('startTime','asc')->get(),
                 'rooms' => Room::where('state','<>',0)->get()]);
     }
     /*
