@@ -363,6 +363,7 @@
             if(startts == 0)
             {
                 $("#useNight").click();
+                //updatePrice(1);
                 $("#useHour").parent().click(function(e){
                     e.preventDefault();
                     return false;
@@ -393,7 +394,14 @@
             startTime.text((istomorrow?'明天 ':'今天 ')+ showHumanHour(startts))
                 .attr("data-content", startts);
             updateEndTime();
-            updatePrice(0);
+            if($("#useNight").parent().hasClass('active'))
+            {
+                updatePrice(1);
+            }
+            else
+            {
+                updatePrice(0);
+            }
 
             var daytime = [{
                 text: '今天',
