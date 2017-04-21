@@ -609,12 +609,15 @@
                 if(page === 0)
                     $("#totalPrice").text((+durationTime.attr("data-content"))/(3600*1000) * (+$("#hourPrice").attr("data-content")) );
                 else {
-                    $t = dateTime.attr('data-content');
-                    if($t > 7)
+                    t = + dateTime.attr('data-content');
+                    console.log('t==='+t);
+                    if(t > 7)
                     {
-                        $t = ($t - new Date().getTime()/1000|0)/ (24*60*60);
+                        t = (t - new Date().getTime()/1000|0)/ (24*60*60);
                     }
-                    if ($t + dateFormat(new Date(), 'dd') >= 27) {
+                    console.log('t==='+t);
+                    if (+ dateFormat(new Date(), 'dd') +t >= 27) {
+                        console.log('t+==='+(+ dateFormat(new Date(), 'dd')+t));
                         var pprice = 149;
                         var roomId = $("#roomId").attr('data-content');
                         if (roomId === 'ae50f8da-225e-11e7-b33a-00163e028324') {
