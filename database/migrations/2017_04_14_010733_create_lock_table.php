@@ -20,6 +20,7 @@ class CreateLockTable extends Migration
             $table -> string('room_id');
             $table -> string('password_id');
             $table -> string('password', 6);
+            $table -> smallInteger('state');
             $table -> timestamp('permission_begin')->nullable();
             $table -> timestamp('permission_end')->nullable();
 //            $table -> integer('state');

@@ -84,54 +84,50 @@ class LockController extends Controller
         return $ret;
     }
 
-    public function updatePassword($room_id, $password, $phonenumber, $permission_begin, $permission_end)
+    private function deleteSparePasword($room_id)
     {
-
-        $query_url = '/update_password';
-        $lock_password = Lock::find_spare_password($room_id);
-        if(empty($lock_password))
+        $query_url = $this->api_url.'/delete_password';
+        $spare_pswds = Lock::where([
+            ['room_id', '=', $room_id],
+            ['permission_end', '<', date('Y-m-d H:i:s', time())],
+            ['state', '=', 1]
+        ]);
+        if($spare_pswds->count() > 0)
         {
-            $ret = $this->addPassword($room_id, $password, $phonenumber, $permission_begin, $permission_end);
-        }
-        else {
+            $spare_pswd = $spare_pswds->first();
             $params = array(
-                "access_token" => $this->access_token(),
-                "home_id" => $this->home_id,
-                "room_id" => $room_id,
-                "is_send_location" => true,
-                "password_id" => $lock_password->password_id,
-                "password" => $password,
-                "permission_begin" => $permission_begin,
-                "permission_end" => $permission_end,
-                'phonenumber' => $phonenumber
+                'room_id' => $room_id,
+                'access_token' => $this->access_token(),
+                'home_id' => $this->home_id,
+                'password_id' => $spare_pswd->password_id
             );
-
             $res = ApiHandle::httpPostJson($query_url, $params);
             $res = json_decode($res, true);
-            if ($res['ErrNo'] != 0) {
-                $ret = array(
-                    'code' => Constant::$STATUS_CODE['FAIL_UPDATE_PASSWORD'],
-                    'content' => $res
-                );
-            }
-            else {
-                $lock_password->update_password($password, $permission_begin, $permission_end);
-                $ret = array(
-                    'code' => Constant::$STATUS_CODE['OK'],
-                    'content' => "更新密码成功"
-                );
+            if($res['ErrNo'] == 0)
+            {
+                $spare_pswd->state = 0;
+                $spare_pswd->save();
+                return $spare_pswd->password_id;
             }
         }
+    }
+
+    public function updatePassword($room_id, $password, $phonenumber, $permission_begin, $permission_end)
+    {
+        $this->deleteSparePasword($room_id);
+        $ret = $this->addPassword($room_id, $password, $phonenumber, $permission_begin, $permission_end);
         return $ret;
     }
 
+
+    /*fortest*/
     public function apiUpdatePassword()
     {
-        $room_id = $_GET['room_id'];
-        $password = $_GET['password'];
-        $phonenumber = $_GET['phonenumber'];
-        $permission_begin = $_GET['permission_begin'];
-        $permission_end = $_GET['permission_end'];
+        $room_id = '58cff65e67df5d3251f0f356';
+        $password = '324157';
+        $phonenumber = '13021941487';
+        $permission_begin = '1492709809';
+        $permission_end = '1492709969';
 
         if(empty($room_id) || empty($password) || empty($phonenumber) || empty($permission_begin) || empty($permission_end))
         {
