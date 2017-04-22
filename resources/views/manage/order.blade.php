@@ -90,7 +90,7 @@
             opacity: 0;
             position: absolute;
         }
-        .hideTime{
+        .hideDate{
             visibility: hidden;
             position:absolute;
             top: -10em;
@@ -110,14 +110,14 @@
                 console.log($("#time").val());
                 time = $("#time").val();
                 list = $(".order");
-                list.removeClass('hideTime');
+                list.removeClass('hideDate');
                 for (i=0;i<list.length;i++)
                 {
                     console.log(new RegExp(time,'g'));
                     if(!$(list[i]).find("#startTime").text().match(new RegExp(time,'g')))
                     {
                         console.log(i);
-                        $(list[i]).addClass('hideTime');
+                        $(list[i]).addClass('hideDate');
                     }
                 }
 
