@@ -2,23 +2,27 @@
 @section('style')
     <style>
         .nav-pills > li.active{
-            border: 1px var(--main-color) solid;
+            /*border: 1px var(--main-color) solid;*/
+            border: 1px #1dccb8 solid;
             border-radius: 4px;
             box-shadow: 0 1px 10px #eeeeee;
         }
         .nav-pills > li.active > a{
-            color: var(--main-color) !important;
+            /*color: var(--main-color) !important;*/
+            color: #1dccb8; !important;
             background: transparent !important;
         }
         .nav-pills > li{
             width: 44%;
 
-            border: 1px var(--used-color) solid;
+            /*border: 1px var(--used-color) solid;*/
+            border: 1px #1dccb8 solid;
             border-radius: 4px;
             box-shadow: 0 1px 10px #eeeeee;
         }
         .nav-pills > li > a{
-            color: var(--used-color);
+            /*color: var(--used-color);*/
+            color: #cccccc;
             background: transparent !important;
         }
         .nav-pills > li >a >div{
@@ -55,7 +59,8 @@
             top: 0.2em;
             left: -1px;
             background: white;
-            border: 1px solid var(--b-font-color);
+            /*border: 1px solid var(--b-font-color);*/
+            border: 1px solid #777777;
             border-radius:5px;
         }
         .cbox label:after{
@@ -67,7 +72,8 @@
             background: transparent;
             top: 0.22em;
             left: 0.15em;
-            border: 1px solid var(--main-color);
+            /*border: 1px solid var(--main-color);*/
+            border: 1px solid #1dccb8;
             border-top: none;
             border-right: none;
             transform:rotate(-45deg);
@@ -80,7 +86,8 @@
             display: flex;
             align-items:center;
             margin-left:0.5em;
-            color: var(--used-color)
+            /*color: var(--used-color)*/
+            color: #cccccc;
         }
     </style>
 @endsection
@@ -161,7 +168,7 @@
         </div>
         <div class="mybox selectPanel">
             <span>总计</span>
-            <div class="present" style="color: var(--price-color);flex-grow:1">
+            <div class="present" style="color: #ff0000;flex-grow:1">
                 <span id="totalPrice"></span>元
             </div>
         </div>
@@ -675,6 +682,7 @@
                     console.log('temptime='+temptime);
                     if(!$('#byHour').hasClass('active'))
                     {
+                        // night
                         temptime = tomorrowts + dateTime.attr('data-content') * 24*60*60*1000;
                         data = {
                             _token: $("meta[name='csrf-token']").attr('content'),
@@ -682,7 +690,7 @@
                             'roomId': $("#roomId").attr('data-content'),
                             'startTime': (temptime-30*60*1000)/1000|0,
                             'endTime'  : (temptime+21*30*60*1000)/1000|0,
-                            'duration' : +durationTime.attr('data-content')/3600000,
+                            'duration' : 11,//+durationTime.attr('data-content')/3600000,
                             'price'   : +($('#totalPrice').text()),
                             'date'     : temptime /1000|0,
                             'isDay'    : $('#byHour').hasClass('active') ? 1:0

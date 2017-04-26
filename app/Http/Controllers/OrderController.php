@@ -232,7 +232,7 @@ class OrderController extends Controller
                 $request->price,
                 $user->id,
                 $user->name,
-            $user->idnumber,
+                $user->idnumber,
                 'info',
                 $user->phonenumber
             );

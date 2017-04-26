@@ -12,10 +12,10 @@
             border-radius: 3px;
         }
         .room-touse{
-            color: var(--main-color);
+            color: #1dccb8;
         }
         .room-used{
-            color: var(--used-color);
+            color: #cccccc;
         }
     </style>
 @endsection

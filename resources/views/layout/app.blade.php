@@ -35,10 +35,10 @@
             justify-content: center;
         }
         .m-color {
-            color: var(--main-color);
+            color: #1dccb8;
         }
         .u-color{
-            color: var(--used-color);
+            color: #cccccc;
         }
         .font-b {
             font-size: 1.4em;
@@ -50,10 +50,10 @@
             font-size: 0.85em;
         }
         .b-color {
-            color: var(--b-font-color);
+            color: #777777;
         }
         .f-color {
-            color: var(--f-font-color);
+            color: #000000;
         }
         .custom-textarea{
             resize: none;
@@ -68,15 +68,18 @@
             margin-top: 0;
             margin-bottom: 1em;
             height: 1px;
-            background-image: -webkit-gradient(linear,0 0, 100% 0 ,from(transparent), to(transparent),color-stop(20%, var(--main-color)) , color-stop(80%, var(--main-color)));
+            /*background-image: -webkit-gradient(linear,0 0, 100% 0 ,from(transparent), to(transparent),color-stop(20%, var(--main-color)) , color-stop(80%, var(--main-color)));*/
+            background-image: -webkit-gradient(linear,0 0, 100% 0 ,from(transparent), to(transparent),color-stop(20%,  #1dccb8) , color-stop(80%,  #1dccb8));
             -moz-background-image: -moz-linear-gradient(left, transparent ,var(--main-color) 20%, var(--main-color) 80%, transparent 100%);
+
         }
         hr.mysplit {
             border: 0;
             margin-top: 0;
             margin-bottom: 1em;
             height: 1px;
-            background-image: -webkit-gradient(linear,0 0, 100% 0 ,from(transparent), to(transparent),color-stop(20%, var(--used-color)) , color-stop(80%, var(--used-color)));
+            /*background-image: -webkit-gradient(linear,0 0, 100% 0 ,from(transparent), to(transparent),color-stop(20%, var(--used-color)) , color-stop(80%, var(--used-color)));*/
+            background-image: -webkit-gradient(linear,0 0, 100% 0 ,from(transparent), to(transparent),color-stop(20%, #cccccc) , color-stop(80%, #cccccc));
             -moz-background-image: -moz-linear-gradient(left, transparent ,var(--used-color) 20%, var(--used-color) 80%, transparent 100%);
         }
         .mybtn-group{
@@ -112,7 +115,8 @@
             right: -1px;
             width: 1px;
             height: 84%;
-            background-image: -webkit-gradient(linear,0 0, 0 100% ,from(transparent), to(transparent),color-stop(20%, var(--main-color)) , color-stop(80%, var(--main-color)));
+            /*background-image: -webkit-gradient(linear,0 0, 0 100% ,from(transparent), to(transparent),color-stop(20%, var(--main-color)) , color-stop(80%, var(--main-color)));*/
+            background-image: -webkit-gradient(linear,0 0, 0 100% ,from(transparent), to(transparent),color-stop(20%, #1dccb8) , color-stop(80%, #1dccb8));
         }
         .mybtn-group button:last-child::after, .mybtn-group div:last-child::after {
             content:"";

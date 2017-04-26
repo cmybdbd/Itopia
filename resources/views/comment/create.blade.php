@@ -8,7 +8,7 @@
         }
         .starrr  a{
             font-size:3em;
-            color: var(--main-color);
+            color : #1dccb8;
         }
         .mainTag{
             display: none;
@@ -18,7 +18,8 @@
         .mainTag p{
             display: flex;
             align-items: center;
-            border: 1px solid var(--used-color);
+            /*border: 1px solid var(--used-color);*/
+            border: 1px solid #1dccb8;
             border-radius: 10px;
             line-height: 1.5em;
             padding: 0.4em 1em;
@@ -38,7 +39,8 @@
         .tag p{
             font-size: 0.8em;
             display: inline-block;
-            border: 1px solid var(--used-color);
+            /*border: 1px solid var(--used-color);*/
+            border: 1px solid #cccccc;
             border-radius: 150px;
             line-height: 1.2em;
             text-align: center;
@@ -47,8 +49,10 @@
             width: 30%;
         }
         p.selected{
-            border-color: var(--main-color);
-            background-color: var(--main-color);
+            /*border-color: var(--main-color);
+            background-color: var(--main-color);*/
+            border-color: #1dccb8;
+            background-color: #1dccb8;
             color: white;
         }
     </style>
