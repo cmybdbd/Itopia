@@ -622,7 +622,9 @@
             }
             function updatePrice(page) {
                 if(page === 0)
+                {
                     $("#totalPrice").text((+durationTime.attr("data-content"))/(3600*1000) * (+$("#hourPrice").attr("data-content")) );
+                }
                 else {
                     t = + dateTime.attr('data-content');
                     console.log('t==='+t);
@@ -641,15 +643,19 @@
                         else if (roomId === 'ae50f8da-225e-11e7-b33b-00163e028924') {
                             pprice = 159;
                         }
-                        $("#totalPrice").text(pprice);
+                        if(dateTime.text() !== "") {
+                            $("#totalPrice").text(pprice);
+                        }
                     }
                     else {
-                        $("#totalPrice").text($("#nightPrice").attr("data-content"));
+                        if(dateTime.text() !== "") {
+                            $("#totalPrice").text($("#nightPrice").attr("data-content"));
+                        }
                     }
                 }
             }
             function checkToPay(){
-                return $("#agreement").is(':checked') && $("#totalPrice").text() != undefined;
+                return $("#agreement").is(':checked') && $("#totalPrice").text() != "";
             }
             $("#useHour").click(function(){
                 updatePrice(0);
@@ -737,7 +743,8 @@
 
                         },
                         error: function (e){
-                            alert(e.responseText);
+                            //alert(e.responseText);
+                            alert("您还没有选择使用时间哦～");
                             //console.log(e.responseText);
                         }
                     });
