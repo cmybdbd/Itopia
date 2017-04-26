@@ -9,14 +9,14 @@
         }
         .nav-pills > li.active > a{
             /*color: var(--main-color) !important;*/
-            color: #1dccb8; !important;
+            color: #1dccb8 !important;
             background: transparent !important;
         }
         .nav-pills > li{
             width: 44%;
 
             /*border: 1px var(--used-color) solid;*/
-            border: 1px #1dccb8 solid;
+            border: 1px #cccccc solid;
             border-radius: 4px;
             box-shadow: 0 1px 10px #eeeeee;
         }
