@@ -31,7 +31,7 @@ class Constant
     public static $ORDER_STATE = array(
         'REMOVE'   => 0,
         'FAILED'   => 1,
-        'USED'     => 2,
+        'HISTORY'  => 2,
         'COMPLETE' => 3,
         'UNPAY'    => 4,
         'TOUSE'    => 5,

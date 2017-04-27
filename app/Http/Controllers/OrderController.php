@@ -93,9 +93,23 @@ class OrderController extends Controller
             [
 
                 'orders' => Order::where(
-                        'state', '>=', 2
+                        'state', '>=', Constant::$ORDER_STATE['HISTORY']
                     )->orderBy('startTime','asc')->get(),
                 'rooms' => Room::where('state','<>',0)->get()]);
+    }
+    function getAnotherOrderList()
+    {
+        return view('manage.anotherOrder')->with(
+            [
+                'orders' => Order::where(
+                    [
+                        ['state', '>=', Constant::$ORDER_STATE['COMPLETE']],
+                        ['endTime', '<=', date('Y-m-d H:i:s', time()+ 60*60)],
+                        ['endTime', '>=', date('Y-m-d H:i:s', time()- 60*60)]
+                        ]
+                )->orderBy('endTime', 'asc')-> get()
+            ]
+        );
     }
     /*
      * show
@@ -257,5 +271,13 @@ class OrderController extends Controller
         ]);
         $oid = $request->oid;
         Order::find($oid)->update(['state'=> Constant::$ORDER_STATE['COMPLETE']]);
+    }
+    function markOrderHistory(Request $request)
+    {
+        $this->validate($request,[
+            'oid' => 'required'
+        ]);
+        $oid = $request->oid;
+        Order::find($oid)->update(['state'=> Constant::$ORDER_STATE['HISTORY']]);
     }
 }

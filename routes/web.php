@@ -42,6 +42,8 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('/manage/room', 'RoomController@manageRoom');
     Route::post('/manage/room', 'RoomController@updateRoomInfo');
     Route::get('/manage/order', 'OrderController@manageOrder');
+    Route::get('/manage/anotherOrder', 'OrderController@getAnotherOrderList');
+    Route::post('/manage/anotherOrder', 'OrderController@markOrderHistory');
 
 
     Route::get('/idAuth', 'IDAuthController@IDauth');
