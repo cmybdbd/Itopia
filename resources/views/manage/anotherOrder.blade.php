@@ -10,9 +10,11 @@
                         <span>房间：</span><span>{{$order->hasRoom->title}}</span>
                         <span>结束时间：</span><span id="endTime">{{$order->endTime}}</span>
                     </div>
+                    @if($order->state == 3)
                     <div>
                         <button class="btn btn-block btn-default conf m-color">确认</button>
                     </div>
+                    @endif
                     <hr class="mysplit-color" style="margin: 2vh 0">
                 </div>
 
