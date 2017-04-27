@@ -105,7 +105,7 @@ class OrderController extends Controller
                     [
                         ['state', '>=', Constant::$ORDER_STATE['HISTORY']],
                         ['endTime', '<=', date('Y-m-d H:i:s', time()+ 60*60)],
-                        ['endTime', '>=', date('Y-m-d H:i:s', time()- 60*60)]
+                        ['endTime', '>=', date('Y-m-d H:i:s', time()- 24*20*60*60)]
                         ]
                 )->orderBy('state', 'desc')->orderBy('endTime', 'asc')-> get()
             ]
