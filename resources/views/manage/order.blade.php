@@ -64,6 +64,9 @@
                         <span>身份证：</span><span>{{$order->hasUser['idnumber']}}</span>
                     </div>
                     <div>
+                        <span>手机号：</span><span>{{$order->hasUser['phonenumber']}}</span>
+                    </div>
+                    <div>
                         <span>房间：</span><span>{{$order->hasRoom->title}}</span>
                         <span>预约时间：</span><span id="startTime">{{$order->startTime}}</span>
                     </div>
