@@ -103,11 +103,11 @@ class OrderController extends Controller
             [
                 'orders' => Order::where(
                     [
-                        ['state', '>=', Constant::$ORDER_STATE['COMPLETE']],
+                        ['state', '>=', Constant::$ORDER_STATE['HISTORY']],
                         ['endTime', '<=', date('Y-m-d H:i:s', time()+ 60*60)],
                         ['endTime', '>=', date('Y-m-d H:i:s', time()- 60*60)]
                         ]
-                )->orderBy('endTime', 'asc')-> get()
+                )->orderBy('state', 'desc')->orderBy('endTime', 'asc')-> get()
             ]
         );
     }

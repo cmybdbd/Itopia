@@ -135,7 +135,7 @@
                 $(".order").addClass('hideRoom');
                 console.log($(this).parent().attr('data-content') );
                 if($(this).parent().attr('data-content') != 'all')
-                    $(".order[roomId='"+$(this).parent().attr("data-content")+"'").removeClass('hideRoom');
+                    $(".order[roomId='"+$(this).parent().attr("data-content")+"']").removeClass('hideRoom');
                 else
                 {
                     $(".order").removeClass('hideRoom');
