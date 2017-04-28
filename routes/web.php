@@ -19,7 +19,7 @@ Route::get('/oauth_callback', 'WeChatController@call_back');
 Route::get('/payment/callback', 'WeChatController@payment_call_back');
 Route::get('/server', 'WeChatController@check_server');
 
-
+Route::get('/manage/order', 'OrderController@manageOrder');
 Route::group(['middleware' => 'auth'], function (){
 
     Route::post('/order/create', 'OrderController@storeOrder');
