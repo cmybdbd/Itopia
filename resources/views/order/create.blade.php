@@ -747,6 +747,7 @@
                     {
                         dateTime.text(date[i].text.split(' ')[1])
                             .attr('data-content', date[i].value);
+                        updatePrice(1);
                     }
                 }
             }
