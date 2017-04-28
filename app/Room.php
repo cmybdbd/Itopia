@@ -59,7 +59,7 @@ class Room extends Model
             ])->get();
 */
             //return count($used);
-            return ($this->nextTime() - time())>= 30*60;
+            return ($this->nextTime() - time())>= 30*60 || $this->nextTime() == 0;
         }
     }
     public function nextTime(){
