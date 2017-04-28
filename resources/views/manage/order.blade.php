@@ -11,7 +11,7 @@
                 <p class="input-group-addon" style="position: absolute;opacity:0">
                     <span style="opacity: 0;">12-31</span>
                 </p>
-                <input type="text" style="width:4em" id="time" value="{{date('m-d',time())}}">
+                <input type="text" style="width:4em" id="time" value="时间">
             </div>
             <ul class="nav nav-pills" roll="tablist">
                 <li role="presentation" class="active" data-content="all">
