@@ -104,6 +104,7 @@ class OrderController extends Controller
                 'orders' => Order::where(
                     [
                         ['state', '>=', Constant::$ORDER_STATE['COMPLETE']],
+                        ['payNum', '<>', ''],
                         ['endTime', '<=', date('Y-m-d 23:30:00', time())],
                         ['endTime', '>=', date('Y-m-d 00:00:00', time())]
                         ]
