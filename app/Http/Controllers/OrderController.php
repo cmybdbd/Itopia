@@ -103,7 +103,7 @@ class OrderController extends Controller
             [
                 'orders' => Order::where(
                     [
-                        ['state', '>=', Constant::$ORDER_STATE['HISTORY']],
+                        ['state', '>=', Constant::$ORDER_STATE['COMPLETE']],
                         ['endTime', '<=', date('Y-m-d H:i:s', time()+ 60*60)],
                         ['endTime', '>=', date('Y-m-d H:i:s', time()- 60*60)]
                         ]

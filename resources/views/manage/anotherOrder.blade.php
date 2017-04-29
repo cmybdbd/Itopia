@@ -10,18 +10,15 @@
                         <span>房间：</span><span>{{$order->hasRoom->title}}</span>
                     </div>
                     <div>
-                        @if($order->state == \App\Utils\Constant::$ORDER_STATE['COMPLETE'])
-                            <span>结束时间：</span><span id="endTime">已结束</span>
-                        @else
+
                             <span>结束时间：</span><span id="endTime">{{$order->endTime}}</span>
-                        @endif
-                        @if($order->state == \App\Utils\Constant::$ORDER_STATE['COMPLETE'])
+
+                        @if($order->state == 3)
                             <button class="btn btn-default conf m-color">确认</button>
                         @endif
                     </div>
                     <hr class="mysplit-color" style="margin: 2vh 0">
                 </div>
-
             @endforeach
         </div>
     </div>
@@ -72,10 +69,7 @@
                             }
                         }
                     );
-                })
-            /*
-
-*/
-        })
+                });
+        });
     </script>
 @endsection

@@ -35,7 +35,6 @@ class Constant
         'UNPAY'    => 4,
         'TOUSE'    => 5,
         'USING'    => 6,
-
         'HISTORY'  => 10,
 
     );
