@@ -99,6 +99,11 @@ class OrderController extends Controller
     }
     function getAnotherOrderList()
     {
+        Order::where([
+            ['state','<=',Constant::$ORDER_STATE['USING']],
+            ['state','>=',Constant::$ORDER_STATE['TOUSE']],
+            ['endTime', '<=', date('Y-m-d H:i:s', time())]
+        ])->update(['state'=>Constant::$ORDER_STATE['COMPLETE']]);
         return view('manage.anotherOrder')->with(
             [
                 'orders' => Order::where(
