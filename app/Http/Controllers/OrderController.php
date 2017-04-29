@@ -107,7 +107,7 @@ class OrderController extends Controller
                         ['endTime', '<=', date('Y-m-d H:i:s', time()+ 60*60)],
                         ['endTime', '>=', date('Y-m-d H:i:s', time()- 60*60)]
                         ]
-                )->orderBy('state', 'asc')->orderBy('endTime', 'asc')-> get()
+                )->orderBy('state', 'desc')->orderBy('endTime', 'asc')-> get()
             ]
         );
     }
