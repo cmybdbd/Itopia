@@ -93,7 +93,7 @@ class OrderController extends Controller
             [
 
                 'orders' => Order::where(
-                        'state', '>=', Constant::$ORDER_STATE['HISTORY']
+                        'state', '>=', Constant::$ORDER_STATE['COMPLETE']
                     )->orderBy('startTime','asc')->get(),
                 'rooms' => Room::where('state','<>',0)->get()]);
     }
