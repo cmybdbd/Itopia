@@ -31,11 +31,12 @@ class Constant
     public static $ORDER_STATE = array(
         'REMOVE'   => 0,
         'FAILED'   => 1,
-        'HISTORY'  => 2,
         'COMPLETE' => 3,
         'UNPAY'    => 4,
         'TOUSE'    => 5,
         'USING'    => 6,
+
+        'HISTORY'  => 10,
 
     );
     public static $WECHAT_PARAM = array(
