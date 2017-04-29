@@ -104,8 +104,8 @@ class OrderController extends Controller
                 'orders' => Order::where(
                     [
                         ['state', '>=', Constant::$ORDER_STATE['COMPLETE']],
-                        ['endTime', '<=', date('Y-m-d H:i:s', time()+ 60*60)],
-                        ['endTime', '>=', date('Y-m-d H:i:s', time()- 60*60)]
+                        ['endTime', '<=', date('Y-m-d 23:30:00', time())],
+                        ['endTime', '>=', date('Y-m-d 00:00:00', time())]
                         ]
                 )->orderBy('state', 'asc')->orderBy('endTime', 'asc')-> get()
             ]
