@@ -10,11 +10,8 @@
                         <span>房间：</span><span>{{$order->hasRoom->title}}</span>
                     </div>
                     <div>
-                        @if($order->state == \App\Utils\Constant::$ORDER_STATE['COMPLETE'])
-                            <span>结束时间：</span><span id="endTime">已结束</span>
-                        @else
                             <span>结束时间：</span><span id="endTime">{{$order->endTime}}</span>
-                        @endif
+                            <span>{{$order->state == \App\Utils\Constant::$ORDER_STATE['COMPLETE']? '已结束':''}}</span>
                         @if($order->state == \App\Utils\Constant::$ORDER_STATE['COMPLETE'])
                             <button class="btn btn-default conf m-color">确认</button>
                         @endif
