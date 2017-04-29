@@ -11,7 +11,7 @@
                     </div>
                     <div>
                             <span>结束时间：</span><span id="endTime">{{date('H:i:s',strtotime($order->endTime))}}</span>
-                            <span>{{$order->state == \App\Utils\Constant::$ORDER_STATE['COMPLETE']? '已结束':''}}</span>
+                            <span>{{$order->state == \App\Utils\Constant::$ORDER_STATE['COMPLETE']? '已结束':($order->state == \App\Utils\Constant::$ORDER_STATE['HISTORY']?'已打扫':'')}}</span>
                         @if($order->state == \App\Utils\Constant::$ORDER_STATE['COMPLETE'])
                             <button class="btn btn-default conf m-color">确认</button>
                         @endif
