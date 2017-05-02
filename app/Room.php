@@ -24,6 +24,7 @@ class Room extends Model
             ['isDay' , '=', 0],
             ['startDate', ">=", Utils::curNight()],
             ['state', '>=', Constant::$ORDER_STATE['UNPAY']],
+            ['state', "<", Constant::$ORDER_STATE['HISTORY']]
         ])->pluck('startDate');
         $res = [];
         foreach ($night as $n)
@@ -65,6 +66,7 @@ class Room extends Model
     public function nextTime(){
         $nextTime = $this -> hasManyOrders()->where([
             ['state','>=', Constant::$ORDER_STATE['UNPAY']],
+            ['state', '<', Constant::$ORDER_STATE['HISTORY']],
             ['isDay', '=', 1],
         ])->max('endTime');
         if(empty($nextTime))

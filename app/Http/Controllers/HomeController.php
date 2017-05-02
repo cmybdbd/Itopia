@@ -17,7 +17,8 @@ class HomeController extends Controller
 
         $exs = Order::where([
             ['userId',Auth::id()],
-            ['state', '>=', Constant::$ORDER_STATE['TOUSE']]]
+            ['state', '>=', Constant::$ORDER_STATE['TOUSE']],
+                ['state','<', Constant::$ORDER_STATE['HISTORY']]]
         )->first();
         if(!empty($exs))
         {
