@@ -61,7 +61,7 @@ class Room extends Model
 */
             //return count($used);
             $nextTime = $this->nextTime();
-            return (date('H',$nextTime) != 11 && ($nextTime - time())>= 30*60) || $nextTime == 0;
+            return (date('m-d H',$nextTime) != date('m-d 11', time()) && ($nextTime - time())>= 30*60) || $nextTime == 0;
         }
     }
     public function nextTime(){
