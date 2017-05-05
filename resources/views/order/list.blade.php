@@ -35,7 +35,7 @@
                 @endif
             <div class="order-item" data-content="{{$order->id}}">
                 <div class="f-color">
-                    <span>{{date('m月d日',strtotime($order->startDate))}}</span>
+                    <span>{{date('m月d日',strtotime($order->startTime))}}</span>
                     -
                     <span>{{$order->isDay?'分时使用':'包夜使用'}}</span>
                     -
