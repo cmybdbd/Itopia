@@ -132,7 +132,7 @@ class PayController extends Controller
         ])->first();
         if(!empty($order))
         {
-            if(empty($order->payNum))
+            if($order->payNum != json_encode($req))
             {
                 $order->payNum = json_encode($req);
                 if($req['resultCode'] == 'SUCCESS')
