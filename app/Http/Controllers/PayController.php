@@ -99,18 +99,20 @@ class PayController extends Controller
 
         $oid = $req['tenantOrder'];
         $order = Order::where([
-            ['id','=',$oid],
+            ['id', '=', $oid],
         ])->first();
-        if(!empty($order))
+        if (!empty($order))
         {
             $order->payNum = json_encode($req);
-            $order->state= Constant::$ORDER_STATE['TOUSE'];
+            if ($req['resultCode'] == 'SUCCESS')
+                $order->state = Constant::$ORDER_STATE['TOUSE'];
             $order->save();
         }
 
         return redirect()->action(
-            'OrderController@getOrderDetail', ['id'=> $oid]
+            'OrderController@getOrderDetail', ['id' => $oid]
         );
+
         /*
         return Response::json($request->all());
         $ret = array(
@@ -120,20 +122,38 @@ class PayController extends Controller
         return Response::json($ret);
         */
     }
-    public function payAsyncResponse()
+    public function payAsyncResponse(Request $request)
     {
+        $req = $request->all();
+
+        $oid = $req['tenantOrder'];
+        $order = Order::where([
+            ['id','=',$oid],
+        ])->first();
+        if(!empty($order))
+        {
+            if(empty($order->payNum))
+            {
+                $order->payNum = json_encode($req);
+                if($req['resultCode'] == 'SUCCESS')
+                    $order->state = Constant::$ORDER_STATE['TOUSE'];
+                $order->save();
+            }
+        }
+
+
         $ret = array(
-            "tenantId" => $_POST['tenantId'],
-            "tenantOrder" => $_POST['tenantOrder'],
-            'orderno' => $_POST['orderno'],
-            'serialNo' => $_POST['serialNo'],
-            'payWay' => $_POST['payWay'],
-            'cardNo' => $_POST['cardNo'],
-            'totalFee' => $_POST['totalFee'],
-            'transDate' => $_POST['transDate'],
-            'resultCode' => $_POST['resultCode'],
-            'resultMsg' => $_POST['resultMsg'],
-            'notify' => $_POST['SUCCESS']
+            "tenantId" => $req['tenantId'],
+            "tenantOrder" => $req['tenantOrder'],
+            'orderno' => $req['orderno'],
+            'serialNo' => $req['serialNo'],
+            'payWay' => $req['payWay'],
+            'cardNo' => $req['cardNo'],
+            'totalFee' => $req['totalFee'],
+            'transDate' => $req['transDate'],
+            'resultCode' => $req['resultCode'],
+            'resultMsg' => $req['resultMsg'],
+            'notify' => 'SUCCESS'
         );
         return Response::json($ret);
 
