@@ -104,7 +104,7 @@ class PayController extends Controller
         if (!empty($order))
         {
             $order->payNum = json_encode($req);
-            if ($req['resultCode'] == 'SUCCESS')
+            //if ($req['resultCode'] == 'SUCCESS')
                 $order->state = Constant::$ORDER_STATE['TOUSE'];
             $order->save();
         }
