@@ -72,7 +72,7 @@
                     </div>
                     <div>
                         <span>时长：</span><span>{{$order->duration}}小时</span>
-                        <span>支付状态：</span>{{$order->state > 2 ? '已支付':'未支付'}}
+                        <span>支付状态：</span>{{$order->state != 4 ? '已支付':'未支付'}}
                     </div>
                     <div>
                         <span>密码：</span><span>{{$order->passwd}}</span>
