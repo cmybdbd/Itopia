@@ -71,7 +71,7 @@ Route::group(['prefix' => 'lock'], function(){
 Route::group(['prefix' => 'pay'], function(){
     Route::get('generate_order', "PayController@apitestGenerateOrder");
     Route::get('syncResponse', "PayController@paySyncResponse");
-    Route::get('asyncResponse', "PayController@payAsyncResponse");
+    Route::post('asyncResponse', "PayController@payAsyncResponse");
 
 });
 
