@@ -135,6 +135,17 @@
                     phone = phoneN.val();
                     if (phone.match(/^\d{11}$/)) {
                         $.ajax({
+                            url: '/savePhone/' + phoneN.val(),
+                            data: {
+                                _token:$("meta[name='csrf-token']").attr('content')
+                            },
+                            type: 'POST',
+                            success: function () {
+                                $("#validatePhone").modal('hide');
+                                console.log('save phone');
+                            }
+                        });
+                        /*$.ajax({
                             type: 'get',
                             dataType: 'jsonp',
                             jsonpCallback: 'callback',
@@ -144,7 +155,7 @@
                                 console.log(e);
                                 inp0.focus();
                             }
-                        });
+                        });*/
                         time(this);
                     }
                     else {
