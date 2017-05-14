@@ -24,6 +24,7 @@ class Room extends Model
             ['isDay' , '=', 0],
             ['startDate', ">=", Utils::curNight()],
             ['state', '>=', Constant::$ORDER_STATE['UNPAY']],
+            ['state', "<", Constant::$ORDER_STATE['HISTORY']]
         ])->pluck('startDate');
         $res = [];
         foreach ($night as $n)
@@ -33,27 +34,40 @@ class Room extends Model
     public function isUsing()
     {
         $hour = date('H',time());
-        if($hour <=  5 || $hour == 23)
+        if($hour <=  5 || $hour >= 22)
         {
             //return json_encode([Utils::curNight(),$this->usingNight()]);
             return in_array(date('Y-m-d H:i:s',Utils::curNight()), json_decode($this->usingNight()));
         }
         else
         {
-            $time = date('Y-m-d H:i:s', time());
+            /*
+            if($hour < 11)
+            {
+                $time =  strtotime(date('Y-m-d 00:00:00',time()))+11*60*60;
+            }
+            else
+            {
+                $time = time();
+            }
+            $starttime = date('Y-m-d H:i:s', $time+30*60);
+            $endtime = date('Y-m-d H:i:s', $time - 30*60);
             $used = $this->hasManyOrders()->where([
-                ['startTime', '<=', $time],
-                ['endTime', '>=', $time],
+                ['startTime', '<=', $starttime],
+                ['endTime', '>=', $endtime],
                 ['isDay', '=', 1],
                 ['state', '>=', Constant::$ORDER_STATE['UNPAY']],
             ])->get();
-
-            return count($used);
+*/
+            //return count($used);
+            $nextTime = $this->nextTime();
+            return (date('m-d H',$nextTime) != date('m-d 11', time()) && ($nextTime - time())>= 30*60) || $nextTime == 0;
         }
     }
     public function nextTime(){
         $nextTime = $this -> hasManyOrders()->where([
             ['state','>=', Constant::$ORDER_STATE['UNPAY']],
+            ['state', '<', Constant::$ORDER_STATE['HISTORY']],
             ['isDay', '=', 1],
         ])->max('endTime');
         if(empty($nextTime))
@@ -69,12 +83,13 @@ class Room extends Model
         $dayMaxTime = $dayStartTime + 22 * 60 * 60;
 
         $time = time() - time() % (30*60) + 30*60;
-        $time = $time > 11*60*60 ? $time : 11*60*60;
+        $time = $time > $dayStartTime + 11*60*60 ? $time : $dayStartTime + 11*60*60;
+
         if ($dayMaxTime > $nextTime && $dayMaxTime > $time)
         {
             return $nextTime > $time ? $nextTime:$time;
         }
-        else if($time > $dayMaxTime && $nextTime < $time)
+        else if($time > $dayMaxTime && ($nextTime-60*60) < $time)
         {
             return $dayStartTime + 35*60*60;
         }

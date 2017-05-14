@@ -3,8 +3,6 @@
 @section('style')
     <style>
         .center> div{
-            width: 80%;
-            margin-left: 10%;
             text-align: center;
         }
         .room-touse, .room-used{
@@ -14,10 +12,10 @@
             border-radius: 3px;
         }
         .room-touse{
-            color: var(--main-color);
+            color: #1dccb8;
         }
         .room-used{
-            color: var(--used-color);
+            color: #cccccc;
         }
     </style>
 @endsection
@@ -28,19 +26,26 @@
             <i class="fa fa-user-circle fa-fw m-color font-b"></i>
             <div style="margin-top: 0.6em">我的订单</div>
         </div>
+
+        @if(count($orders))
         <div class="mybox" style="text-align: left">
             @foreach($orders as $key => $order)
                 @if($key != 0)
                     <hr class="mysplit">
                 @endif
+            <div class="order-item" data-content="{{$order->id}}">
                 <div class="f-color">
-                    <span>{{date('m月d日',strtotime($order->date))}}</span>
+                    <span>{{date('m月d日',strtotime($order->startTime))}}</span>
                     -
                     <span>{{$order->isDay?'分时使用':'包夜使用'}}</span>
-                    @if($order->state > 4)
-                        <span class="room-used" >已使用</span>
+                    -
+                    <span>{{$order->hasRoom->title}}</span>
+                    @if($order->state < 4)
+                        <span class="room-used" >已结束</span>
+                    @elseif($order->state <6)
+                        <span class="room-touse" >未使用</span>
                     @else
-                        <span class="room-touse" >可使用</span>
+                        <span class="room-touse" >使用中</span>
                     @endif
                 </div>
                 <div class="b-color">
@@ -53,10 +58,26 @@
                 </div>
                 <div>
                     <span>消费金额：</span>
-                    <span>{{$order->payNum}}元</span>
+                    <span>{{$order->price}}元</span>
                 </div>
                 </div>
+            </div>
             @endforeach
         </div>
+        @else
+            <div style="width: 90%; margin-left: 5%; text-align:center">
+                您还没有订单哟，快来体验吧！
+            </div>
+        @endif
     </div>
+@endsection
+@section('scripts')
+    <script>
+        $(function () {
+            $(".order-item").on('click',function(){
+                window.location.href = '/result/'+$(this).attr("data-content");
+            });
+        })
+    </script>
+
 @endsection

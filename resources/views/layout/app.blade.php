@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Itopia-随时随地的私人空间</title>
+    <title>iTOPIA-随时随地的私人空间</title>
     <link rel="stylesheet" href="{{url('css/app.css')}}">
     <style type="text/css">
         :root {
@@ -17,7 +17,8 @@
             --used-color: #cccccc;
             --price-color: #ff0000;
         }
-        @font-face { font-family:Noto-Sans; src: url('font/NotoSans-Bold.ttf'); }
+        /*@font-face { font-family:Noto-Sans; src: url('font/NotoSans-Bold.ttf'); }*/
+
         body{
             background-color: white;
         }
@@ -34,19 +35,25 @@
             justify-content: center;
         }
         .m-color {
-            color: var(--main-color);
+            color: #1dccb8;
         }
         .u-color{
-            color: var(--used-color);
+            color: #cccccc;
         }
         .font-b {
             font-size: 1.4em;
         }
+        .font-m{
+            font-size: 1.2em;
+        }
+        .font-s{
+            font-size: 0.85em;
+        }
         .b-color {
-            color: var(--b-font-color);
+            color: #777777;
         }
         .f-color {
-            color: var(--f-font-color);
+            color: #000000;
         }
         .custom-textarea{
             resize: none;
@@ -58,23 +65,28 @@
         }
         hr.mysplit-color {
             border: 0;
-            margin: 1em;
+            margin-top: 0;
+            margin-bottom: 1em;
             height: 1px;
-            background-image: -webkit-gradient(linear,0 0, 100% 0 ,from(transparent), to(transparent),color-stop(20%, var(--main-color)) , color-stop(80%, var(--main-color)));
+            /*background-image: -webkit-gradient(linear,0 0, 100% 0 ,from(transparent), to(transparent),color-stop(20%, var(--main-color)) , color-stop(80%, var(--main-color)));*/
+            background-image: -webkit-gradient(linear,0 0, 100% 0 ,from(transparent), to(transparent),color-stop(20%,  #1dccb8) , color-stop(80%,  #1dccb8));
             -moz-background-image: -moz-linear-gradient(left, transparent ,var(--main-color) 20%, var(--main-color) 80%, transparent 100%);
+
         }
         hr.mysplit {
             border: 0;
-            margin: 1em;
+            margin-top: 0;
+            margin-bottom: 1em;
             height: 1px;
-            background-image: -webkit-gradient(linear,0 0, 100% 0 ,from(transparent), to(transparent),color-stop(20%, var(--used-color)) , color-stop(80%, var(--used-color)));
+            /*background-image: -webkit-gradient(linear,0 0, 100% 0 ,from(transparent), to(transparent),color-stop(20%, var(--used-color)) , color-stop(80%, var(--used-color)));*/
+            background-image: -webkit-gradient(linear,0 0, 100% 0 ,from(transparent), to(transparent),color-stop(20%, #cccccc) , color-stop(80%, #cccccc));
             -moz-background-image: -moz-linear-gradient(left, transparent ,var(--used-color) 20%, var(--used-color) 80%, transparent 100%);
         }
         .mybtn-group{
-            width: 100%;
-            height: 10vh;
+            width: 99%;
+            height: 12vh;
         }
-        .mybtn-group button{
+        .mybtn-group button, .mybtn-group div{
             border: none;
             background: transparent;
             cursor: pointer;
@@ -84,18 +96,31 @@
             width: 50%;
             height: 100%;
             float: left;
+
+
+            display: -webkit-flex;
+            -webkit-flex-direction:column;
+            -webkit-justify-content: center;
+            -webkit-align-items: center;
+            -webkit-box-flex: 1;
+            display: flex;
+            flex-direction:column;
+            justify-content: center;
+            align-items: center;
         }
-        .mybtn-group button::after{
+        .mybtn-group button::after, .mybtn-group div::after{
             position: absolute;
             content: "";
             top: 8%;
             right: -1px;
             width: 1px;
             height: 84%;
-            background-image: -webkit-gradient(linear,0 0, 0 100% ,from(transparent), to(transparent),color-stop(20%, var(--main-color)) , color-stop(80%, var(--main-color)));
+            /*background-image: -webkit-gradient(linear,0 0, 0 100% ,from(transparent), to(transparent),color-stop(20%, var(--main-color)) , color-stop(80%, var(--main-color)));*/
+            background-image: -webkit-gradient(linear,0 0, 0 100% ,from(transparent), to(transparent),color-stop(20%, #1dccb8) , color-stop(80%, #1dccb8));
         }
-        .mybtn-group button:last-child::after{
+        .mybtn-group button:last-child::after, .mybtn-group div:last-child::after {
             content:"";
+            background-image: none;
         }
         #param{
             display: none;
@@ -118,7 +143,6 @@
         .modal-dialog {
             display: inline-block;
             text-align: left;
-            top:40%
         }
     </style>
     @yield('style')
@@ -130,10 +154,10 @@
     <div class="modal-content">
         <div class="modal-body" style="text-align: center;">
             <div style="margin-left:5%;margin-right:5%;">
-                主人莫生气，电话联系小@ ({{\App\Utils\Constant::$REPORT_PHONE}}),或在后台留言，小@会神速回复
+                主人莫生气，电话联系小i ({{\App\Utils\Constant::$REPORT_PHONE}}),或在后台留言，小i会神速回复
             </div>
             <hr class="mysplit" style="margin: 0.5em;">
-            <button class="m-color font-b"
+            <button class="m-color font-m"
                     data-dismiss="modal"
                     style="border:none;width:100%;height:100%;background-color:white;">朕知道了</button>
         </div>

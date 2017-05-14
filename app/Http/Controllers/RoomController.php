@@ -8,13 +8,43 @@ use Illuminate\Support\Facades\Response;
 
 class RoomController extends Controller
 {
-    function updateRoomInfo()
+    function updateRoomInfo(Request $request)
     {
+        $room = Room::find($request->id);
+
+        if(!empty($request->title))
+        {
+            $room->title = $request->title;
+        }
+        if(!empty($request->address))
+        {
+            $room->address = $request->address;
+        }
+        if(!empty($request->hourPrice))
+        {
+            $room->hourPrice = $request->hourPrice;
+        }
+        if(!empty($request->nightPrice))
+        {
+            $room->nightPrice = $request->nightPrice;
+        }
+        if(!empty($request->number))
+        {
+            $room->phoneOfManager = $request->number;
+        }
+        if($room->save())
+        {
+            return redirect() -> back() ;
+        }
+        else
+        {
+            return redirect() -> back() ->withInput()->withErrors('保存失败');
+        }
     }
     function manageRoom()
     {
 
-        return view('manage.room')->withRooms(Room::all());
+        return view('manage.room')->withRooms(Room::where('state' ,'<>',0)->get());
     }
     function getRoomList()
     {}

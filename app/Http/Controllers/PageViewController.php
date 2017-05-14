@@ -11,8 +11,9 @@ class PageViewController extends Controller
 
     public static function updatePageView($page)
     {
-        $time = time() - time() %(24*60*60) - 8*60*60;
-        $date = date('Y-m-d H:i:s',$time);
+        //$time = time() - time() %(24*60*60) - 8*60*60;
+        $date = (date('Y-m-d 00:00:00', time()));
+        //$date = date('Y-m-d H:i:s',$time);
         $pageView =PageView::where('curDate' ,'=', $date)->first();
         if(!count($pageView))
         {
@@ -24,6 +25,8 @@ class PageViewController extends Controller
             $pageView->comment = 0;
             $pageView->commentResult = 0;
             $pageView->orderList = 0;
+            $pageView-> useHour = 0;
+            $pageView-> useNight = 0;
         }
         $pageView->curDate = $date;
         $pageView->$page += 1;

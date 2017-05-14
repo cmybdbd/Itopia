@@ -22,6 +22,29 @@ class OrderController extends Controller
 
         if(!empty($order->payNum ))
         {
+            $gateDoor = Room::find(Constant::$GATE_ID);
+            if(strtotime($gateDoor->updated_at) < Utils::curDay() || empty($gateDoor->passwd ))
+            {
+                $passwd = Utils::generatePasswd(6);
+                $lc = new LockController();
+                $ret = $lc->updatePassword(
+                    '',
+                    $passwd,
+                    Constant::$REPORT_PHONE,
+                    Utils::curDay(),
+                    Utils::curDay()+ 24*60*60
+                );
+                if ($ret['code'] == Constant::$STATUS_CODE['OK'])
+                {
+                    $gatePasswd = $passwd;
+                    $gateDoor->passwd = $passwd;
+                    $gateDoor->save();
+                }
+            }
+            else
+            {
+                $gatePasswd = $gateDoor-> passwd;
+            }
             if(empty($order->passwd))
             {
                 $payNum = json_decode($order->payNum, true);
@@ -38,9 +61,10 @@ class OrderController extends Controller
                         $order->hasRoom->roomLockId,
                         $passwd,
                         Auth::user()->phonenumber,
-                        strtotime($order->startTime),
+                        strtotime($order->startTime) - 15*60,
                         strtotime($order->endTime)
                     );
+                    //return json_encode($ret);
                     if ($ret['code'] == Constant::$STATUS_CODE['OK'])
                     {
                         $order->passwd = $passwd;
@@ -50,7 +74,7 @@ class OrderController extends Controller
             }
             if(!empty($order->passwd))
             {
-                return view('order.result')->with(['order' => $order]);
+                return view('order.result')->with(['order' => $order, 'gatepass'=>$gatePasswd]);
             }
         }
         return "someting error";
@@ -60,16 +84,38 @@ class OrderController extends Controller
         PageViewController::updatePageView('orderList');
         return view('order.list')->withOrders(Order::with('hasRoom')->where([
             ['userId','=',$id],
-        ['state' ,'>',Constant::$ORDER_STATE['UNPAY']]
+        ['state' ,'>=',Constant::$ORDER_STATE['TOUSE']]
         ])->get());
     }
     function manageOrder()
     {
-        return view('manage.order')->withOrders(Order::with('hasRoom')
-            ->with('hasUser')
-        ->where([
-            ['state', '>', 2],
-        ])->get());
+        return view('manage.order')->with(
+            [
+
+                'orders' => Order::where(
+                        'state', '>=', Constant::$ORDER_STATE['COMPLETE']
+                    )->orderBy('startTime','asc')->get(),
+                'rooms' => Room::where('state','<>',0)->get()]);
+    }
+    function getAnotherOrderList()
+    {
+        Order::where([
+            ['state','<=',Constant::$ORDER_STATE['USING']],
+            ['state','>=',Constant::$ORDER_STATE['TOUSE']],
+            ['endTime', '<=', date('Y-m-d H:i:s', time())]
+        ])->update(['state'=>Constant::$ORDER_STATE['COMPLETE']]);
+        return view('manage.anotherOrder')->with(
+            [
+                'orders' => Order::where(
+                    [
+                        ['state', '>=', Constant::$ORDER_STATE['COMPLETE']],
+                        ['payNum', '<>', ''],
+                        ['endTime', '<=', date('Y-m-d 23:30:00', time())],
+                        ['endTime', '>=', date('Y-m-d 00:00:00', time())]
+                        ]
+                )->orderBy('state', 'asc')->orderBy('endTime', 'asc')-> get()
+            ]
+        );
     }
     /*
      * show
@@ -133,7 +179,7 @@ class OrderController extends Controller
 
         if (isset($request->uuid))
         {
-            Order::where('id', $request->uuid)->update(['state' => Constant::$ORDER_STATE['REMOVE']]);
+            Order::where([['id', $request->uuid],['isDay',$request->isDay]])->update(['state' => Constant::$ORDER_STATE['REMOVE']]);
         }
         $order = Uuid::generate()->string;
         if($request->isDay)
@@ -142,8 +188,8 @@ class OrderController extends Controller
             DB::insert('insert into `orders` ' .
                 '(`userId`, `roomId`, `startDate`, `startTime`, `endTime`, `duration`, `price`,`isDay`, `state`, `id`, `updated_at`, `created_at`)' .
                 'select ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? from users ' .
-                'where ((select max(endTime) from orders where `isDay` = 1 and `state` > 0 and `roomId` = ?) is null or '.
-                ' (select max(endTime) from orders where `roomId` = ? and `isDay`=1 and `state` > 0) < ? )and id= ?',
+                'where ((select max(endTime) from orders where `isDay` = 1 and `state` > 3 and `roomId` = ?) is null or '.
+                ' (select max(endTime) from orders where `roomId` = ? and `isDay`=1 and `state` > 3) < ? )and id= ?',
                 [
                     $request->userId,
                     $request->roomId,
@@ -171,7 +217,7 @@ class OrderController extends Controller
             DB::insert('insert into `orders` ' .
                 '(`userId`, `roomId`, `startDate`, `startTime`, `endTime`, `duration`, `price`,`isDay`, `state`, `id`, `updated_at`, `created_at`)' .
                 'select ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? from users ' .
-                'where (select id from orders where `state` > 0 and `isDay`=0 and `roomId` = ? and `startDate` = ?) is null and id= ?',
+                'where (select id from orders where `state` > 3 and `isDay`=0 and `roomId` = ? and `startDate` = ?) is null and id= ?',
                 [
                     $request->userId,
                     $request->roomId,
@@ -197,41 +243,16 @@ class OrderController extends Controller
         $user =User::find($request->userId);
         $succ = Order::find($order);
 
-        /*
-                $order = new Order();
-                $order->userId = $request->userId;
-                $order->roomId =$request->roomId;
-                $order->date =  date('Y-m-d H:i:s',$request->date);
-                $order->startTime =  date('Y-m-d H:i:s',$request->startTime);
-                $order->endTime =  date('Y-m-d H:i:s',$request->endTime);
-                $order->duration =$request->duration;
-                $order->payNum = $request->payNum;
-
-                $existOrder = Order::where([
-                    ['userId', '=', $order->userId],
-                    ['roomId', '=', $order->roomId],
-                    ['state',  '=', Constant::$ORDER_STATE['UNPAY']],
-                ])->first();
-                if(!empty($existOrder))
-                {
-                    $order = $existOrder;
-                }
-                else
-                {
-                    $order->state = Constant::$ORDER_STATE['UNPAY'];
-                    $order->save();
-                }
-        */
         $json = '';
 
         if (!empty($succ))
         {
             $pay =new PayController();
             $json = $pay->generateOrder($order,
-                '0.01',
+                $request->price,
                 $user->id,
                 $user->name,
-            $user->idnumber,
+                $user->idnumber,
                 'info',
                 $user->phonenumber
             );
@@ -256,5 +277,13 @@ class OrderController extends Controller
         ]);
         $oid = $request->oid;
         Order::find($oid)->update(['state'=> Constant::$ORDER_STATE['COMPLETE']]);
+    }
+    function markOrderHistory(Request $request)
+    {
+        $this->validate($request,[
+            'oid' => 'required'
+        ]);
+        $oid = $request->oid;
+        Order::find($oid)->update(['state'=> Constant::$ORDER_STATE['HISTORY']]);
     }
 }

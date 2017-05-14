@@ -38,7 +38,21 @@ class Utils{
         $xml .= '</xml>';
         return $xml;
     }
+    static public function generatePasswd($len){
+        $strpol = '0123456789';
+        $passwd = '';
+        for ($i = 0; $i < $len; $i++)
+        {
+            $passwd .= $strpol[mt_rand(0, strlen($strpol) - 1)];
+        }
+        return $passwd;
+    }
+    static public function curDay(){
+        $time = time();
 
+        return strtotime(date('Y-m-d 00:00:00'));
+
+    }
     static public function curNight(){
         $time = time();
         if(date('H',$time) <= 5)

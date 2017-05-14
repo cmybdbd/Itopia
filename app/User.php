@@ -31,15 +31,16 @@ class User extends Authenticatable
 
     public static function saveNewUser($userInfo)
     {
+        //todo emoji name
         $user = new User();
         $user->openid = $userInfo['openid'];
-        $user->nickname = empty($userInfo['nickname'])?'':$userInfo['nickname'];
+        $user->nickname = empty($userInfo['nickname'])?'':base64_encode($userInfo['nickname']);
         $user->sex = empty($userInfo['sex'])?0:$userInfo['sex'];
         $user->province = empty($userInfo['province'])?'':$userInfo['province'];
         $user->city = empty($userInfo['city'])?'':$userInfo['city'];
         $user->country = empty($userInfo['country'])?'':$userInfo['country'];
         $user->headimgurl = empty($userInfo['headimgurl'])?'':$userInfo['headimgurl'];
-        $user->privilege = empty($userInfo['privilege'])?'':$userInfo['privilege'];
+        $user->privilege = empty($userInfo['privilege'])?'':json_encode($userInfo['privilege']);
         $user->unionid = empty($userInfo['unionid'])?'':$userInfo['unionid'];
         $user->save();
         return $user;
