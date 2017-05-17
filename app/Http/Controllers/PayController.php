@@ -95,7 +95,7 @@ class PayController extends Controller
 
     public function paySyncResponse(Request $request)
     {
-        /*
+
         $req = $request->all();
 
         $oid = $req['tenantOrder'];
@@ -113,7 +113,7 @@ class PayController extends Controller
         return redirect()->action(
             'OrderController@getOrderDetail', ['id' => $oid]
         );
-*/
+
         /*
         return Response::json($request->all());
         $ret = array(
