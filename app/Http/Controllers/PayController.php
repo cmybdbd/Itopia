@@ -95,6 +95,7 @@ class PayController extends Controller
 
     public function paySyncResponse(Request $request)
     {
+
         $req = $request->all();
 
         $oid = $req['tenantOrder'];
