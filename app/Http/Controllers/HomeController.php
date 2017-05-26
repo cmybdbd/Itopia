@@ -27,6 +27,14 @@ class HomeController extends Controller
         return view('frontpage')->withRooms(Room::where('state','<>',0)->get());
 
     }
+    function dayPage()
+    {
+        return view('frontpage')->withRooms(Room::where('state','<>',0)->get());
+    }
+    function nightPage()
+    {
+        return view('frontpage')->withRooms(Room::where('state','<>',0)->get());
+    }
     function orderList()
     {
         $id = Auth::id();

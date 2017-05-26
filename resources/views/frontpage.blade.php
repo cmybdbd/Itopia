@@ -296,71 +296,6 @@
                                 1000)
                         }
                     }
-
-/*<<<<<<< HEAD
-                //alert('no idnumber');
-                var inp0 = $("#inp0"),
-                    inp1 = $("#inp1"),
-                    inp2 = $("#inp2"),
-                    inp3 = $("#inp3");
-
-                validatePhone.modal('show');
-                $("#sendCode").on('click', function () {
-                    phone = phoneN.val();
-                    if (phone.match(/^\d{11}$/)) {
-                        $.ajax({
-                            url: '/savePhone/' + phoneN.val(),
-                            data: {
-                                _token:$("meta[name='csrf-token']").attr('content')
-                            },
-                            type: 'POST',
-                            success: function () {
-                                $("#validatePhone").modal('hide');
-                                console.log('save phone');
-                            }
-                        });
-                        /*$.ajax({
-                            type: 'get',
-                            dataType: 'jsonp',
-                            jsonpCallback: 'callback',
-                            url: 'http://renthouse.wecash.net/itopia/checkphone.php?m=sendCode&' +
-                            'p=' + phone,
-                            success: function (e) {
-                                console.log(e);
-                                inp0.focus();
-                            }
-                        });*//*
-                        time(this);
-                    }
-                    else {
-                        $("#phoneN").focus();
-                    }
-                });
-
-                inp0.bind('input', function () {
-                    inp1.focus();
-                });
-                inp1.bind('input', function () {
-                    inp2.focus();
-                });
-                inp2.bind('input', function () {
-                    inp3.focus();
-                });
-                inp3.bind('input', function () {
-                    if (inp3.val().match(/^\d$/)) {
-                        console.log('http://renthouse.wecash.net/itopia/checkphone.php?m=checkCode&' +
-                            'p=' + inp0.val() + inp1.val() + inp2.val() + inp3.val());
-                        $.ajax({
-                            dataType: 'jsonp',
-                            jsonpCallback: "jsonp",
-                            url: 'http://renthouse.wecash.net/itopia/checkphone.php?m=checkCode&' +
-                            'p=' + inp0.val() + inp1.val() + inp2.val() + inp3.val(),
-                            success: function (e) {
-                                console.log(e);
-                                if (e.code == 200) {
-                                    $("#validatePhone").modal('hide');*/
-
-                    //alert('no idnumber');
                     var inp0 = $("#inp0"),
                         inp1 = $("#inp1"),
                         inp2 = $("#inp2"),
@@ -368,6 +303,7 @@
 
                     validatePhone.modal('show');
                     $("#sendCode").on('click', function () {
+                        
                         phone = phoneN.val();
                         if (phone.match(/^\d{11}$/)) {
                             strpol = '0123456789';

@@ -77,7 +77,7 @@ class OrderController extends Controller
                 return view('order.result')->with(['order' => $order, 'gatepass'=>$gatePasswd]);
             }
         }
-        return "someting error";
+        return "something error";
     }
     function getOrderList($id)
     {
@@ -285,5 +285,10 @@ class OrderController extends Controller
         ]);
         $oid = $request->oid;
         Order::find($oid)->update(['state'=> Constant::$ORDER_STATE['HISTORY']]);
+    }
+    function getOrderInfo($id)
+    {
+        $order = Order::with('hasRoom')->find($id);
+        return $order;
     }
 }
