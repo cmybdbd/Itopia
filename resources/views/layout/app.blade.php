@@ -122,7 +122,7 @@
             width: 1px;
             height: 84%;
             /*background-image: -webkit-gradient(linear,0 0, 0 100% ,from(transparent), to(transparent),color-stop(20%, var(--main-color)) , color-stop(80%, var(--main-color)));*/
-            background-image: -webkit-gradient(linear,0 0, 0 100% ,from(transparent), to(transparent),color-stop(20%, #1dccb8) , color-stop(80%, #1dccb8));
+            /*background-image: -webkit-gradient(linear,0 0, 0 100% ,from(transparent), to(transparent),color-stop(20%, #1dccb8) , color-stop(80%, #1dccb8));*/
         }
         .mybtn-group button:last-child::after, .mybtn-group div:last-child::after {
             content:"";
@@ -159,6 +159,9 @@
             border-width: 2px;
             border-color:#1dccb8;
             border-radius:50px;
+        }
+        .map{
+            background-image: linear-gradient(0deg, #000 20%, #f00 50%, #090 80%);
         }
     </style>
     @yield('style')

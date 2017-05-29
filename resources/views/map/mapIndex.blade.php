@@ -19,7 +19,9 @@
         </div>
     </div>
     <div class="content" style="height:100%;overflow:hidden;">
+        <div class="map">
         <img src="{{asset('storage/map/mapPKU.png')}}" style="position:absolute;top:0px;z-index:-1;height:100%;width:auto;overflow:scroll">
+        </div>
     </div>
     <div style="position:fixed;width:100%;bottom:8%;">
         <div class="circle" style="text-align:center;position:absolute;bottom:10%;left:16%">
