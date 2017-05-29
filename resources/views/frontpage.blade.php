@@ -297,9 +297,9 @@
                                 1000)
                         }
                     }
-<<<<<<< HEAD
 
-/*<<<<<<< HEAD
+
+/*
                 //alert('no idnumber');
                 var inp0 = $("#inp0"),
                     inp1 = $("#inp1"),
@@ -364,8 +364,7 @@
 
                     //alert('no idnumber');
                     /*
-=======
->>>>>>> origin/master
+
                     var inp0 = $("#inp0"),
                         inp1 = $("#inp1"),
                         inp2 = $("#inp2"),

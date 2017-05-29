@@ -5,22 +5,21 @@
     <div class="myHeader" style="margin-bottom: 2vh;box-shadow:0 1px 6px #eeeeee">
         <div class="mybtn-group" style="">
             <div id="myOrder">
-                <i class="fa fa-user-circle fa-fw m-color font-b"></i>
-                <span style="margin-top: 1vh">
+                <img src="{{asset('storage/map/myOrder.png')}}" style="width:5em;margin-left:-40%;" alt="">
+                <!--<span style="margin-top: 1vh">
                 我的订单
-                </span>
+                </span>-->
             </div>
             <div id="equipment">
-                <img src="{{asset('storage/u329.png')}}" style="width:1.4em" alt="">
-
-                <span style="margin-top: 1vh">
+                <img src="{{asset('storage/map/roomFacilities.png')}}" style="width:5em;margin-right:-40%;" alt="">
+                <!--<span style="margin-top: 1vh">
                     小屋设施
-                </span>
+                </span>-->
             </div>
         </div>
     </div>
-    <div class="content">
-        <img src="{{asset('storage/map/mapPKU.png')}}" class="img-responsive" style="position:absolute;top:0px;z-index:-1;width:100%;">
+    <div class="content" style="height:100%;overflow:hidden;">
+        <img src="{{asset('storage/map/mapPKU.png')}}" style="position:absolute;top:0px;z-index:-1;height:100%;width:auto;overflow:scroll">
         <div class="circle" style="text-align:center;position:absolute;bottom:10%;left:16%">
             <p class="font-xl" style="margin-top:10px;">时租</p>
             <p class="font-m m-color" style="margin-top:-10px;">19/时</p></div>
@@ -268,7 +267,6 @@
                         }
                     }
 
-/*<<<<<<< HEAD
                 //alert('no idnumber');
                 var inp0 = $("#inp0"),
                     inp1 = $("#inp1"),
