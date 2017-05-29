@@ -20,45 +20,15 @@
         </div>
     </div>
     <div class="content">
-        @foreach($rooms as $key => $room)
-            <div class="mybox roomItem" data-content="{{$room->id}}">
-                    <div class="myrow"  id="slide_{{$key}}" style="margin-bottom: 1vh;margin-left:auto;margin-right:auto;display:block;text-align:center;width: 300px;height: 200px;overflow:hidden;visibility:hidden;position:relative;top:0px;left:0px;" >
-                        <div data-u="slides" style="width: 300px;height: 200px; overflow:hidden;position:relative;top:0px;left:0px;">
-                            <?php $imgFiles = \Illuminate\Support\Facades\File::files('storage/room'.($key+1));?>
-                            @foreach($imgFiles as $img)
-                               <!-- <img src="{{asset('storage/arch.jpg')}}" style="width: 100%" >-->
-                               <div>
-                                   <img src="{{$img}}" data-u="image" alt="" width="300px">
-                               </div>
-                            @endforeach
-                        </div>
-                    </div>
-                    <div class="myrow"  style="justify-content: space-between">
-                        <span class="item">{{$room->title}}</span>
-                        <span class="room-state room-used {{$room->isUsing()? 'u-color':'m-color'}}" style="padding:0 2vw;border: 1px solid;border-radius: 3px;display:flex;flex-direction: row;justify-content: center">
-                            {{$room->isUsing() ? '使用中':'可使用'}}
-                        </span>
-                    </div>
-                    <div class="myrow"  style="justify-content: space-between">
-                        <span class="m-color" style="font-weight: bold;">¥ {{$room->hourPrice}}/时 ¥ {{$room->nightPrice}}/夜</span>
-                        @if($room->isUsing())
-                            @if($room->nextTime() != 0)
-                                <span class="room-state b-color">可预约<span class="m-color">{{(date('H',$room->nextTime())== 11? '明早':'' ). date('H:i',$room->nextTime())}}</span>使用</span>
-                            @elseif(in_array(date('Y-m-d 00:00:00',\App\Utils\Utils::curNight()), json_decode($room->usingNight())))
-                                <span class="room-state b-color">今日已约满</span>
-                            @else
-                                <span class="room-state m-color">可预约包夜</span>
-                            @endif
-                        @else
-                            <span class="room-state b-color">现在使用</span>
-                        @endif
-                    </div>
-            </div>
-        @endforeach
+        <img src="{{asset('storage/map/mapPKU.png')}}" class="img-responsive" style="position:absolute;top:0px;z-index:-1;width:100%;">
+        <div class="circle" style="text-align:center;position:absolute;bottom:10%;left:16%">
+            <p class="font-xl" style="margin-top:10px;">时租</p>
+            <p class="font-m m-color" style="margin-top:-10px;">19/时</p></div>
+        <div class="circle" style="text-align:center;position:absolute;bottom:10%;right:16%">
+            <p class="font-xl" style="margin-top:10px;">包夜</p>
+            <p class="font-m m-color" style="margin-top:-10px;">159/夜</p></div>
     </div>
-    <div class="footer m-color" style="text-align: center;margin-bottom:4vh">
-        更多iTOPIA即时私人空间将陆续开放，敬请期待！
-    </div>
+
     <div id="param">
         <div class="uid" data-content="{{\Illuminate\Support\Facades\Auth::id()}}"></div>
         <div class="uphoneN" data-content="{{\Illuminate\Support\Facades\Auth::user()->phonenumber}}"></div>

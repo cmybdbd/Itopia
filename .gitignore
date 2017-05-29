@@ -17,3 +17,4 @@ process.org
 composer.lock
 
 *.log
+storage/desktop.ini

@@ -25,11 +25,24 @@ class HomeController extends Controller
             return redirect()->action('OrderController@getOrderDetail',['id'=>$exs->id]);
         }
         return view('frontpage')->withRooms(Room::where('state','<>',0)->get());
-
     }
+
     function orderList()
     {
         $id = Auth::id();
         return redirect()->action('OrderController@getOrderList',['id'=>$id]);
+    }
+
+    function mapDisplay()
+    {
+        PageViewController::updatePageView('home');
+
+        $exs = Order::where([
+            ['userId',Auth::id()],
+            ['state', '>=', Constant::$ORDER_STATE['TOUSE']],
+                ['state','<', Constant::$ORDER_STATE['HISTORY']]]
+        )->first();
+        //$id = Auth::id();
+        return view('map.mapIndex')->withRooms(Room::where('state','<>',0)->get());
     }
 }

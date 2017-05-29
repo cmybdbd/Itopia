@@ -40,6 +40,9 @@
         .u-color{
             color: #cccccc;
         }
+        .font-xl {
+            font-size: 1.8em;
+        }
         .font-b {
             font-size: 1.4em;
         }
@@ -48,6 +51,9 @@
         }
         .font-s{
             font-size: 0.85em;
+        }
+        .font-xs{
+            font-size: 0.7em;
         }
         .b-color {
             color: #777777;
@@ -143,6 +149,16 @@
         .modal-dialog {
             display: inline-block;
             text-align: left;
+        }
+
+        .circle{
+            width:100px;
+            height:100px;
+            background-color:#fff;
+            border-style:solid;
+            border-width: 2px;
+            border-color:#1dccb8;
+            border-radius:50px;
         }
     </style>
     @yield('style')
