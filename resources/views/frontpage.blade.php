@@ -297,6 +297,7 @@
                                 1000)
                         }
                     }
+<<<<<<< HEAD
 
 /*<<<<<<< HEAD
                 //alert('no idnumber');
@@ -363,6 +364,8 @@
 
                     //alert('no idnumber');
                     /*
+=======
+>>>>>>> origin/master
                     var inp0 = $("#inp0"),
                         inp1 = $("#inp1"),
                         inp2 = $("#inp2"),
@@ -370,6 +373,7 @@
 
                     validatePhone.modal('show');
                     $("#sendCode").on('click', function () {
+                        
                         phone = phoneN.val();
                         if (phone.match(/^\d{11}$/)) {
                             strpol = '0123456789';

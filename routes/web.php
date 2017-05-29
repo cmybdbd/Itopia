@@ -29,6 +29,8 @@ Route::group(['middleware' => 'auth'], function (){
     });
 
     Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/dayPage','HomeController@dayPage');
+    Route::get('/nightPage','HomeController@nightPage');
     Route::get('/create/{uid}/{rid}', 'OrderController@createOrder');
     Route::get('/result/{id}','OrderController@getOrderDetail');
 
@@ -44,7 +46,7 @@ Route::group(['middleware' => 'auth'], function (){
     //Route::get('/manage/order', 'OrderController@manageOrder');
     Route::get('/manage/anotherOrder', 'OrderController@getAnotherOrderList');
     Route::post('/manage/anotherOrder', 'OrderController@markOrderHistory');
-
+    Route::get('/manage/orderInfo/{id}','OrderController@getOrderInfo');
 
     Route::get('/idAuth', 'IDAuthController@IDauth');
 
