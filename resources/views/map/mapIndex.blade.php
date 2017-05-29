@@ -2,8 +2,8 @@
 @extends('layout.app')
 
 @section('content')
-    <div class="myHeader" style="margin-bottom: 2vh;box-shadow:0 1px 6px #eeeeee">
-        <div class="mybtn-group" style="">
+    <div class="myHeader" style="position:fixed;top:3%;width:100%;margin-bottom: 2vh;box-shadow:0 1px 6px #eeeeee">
+        <div class="mybtn-group" style="width:100%;height:60px;position:absolute;">
             <div id="myOrder">
                 <img src="{{asset('storage/map/myOrder.png')}}" style="width:5em;margin-left:-40%;" alt="">
                 <!--<span style="margin-top: 1vh">
@@ -20,6 +20,8 @@
     </div>
     <div class="content" style="height:100%;overflow:hidden;">
         <img src="{{asset('storage/map/mapPKU.png')}}" style="position:absolute;top:0px;z-index:-1;height:100%;width:auto;overflow:scroll">
+    </div>
+    <div style="position:fixed;width:100%;bottom:8%;">
         <div class="circle" style="text-align:center;position:absolute;bottom:10%;left:16%">
             <p class="font-xl" style="margin-top:10px;">时租</p>
             <p class="font-m m-color" style="margin-top:-10px;">19/时</p></div>

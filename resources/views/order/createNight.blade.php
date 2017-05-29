@@ -1,5 +1,5 @@
 <!--
-create day order.
+create night order.
 -->
 @extends('layout.app')
 @section('style')
