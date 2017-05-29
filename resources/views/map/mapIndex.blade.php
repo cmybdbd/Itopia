@@ -2,19 +2,19 @@
 @extends('layout.app')
 
 @section('content')
-    <div class="myHeader" style="position:fixed;top:3%;width:100%;margin-bottom: 2vh;box-shadow:0 1px 6px #eeeeee">
-        <div class="mybtn-group" style="width:100%;height:60px;position:absolute;">
+    <div class="myHeader" style="position:fixed;top:0px;width:100%;margin-bottom: 2vh;box-shadow:0 1px 6px #eeeeee">
+        <div class="mybtn-group" style="top:0px;width:100%;height:60px;position:absolute;">
             <div id="myOrder">
-                <img src="{{asset('storage/map/myOrder.png')}}" style="width:5em;margin-left:-40%;" alt="">
-                <!--<span style="margin-top: 1vh">
+                <img src="{{asset('storage/map/myOrder.png')}}" style="position:absolute;width:80px;top:48px;left:60px;" alt="">
+                <span style="margin-top: 1vh">
                 我的订单
-                </span>-->
+                </span>
             </div>
             <div id="equipment">
-                <img src="{{asset('storage/map/roomFacilities.png')}}" style="width:5em;margin-right:-40%;" alt="">
-                <!--<span style="margin-top: 1vh">
+                <img src="{{asset('storage/map/roomFacilities.png')}}" style="position:absolute;width:80px;top:48px;right:60px;" alt="">
+                <span style="margin-top: 1vh">
                     小屋设施
-                </span>-->
+                </span>
             </div>
         </div>
     </div>

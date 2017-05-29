@@ -160,8 +160,16 @@
             border-color:#1dccb8;
             border-radius:50px;
         }
-        .map{
-            background-image: linear-gradient(0deg, #000 20%, #f00 50%, #090 80%);
+        .blend
+        {
+            width:782px;
+            height:540px;
+            background:#de6e3d url("lighthouse.jpg") no-repeat center center;
+        }
+    
+        .blend.multiply
+        {
+            background-blend-mode: multiply;
         }
     </style>
     @yield('style')
