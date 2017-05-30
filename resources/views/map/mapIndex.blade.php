@@ -23,7 +23,7 @@
         <img src="{{asset('storage/map/mapPKU.png')}}" style="position:absolute;top:0px;z-index:-1;height:100%;width:auto;overflow:scroll">
         </div>
     </div>
-    <div style="position:fixed;width:100%;bottom:5%;">font-weight:50
+    <div style="position:fixed;width:100%;bottom:5%;">
         <div class="circle" style="text-align:center;position:absolute;bottom:0%;left:55px">
             <p class="font-xl" style="margin-top:16px;font-weight:500;">时租</p>
             <p class="font-l m-color" style="margin-top:-10px;font-weight:500;">19 / 小时</p></div>
@@ -243,7 +243,12 @@
                 phoneN.focus();
             });
 
-
+            $("#day").on('click',function () {
+                window.location.href = window.location.href.replace('home','dayPage');
+            });
+            $("#night").on('click',function () {
+                window.location.href = window.location.href.replace('home','nightPage');
+            });
             var uid = $("#param .uid").attr('data-content');
             $("#myOrder").on('click',function () {
                 window.location.href = window.location.href.replace('home','orderList/'+uid);

@@ -24,7 +24,7 @@ class HomeController extends Controller
         {
             return redirect()->action('OrderController@getOrderDetail',['id'=>$exs->id]);
         }
-        return view('frontpage')->withRooms(Room::where('state','<>',0)->get());
+        return view('map.mapIndex')->withRooms(Room::where('state','<>',0)->get());
     }
 
     function dayPage()
