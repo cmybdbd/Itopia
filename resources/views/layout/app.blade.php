@@ -41,7 +41,10 @@
             color: #cccccc;
         }
         .font-xl {
-            font-size: 1.8em;
+            font-size: 17px;
+        }
+        .font-l {
+            font-size: 16px;
         }
         .font-b {
             font-size: 1.4em;
@@ -152,8 +155,8 @@
         }
 
         .circle{
-            width:100px;
-            height:100px;
+            width:90px;
+            height:90px;
             background-color:#fff;
             border-style:solid;
             border-width: 2px;

@@ -5,14 +5,14 @@
     <div class="myHeader" style="position:fixed;top:0px;width:100%;margin-bottom: 2vh;box-shadow:0 1px 6px #eeeeee">
         <div class="mybtn-group" style="top:0px;width:100%;height:60px;position:absolute;">
             <div id="myOrder">
-                <img src="{{asset('storage/map/myOrder.png')}}" style="position:absolute;width:80px;top:48px;left:60px;" alt="">
-                <span style="margin-top: 1vh">
+                <img src="{{asset('storage/map/myOrder.png')}}" style="position:absolute;width:40px;top:24px;left:30px;" alt="">
+                <span style="font-size:14px;font-weight:500;position:absolute;top:68px;left:22px;">
                 我的订单
                 </span>
             </div>
             <div id="equipment">
-                <img src="{{asset('storage/map/roomFacilities.png')}}" style="position:absolute;width:80px;top:48px;right:60px;" alt="">
-                <span style="margin-top: 1vh">
+                <img src="{{asset('storage/map/roomFacilities.png')}}" style="position:absolute;width:40px;top:24px;right:30px;" alt="">
+                <span style="font-size:14px;font-weight:500;position:absolute;top:68px;right:22px;">
                     小屋设施
                 </span>
             </div>
@@ -23,13 +23,13 @@
         <img src="{{asset('storage/map/mapPKU.png')}}" style="position:absolute;top:0px;z-index:-1;height:100%;width:auto;overflow:scroll">
         </div>
     </div>
-    <div style="position:fixed;width:100%;bottom:8%;">
-        <div class="circle" style="text-align:center;position:absolute;bottom:10%;left:16%">
-            <p class="font-xl" style="margin-top:10px;">时租</p>
-            <p class="font-m m-color" style="margin-top:-10px;">19/时</p></div>
-        <div class="circle" style="text-align:center;position:absolute;bottom:10%;right:16%">
-            <p class="font-xl" style="margin-top:10px;">包夜</p>
-            <p class="font-m m-color" style="margin-top:-10px;">159/夜</p></div>
+    <div style="position:fixed;width:100%;bottom:5%;">font-weight:50
+        <div class="circle" style="text-align:center;position:absolute;bottom:0%;left:55px">
+            <p class="font-xl" style="margin-top:16px;font-weight:500;">时租</p>
+            <p class="font-l m-color" style="margin-top:-10px;font-weight:500;">19 / 小时</p></div>
+        <div class="circle" style="text-align:center;position:absolute;bottom:0%;right:55px">
+            <p class="font-xl" style="margin-top:16px;font-weight:500;">包夜</p>
+            <p class="font-l m-color" style="margin-top:-10px;font-weight:500;">159 / 夜</p></div>
     </div>
 
     <div id="param">
