@@ -24,10 +24,10 @@
         </div>
     </div>
     <div style="position:fixed;width:100%;bottom:8%;">
-        <div class="circle" style="text-align:center;position:absolute;bottom:10%;left:16%">
+        <div id="day" class="circle" style="text-align:center;position:absolute;bottom:10%;left:16%">
             <p class="font-xl" style="margin-top:10px;">时租</p>
             <p class="font-m m-color" style="margin-top:-10px;">19/时</p></div>
-        <div class="circle" style="text-align:center;position:absolute;bottom:10%;right:16%">
+        <div id="night" class="circle" style="text-align:center;position:absolute;bottom:10%;right:16%">
             <p class="font-xl" style="margin-top:10px;">包夜</p>
             <p class="font-m m-color" style="margin-top:-10px;">159/夜</p></div>
     </div>
@@ -243,7 +243,12 @@
                 phoneN.focus();
             });
 
-
+            $("#day").on('click',function () {
+                window.location.href = window.location.href.replace('home','dayPage');
+            });
+            $("#night").on('click',function () {
+                window.location.href = window.location.href.replace('home','nightPage');
+            });
             var uid = $("#param .uid").attr('data-content');
             $("#myOrder").on('click',function () {
                 window.location.href = window.location.href.replace('home','orderList/'+uid);
