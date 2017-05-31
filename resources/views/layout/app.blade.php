@@ -41,7 +41,10 @@
             color: #cccccc;
         }
         .font-xl {
-            font-size: 1.8em;
+            font-size: 17px;
+        }
+        .font-l {
+            font-size: 16px;
         }
         .font-b {
             font-size: 1.4em;
@@ -151,15 +154,41 @@
             text-align: left;
         }
 
+        .button-available{
+            background-color:#1dccb8;color:white;
+        }
+
+        .button-occupied{
+            background-color:white;
+            color:#cccccc;
+            border-color:#cccccc;
+        }
+
         .circle{
-            width:100px;
-            height:100px;
+            width:90px;
+            height:90px;
             background-color:#fff;
             border-style:solid;
             border-width: 2px;
             border-color:#1dccb8;
             border-radius:50px;
         }
+
+        #triangle-down-b {
+            width:0px;height:0px;            
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 6px solid #777777;
+        }
+
+
+        #triangle-down-main {
+            width:0px;height:0px;            
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 6px solid #1dccb8;
+        }
+
         .blend
         {
             width:782px;

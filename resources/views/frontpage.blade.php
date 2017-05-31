@@ -3,25 +3,42 @@
 
 @section('content')
     <div class="myHeader" style="margin-bottom: 2vh;box-shadow:0 1px 6px #eeeeee">
-        <div class="mybtn-group" style="">
-            <div id="myOrder">
-                <i class="fa fa-user-circle fa-fw m-color font-b"></i>
+        <div class="mybtn-group" style="height:44px;">
+            <div id="myOrder" style="height:44px;">
                 <span style="margin-top: 1vh">
-                我的订单
+                    今日使用
                 </span>
             </div>
-            <div id="equipment">
-                <img src="{{asset('storage/u329.png')}}" style="width:1.4em" alt="">
-
+            <div id="equipment" style="height:44px;">
                 <span style="margin-top: 1vh">
-                    小屋设施
+                    明日使用
                 </span>
+                <br>
+                <span id="time"></span>
+            </div>
+        </div>
+        <div class="mybtn-group" style="height:44px;">
+            <div id="allHome" style="width:33%;height:44px;">
+                <span style="margin-top: 1vh">
+                    全   部
+                </span>
+            </div>
+            <div id="nearestHome" style="width:33%;height:44px;">
+                <span style="margin-top: 1vh">
+                    离我最近
+                </span>
+            </div>
+            <div id="chooseArea" style="width:33%;height:44px;">
+                <span style="margin-top: 1vh">
+                    选择小区
+                </span>
+                <div id="triangle-down-b" style="position:absolute;right:10px;top:23px;">
             </div>
         </div>
     </div>
     <div class="content">
         @foreach($rooms as $key => $room)
-            <div class="mybox roomItem" data-content="{{$room->id}}">
+            <div class="roomItem" data-content="{{$room->id}}">
                     <div class="myrow"  id="slide_{{$key}}" style="margin-bottom: 1vh;margin-left:auto;margin-right:auto;display:block;text-align:center;width: 300px;height: 200px;overflow:hidden;visibility:hidden;position:relative;top:0px;left:0px;" >
                         <div data-u="slides" style="width: 300px;height: 200px; overflow:hidden;position:relative;top:0px;left:0px;">
                             <?php $imgFiles = \Illuminate\Support\Facades\File::files('storage/room'.($key+1));?>
@@ -33,14 +50,13 @@
                             @endforeach
                         </div>
                     </div>
-                    <div class="myrow"  style="justify-content: space-between">
+                    <div class="myrow"  style="justify-content: space-between;margin-left:12px;margin-right:12px;margin-bottom:10px;">
                         <span class="item">{{$room->title}}</span>
-                        <span class="room-state room-used {{$room->isUsing()? 'u-color':'m-color'}}" style="padding:0 2vw;border: 1px solid;border-radius: 3px;display:flex;flex-direction: row;justify-content: center">
+                        <span class="m-color" style="float:right;font-weight: 500;">¥ {{$room->hourPrice}}/小时</span><!--¥ {{$room->nightPrice}}/夜-->
+                        <br>
+                        <span class="room-state room-used {{$room->isUsing()? 'button-occupied':'button-available'}}" style="width:56px;padding:0 2vw;border: 1px solid;border-radius:12px;justify-content: center;">
                             {{$room->isUsing() ? '使用中':'可使用'}}
                         </span>
-                    </div>
-                    <div class="myrow"  style="justify-content: space-between">
-                        <span class="m-color" style="font-weight: bold;">¥ {{$room->hourPrice}}/时 ¥ {{$room->nightPrice}}/夜</span>
                         @if($room->isUsing())
                             @if($room->nextTime() != 0)
                                 <span class="room-state b-color">可预约<span class="m-color">{{(date('H',$room->nextTime())== 11? '明早':'' ). date('H:i',$room->nextTime())}}</span>使用</span>
@@ -50,7 +66,7 @@
                                 <span class="room-state m-color">可预约包夜</span>
                             @endif
                         @else
-                            <span class="room-state b-color">现在使用</span>
+                            <span class="room-state b-color" style="float:right;">即时使用</span>
                         @endif
                     </div>
             </div>
@@ -200,6 +216,77 @@
 @section('scripts')
     <script src="{{url('js/jssor.slider.min.js')}}"></script>
     <script>
+    window.onload=function(){
+    var date_time = new Date();
+date_time.setTime(date_time.getTime()+24*60*60*1000);//tomorrow
+ //定义星期
+ var week;
+ //switch判断
+ switch (date_time.getDay()){
+case 1: week="星期一"; break;
+case 2: week="星期二"; break;
+case 3: week="星期三"; break;
+case 4: week="星期四"; break;
+case 5: week="星期五"; break;
+case 6: week="星期六"; break;
+default:week="星期天"; break;
+ }
+
+ //年
+ var year = date_time.getFullYear();
+  //判断小于10，前面补0
+   if(year<10){
+  year="0"+year;
+ }
+
+ //月
+ var month = date_time.getMonth()+1;
+  //判断小于10，前面补0
+  //if(month<10){
+//month="0"+month;
+ //}
+
+ //日
+ var day = date_time.getDate();
+  //判断小于10，前面补0
+   //if(day<10){
+  //day="0"+day;
+ //}
+
+
+ //时
+ var hours =date_time.getHours();
+  //判断小于10，前面补0
+    if(hours<10){
+  hours="0"+hours;
+ }
+
+ //分
+ var minutes =date_time.getMinutes();
+  //判断小于10，前面补0
+    if(minutes<10){
+  minutes="0"+minutes;
+ }
+
+ //秒
+ var seconds=date_time.getSeconds();
+  //判断小于10，前面补0
+    if(seconds<10){
+  seconds="0"+seconds;
+ }
+
+ 
+
+ //拼接时间
+
+ var date_str = month+"月"+day+"日 ";
+
+ 
+
+ //显示在id为time的容器里
+
+ document.getElementById("time").innerHTML= date_str;
+}
         $(function () {
 
             var jssor_1_SlideshowTransitions = [
