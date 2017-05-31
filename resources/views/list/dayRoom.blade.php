@@ -62,13 +62,12 @@
                         @if($room->isUsing())
                             @if($room->nextTime() != 0)
                                 <span class="room-state b-color">可预约<span class="m-color">{{(date('H',$room->nextTime())== 11? '明早':'' ). date('H:i',$room->nextTime())}}</span>使用</span>
-                            @elseif(in_array(date('Y-m-d 00:00:00',\App\Utils\Utils::curNight()), json_decode($room->usingNight())))
-                                <span class="room-state b-color">今日已约满</span>
                             @else
-                                <span class="room-state m-color">可预约包夜</span>
+                            <!--if(in_array(date('Y-m-d 00:00:00',\App\Utils\Utils::curNight()), json_decode($room->usingNight())))-->
+                                <span class="room-state b-color">今日已约满</span>
                             @endif
                         @else
-                            <span class="room-state b-color" style="float:right;">即时使用</span>
+                            <span class="room-state b-color" style="font-size:12px;float:right;">即时使用</span>
                         @endif
                     </div>
             </div>
@@ -183,6 +182,7 @@
             </div>
         </div>
     </div>
+</div>
 @endsection
 @section('style')
     <style>
@@ -218,4 +218,5 @@
 @section('scripts')
     <script src="{{url('js/jssor.slider.min.js')}}"></script>
     <script src="{{url('js/roomList.js')}}"></script>
+    <script src="{{url('js/login.js')}}"></script>
 @endsection

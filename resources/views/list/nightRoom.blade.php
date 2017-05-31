@@ -63,7 +63,7 @@
                         <span class="room-state room-used {{$room->isUsing()? 'button-occupied':'button-available'}}" style="width:56px;padding:0 2vw;border: 1px solid;border-radius:12px;justify-content: center;">
                             {{$room->isUsing() ? '已订出':'可使用'}}
                         </span>
-                        <span class="room-state b-color" style="float:right;"><span name="today"></span>23:00 - 次日11:00</span>
+                        <span class="room-state b-color" style="font-size:12px;float:right;"><span name="today"></span>23:00 - 次日11:00</span>
                     </div>
             </div>
         @endforeach
@@ -76,6 +76,7 @@
         <div class="uphoneN" data-content="{{\Illuminate\Support\Facades\Auth::user()->phonenumber}}"></div>
         <div class="uidN" data-content="{{\Illuminate\Support\Facades\Auth::user()->idnumber}}"></div>
     </div>
+</div>
 
     <div id="validatePhone" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
@@ -172,7 +173,7 @@
                     <hr class="mysplit" style="margin: 0.5em;">
                     <button class="m-color font-m"
                             data-dismiss="modal"
-                            style="border:none;width:100%;height:100%;background-color:white;">朕知道了</button>
+                              style="border:none;width:100%;height:100%;background-color:white;">朕知道了</button>
                 </div>
             </div>
         </div>
@@ -212,4 +213,5 @@
 @section('scripts')
     <script src="{{url('js/jssor.slider.min.js')}}"></script>
     <script src="{{url('js/roomList.js')}}"></script>
+    <script src="{{url('js/login.js')}}"></script>
 @endsection

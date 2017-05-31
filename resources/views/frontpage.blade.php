@@ -183,6 +183,7 @@
             </div>
         </div>
     </div>
+</div>
 @endsection
 @section('style')
     <style>

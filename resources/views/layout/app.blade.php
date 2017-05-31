@@ -202,6 +202,7 @@
             border-top: 6px solid #777777;
         }
 
+
         #triangle-down-main {
             width:0px;height:0px;            
             border-left: 4px solid transparent;

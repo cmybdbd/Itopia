@@ -169,9 +169,9 @@
             height: 1.6em;
         }
     </style>
-    @endsection
+@endsection
 @section('scripts')
-    <script src="{{url('js/jssor.slider.min.js')}}"></script>
-    <script src="{{url('js/roomList.js')}}"></script>
-    <script src="{{url('js/login.js')}}"></script>
+    <script type="javascript" src="{{url('js/jssor.slider.min.js')}}"></script>
+    <script type="javascript" src="{{url('js/roomList.js')}}"></script>
+    <script type="javascript" src="{{url('js/login.js')}}"></script>
 @endsection
