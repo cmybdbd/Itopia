@@ -101,6 +101,16 @@
             border-color: white;
         }
 
+        .btn-main-secondary{
+            width: 158px;
+            color:#777777;
+            font-size: 14px;
+            height:44px;
+            background-color: white;
+            border-radius: 10px;
+            border-color: #1dccb8;
+        }
+
         .mybtn-group{
             width: 99%;
             height: 12vh;
@@ -160,6 +170,7 @@
         }
 
         .modal-dialog {
+            margin: auto;
             display: inline-block;
             text-align: left;
         }
