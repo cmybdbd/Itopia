@@ -24,16 +24,17 @@ class HomeController extends Controller
         {
             return redirect()->action('OrderController@getOrderDetail',['id'=>$exs->id]);
         }
-        return view('map.mapIndex')->withRooms(Room::where('state','<>',0)->get());
+        //return view('map.mapIndex')->withRooms(Room::where('state','<>',0)->get());
+        return view('frontpage')->withRooms(Room::where('state','<>',0)->get());
     }
 
     function dayPage()
     {
-        return view('frontpage')->withRooms(Room::where('state','<>',0)->get());
+        return view('list.dayRoom')->withRooms(Room::where('state','<>',0)->get());
     }
     function nightPage()
     {
-        return view('frontpage')->withRooms(Room::where('state','<>',0)->get());
+        return view('list.nightRoom')->withRooms(Room::where('state','<>',0)->get());
     }
 
     function orderList()
