@@ -218,6 +218,6 @@
 @section('scripts')
     <script src="{{url('js/jssor.slider.min.js')}}"></script>
     <script src="{{url('js/roomList.js')}}"></script>
-    <script src="{{url('js/login.js')}}"></script>
-    <!--<script src="{{url('js/dayRoomClick.js')}}"></script>-->
+    <!--<script src="{{url('js/login.js')}}"></script>-->
+    <script src="{{url('js/dayRoomClick.js')}}"></script>
 @endsection
