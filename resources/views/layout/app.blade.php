@@ -91,6 +91,26 @@
             background-image: -webkit-gradient(linear,0 0, 100% 0 ,from(transparent), to(transparent),color-stop(20%, #cccccc) , color-stop(80%, #cccccc));
             -moz-background-image: -moz-linear-gradient(left, transparent ,var(--used-color) 20%, var(--used-color) 80%, transparent 100%);
         }
+
+        .btn-main{
+            color:white;
+            font-size: 18px;
+            height:44px;
+            background-color: #1dccb8;
+            border-radius: 22px;
+            border-color: white;
+        }
+
+        .btn-main-secondary{
+            width: 158px;
+            color:#777777;
+            font-size: 14px;
+            height:44px;
+            background-color: white;
+            border-radius: 10px;
+            border-color: #1dccb8;
+        }
+
         .mybtn-group{
             width: 99%;
             height: 12vh;
@@ -150,6 +170,7 @@
         }
 
         .modal-dialog {
+            margin: auto;
             display: inline-block;
             text-align: left;
         }
@@ -180,7 +201,6 @@
             border-right: 4px solid transparent;
             border-top: 6px solid #777777;
         }
-
 
         #triangle-down-main {
             width:0px;height:0px;            
