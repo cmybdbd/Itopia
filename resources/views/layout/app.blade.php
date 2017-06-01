@@ -28,8 +28,8 @@
         }
         .mybox {
             box-shadow: 0 0 6px #dddddd;
-            margin: 4.2vw 4.2vw 4.2vw 4.2vw;
-            padding: 1em;
+            margin: 12px 12px 12px 12px;
+            padding: 0;
         }
         .flex-center{
             display: flex;
@@ -51,13 +51,13 @@
             font-size: 1.4em;
         }
         .font-m{
-            font-size: 1.2em;
+            font-size: 14px;
         }
         .font-s{
-            font-size: 0.85em;
+            font-size: 10px;
         }
         .font-xs{
-            font-size: 0.7em;
+            font-size: 8px;
         }
         .b-color {
             color: #777777;
@@ -203,7 +203,6 @@
             border-top: 6px solid #777777;
         }
 
-
         #triangle-down-main {
             width:0px;height:0px;            
             border-left: 4px solid transparent;
@@ -211,17 +210,25 @@
             border-top: 6px solid #1dccb8;
         }
 
-a{
-    color:#777777;
+        a{
+            color:#777777;
+        }
+
+        a:hover,a:active,a:after{
+            color:#cccccc;
+            text-decoration : none;
+        }
+
+.nav-button{
+    z-index:10;
+    box-shadow:rgba(255,255,255,1) 0px 3px 0px 0px;
 }
 
-a:hover,a:active,a:after{
-    color:#cccccc;
-    text-decoration : none;
+
+.nav-button:hover,.nav-button:active{
+    z-index:100;
+    box-shadow:rgba(29,204,184,1) 0px 3px 0px 0px;
 }
-
-.user{width:280px;box-shadow:rgba(29,204,184,.3) 0px 2px 0px 0px}
-
 
 .user:hover .user-nav {
   visibility:visible;
@@ -233,7 +240,7 @@ a:hover,a:active,a:after{
 
 .user-nav{text-align:center;z-index:1;position:relative; visibility:hidden; opacity:0;-webkit-transition:all .15s; top:40px;-webkit-transform: translate3d(0, 0, 0)}
 
-.user-nav ul{position:absolute; width:175px;background:#fff; left:-120px; color:#777; border-radius:10px;box-shadow:rgba(0,0,0,.3) 0px 2px 4px;}
+.user-nav ul{position:absolute; width:175px;background:#fff; left:-100px; color:#777; border-radius:10px;box-shadow:rgba(0,0,0,.3) 0px 2px 4px;}
 
 .user-nav ul:after{
   content:"";

@@ -1,17 +1,18 @@
 <!--day room list
-5.31 UI 1.0 
+5.31 UI 1.0 basic structure
+6.1 UI 1.1 shadow effect added
 -->
 @extends('layout.app')
 
 @section('content')
-    <div class="myHeader" style="margin-bottom: 2vh;box-shadow:0 1px 6px #eeeeee">
-        <div class="mybtn-group" style="position:fixed;z-index:10;height:44px;background-color:white;">
-            <div id="myOrder" style="height:44px;">
+    <div class="myHeader" style="margin-bottom: 2vh;">
+        <div class="mybtn-group" style="position:fixed;top:0px;z-index:10;height:44px;background-color:white;">
+            <div class="nav-button" id="myOrder" style="height:44px;">
                 <span style="margin-top: 1vh">
                     今日使用
                 </span>
             </div>
-            <div id="equipment" style="height:44px;">
+            <div class="nav-button" id="equipment" style="height:44px;">
                 <span style="margin-top: 1vh">
                     明日使用
                 </span>
@@ -19,37 +20,36 @@
                 <span id="tomorrow"></span>
             </div>
         </div>
-        <div class="mybtn-group" style="position:fixed;z-index:10;top:44px;height:44px;background-color:white;">
-            <div id="allHome" style="width:33%;height:44px;">
+        <div class="mybtn-group" style="position:fixed;z-index:10;top:46px;height:44px;background-color:white;box-shadow:0 1px 6px #eeeeee">
+            <div class="nav-button" id="allHome" style="width:33%;height:44px;">
                 <span style="margin-top: 1vh">
                     全   部
                 </span>
             </div>
-            <div id="nearestHome" style="width:33%;height:44px;">
+            <div class="nav-button" id="nearestHome" style="width:33%;height:44px;">
                 <span style="margin-top: 1vh">
                     离我最近
                 </span>
             </div>
-            <div id="chooseArea" style="width:33%;height:44px;">
-                <div class="user">
-                    <span style="margin-top: 2vh">选择小区</span>
-                    <div id="triangle-down-b" style="position:absolute;right:-10px;top:23px;"></div>
-                    <div class="user-nav">
-                        <ul style="padding-left:0px; top:0px;">
-                            <li><a class="font-xl"href="#">稻香园 <b class="m-color">3</b> 间</a></li>
-                            <hr class="mysplit" style="margin:0px;">
-                            <li><a class="font-xl"href="#">大河庄苑 <b class="m-color">8</b> 间</a></li>
-                            <hr class="mysplit" style="margin:0px;">
-                            <li><a class="font-xl"href="#">科育小区 <b class="m-color">3</b> 间</a></li>
-                            <hr class="mysplit" style="margin:0px;">
-                            <li><a class="font-xl"href="#">芙蓉里 <b class="m-color">3</b> 间</a></li>
-                            <hr class="mysplit" style="margin:0px;">
-                            <li><a class="font-xl"href="#">中关园 <b class="m-color">3</b> 间</a></li>
-                        </ul>
-                    </div>
+            <div class="user nav-button" id="chooseArea" style="width:33%;height:44px;">
+                <span style="margin-top: 2vh">选择小区</span>
+                <div id="triangle-down-b" style="position:absolute;right:10%;top:23px;"></div>
+                <div class="user-nav">
+                    <ul style="padding-left:0px; top:0px;">
+                        <li><a class="font-xl"href="#">稻香园 <b class="m-color">3</b> 间</a></li>
+                        <hr class="mysplit" style="margin:0px;">
+                        <li><a class="font-xl"href="#">大河庄苑 <b class="m-color">8</b> 间</a></li>
+                        <hr class="mysplit" style="margin:0px;">
+                        <li><a class="font-xl"href="#">科育小区 <b class="m-color">3</b> 间</a></li>
+                        <hr class="mysplit" style="margin:0px;">
+                        <li><a class="font-xl"href="#">芙蓉里 <b class="m-color">3</b> 间</a></li>
+                        <hr class="mysplit" style="margin:0px;">
+                        <li><a class="font-xl"href="#">中关园 <b class="m-color">3</b> 间</a></li>
+                    </ul>
                 </div>
+            </div>
         </div>
-    </div>
+    <hr class="mysplit" style="margin:0;">
     <div class="content" style="padding-top:88px;">
         @foreach($rooms as $key => $room)
             <div class="roomItem" data-content="{{$room->id}}">
@@ -83,10 +83,11 @@
                         @endif
                     </div>
             </div>
+            <hr class="mysplit" style="margin:0;">
         @endforeach
     </div>
-    <div class="footer m-color" style="text-align: center;margin-bottom:4vh">
-        更多iTOPIA即时私人空间将陆续开放，敬请期待！
+     <div class="footer m-color" style="text-align: center;margin-bottom:50px;">
+        <p style="margin-top:50px;">更多iTOPIA即时私人空间将陆续开放，敬请期待！</p>
     </div>
     <div id="param">
         <div class="uid" data-content="{{\Illuminate\Support\Facades\Auth::id()}}"></div>

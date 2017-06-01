@@ -95,8 +95,11 @@ create day order.
     </style>
 @endsection
 @section('content')
+<div class="center">
+    <div class="font-l"
+             style="background-color:#eeeeee;width:100%;height: 44px;margin:0;display:flex;align-items: center;justify-content: center">填写订单</div>
     <div class="mybox" style="box-shadow:none;">
-        <div class="f-color font-b">
+        <div class="f-color font-l">
             {{$room->title}}
         </div>
         <div class="b-color">
@@ -104,32 +107,21 @@ create day order.
         </div>
     </div>
 
-    <div style="margin: 3vw;">
-        <div class="m-color font-m">
-            选择使用方式
+    <img></img>
+    <hr class="mysplit">
+    <div class="mybox" style="box-shadow:none;">
+        <div class="f-color font-l">
+            选择使用时长
         </div>
-        <ul class="nav nav-pills" role="tablist" style="margin-top: 2vh;display:flex;justify-content: space-between">
-            <li role="presentation" class="active custom-li ">
-                <a href="#byHour" aria-controls="byHour" role="tab" id="useHour"
-                data-toggle="pill">
-                    <div>分时使用</div>
-                    <div>(11:00-23:00)</div>
-                    <div id="hourPrice" data-content="{{$room->hourPrice}}">
-                        {{$room->hourPrice}}/小时
-                    </div>
-                </a>
-            </li>
-            <li role="presentation" class="custom-li">
-                <a href="#byNight" aria-controls="byNight" role="tab" id="useNight"
-                data-toggle="pill">
-                    <div>预约包夜</div>
-                    <div>(23:30-次日10:30)</div>
-                    <div id="nightPrice" data-content="{{$room->nightPrice}}">
-                        {{$room->nightPrice}}/夜
-                    </div>
-                </a>
-            </li>
-        </ul>
+        <div class="m-color" style="padding-right:20%;margin-top:-7%;float:right">
+            今天(<span name="today"></span>) 13：00 ——
+        </div>
+    </div>
+    <hr class="mysplit">
+    <div class="mybox" style="box-shadow:none;">
+        <div class="f-color font-l">
+            订单结算
+        </div>
         <div class="tab-content" style="margin-top: 3vw;">
             <div class="m-color font-m">选择使用时间</div>
             <div role="tabpanel" class="tab-pane active" id="byHour">
@@ -179,10 +171,13 @@ create day order.
     <div class="cbox b-color font-s" style="margin: 3vw;">
         <input type="checkbox" id="agreement" style="margin:0">
         <label for="agreement"></label>本人已获悉并同意<span id="tos">《iTOPIA即时私人空间用户服务协议》</span>
+    </div>    
     </div>
-    <div id="toPay" class="myTail font-b m-color" style="height:3em;margin-top: 2vh;box-shadow:0 -1px 6px #eeeeee">
-        <button style="width: 100%;height: 100%; border:none;background:transparent">去支付</button>
-    </div>
+    <button class="btn btn-block btn-default btn-main" id="return">去支付</button>
+</div>
+    
+
+<div id="hourPrice" data-content="{{$room->hourPrice}}"></div>
 
     <div class="modal fade bs-example-modal-sm tos-content" role="dialog">
         <div class="modal-dialog modal-sm" role="document">
@@ -784,4 +779,5 @@ create day order.
 
         });
     </script>
+    <script src="{{url('js/roomList.js')}}"></script>
     @endsection
