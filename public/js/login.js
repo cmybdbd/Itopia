@@ -1,5 +1,5 @@
 $(function () {
-
+    /*
     var jssor_1_SlideshowTransitions = [
         {
             $Duration:1000,
@@ -15,7 +15,7 @@ $(function () {
             $Easing:{$Left:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},
             $Opacity:0
         }
-    ];
+    ];*/
 
     var jssor_1_options = {
         $AutoPlay: 1
@@ -73,6 +73,13 @@ $(function () {
     $("#myOrder").on('click',function () {
         window.location.href = window.location.href.replace('home','orderList/'+uid);
     });
+    $("#day").on('click',function () {
+        window.location.href = window.location.href.replace('home','dayPage');
+    });
+    $("#night").on('click',function () {
+        window.location.href = window.location.href.replace('home','nightPage');
+    });
+    
     $(".roomItem").on('click', function () {
         var t1 =false,t2=false;
         
