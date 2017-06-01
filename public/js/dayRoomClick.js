@@ -128,21 +128,11 @@ $(function () {
                 window.location.href = window.location.href.replace('home','orderList/'+uid);
             });
             $(".roomItem").on('click', function () {
+
                 window.location.href = window.location.href.replace(
-                    'home',
-                    'create/' + uid + '/' + $(this).attr('data-content')
+                    'dayPage',
+                    'create/day/' + uid + '/' + $(this).attr('data-content')
             )
-            });
-            $("#equipment").on('click',function () {
-                $(".equipment-content").modal();
-            });
-
-            $("#day").on('click',function () {
-                window.location.href = window.location.href.replace('home','dayPage');
-            });
-
-            $("#night").on('click',function () {
-                window.location.href = window.location.href.replace('home','nightPage');
             });
 
 });

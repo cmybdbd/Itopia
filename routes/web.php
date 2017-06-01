@@ -32,6 +32,8 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('/dayPage','HomeController@dayPage');
     Route::get('/nightPage','HomeController@nightPage');
     Route::get('/create/{uid}/{rid}', 'OrderController@createOrder');
+    Route::get('/create/day/{uid}/{rid}', 'OrderController@createDayOrder');
+    Route::get('/create/night/{uid}/{rid}', 'OrderController@createNightOrder');
     Route::get('/result/{id}','OrderController@getOrderDetail');
 
     Route::post('/order/complete','OrderController@completeOrder');
