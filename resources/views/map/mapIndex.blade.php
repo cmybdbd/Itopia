@@ -23,11 +23,11 @@
         <img src="{{asset('storage/map/mapPKU.png')}}" style="position:absolute;top:0px;z-index:-1;height:100%;width:auto;overflow:scroll">
         </div>
     </div>
-    <div style="position:fixed;width:100%;bottom:5%;">
-        <div class="circle" style="text-align:center;position:absolute;bottom:0%;left:55px">
+    <div style="position:fixed;width:100%;bottom:64px;">
+        <div class="circle" style="text-align:center;position:absolute;bottom:0;left:20%">
             <p class="font-xl" style="margin-top:16px;font-weight:500;">时租</p>
             <p class="font-l m-color" style="margin-top:-10px;font-weight:500;">19 / 小时</p></div>
-        <div class="circle" style="text-align:center;position:absolute;bottom:0%;right:55px">
+        <div class="circle" style="text-align:center;position:absolute;bottom:0;right:20%">
             <p class="font-xl" style="margin-top:16px;font-weight:500;">包夜</p>
             <p class="font-l m-color" style="margin-top:-10px;font-weight:500;">159 / 夜</p></div>
     </div>

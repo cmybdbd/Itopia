@@ -81,7 +81,7 @@
         <div class="uphoneN" data-content="{{\Illuminate\Support\Facades\Auth::user()->phonenumber}}"></div>
         <div class="uidN" data-content="{{\Illuminate\Support\Facades\Auth::user()->idnumber}}"></div>
     </div>
-
+</div>
     <div id="validatePhone" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -182,7 +182,7 @@
             </div>
         </div>
     </div>
-</div>
+
 @endsection
 @section('style')
     <style>
@@ -218,5 +218,6 @@
 @section('scripts')
     <script src="{{url('js/jssor.slider.min.js')}}"></script>
     <script src="{{url('js/roomList.js')}}"></script>
-    <script src="{{url('js/dayRoomClick.js')}}"></script>
+    <script src="{{url('js/login.js')}}"></script>
+    <!--<script src="{{url('js/dayRoomClick.js')}}"></script>-->
 @endsection
