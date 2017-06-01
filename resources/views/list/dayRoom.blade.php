@@ -31,7 +31,7 @@
                     离我最近
                 </span>
             </div>
-            <div class="user nav-button" id="chooseArea" style="width:33%;height:44px;">
+            <div class="user nav-button" id="chooseArea" style="width:34%;height:44px;border-right-color:white;border-right-style:solid;border-right-width:5px;">
                 <span style="margin-top: 2vh">选择小区</span>
                 <div id="triangle-down-b" style="position:absolute;right:10%;top:23px;"></div>
                 <div class="user-nav">

@@ -222,9 +222,8 @@
 
 .nav-button{
     z-index:10;
-    box-shadow:rgba(228,228,228,1) 1px 2px 0px 0px;
+    box-shadow:rgba(228,228,228,1) 0px 2px 0px 0px;
 }
-
 
 .nav-button:hover,.nav-button:active{
     z-index:100;
