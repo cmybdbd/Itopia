@@ -104,7 +104,7 @@
                 <hr class="mysplit">
                 <div class="modal-body">
                     <div class="input-group input-group-lg">
-                        <input type="number" class="form-control" id="phoneN" max="99999999999" placeholder="请输入你的手机号">
+                        <input type="text" class="form-control" id="phoneN" max="99999999999" placeholder="请输入你的手机号">
                         <span class="input-group-btn">
                             <button class="btn btn-secondary" id="sendCode" type="button">获取验证码</button>
                         </span>
@@ -112,7 +112,7 @@
                 </div>
                 <div class="" style="padding-bottom: 2.5em;display:flex; justify-content: space-around;">
                     @for($i = 0; $i < 4; $i ++)
-                        <input type="number" id="inp{{$i}}" style="text-align: center;font-size:2em; width: 1.6em;">
+                        <input type="text" id="inp{{$i}}" style="text-align: center;font-size:2em; width: 1.6em;">
                     @endfor
                 </div>
                 <p class="errormsg" style="color: red; position: absolute;left:1em;bottom: 0em;"></p>
