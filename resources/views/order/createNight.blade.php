@@ -1,5 +1,5 @@
-<!--
-create night order.
+<!--create day order.
+6.1 UI 1.0 basic layout
 -->
 @extends('layout.app')
 @section('style')
@@ -95,8 +95,11 @@ create night order.
     </style>
 @endsection
 @section('content')
+<div class="center">
+    <div class="font-l"
+             style="background-color:#eeeeee;width:100%;height: 44px;margin:0;display:flex;align-items: center;justify-content: center">填写订单</div>
     <div class="mybox" style="box-shadow:none;">
-        <div class="f-color font-b">
+        <div class="f-color font-l">
             {{$room->title}}
         </div>
         <div class="b-color">
@@ -104,85 +107,52 @@ create night order.
         </div>
     </div>
 
-    <div style="margin: 3vw;">
-        <div class="m-color font-m">
-            选择使用方式
-        </div>
-        <ul class="nav nav-pills" role="tablist" style="margin-top: 2vh;display:flex;justify-content: space-between">
-            <li role="presentation" class="active custom-li ">
-                <a href="#byHour" aria-controls="byHour" role="tab" id="useHour"
-                data-toggle="pill">
-                    <div>分时使用</div>
-                    <div>(11:00-23:00)</div>
-                    <div id="hourPrice" data-content="{{$room->hourPrice}}">
-                        {{$room->hourPrice}}/小时
-                    </div>
-                </a>
-            </li>
-            <li role="presentation" class="custom-li">
-                <a href="#byNight" aria-controls="byNight" role="tab" id="useNight"
-                data-toggle="pill">
-                    <div>预约包夜</div>
-                    <div>(23:30-次日10:30)</div>
-                    <div id="nightPrice" data-content="{{$room->nightPrice}}">
-                        {{$room->nightPrice}}/夜
-                    </div>
-                </a>
-            </li>
-        </ul>
-        <div class="tab-content" style="margin-top: 3vw;">
-            <div class="m-color font-m">选择使用时间</div>
-            <div role="tabpanel" class="tab-pane active" id="byHour">
-
-                <div class="mybox selectPanel">
-                    开始时间
-                    <div id="startTime" class="scrollPicker" data-content="{{$startDayTime}}">
-
-                    </div>
-                    <i class="fa fa-chevron-right" ></i>
-                </div>
-
-                <div class="mybox selectPanel" style="display:flex;">
-                    使用时长
-                    <div id="durationTime" class="scrollPicker" data-content="3600000" >
-                        1 小时
-                    </div>
-                    <i class="fa fa-chevron-right" ></i>
-                </div>
-                <div class="mybox selectPanel">
-                    结束时间
-                    <div id="endTime" class="present noPicker">
-
-                    </div>
-                    <i class="fa fa-chevron-right"></i>
-                </div>
-            </div>
-            <div role="tabpanel" class="tab-pane " id="byNight">
-                <div class="mybox selectPanel">
-                    日期
-                    <div id="dateTime" class="scrollPicker" data-content="{{$startNightTime}}"></div>
-                    <i class="fa fa-chevron-right" ></i>
+    <div class="content">
+        <div class="roomItem" data-content="{{$room->id}}">
+            <div class="myrow" style="margin-bottom: 1vh;margin-left:auto;margin-right:auto;display:block;text-align:center;width: 300px;height: 200px;overflow:hidden;visibility:hidden;position:relative;top:0px;left:0px;" >
+                <div data-u="slides" style="width: 300px;height: 200px; overflow:hidden;position:relative;top:0px;left:0px;">
+                    <?php $imgFiles = \Illuminate\Support\Facades\File::files('storage/room'.($room->parentId));?>
+                    @foreach($imgFiles as $img)
+                        <div>
+                            <img src="{{$img}}" data-u="image" alt="" width="300px"></img>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="m-color font-m" style="margin-top: 3vw;">
+    <hr class="mysplit">
+    <div class="mybox" style="box-shadow:none;">
+        <div class="f-color font-l">
+            使用时间
+        </div>
+        <div class="m-color" style="text-align:right;margin-top:-7%;float:right">
+            2017年<span name="today"></span> 23:00<br>
+            — <span id="tomorrow"></span> 11:00
+        </div>
+    </div>
+    <br>
+    <hr class="mysplit">
+    <div class="mybox" style="box-shadow:none;">
+        <div class="f-color font-l">
             订单结算
         </div>
-        <div class="mybox selectPanel">
+        <div class="mybox selectPanel font-l" style="box-shadow:none;">
             <span>总计</span>
             <div class="present" style="color: #ff0000;flex-grow:1">
-                <span id="totalPrice"></span>元
+                <span id="totalPrice">{{$room->nightPrice}}</span>元
             </div>
         </div>
     </div>
-    <div class="cbox b-color font-s" style="margin: 3vw;">
+    <div class="cbox b-color font-s" style="margin: 18px;">
         <input type="checkbox" id="agreement" style="margin:0">
-        <label for="agreement"></label>本人已获悉并同意<span id="tos">《iTOPIA即时私人空间用户服务协议》</span>
+        <label for="agreement"></label>本人已获悉并同意<span id="tos">《iTOPIA分时空间使用条例》</span>
+    </div>    
     </div>
-    <div id="toPay" class="myTail font-b m-color" style="height:3em;margin-top: 2vh;box-shadow:0 -1px 6px #eeeeee">
-        <button style="width: 100%;height: 100%; border:none;background:transparent">去支付</button>
-    </div>
+    <button class="btn btn-block btn-default btn-main" id="return">去支付</button>
+</div>
+
 
     <div class="modal fade bs-example-modal-sm tos-content" role="dialog">
         <div class="modal-dialog modal-sm" role="document">
@@ -314,6 +284,8 @@ create night order.
 
 
     <div id="param">
+        <div id="hourPrice" data-content="{{$room->hourPrice}}"></div>
+        <div id="nightPrice" data-content="{{$room->nightPrice}}"></div>
         <div id="userId" data-content="{{\Illuminate\Support\Facades\Auth::id()}}"></div>
         <div id="roomId" data-content="{{$room->id}}"></div>
         <div id="exs" data-content="{{$olderOrder}}"></div>
@@ -624,15 +596,8 @@ create night order.
                     .attr('data-content', (+startTime.attr("data-content")) + (+durationTime.attr("data-content")));
             }
             function updatePrice(page) {
-                if(page === 0)
-                {
-                    $("#totalPrice").text((+durationTime.attr("data-content"))/(3600*1000) * (+$("#hourPrice").attr("data-content")) );
-                }
-                else {
-
-                    if (dateTime.text() !== "") {
-                        $("#totalPrice").text($("#nightPrice").attr("data-content"));
-                    }
+                if (dateTime.text() !== "") {
+                    $("#totalPrice").text($("#nightPrice").attr("data-content"));
                 }
             }
             function checkToPay(){
@@ -784,4 +749,5 @@ create night order.
 
         });
     </script>
+    <script src="{{url('js/roomList.js')}}"></script>
     @endsection

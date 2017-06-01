@@ -7,12 +7,12 @@
 @section('content')
     <div class="myHeader" style="margin-bottom: 2vh;">
         <div class="mybtn-group" style="position:fixed;top:0px;z-index:10;height:44px;background-color:white;">
-            <div class="nav-button" id="myOrder" style="height:44px;">
+            <div id="myOrder" style="height:44px;">
                 <span style="margin-top: 1vh">
                     今日使用
                 </span>
             </div>
-            <div class="nav-button" id="equipment" style="height:44px;">
+            <div id="equipment" style="height:44px;">
                 <span style="margin-top: 1vh">
                     明日使用
                 </span>
@@ -20,7 +20,7 @@
                 <span id="tomorrow"></span>
             </div>
         </div>
-        <div class="mybtn-group" style="position:fixed;z-index:10;top:46px;height:44px;background-color:white;box-shadow:0 1px 6px #eeeeee">
+        <div class="mybtn-group" style="position:fixed;z-index:10;top:44px;height:44px;background-color:white;box-shadow:0 1px 6px #eeeeee">
             <div class="nav-button" id="allHome" style="width:33%;height:44px;">
                 <span style="margin-top: 1vh">
                     全   部
@@ -68,7 +68,7 @@
                         <span class="item">{{$room->title}}</span>
                         <span class="m-color" style="float:right;font-weight: 500;">¥ {{$room->hourPrice}}/小时</span>
                         <br>
-                        <span class="room-state room-used {{$room->isUsing()? 'button-occupied':'button-available'}}" style="width:56px;padding:0 2vw;border: 1px solid;border-radius:12px;justify-content: center;">
+                        <span class="room-state room-used {{$room->isUsing()? 'button-occupied':'button-available'}} font-s" style="width:50px;height:20px;padding:2px 8px;;border: 1px solid;border-radius:10px;justify-content: center;">
                             {{$room->isUsing() ? '使用中':'可使用'}}
                         </span>
                         @if($room->isUsing())
@@ -98,21 +98,22 @@
     <div id="validatePhone" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
+                <img src="{{asset('storage/map/cross.png')}}" style="position:absolute;width:20px;top:20px;right:20px;" alt="">
                 <div class="m-color">
                     <h4 style="text-align: center;line-height:2em">注册/登录</h4>
                 </div>
                 <hr class="mysplit">
                 <div class="modal-body">
-                    <div class="input-group input-group-lg">
-                        <input type="text" class="form-control" id="phoneN" max="99999999999" placeholder="请输入你的手机号">
+                    <div class="input-group input-group-lg" style="width:277px;">
+                        <input type="text" style="position:absolute;width:247px;font-size:14px;" class="form-control" id="phoneN" max="99999999999" placeholder="请输入您的11位手机号">
                         <span class="input-group-btn">
-                            <button class="btn btn-secondary" id="sendCode" type="button">获取验证码</button>
+                            <button class="btn btn-secondary btn-main-secondary" id="sendCode" type="button" style="z-index:11;margin-left:1px;border-radius: 10px;font-size:14px;">获取验证码</button>
                         </span>
                     </div>
                 </div>
                 <div class="" style="padding-bottom: 2.5em;display:flex; justify-content: space-around;">
                     @for($i = 0; $i < 4; $i ++)
-                        <input type="text" id="inp{{$i}}" style="text-align: center;font-size:2em; width: 1.6em;">
+                        <input type="text" id="inp{{$i}}" style="border-radius:8px;border: 1px solid #1dccb8;text-align: center;font-size:2em; width: 49px;">
                     @endfor
                 </div>
                 <p class="errormsg" style="color: red; position: absolute;left:1em;bottom: 0em;"></p>

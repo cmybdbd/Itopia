@@ -49,7 +49,7 @@
                     <div class="input-group input-group-lg">
                         <input type="text" class="form-control" id="phoneN" max="99999999999" placeholder="请输入你的手机号">
                         <span class="input-group-btn">
-                            <button class="btn btn-secondary btn-main-secondary" id="sendCode" type="button">获取验证码</button>
+                            <button class="btn btn-secondary btn-main-secondary" id="sendCode" type="button" style="font-size:10px;">获取验证码</button>
                         </span>
                     </div>
                 </div>

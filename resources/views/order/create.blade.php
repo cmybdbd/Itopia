@@ -127,8 +127,11 @@
         <div class="f-color font-l">
             选择使用时长
         </div>
-        <div class="m-color" style="padding-right:20%;margin-top:-7%;float:right">
+        <div class="mybox selectPanel" style="box-shadow:none;">
+            时间
+            <div class="m-color" style="float:right;margin-left:20%;">
             今天(<span name="today"></span>) 13：00 ——
+        </div>
         </div>
     </div>
     <hr class="mysplit">
@@ -137,10 +140,9 @@
             订单结算
         </div>
         <div class="tab-content" style="margin-top: 3vw;">
-            <div class="m-color font-m">选择使用时间</div>
             <div role="tabpanel" class="tab-pane active" id="byHour">
 
-                <div class="mybox selectPanel">
+                <div class="mybox selectPanel" style="box-shadow:none;">
                     开始时间
                     <div id="startTime" class="scrollPicker" data-content="{{$startDayTime}}">
 
@@ -148,19 +150,18 @@
                     <i class="fa fa-chevron-right" ></i>
                 </div>
 
-                <div class="mybox selectPanel" style="display:flex;">
+                <div class="mybox selectPanel" style="display:flex;box-shadow:none;">
                     使用时长
                     <div id="durationTime" class="scrollPicker" data-content="3600000" >
                         1 小时
                     </div>
                     <i class="fa fa-chevron-right" ></i>
                 </div>
-                <div class="mybox selectPanel">
+                <div class="mybox selectPanel" style="box-shadow:none;">
                     结束时间
                     <div id="endTime" class="present noPicker">
 
                     </div>
-                    <i class="fa fa-chevron-right"></i>
                 </div>
             </div>
             <div role="tabpanel" class="tab-pane " id="byNight">
@@ -172,10 +173,7 @@
             </div>
         </div>
 
-        <div class="m-color font-m" style="margin-top: 3vw;">
-            订单结算
-        </div>
-        <div class="mybox selectPanel">
+        <div class="mybox selectPanel font-l" style="box-shadow:none;">
             <span>总计</span>
             <div class="present" style="color: #ff0000;flex-grow:1">
                 <span id="totalPrice"></span>元

@@ -196,7 +196,7 @@ class OrderController extends Controller
             $nightTime = Utils::curNight();
         }
         PageViewController::updatePageView('create');
-        return view('order.create')->with([
+        return view('order.createNight')->with([
             'room'=>Room::find($rid),
             'startDayTime'=>$dayTime,
             'startNightTime' =>$nightTime,

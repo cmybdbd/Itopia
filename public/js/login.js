@@ -1,5 +1,5 @@
 $(function () {
-    /*
+    /*Z
     var jssor_1_SlideshowTransitions = [
         {
             $Duration:1000,

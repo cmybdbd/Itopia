@@ -54,7 +54,7 @@
             font-size: 14px;
         }
         .font-s{
-            font-size: 10px;
+            font-size: 12px;
         }
         .font-xs{
             font-size: 8px;
@@ -95,6 +95,8 @@
 
         .btn-main{
             color:white;
+            width: 92.6%;
+            margin:auto;
             font-size: 18px;
             height:44px;
             background-color: #1dccb8;
@@ -103,12 +105,11 @@
         }
 
         .btn-main-secondary{
-            width: 158px;
+            width: 99px;
             color:#777777;
             font-size: 14px;
             height:44px;
             background-color: white;
-            border-radius: 10px;
             border-color: #1dccb8;
         }
 
@@ -221,7 +222,7 @@
 
 .nav-button{
     z-index:10;
-    box-shadow:rgba(255,255,255,1) 0px 3px 0px 0px;
+    box-shadow:rgba(228,228,228,1) 1px 2px 0px 0px;
 }
 
 
