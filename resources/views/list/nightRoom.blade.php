@@ -1,6 +1,6 @@
 <!--night room list
 5.31 UI 1.0 basic structure
-6.1 UI 1.1 shadow effect added
+6.1 UI 1.2 navbar added / shadow effect added,UI finished
 -->
 @extends('layout.app')
 

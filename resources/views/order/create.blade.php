@@ -1,5 +1,5 @@
-<!--
-create day order.
+<!--create day order.
+6.1 UI 1.0 basic layout
 -->
 @extends('layout.app')
 @section('style')
@@ -107,7 +107,22 @@ create day order.
         </div>
     </div>
 
-    <img></img>
+    <div class="content">
+        <div class="roomItem" data-content="{{$room->id}}">
+            <div class="myrow" style="margin-bottom: 1vh;margin-left:auto;margin-right:auto;display:block;text-align:center;width: 300px;height: 200px;overflow:hidden;visibility:hidden;position:relative;top:0px;left:0px;" >
+                <div data-u="slides" style="width: 300px;height: 200px; overflow:hidden;position:relative;top:0px;left:0px;">
+                    <?php $imgFiles = \Illuminate\Support\Facades\File::files('storage/room'.($room->id));?><!--actually it's supposed to be room->name!!!-->
+                    @foreach($imgFiles as $img)
+                        <!--<div>
+                            <img src="{{$img}}" data-u="image" alt="" width="300px"></img>
+                        </div>-->
+                    @endforeach
+                    <img src="{{asset('storage/arch.jpg')}}" style="width: 300px;" >
+                </div>
+            </div>
+        </div>
+    </div>
+
     <hr class="mysplit">
     <div class="mybox" style="box-shadow:none;">
         <div class="f-color font-l">
