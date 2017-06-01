@@ -5,7 +5,7 @@
 
 @section('content')
     <div class="myHeader" style="margin-bottom: 2vh;box-shadow:0 1px 6px #eeeeee">
-        <div class="mybtn-group" style="height:44px;">
+        <div class="mybtn-group" style="position:fixed;z-index:10;height:44px;background-color:white;">
             <div id="myOrder" style="height:44px;">
                 <span style="margin-top: 1vh">
                     今日使用
@@ -19,7 +19,7 @@
                 <span id="tomorrow"></span>
             </div>
         </div>
-        <div class="mybtn-group" style="height:44px;">
+        <div class="mybtn-group" style="position:fixed;z-index:10;top:44px;height:44px;background-color:white;">
             <div id="allHome" style="width:33%;height:44px;">
                 <span style="margin-top: 1vh">
                     全   部
@@ -31,14 +31,26 @@
                 </span>
             </div>
             <div id="chooseArea" style="width:33%;height:44px;">
-                <span style="margin-top: 1vh">
-                    选择小区
-                </span>
-                <div id="triangle-down-b" style="position:absolute;right:10px;top:23px;">
-            </div>
+                <div class="user">
+                    <span style="margin-top: 2vh">选择小区</span>
+                    <div id="triangle-down-b" style="position:absolute;right:-10px;top:23px;"></div>
+                    <div class="user-nav">
+                        <ul style="padding-left:0px; top:0px;">
+                            <li><a class="font-xl"href="#">稻香园 <b class="m-color">3</b> 间</a></li>
+                            <hr class="mysplit" style="margin:0px;">
+                            <li><a class="font-xl"href="#">大河庄苑 <b class="m-color">8</b> 间</a></li>
+                            <hr class="mysplit" style="margin:0px;">
+                            <li><a class="font-xl"href="#">科育小区 <b class="m-color">3</b> 间</a></li>
+                            <hr class="mysplit" style="margin:0px;">
+                            <li><a class="font-xl"href="#">芙蓉里 <b class="m-color">3</b> 间</a></li>
+                            <hr class="mysplit" style="margin:0px;">
+                            <li><a class="font-xl"href="#">中关园 <b class="m-color">3</b> 间</a></li>
+                        </ul>
+                    </div>
+                </div>
         </div>
     </div>
-    <div class="content">
+    <div class="content" style="padding-top:88px;">
         @foreach($rooms as $key => $room)
             <div class="roomItem" data-content="{{$room->id}}">
                     <div class="myrow"  id="slide_{{$key}}" style="margin-bottom: 1vh;margin-left:auto;margin-right:auto;display:block;text-align:center;width: 300px;height: 200px;overflow:hidden;visibility:hidden;position:relative;top:0px;left:0px;" >
