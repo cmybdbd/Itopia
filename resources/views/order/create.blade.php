@@ -114,7 +114,7 @@
                     <?php $imgFiles = \Illuminate\Support\Facades\File::files('storage/room'.($room->parentId));?>
                     @foreach($imgFiles as $img)
                         <div>
-                            <img src="{{$img}}" data-u="image" alt="" width="300px"></img>
+                            <img src="../../../{{$img}}" data-u="image" alt="" width="300px"></img>
                         </div>
                     @endforeach
                 </div>

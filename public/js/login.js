@@ -1,4 +1,5 @@
 $(function () {
+
     /*Z
     var jssor_1_SlideshowTransitions = [
         {
@@ -16,19 +17,19 @@ $(function () {
             $Opacity:0
         }
     ];*/
-
+/*
     var jssor_1_options = {
         $AutoPlay: 1
     };
     var jssor_slider = [];
     for (i =0 ;i< $(".roomItem").length;i++) {
         jssor_slider[i] = new $JssorSlider$("slide_"+i, jssor_1_options);
-    }
+    }*/
    // var jssor_2_slider = new $JssorSlider$("jssor_2", jssor_1_options);
 
     /*responsive code begin*/
     /*remove responsive code if you don't want the slider scales while window resizing*/
-    function ScaleSlider() {
+    /*function ScaleSlider() {
         var uload = false;
         for(i=0; i< $(".roomItem").length;i++) {
             var refwidth = jssor_slider[i].$Elmt.parentNode.clientWidth;
@@ -54,10 +55,10 @@ $(function () {
     $(window).bind("load", ScaleSlider);
     $(window).bind("resize", ScaleSlider);
     $(window).bind("orientationchange", ScaleSlider);
+*/
 
 
-
-
+    
     $("#equipment").on('click',function () {
         $(".equipment-content").modal();
     });
@@ -97,9 +98,9 @@ $(function () {
                     o.textContent = "重新发送(" + wait + ")";
                     wait--;
                     setTimeout(function () {
-                            time(o)
+                            time(o);
                         },
-                        1000)
+                        1000);
                 }
             }
 
@@ -199,14 +200,14 @@ $(function () {
                                 inp0.focus();
                             }
                         }
-                    })
+                    });
 
                 }
             });
         }
         else{
             t1 =true;
-        };
+        }
         if(!$("#param .uidN").attr("data-content")) {
             var validateID = $("#validateIdNumber");
             validateID.on("shown.bs.modal", function(){
@@ -234,7 +235,7 @@ $(function () {
                                 $("#idNumberError").modal('show');
                             }
                         }
-                    })
+                    });
                 }
                 else
                 {
@@ -242,12 +243,12 @@ $(function () {
                         .val('')
                         .focus();
                 }
-            })
+            });
             $("#idNumberError button").on("click",function(){
                 $("#idNumberError").modal('hide');
                 validateID.find('input').val('');
                 validateID.modal('show');
-            })
+            });
         }
         else
         {
@@ -259,7 +260,7 @@ $(function () {
             window.location.href = window.location.href.replace(
                 'home',
                 'create/' + uid + '/' + $(this).attr('data-content')
-            )
+            );
         }
     });
 });
