@@ -1,3 +1,6 @@
+<!--comment create page
+5.31 UI 1.0 done
+-->
 @extends('layout.app')
 @section('style')
     <style>

@@ -1,15 +1,10 @@
+<!--comment create page
+6.2 UI 1.0 textarea word counter added
+-->
 @extends('layout.app')
 @section('style')
     <link rel="stylesheet" href="{{url('css/starrr.css')}}">
     <style>
-        .starrr{
-            margin-top: 1em;
-            margin-bottom: 1em;
-        }
-        .starrr  a{
-            font-size:3em;
-            color : #1dccb8;
-        }
         .mainTag{
             display: none;
             flex-wrap: wrap;
@@ -19,10 +14,10 @@
             display: flex;
             align-items: center;
             /*border: 1px solid var(--used-color);*/
-            border: 1px solid #1dccb8;
-            border-radius: 10px;
+            border: 1px solid #cccccc;
+            border-radius: 17px;
             line-height: 1.5em;
-            padding: 0.4em 1em;
+            padding: 6px 24px;
 
         }
 
@@ -44,7 +39,7 @@
             border-radius: 150px;
             line-height: 1.2em;
             text-align: center;
-            padding: 0.4em 0em;
+            padding: 6px 0px;
             margin: 0.25em;
             width: 30%;
         }
@@ -55,79 +50,83 @@
             background-color: #1dccb8;
             color: white;
         }
+        .custom-textarea{
+            margin-top:18px;
+        }
     </style>
 @endsection
 @section('content')
-    <div>
-        <div class="mybox">
-            <div class="flex-center m-color font-b">
-                感谢主人使用iTOPIA空间
+    <div class="font-l"
+        style="background-color:#eeeeee;width:100%;height: 44px;margin:0;display:flex;align-items: center;justify-content: center">您的评价
+    </div>
+    <!--<hr class="mysplit"-->
+    <div class="mybox" style="box-shadow:none;">
+        <div class="mybox" style="box-shadow:none;">
+            <div class="flex-center m-color font-l">
+                感谢主人使用蜗壳空间
             </div>
             <hr class="mysplit">
-            <div class="flex-center b-color">
+            <div class="flex-center b-color font-m">
             希望主人能留下对iTOPIA的意见建议(*￣︶￣*)
             </div>
-            <div class="flex-center b-color">
-            填写就有机会获得小 i 送出的多小时免费体验哦
+            <div class="flex-center b-color font-m">
+            填写就有机会获得小蜗送出的多小时免费体验哦
             </div>
-            <div class="flex-center">
+            <div class="flex-center" style="height:90px;">
                 <div class="starrr"></div>
             </div>
 
             <div class="tags">
                 <div class="mainTag">
-                    <p>地理位置不够好</p>
-                    <p>安全设施不够好</p>
-                    <p>房间设施不够好</p>
-                    <p>微信平台不好用</p>
+                    <p style="cursor:pointer;">地理位置不够好</p>
+                    <p style="cursor:pointer;">安全设施不够好</p>
+                    <p style="cursor:pointer;">房间设施不够好</p>
+                    <p style="cursor:pointer;">微信平台不好用</p>
                 </div>
                 <div class="tagDetail">
                     <div>
                         地理位置
                         <div class="tag">
-                            <p>距离较远</p>
-                            <p>不容易找到</p>
-                            <p>周边交通不便</p>
+                            <p style="cursor:pointer;">距离较远</p>
+                            <p style="cursor:pointer;">不容易找到</p>
+                            <p style="cursor:pointer;">周边交通不便</p>
                         </div>
                     </div>
                     <div>
                         安全设施
                         <div class="tag">
-                            <p>密码锁不方便</p>
-                            <p>安全无保障</p>
+                            <p style="cursor:pointer;">密码锁不方便</p>
+                            <p style="cursor:pointer;">安全无保障</p>
                         </div>
                     </div>
                     <div>
                         房间设施
                         <div class="tag">
-                            <p>家具种类少</p>
-                            <p>房间卫生差</p>
-                            <p>设施损坏</p>
-                            <p>布局不合理</p>
-                            <p>隔音效果差</p>
-                            <p>缺少娱乐功能</p>
+                            <p style="cursor:pointer;">家具种类少</p>
+                            <p style="cursor:pointer;">房间卫生差</p>
+                            <p style="cursor:pointer;">设施损坏</p>
+                            <p style="cursor:pointer;">布局不合理</p>
+                            <p style="cursor:pointer;">隔音效果差</p>
+                            <p style="cursor:pointer;">缺少娱乐功能</p>
                         </div>
                     </div>
                     <div>
                         微信平台
                         <div class="tag">
-                            <p>操作复杂</p>
-                            <p>系统漏洞</p>
-                            <p>客服不及时</p>
+                            <p style="cursor:pointer;">操作复杂</p>
+                            <p style="cursor:pointer;">系统漏洞</p>
+                            <p style="cursor:pointer;">客服不及时</p>
                         </div>
                     </div>
 
                 </div>
             </div>
 
-            <textarea class="form-control custom-textarea" name="" id="" cols="30" rows="6"></textarea>
-        </div>
-        <div class="lr">
-            <button id="commit" class="btn btn-block btn-default font-b">提 交</button>
+            <textarea class="form-control custom-textarea" name="" id="" cols="30" rows="6" onkeyup="countChar(this)"></textarea>
+            <p style="margin-top:12px;"><span id="wordcount">0</span>/100，最少输入15字</p>
         </div>
     </div>
-
-
+    <button class="btn btn-block btn-default btn-main" id="commit">提交</button>
 
 
     <div id="param">
@@ -138,7 +137,21 @@
 @section('scripts')
     <script src="{{url('/js/starrr.js')}}"></script>
     <script>
-
+        function countChar(val){
+            var len = val.value.length;
+            var num;
+            if (len >= 100) {
+                val.value = val.value.substring(0, 100);
+                num = 100;
+            } else {
+                num = len;
+            }
+            if(num<15)
+                $("#wordcount").css('color','red');
+            else
+                $("#wordcount").css('color','#777');
+            $("#wordcount").html(num);
+        };
         $(function () {
             var starNum = -1;
             idCommit =$("#commit");
