@@ -216,9 +216,15 @@
         }
 
         a:hover,a:active,a:after{
-            color:#cccccc;
+            color:#1dccb8;
             text-decoration : none;
         }
+
+.nav-button-top:hover,.nav-button-top:active{
+    color:#1dccb8;
+    z-index:100;
+    /*box-shadow:rgba(29,204,184,1) 0px 3px 0px 0px;*/
+}
 
 .nav-button{
     z-index:10;
@@ -226,6 +232,7 @@
 }
 
 .nav-button:hover,.nav-button:active{
+    color:#1dccb8;
     z-index:100;
     box-shadow:rgba(29,204,184,1) 0px 3px 0px 0px;
 }

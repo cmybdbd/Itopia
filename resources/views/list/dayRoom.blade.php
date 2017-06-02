@@ -6,13 +6,13 @@
 
 @section('content')
     <div class="myHeader" style="margin-bottom: 2vh;">
-        <div class="mybtn-group" style="position:fixed;top:0px;z-index:10;height:44px;background-color:white;">
-            <div id="myOrder" style="height:44px;">
+        <div class="mybtn-group" style="position:fixed;top:0px;z-index:10;height:46px;background-color:white;">
+            <div class="nav-button-top" id="myOrder" style="height:44px;">
                 <span style="margin-top: 1vh">
                     今日使用
                 </span>
             </div>
-            <div id="equipment" style="height:44px;">
+            <div class="nav-button-top" id="equipment" style="height:44px;">
                 <span style="margin-top: 1vh">
                     明日使用
                 </span>
@@ -20,7 +20,7 @@
                 <span id="tomorrow"></span>
             </div>
         </div>
-        <div class="mybtn-group" style="position:fixed;z-index:10;top:44px;height:44px;background-color:white;box-shadow:0 1px 6px #eeeeee">
+        <div class="mybtn-group" style="position:fixed;z-index:10;top:46px;height:44px;background-color:white;box-shadow:0 1px 6px #eeeeee">
             <div class="nav-button" id="allHome" style="width:33%;height:44px;">
                 <span style="margin-top: 1vh">
                     全   部
@@ -33,7 +33,7 @@
             </div>
             <div class="user nav-button" id="chooseArea" style="width:34%;height:44px;border-right-color:white;border-right-style:solid;border-right-width:5px;">
                 <span style="margin-top: 2vh">选择小区</span>
-                <div id="triangle-down-b" style="position:absolute;right:10%;top:23px;"></div>
+                <div id="triangle-down-b" style="position:absolute;right:20%;top:60%;"></div>
                 <div class="user-nav">
                     <ul style="padding-left:0px; top:0px;">
                         <li><a class="font-xl"href="#">稻香园 <b class="m-color">3</b> 间</a></li>
@@ -52,7 +52,7 @@
     <hr class="mysplit" style="margin:0;">
     <div class="content" style="padding-top:88px;">
         @foreach($rooms as $key => $room)
-            <div class="roomItem" data-content="{{$room->id}}">
+            <div class="roomItem" data-content="{{$room->id}}" style="cursor:pointer;">
                     <div class="myrow"  id="slide_{{$key}}" style="margin-bottom: 1vh;margin-left:auto;margin-right:auto;display:block;text-align:center;width: 300px;height: 200px;overflow:hidden;visibility:hidden;position:relative;top:0px;left:0px;" >
                         <div data-u="slides" style="width: 300px;height: 200px; overflow:hidden;position:relative;top:0px;left:0px;">
                             <?php $imgFiles = \Illuminate\Support\Facades\File::files('storage/room'.($key+1));?>

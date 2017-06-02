@@ -6,8 +6,8 @@
 
 @section('content')
     <div class="myHeader" style="margin-bottom: 2vh;">
-        <div class="mybtn-group" style="position:fixed;top:0px;z-index:10;height:44px;background-color:white;">
-            <div id="lastnight" style="width:33%;height:44px;">
+        <div class="mybtn-group" style="position:fixed;top:0px;z-index:10;height:46px;background-color:white;">
+            <div class="nav-button-top" id="lastnight" style="width:33%;height:44px;">
                 <img style="position:absolute;top:15px;left:15px;width:15px;" src="{{asset('storage/order/leftarrow.png')}}"></img>
                 <span style="margin-top: 1vh">
                     前一夜
@@ -18,7 +18,7 @@
                 <span style="color:white;margin-top:10px;" name="today"></span>
                 <div style="position:absolute;left:0;right:0;margin:auto;top:10px;width:95.5%;height:34px;border-radius:15px;background-color:#1dccb8;z-index:-1;"></div>
             </div>
-            <div id="nextnight" style="width:33%;height:44px;">
+            <div class="nav-button-top" id="nextnight" style="width:33%;height:44px;">
                 <img style="position:absolute;top:15px;right:15px;width:15px;" src="{{asset('storage/order/rightarrow.png')}}"></img>
                 <span style="margin-top: 1vh">
                     后一夜
@@ -26,7 +26,7 @@
                 <span id="tomorrow"></span>
             </div>
         </div>
-        <div class="mybtn-group" style="position:fixed;z-index:10;top:44px;height:44px;background-color:white;">
+        <div class="mybtn-group" style="position:fixed;z-index:10;top:46px;height:44px;background-color:white;">
             <div class="nav-button" id="allHome" style="width:33%;height:44px;">
                 <span style="margin-top: 1vh">
                     全   部
@@ -37,9 +37,9 @@
                     离我最近
                 </span>
             </div>
-            <div class="user nav-button" id="chooseArea" style="width:33%;height:44px;">
+            <div class="user nav-button" id="chooseArea" style="width:34%;height:44px;">
                 <span style="margin-top: 2vh">选择小区</span>
-                <div id="triangle-down-b" style="position:absolute;right:10%;top:23px;"></div>
+                <div id="triangle-down-b" style="position:absolute;right:20%;top:60%;"></div>
                 <div class="user-nav">
                     <ul style="padding-left:0px; top:0px;">
                         <li><a class="font-xl"href="#">稻香园 <b class="m-color">3</b> 间</a></li>
