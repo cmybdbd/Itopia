@@ -1,5 +1,6 @@
 <!--comment create page
 6.2 UI 1.0 textarea word counter added
+       1.1 UI update
 -->
 @extends('layout.app')
 @section('style')
@@ -39,7 +40,7 @@
             border-radius: 150px;
             line-height: 1.2em;
             text-align: center;
-            padding: 6px 0px;
+            padding: 4px 0px 6px 0px;
             margin: 0.25em;
             width: 30%;
         }
@@ -65,7 +66,7 @@
             <div class="flex-center m-color font-l">
                 感谢主人使用蜗壳空间
             </div>
-            <hr class="mysplit">
+            <hr class="mysplit" style="margin-top:6.4px;">
             <div class="flex-center b-color font-m">
             希望主人能留下对iTOPIA的意见建议(*￣︶￣*)
             </div>
@@ -122,7 +123,7 @@
                 </div>
             </div>
 
-            <textarea class="form-control custom-textarea" name="" id="" cols="30" rows="6" onkeyup="countChar(this)"></textarea>
+            <textarea class="form-control custom-textarea" name="" id="commentText" cols="30" rows="6" onkeyup="countChar(this)"></textarea>
             <p style="margin-top:12px;"><span id="wordcount">0</span>/100，最少输入15字</p>
         </div>
     </div>
@@ -152,6 +153,8 @@
                 $("#wordcount").css('color','#777');
             $("#wordcount").html(num);
         };
+        //var a = getElementById("#commentText");
+        //countChar(a);
         $(function () {
             var starNum = -1;
             idCommit =$("#commit");
