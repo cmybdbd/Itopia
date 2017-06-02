@@ -109,15 +109,9 @@
 
     <div class="content">
         <div class="roomItem" data-content="{{$room->id}}">
-            <div class="myrow" style="margin-bottom: 1vh;margin-left:auto;margin-right:auto;display:block;text-align:center;width: 300px;height: 200px;overflow:hidden;visibility:hidden;position:relative;top:0px;left:0px;" >
-                <div data-u="slides" style="width: 300px;height: 200px; overflow:hidden;position:relative;top:0px;left:0px;">
-                    <?php $imgFiles = \Illuminate\Support\Facades\File::files('storage/room'.($room->parentId));?>
-                    @foreach($imgFiles as $img)
-                        <div>
-                            <img src="{{$img}}" data-u="image" alt="" width="300px"></img>
-                        </div>
-                    @endforeach
-                </div>
+            <div class="myrow" style="text-align:center;background-color:#eeeeee;">
+                <?php $imgFiles = \Illuminate\Support\Facades\File::files('storage/room'.($room->parentId));?>
+                <img src="../../../{{$imgFiles[0]}}" data-u="image" alt="" style="height:200px;"></img>
             </div>
         </div>
     </div>
@@ -145,12 +139,11 @@
             </div>
         </div>
     </div>
-    <div class="cbox b-color font-s" style="margin: 18px;">
+    <div class="cbox b-color font-m" style="margin:12px 36px 12px 36px; padding-left:10px;">
         <input type="checkbox" id="agreement" style="margin:0">
         <label for="agreement"></label>本人已获悉并同意<span id="tos">《iTOPIA分时空间使用条例》</span>
-    </div>    
     </div>
-    <button class="btn btn-block btn-default btn-main" id="return">去支付</button>
+    <button class="btn btn-block btn-default btn-main" id="return">去支付<span id="timeCount"></span></button>
 </div>
 
 
@@ -297,6 +290,39 @@
 @section('scripts')
 
     <script>
+    $(document).ready(function(){
+                timeCount($("#timeCount"));
+            });
+
+var btn;
+var clock = '';
+var nums = 300;//5min
+
+function timeCount(thisBtn){
+    btn = thisBtn;
+    btn.html('(5分0秒)');
+    clock = setInterval(doLoop, 1000); //一秒执行一次
+}
+
+function doLoop(){
+    var mins = 0;
+    nums--;
+    t = nums;
+    while(t>=60)
+    {
+        mins++;
+        t=t-60;
+    }
+    var secs = t;
+
+    if(nums > 0){
+        btn.html('('+mins+'分'+secs+'秒)');
+    }else{
+        //alert('已过期，请重新付款！');
+        window.location.href='/home';
+    }
+}
+
         $(function() {
             $("#tos").on('click',function(){
                 $(".tos-content").modal();
@@ -574,7 +600,6 @@
                 }
 
             });
-
 
 
             durationPicker.on('picker.select', function(selectedVal, selectedIndex){
