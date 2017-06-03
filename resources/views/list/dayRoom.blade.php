@@ -50,7 +50,7 @@
             </div>
         </div>
     <hr class="mysplit" style="margin:0;">
-    <div id="content" class="content" style="padding-top:88px;">
+    <div id="content" class="content" style="padding-top:81px;">
         @foreach($rooms as $key => $room)
             <div class="roomItem" data-content="{{$room->id}}" style="cursor:pointer;">
                     <div style="wdith:100%;background-color:#eeeeee;">

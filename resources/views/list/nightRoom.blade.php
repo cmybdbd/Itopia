@@ -56,7 +56,7 @@
             </div>
         </div>
     </div>
-    <div class="content" style="padding-top:88px;">
+    <div class="content" style="padding-top:81px;">
         @foreach($rooms as $key => $room)
             <div class="roomItem" data-content="{{$room->id}}">
                     <div style="wdith:100%;background-color:#eeeeee;">
