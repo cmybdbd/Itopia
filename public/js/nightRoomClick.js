@@ -1,3 +1,4 @@
+var dayShift = 0;
 $(function () {
 
     var jssor_1_SlideshowTransitions = [
@@ -55,8 +56,69 @@ $(function () {
     $(window).bind("resize", ScaleSlider);
     $(window).bind("orientationchange", ScaleSlider);
 
+    $("#lastnight").on('click',function () {
+        if(dayShift>0){
+            dayShift--;
+            var date_time = new Date();
+            date_time.setTime(date_time.getTime() + dayShift * 24*60*60*1000);
 
+            var month = date_time.getMonth()+1;
+            var day = date_time.getDate();
+            var date_td = month+"月"+day+"日";
 
+            date_time.setTime(date_time.getTime()+24*60*60*1000);//tomorrow
+            var monthtm = date_time.getMonth()+1;
+            var daytm = date_time.getDate();
+            var date_tm = monthtm+"月"+daytm+"日";
+ 
+            date_time.setTime(date_time.getTime()-2*24*60*60*1000);//yesterday
+            var monthyt = date_time.getMonth()+1;
+            var dayyt = date_time.getDate();
+            var date_yt = monthyt+"月"+dayyt+"日";
+ 
+            //显示在容器里
+            var tm = document.getElementById("tomorrow");
+            var yt = document.getElementById("yesterday");
+ 
+            document.getElementById("tomorrow").innerHTML= date_tm;
+            document.getElementById("yesterday").innerHTML= date_yt;
+            var tags = document.getElementsByName("today");
+            for(var i in tags)//对标签进行遍历 
+                tags[i].innerHTML= date_td;
+        }
+    });
+
+    $("#nextnight").on('click',function () {
+        if(dayShift<7){
+            dayShift++;
+            var date_time = new Date();
+            date_time.setTime(date_time.getTime() + dayShift * 24*60*60*1000);
+
+            var month = date_time.getMonth()+1;
+            var day = date_time.getDate();
+            var date_td = month+"月"+day+"日";
+
+            date_time.setTime(date_time.getTime()+24*60*60*1000);//tomorrow
+            var monthtm = date_time.getMonth()+1;
+            var daytm = date_time.getDate();
+            var date_tm = monthtm+"月"+daytm+"日";
+ 
+            date_time.setTime(date_time.getTime()-2*24*60*60*1000);//yesterday
+            var monthyt = date_time.getMonth()+1;
+            var dayyt = date_time.getDate();
+            var date_yt = monthyt+"月"+dayyt+"日";
+ 
+            //显示在容器里
+            var tm = document.getElementById("tomorrow");
+            var yt = document.getElementById("yesterday");
+ 
+            document.getElementById("tomorrow").innerHTML= date_tm;
+            document.getElementById("yesterday").innerHTML= date_yt;
+            var tags = document.getElementsByName("today");
+            for(var i in tags)//对标签进行遍历 
+                tags[i].innerHTML= date_td;
+        }
+    });
 
     $("#dxy").on('click',function () {
         window.location.href='/getNightRooms/dxy';
@@ -109,9 +171,6 @@ $(function () {
                         1000)
                 }
             }
-
-
-            
 
             var inp0 = $("#inp0"),
                 inp1 = $("#inp1"),
@@ -262,150 +321,12 @@ $(function () {
         }
         
         if(t1  && t2)//if(1)              
-        {
-            window.location.href = window.location.href.replace(
+        {   
+            window.location.href = '../create/night/' + uid + '/' + $(this).attr('data-content') + '/' + dayShift;
+            /*window.location.href = window.location.href.replace(
                 'nightPage',
                 'create/night/' + uid + '/' + $(this).attr('data-content')
-            )
+            )*/
         }
     });
 });
-
-/*$(function () {
-    var validatePhone =$("#validatePhone");
-    var phoneN = $("#phoneN");
-    validatePhone.on('shown.bs.modal', function () {
-        phoneN.focus();
-    });
-    if(!$("#param .uphoneN").attr("data-content")) {
-        var wait = 60;
-
-        function time(o) {
-            if (wait === 0) {
-                o.removeAttribute("disabled");
-                o.textContent = "获取验证码";
-                wait = 60;
-            } else {
-
-                o.setAttribute("disabled", true);
-                o.textContent = "重新发送(" + wait + ")";
-                wait--;
-                setTimeout(function () {
-                        time(o)
-                    },
-                        1000)
-            }
-        }
-
-        //alert('no idnumber');
-        var inp0 = $("#inp0"),
-            inp1 = $("#inp1"),
-            inp2 = $("#inp2"),
-            inp3 = $("#inp3");
-
-                validatePhone.modal('show');
-                $("#sendCode").on('click', function () {
-                    phone = phoneN.val();
-                    if (phone.match(/^\d{11}$/)) {
-                        $.ajax({
-                            type: 'get',
-                            dataType: 'jsonp',
-                            jsonpCallback: 'callback',
-                            url: 'http://renthouse.wecash.net/itopia/checkphone.php?m=sendCode&' +
-                            'p=' + phone,
-                            success: function (e) {
-                                console.log(e);
-                                inp0.focus();
-                            }
-                        });
-                        time(this);
-                    }
-                    else {
-                        $("#phoneN").focus();
-                    }
-                });
-
-                inp0.bind('input', function () {
-                    inp1.focus();
-                });
-                inp1.bind('input', function () {
-                    inp2.focus();
-                });
-                inp2.bind('input', function () {
-                    inp3.focus();
-                });
-                inp3.bind('input', function () {
-                    if (inp3.val().match(/^\d$/)) {
-                        console.log('http://renthouse.wecash.net/itopia/checkphone.php?m=checkCode&' +
-                            'p=' + inp0.val() + inp1.val() + inp2.val() + inp3.val());
-                        $.ajax({
-                            dataType: 'jsonp',
-                            jsonpCallback: "jsonp",
-                            url: 'http://renthouse.wecash.net/itopia/checkphone.php?m=checkCode&' +
-                            'p=' + inp0.val() + inp1.val() + inp2.val() + inp3.val(),
-                            success: function (e) {
-                                console.log(e);
-                                if (e.code == 200) {
-                                    $("#validatePhone").modal('hide');
-                                    $.ajax({
-                                        url: '/savePhone/' + phoneN.val(),
-                                        data: {
-                                            _token:$("meta[name='csrf-token']").attr('content')
-                                        },
-                                        type: 'POST',
-                                        success: function () {
-                                            console.log('save phone');
-                                        }
-                                    });
-                                }
-                                else {
-                                    $(".errormsg").text('验证码有误');
-                                    setTimeout(function () {
-                                        $(".errormsg").text('');
-                                    }, 3000);
-                                    inp0.val('');
-                                    inp1.val('');
-                                    inp2.val('');
-                                    inp3.val('');
-                                    inp0.focus();
-                                }
-
-                            }
-                        });
-                    }
-                });
-            };
-            if(!$("#param .uidN").attr("data-content")) {
-                var validateID = $("#validateIdNumber");
-                validateID.modal('show');
-                $("#validateID").on("click",function(){
-                    var RealName = $("#RealName").val();
-                    var RealId = $("#RealId").val();
-
-                    if(RealId.match(/^\d{18}$/)) {
-                        $.ajax({
-                            url: '/idAuth?name=' + RealName + "&id_card="+RealId,
-                            success:function(e){
-                                console.log(e);
-                                if(e.code == 200)
-                                {
-                                    validateID.modal('hide');
-                                }
-                            }
-                        })
-                    }
-                })
-            }
-            var uid = $("#param .uid").attr('data-content');
-            $("#myOrder").on('click',function () {
-                window.location.href = window.location.href.replace('home','orderList/'+uid);
-            });
-            $(".roomItem").on('click', function () {
-
-                window.location.href = window.location.href.replace(
-                    'nightPage',
-                    'create/night/' + uid + '/' + $(this).attr('data-content')
-            )
-            });
-
-});*/

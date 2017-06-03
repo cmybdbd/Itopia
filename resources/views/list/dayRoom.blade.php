@@ -6,13 +6,13 @@
 
 @section('content')
     <div class="myHeader" style="margin-bottom: 2vh;">
-        <div class="mybtn-group" style="position:fixed;top:0px;z-index:10;height:46px;background-color:white;">
-            <div class="nav-button-top" id="useToday" style="height:44px;">
+        <div class="mybtn-group" style="position:fixed;top:0px;z-index:10;height:48px;background-color:white;">
+            <div class="nav-button-top nav-active" id="useToday" style="height:46px;">
                 <span style="margin-top: 1vh">
                     今日使用
                 </span>
             </div>
-            <div class="nav-button-top" id="useTomorrow" style="height:44px;">
+            <div class="nav-button-top" id="useTomorrow" style="height:46px;">
                 <span style="margin-top: 1vh">
                     明日使用
                 </span>
@@ -20,7 +20,7 @@
                 <span id="tomorrow"></span>
             </div>
         </div>
-        <div class="mybtn-group" style="position:fixed;z-index:10;top:46px;height:44px;background-color:white;box-shadow:0 1px 6px #eeeeee">
+        <div class="mybtn-group" style="position:fixed;z-index:10;top:48px;height:44px;background-color:white;box-shadow:0 1px 6px #eeeeee">
             <div class="nav-button" id="allHome" style="width:33%;height:44px;">
                 <span style="margin-top: 1vh">
                     全   部

@@ -1,3 +1,4 @@
+var dayShift = 0;
 $(function () {
 
     var jssor_1_SlideshowTransitions = [
@@ -57,14 +58,23 @@ $(function () {
 
 
 
-
-
     var validatePhone =$("#validatePhone");
     var phoneN = $("#phoneN");
     validatePhone.on('shown.bs.modal', function () {
         phoneN.focus();
     });
 
+
+    $("#useToday").on('click',function () {
+        dayShift = 0;
+        $("#useToday").addClass("nav-active");
+        $("#useTomorrow").removeClass("nav-active");
+    });
+    $("#useTomorrow").on('click',function () {
+        dayShift = 1;
+        $("#useTomorrow").addClass("nav-active");
+        $("#useToday").removeClass("nav-active");
+    });
 
     $("#dxy").on('click',function () {
         window.location.replace('/getDayRooms/dxy');
@@ -112,8 +122,6 @@ $(function () {
                 }
             }
 
-
-            
 
             var inp0 = $("#inp0"),
                 inp1 = $("#inp1"),
@@ -265,7 +273,7 @@ $(function () {
         
         if(t1  && t2)//if(1)              
         {   
-            window.location.href = '../create/day/' + uid + '/' + $(this).attr('data-content') + '/' + $('#dayShift').attr('data-content');
+            window.location.href = '../create/day/' + uid + '/' + $(this).attr('data-content') + '/' + dayShift;
             /*window.location.href = window.location.href.replace(
                 'create/day/' + uid + '/' + $(this).attr('data-content')
             )*/
