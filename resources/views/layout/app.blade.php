@@ -290,8 +290,12 @@
 .user-nav ul li:active{background:#1dccb8; color:#fff;-webkit-transition:all .15s;}
 
 .user-nav ul li:hover,.user-nav ul li:active span{background-position-x:-20px;}
+
+.modal-dialog{
+    margin-top:40%;
+}
     
-    </style>
+</style>
     @yield('style')
 </head>
 <body>
@@ -316,7 +320,7 @@
 <div id="validatePhone" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <img src="{{asset('storage/map/cross.png')}}" style="position:absolute;width:20px;top:20px;right:20px;" alt="">
+                <img data-dismiss="modal" src="{{asset('storage/map/cross.png')}}" style="cursor:pointer;position:absolute;width:20px;top:20px;right:20px;" alt="">
                 <div class="m-color">
                     <h4 style="text-align: center;line-height:2em">注册/登录</h4>
                 </div>
@@ -329,7 +333,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="" style="padding-bottom: 2.5em;display:flex; justify-content: space-around;">
+                <div class="" style="margin-left:18px;margin-right:18px;padding-bottom: 2.5em;display:flex; justify-content: space-around;">
                     @for($i = 0; $i < 4; $i ++)
                         <input type="text" id="inp{{$i}}" style="border-radius:8px;border: 1px solid #1dccb8;text-align: center;font-size:2em; width: 49px;">
                     @endfor
