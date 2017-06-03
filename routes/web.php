@@ -28,14 +28,15 @@ Route::group(['middleware' => 'auth'], function (){
         \App\User::savePhone($phone, \Illuminate\Support\Facades\Auth::id());
     });
 
+    Route::get('/timetest', 'OrderController@test');
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/dayPage','HomeController@dayPage');
     Route::get('/nightPage','HomeController@nightPage');
     Route::get('/getDayRooms/{name}','HomeController@getDayRooms');
     Route::get('/getNightRooms/{name}','HomeController@getNightRooms');
     Route::get('/create/{uid}/{rid}', 'OrderController@createOrder');
-    Route::get('/create/day/{uid}/{rid}', 'OrderController@createDayOrder');
-    Route::get('/create/night/{uid}/{rid}', 'OrderController@createNightOrder');
+    Route::get('/create/day/{uid}/{rid}/{day}', 'OrderController@createDayOrder');
+    Route::get('/create/night/{uid}/{rid}/{day}', 'OrderController@createNightOrder');
     Route::get('/result/{id}','OrderController@getOrderDetail');
 
     Route::post('/order/complete','OrderController@completeOrder');

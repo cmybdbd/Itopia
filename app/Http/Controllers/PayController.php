@@ -63,7 +63,7 @@ class PayController extends Controller
         $res = ApiHandle::httpPostJson($query_url, $params);
         $res = json_decode($res, true);
 
-
+        //return $res;
         if($res['successful'] == 1)
         {
             $orderno = $res['data']['orderno'];

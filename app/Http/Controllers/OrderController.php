@@ -123,18 +123,30 @@ class OrderController extends Controller
     /*
      * show
      */
-    function createDayOrder($uid, $rid)
+    function test()
+    {
+        $rid = 'ae50f8da-225e-11e7-b33a-00163e028324';
+        $maxDayTime = strtotime(Order::where([
+            ['roomId','=', $rid],
+            ['isDay', '=', 1],
+            ['state', '>', Constant::$ORDER_STATE['REMOVE']]
+        ])->where('endTime','>','2017-05-26')->max('endTime'));
+        //$nowday = time();
+        $nowday = strtotime(date("Y-m-d"));//strtotime(date("Y-m-d"))+ ' ' + 
+        return $nowday;
+    }
+    function createDayOrder($uid, $rid, $day)
     {
         $maxDayTime = strtotime(Order::where([
             ['roomId','=', $rid],
             ['isDay', '=', 1],
             ['state', '>', Constant::$ORDER_STATE['REMOVE']]
-        ])->max('endTime'));
+        ])->where('endTime','<',date("Y-m-d",time()+86400*($day + 1)))->max('endTime'));
         $maxNightTime = strtotime(Order::where([
             ['roomId','=', $rid],
             ['isDay', '=', 0],
             ['state', '>', Constant::$ORDER_STATE['REMOVE']]
-        ])->max('endTime'));
+        ])->where('endTime','<',date("Y-m-d",time()+86400*($day + 1)))->max('endTime'));
         $existOrder = Order::where([
             ['userId' , '=', $uid],
             ['roomId', '=', $rid],
@@ -147,15 +159,15 @@ class OrderController extends Controller
         }
         else
         {
-            $dayTime = time();
+            $dayTime = time()+86400*$day;
         }
         if(!empty($maxNightTime))
         {
-            $nightTime = $maxNightTime + 24*60*60*1000;
+            $nightTime = $maxNightTime;
         }
         else
         {
-            $nightTime = Utils::curNight();
+            $nightTime = 0;
         }
         PageViewController::updatePageView('create');
         return view('order.create')->with([
@@ -164,18 +176,18 @@ class OrderController extends Controller
             'startNightTime' =>$nightTime,
             'olderOrder'=>$existOrder]);
     }
-    function createNightOrder($uid, $rid)
+    function createNightOrder($uid, $rid ,$day)
     {
         $maxDayTime = strtotime(Order::where([
             ['roomId','=', $rid],
             ['isDay', '=', 1],
             ['state', '>', Constant::$ORDER_STATE['REMOVE']]
-        ])->max('endTime'));
+        ])->where('endTime','<',date("Y-m-d",time()+86400*($day + 1)))->max('endTime'));
         $maxNightTime = strtotime(Order::where([
             ['roomId','=', $rid],
             ['isDay', '=', 0],
             ['state', '>', Constant::$ORDER_STATE['REMOVE']]
-        ])->max('endTime'));
+        ])->where('startTime','<',date("Y-m-d",time()+86400*($day + 1)))->where('startTime','>',date("Y-m-d",time()+86400*$day))->max('startTime'));
         $existOrder = Order::where([
             ['userId' , '=', $uid],
             ['roomId', '=', $rid],
@@ -188,15 +200,15 @@ class OrderController extends Controller
         }
         else
         {
-            $dayTime = time();
+            $dayTime = time()+86400*$day;
         }
         if(!empty($maxNightTime))
         {
-            $nightTime = $maxNightTime + 24*60*60*1000;
+            $nightTime = $maxNightTime;
         }
         else
         {
-            $nightTime = Utils::curNight();
+            $nightTime = 0;
         }
         PageViewController::updatePageView('create');
         return view('order.createNight')->with([

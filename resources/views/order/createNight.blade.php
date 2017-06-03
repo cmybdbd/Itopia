@@ -276,12 +276,12 @@
     </div>
 
 <?php $stTime=strtotime(date("Y-m-d")+'23:00'); 
-$edTime=$stTime + 12 * 3600000;
+$edTime=$stTime + 86400/2;
 ?>
     <div id="param">
         <div id="startTime" data-content="{{$stTime}}"></div>
         <div id="endTime1" data-content="{{$edTime}}"></div>
-        <div id="durationTime" data-content="12 * 3600000"></div>
+        <div id="durationTime" data-content="86400/2"></div>
         <div id="hourPrice" data-content="{{$room->hourPrice}}"></div>
         <div id="nightPrice" data-content="{{$room->nightPrice}}"></div>
         <div id="userId" data-content="{{\Illuminate\Support\Facades\Auth::id()}}"></div>

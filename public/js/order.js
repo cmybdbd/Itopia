@@ -402,12 +402,14 @@ $(function() {
                             else
                             {
                                 $("#toPay button").text('下单失败');
+                                alert('下单失败');
+                                console.log('下单失败');
                                 window.location.href=window.location.href;
                             }
 
                         },
                         error: function (e){
-                            //alert(e.responseText);
+                            alert(e.responseText);
                             alert("您还没有选择使用时间哦～");
                             //console.log(e.responseText);
                         }
