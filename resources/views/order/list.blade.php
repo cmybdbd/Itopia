@@ -5,30 +5,17 @@
         .center> div{
             text-align: center;
         }
-        .room-touse, .room-used{
-            float:right;
-            padding:0 0.5em;
-            border: 1px solid;
-            border-radius: 3px;
-        }
-        .room-touse{
-            color: #1dccb8;
-        }
-        .room-used{
-            color: #cccccc;
-        }
+
     </style>
 @endsection
 @section('content')
     <div class="center">
-        <div class="font-b"
-        style="height: 8em;display:flex;flex-direction: column; align-items: center;justify-content: center">
-            <i class="fa fa-user-circle fa-fw m-color font-b"></i>
-            <div style="margin-top: 0.6em">我的订单</div>
+        <div class="font-l"
+        style="background-color:#eeeeee;width:100%;height: 44px;margin:0;display:flex;align-items: center;justify-content: center">我的订单
         </div>
 
         @if(count($orders))
-        <div class="mybox" style="text-align: left">
+        <div class="mybox" style="text-align: left;box-shadow:none;">
             @foreach($orders as $key => $order)
                 @if($key != 0)
                     <hr class="mysplit">
@@ -38,23 +25,22 @@
                     <span>{{date('m月d日',strtotime($order->startTime))}}</span>
                     -
                     <span>{{$order->isDay?'分时使用':'包夜使用'}}</span>
-                    -
-                    <span>{{$order->hasRoom->title}}</span>
                     @if($order->state < 4 || $order->state > 8)
-                        <span class="room-used" >已结束</span>
+                        <span class="button-occupied font-s" style="float:right;">已结束</span>
                     @elseif($order->state <6)
-                        <span class="room-touse" >未使用</span>
+                        <span class="button-available font-s" style="width:55px;height:24px;float:right;">可使用</span>
                     @else
-                        <span class="room-touse" >使用中</span>
+                        <span class="button-available font-s" style="float:right;">使用中</span>
                     @endif
                 </div>
                 <div class="b-color">
                 <div>
-                    {{$order->hasRoom->address}}
+                    {{$order->hasRoom->title}}空间
+                    <!--{{$order->hasRoom->address}}-->
                 </div>
                 <div>
                     <span>使用时间：</span>
-                    <span>{{$order->startTime}}</span>
+                    <span>20{{date('y年m月d日G:i',strtotime($order->startTime))}} — {{date('G:i',strtotime($order->endTime))}}</span>
                 </div>
                 <div>
                     <span>消费金额：</span>

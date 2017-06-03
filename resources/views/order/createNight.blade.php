@@ -110,7 +110,7 @@
     <div class="content">
         <div class="roomItem" data-content="{{$room->id}}">
             <div class="myrow" style="text-align:center;background-color:#eeeeee;">
-                <?php $imgFiles = \Illuminate\Support\Facades\File::files('storage/room'.($room->parentId));?>
+                <?php $imgFiles = \Illuminate\Support\Facades\File::files('storage/room'.($room->state));?>
                 <img src="../../../{{$imgFiles[0]}}" data-u="image" alt="" style="height:200px;"></img>
             </div>
         </div>

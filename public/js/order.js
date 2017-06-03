@@ -216,10 +216,12 @@ $(function() {
                 title: '开始时间',
                 id: 'startPicker'
             });
+
+            //使用时长
             var durationPicker = new Picker({
                 data: [duration],
                 selectIndex: [0],
-                title: '使用时长',
+                title: '',
                 id: 'durationPicker'
             });
             var datePicker = new Picker({
