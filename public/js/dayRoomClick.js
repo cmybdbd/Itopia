@@ -67,21 +67,24 @@ $(function () {
 
 
     $("#dxy").on('click',function () {
-        window.location.href='http://itopia.localhost/getDayRooms/dxy';
+        window.location.replace('/getDayRooms/dxy');
+        //window.location.href='/getDayRooms/dxy';
     });
     $("#dhzy").on('click',function () {
-        window.location.href='http://itopia.localhost/getDayRooms/dhzy';
+        window.location.replace('/getDayRooms/dhzy');
     });
     $("#kyxq").on('click',function () {
-        window.location.href='http://itopia.localhost/getDayRooms/kyxq';
+        window.location.replace('/getDayRooms/kyxq');
     });
     $("#frl").on('click',function () {
-        window.location.href='http://itopia.localhost/getDayRooms/frl';
+        window.location.replace('/getDayRooms/frl');
     });
     $("#zgy").on('click',function () {
-        window.location.href='http://itopia.localhost/getDayRooms/zgy';
+        window.location.replace('/getDayRooms/zgy');
     });
-
+    $("#allHome").on('click',function () {
+        window.location.replace('/dayPage');
+    });
     var uid = $("#param .uid").attr('data-content');
     $("#myOrder").on('click',function () {
         window.location.href = window.location.href.replace('home','orderList/'+uid);
@@ -261,11 +264,11 @@ $(function () {
         }
         
         if(t1  && t2)//if(1)              
-        {
-            window.location.href = window.location.href.replace(
-                'dayPage',
+        {   
+            window.location.href = '../create/day/' + uid + '/' + $(this).attr('data-content')
+            /*window.location.href = window.location.href.replace(
                 'create/day/' + uid + '/' + $(this).attr('data-content')
-            )
+            )*/
         }
     });
 });

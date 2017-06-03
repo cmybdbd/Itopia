@@ -59,21 +59,23 @@ $(function () {
 
 
     $("#dxy").on('click',function () {
-        window.location.href='http://itopia.localhost/getNightRooms/dxy';
+        window.location.href='/getNightRooms/dxy';
     });
     $("#dhzy").on('click',function () {
-        window.location.href='http://itopia.localhost/getNightRooms/dhzy';
+        window.location.href='/getNightRooms/dhzy';
     });
     $("#kyxq").on('click',function () {
-        window.location.href='http://itopia.localhost/getNightRooms/kyxq';
+        window.location.href='/getNightRooms/kyxq';
     });
     $("#frl").on('click',function () {
-        window.location.href='http://itopia.localhost/getNightRooms/frl';
+        window.location.href='/getNightRooms/frl';
     });
     $("#zgy").on('click',function () {
-        window.location.href='http://itopia.localhost/getNightRooms/zgy';
+        window.location.href='/getNightRooms/zgy';
     });
-
+    $("#allHome").on('click',function () {
+        window.location.href='/nightPage';
+    });
     var validatePhone =$("#validatePhone");
     var phoneN = $("#phoneN");
     validatePhone.on('shown.bs.modal', function () {
