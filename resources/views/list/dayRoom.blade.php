@@ -70,7 +70,7 @@
                         <span class="item">{{$room->title}}</span>
                         <span class="m-color" style="float:right;font-weight: 500;">¥ {{$room->hourPrice}}/小时</span>
                         <br>
-                        <span class="room-state room-used {{$room->isUsing()? 'button-occupied':'button-available'}} font-s" style="width:50px;height:20px;padding:2px 8px;;border: 1px solid;border-radius:10px;justify-content: center;">
+                        <span class="room-state room-used {{$room->isUsing()? 'button-occupied':'button-available'}} font-s">
                             {{$room->isUsing() ? '使用中':'可使用'}}
                         </span>
                         @if($room->isUsing())

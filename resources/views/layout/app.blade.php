@@ -178,13 +178,25 @@
         }
 
         .button-available{
-            background-color:#1dccb8;color:white;
+            background-color:#1dccb8;
+            color:white;
+            width:50px;
+            height:20px;
+            padding:2px 8px;
+            border: 1px solid;
+            border-radius:10px;
+            justify-content: center;
         }
 
         .button-occupied{
             background-color:white;
             color:#cccccc;
-            border-color:#cccccc;
+            width:50px;
+            height:20px;
+            padding:2px 8px;
+            border: 1px solid #cccccc;
+            border-radius:10px;
+            justify-content: center;
         }
 
         .circle{
