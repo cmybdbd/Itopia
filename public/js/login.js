@@ -72,16 +72,27 @@ $(function () {
 
     var uid = $("#param .uid").attr('data-content');
     $("#myOrder").on('click',function () {
-        window.location.href = window.location.href.replace('home','orderList/'+uid);
+        if(!$("#param .uphoneN").attr("data-content"))
+            login();
+        else
+            window.location.href = window.location.href.replace('home','orderList/'+uid);
     });
     $("#day").on('click',function () {
+        if(!$("#param .uphoneN").attr("data-content"))
+            login();
+        else
         window.location.href = window.location.href.replace('home','dayPage');
     });
     $("#night").on('click',function () {
+        if(!$("#param .uphoneN").attr("data-content"))
+            login();
+        else
         window.location.href = window.location.href.replace('home','nightPage');
     });
     
-    $(".roomItem").on('click', function () {
+    $(document).ready(login());
+
+    function login () {
         var t1 =false,t2=false;
         
         if(!$("#param .uphoneN").attr("data-content")) {
@@ -102,10 +113,7 @@ $(function () {
                         },
                         1000);
                 }
-            }
-
-
-            
+            }     
 
             var inp0 = $("#inp0"),
                 inp1 = $("#inp1"),
@@ -262,5 +270,5 @@ $(function () {
                 'create/' + uid + '/' + $(this).attr('data-content')
             );
         }
-    });
+    }
 });

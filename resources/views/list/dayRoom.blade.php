@@ -33,7 +33,7 @@
             </div>
             <div class="user nav-button" id="chooseArea" style="width:34%;height:44px;border-right-color:white;border-right-style:solid;border-right-width:5px;">
                 <span style="margin-top: 2vh">选择小区</span>
-                <div id="triangle-down-b" style="position:absolute;right:18%;top:52%;"></div>
+                <div id="triangle-down-b" style="position:absolute;right:14%;top:52%;"></div>
                 <div class="user-nav">
                     <ul style="padding-left:0px; top:0px;">
                         <li><a id="dxy" class="font-xl"href="#">稻香园 <b class="m-color">3</b> 间</a></li>
@@ -75,10 +75,10 @@
                         </span>
                         @if($room->isUsing())
                             @if($room->nextTime() != 0)
-                                <span class="room-state b-color">可预约<span class="m-color">{{(date('H',$room->nextTime())== 11? '明早':'' ). date('H:i',$room->nextTime())}}</span>使用</span>
+                                <span class="room-state b-color" style="font-size:12px;float:right;">可预约<span class="m-color">{{(date('H',$room->nextTime())== 11? '明早':'' ). date('H:i',$room->nextTime())}}</span>使用</span>
                             @else
                             <!--if(in_array(date('Y-m-d 00:00:00',\App\Utils\Utils::curNight()), json_decode($room->usingNight())))-->
-                                <span class="room-state b-color">今日已约满</span>
+                                <span class="room-state b-color" style="font-size:12px;float:right;">今日已约满</span>
                             @endif
                         @else
                             <span class="room-state b-color" style="font-size:12px;float:right;">即时使用</span>
@@ -97,66 +97,6 @@
         <div class="uidN" data-content="{{\Illuminate\Support\Facades\Auth::user()->idnumber}}"></div>
     </div>
 </div>
-    <div id="validatePhone" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <img src="{{asset('storage/map/cross.png')}}" style="position:absolute;width:20px;top:20px;right:20px;" alt="">
-                <div class="m-color">
-                    <h4 style="text-align: center;line-height:2em">注册/登录</h4>
-                </div>
-                <hr class="mysplit">
-                <div class="modal-body">
-                    <div class="input-group input-group-lg" style="width:277px;">
-                        <input type="text" style="position:absolute;width:247px;font-size:14px;" class="form-control" id="phoneN" max="99999999999" placeholder="请输入您的11位手机号">
-                        <span class="input-group-btn">
-                            <button class="btn btn-secondary btn-main-secondary" id="sendCode" type="button" style="z-index:11;margin-left:1px;border-radius: 10px;font-size:14px;">获取验证码</button>
-                        </span>
-                    </div>
-                </div>
-                <div class="" style="padding-bottom: 2.5em;display:flex; justify-content: space-around;">
-                    @for($i = 0; $i < 4; $i ++)
-                        <input type="text" id="inp{{$i}}" style="border-radius:8px;border: 1px solid #1dccb8;text-align: center;font-size:2em; width: 49px;">
-                    @endfor
-                </div>
-                <p class="errormsg" style="color: red; position: absolute;left:1em;bottom: 0em;"></p>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-    <div id="validateIdNumber" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="m-color">
-                    <h4 style="text-align: center;line-height:2em">身份验证</h4>
-                </div>
-                <hr class="mysplit">
-                <div class="modal-body">
-                    <div class="input-group input-group-lg" >
-                        <input type="text" class="form-control" id="RealId" placeholder="请输入身份证号">
-                    </div>
-                    <div class="input-group input-group-lg">
-                        <input type="text" class="form-control" id="RealName" placeholder="请输入姓名">
-                    </div>
-                </div>
-                <div>
-                    <button class="btn btn-default form-control font-b" style="height: 3em" id="validateID">确 认</button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-    <div id="idNumberError" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="b-color" style="padding:1em 2em">主人, 你输入的身份证号有误哦！</div>
-                </div>
-
-                <div>
-                    <button class="btn btn-default form-control m-color" style="height: 3em" id="">朕重新输入一遍</button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-
 
     <div class="modal fade bs-example-modal-sm equipment-content" role="dialog">
         <div class="modal-dialog modal-sm" role="document">

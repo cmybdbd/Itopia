@@ -26,11 +26,11 @@
                     -
                     <span>{{$order->isDay?'分时使用':'包夜使用'}}</span>
                     @if($order->state < 4 || $order->state > 8)
-                        <span class="button-occupied font-s" style="float:right;">已结束</span>
+                        <span class="button-occupied font-s" style="width:55px;height:24px;float:right;">已结束</span>
                     @elseif($order->state <6)
                         <span class="button-available font-s" style="width:55px;height:24px;float:right;">可使用</span>
                     @else
-                        <span class="button-available font-s" style="float:right;">使用中</span>
+                        <span class="button-available font-s" style="width:55px;height:24px;float:right;">使用中</span>
                     @endif
                 </div>
                 <div class="b-color">
