@@ -791,5 +791,6 @@
 
         });
     </script>
+    
     <script src="{{url('js/roomList.js')}}"></script>
     @endsection
