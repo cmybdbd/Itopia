@@ -59,8 +59,9 @@
     <div class="content" style="padding-top:88px;">
         @foreach($rooms as $key => $room)
             <div class="roomItem" data-content="{{$room->id}}">
-                    <div class="myrow"  id="slide_{{$key}}" style="margin-bottom: 1vh;margin-left:auto;margin-right:auto;display:block;text-align:center;width: 300px;height: 200px;overflow:hidden;visibility:hidden;position:relative;top:0px;left:0px;" >
-                        <div data-u="slides" style="width: 300px;height: 200px; overflow:hidden;position:relative;top:0px;left:0px;">
+                    <div style="wdith:100%;background-color:#eeeeee;">
+                    <div class="myrow"  id="slide_{{$key}}" style="margin-bottom: 1vh;margin-left:auto;margin-right:auto;display:block;text-align:center;width:325px;height: 200px;overflow:hidden;visibility:hidden;position:relative;top:0px;left:0px;" >
+                        <div data-u="slides" style="width:325px;height: 200px; overflow:hidden;position:relative;top:0px;left:0px;">
                             <?php $imgFiles = \Illuminate\Support\Facades\File::files('storage/room'.($key+1));?>
                             @foreach($imgFiles as $img)
                                <!-- <img src="{{asset('storage/arch.jpg')}}" style="width: 100%" >-->
@@ -69,6 +70,7 @@
                                </div>
                             @endforeach
                         </div>
+                    </div>
                     </div>
                     <div class="myrow"  style="justify-content: space-between;margin-left:12px;margin-right:12px;margin-bottom:10px;">
                         <span class="item">{{$room->title}}</span>
