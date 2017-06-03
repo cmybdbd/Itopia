@@ -20,7 +20,7 @@
     </div>
     <div class="content" style="height:100%;overflow:hidden;">
         <div class="map">
-        <img src="{{asset('storage/map/mapPKU.png')}}" style="position:absolute;top:0px;z-index:-1;height:100%;width:auto;overflow:scroll">
+        <img class="blend"  style="position:absolute;top:0px;z-index:-1;height:100%;width:1000px;overflow:scroll">
         </div>
     </div>
     <div style="position:fixed;width:100%;bottom:64px;">
@@ -107,6 +107,12 @@
         }
         span.room-state{
             height: 1.6em;
+        }
+
+        .blend
+        {
+            background-image: url({{asset('storage/map/mapPKU.png')}}), -moz-linear-gradient( top,#ccc,#000);
+            background-blend-mode: screen, multiply;
         }
     </style>
 @endsection

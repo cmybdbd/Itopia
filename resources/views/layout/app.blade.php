@@ -284,18 +284,7 @@
 .user-nav ul li:active{background:#1dccb8; color:#fff;-webkit-transition:all .15s;}
 
 .user-nav ul li:hover,.user-nav ul li:active span{background-position-x:-20px;}
-
-        .blend
-        {
-            width:782px;
-            height:540px;
-            background:#de6e3d url("lighthouse.jpg") no-repeat center center;
-        }
     
-        .blend.multiply
-        {
-            background-blend-mode: multiply;
-        }
     </style>
     @yield('style')
 </head>
@@ -359,7 +348,7 @@
                     </div>
                 </div>
                 <div>
-                    <button class="btn btn-default form-control font-b" style="height: 3em" id="validateID">确 认</button>
+                    <button class="btn btn-default btn-main form-control font-b" style="height: 3em" id="validateID">确 认</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
