@@ -275,12 +275,12 @@
         </div>
     </div>
 
-<?php $stTime=strtotime(date("Y-m-d")+'23:00:00'); 
+<?php $stTime=strtotime(date("Y-m-d")+'23:00'); 
 $edTime=$stTime + 12 * 3600000;
 ?>
     <div id="param">
         <div id="startTime" data-content="{{$stTime}}"></div>
-        <div id="endTime" data-content="{{$edTime}}"></div>
+        <div id="endTime1" data-content="{{$edTime}}"></div>
         <div id="durationTime" data-content="12 * 3600000"></div>
         <div id="hourPrice" data-content="{{$room->hourPrice}}"></div>
         <div id="nightPrice" data-content="{{$room->nightPrice}}"></div>
@@ -404,18 +404,10 @@ function doLoop(){
             console.log(showHumanTime(todayts));
 
 
-            startTime.text((istomorrow?'明天 ':'今天 ')+ showHumanHour(startts))
-                .attr("data-content", startts);
+            //startTime.text((istomorrow?'明天 ':'今天 ')+ showHumanHour(startts))
+                //.attr("data-content", startts);
             updateEndTime();
-            if($("#useNight").parent().hasClass('active'))
-            {
-                updatePrice(1);
-            }
-            else
-            {
-                updatePrice(0);
-            }
-
+           
             var daytime = [{
                 text: '今天',
                 value: 0,
@@ -568,58 +560,6 @@ function doLoop(){
             });
             console.log('isusing='+isUsing);
 
-            startPicker.on('picker.select', function (selectedVal, selectedIndex) {
-                var d = day[selectedIndex[0]].value;
-                selectedDay = d === 0 ? '今天' : '明天';
-                startTime.text(selectedDay + ' ' + time[selectedIndex[1]].text)
-                    .attr("data-content", (d===0 ? startts :tomorrowts) + time[selectedIndex[1]].value);
-
-                updateEndTime();
-            });
-            startPicker.on('picker.change', function (index, selectedIndex) {
-                if (index === 0){
-                    firstChange();
-                }
-
-                function firstChange() {
-                    time = [];
-                    checked = [];
-                    checked[0] = selectedIndex;
-                    var firstDay = daytime[selectedIndex];
-                    creatList(firstDay.sub, time);
-
-                    startPicker.refillColumn(1, time);
-                    if(selectedIndex != istomorrow)
-                    {
-                        $($("#startPicker ul")[1]).children().addClass('disable');
-                    }
-                    else
-                    {
-                        var lis = $($("#startPicker ul")[1]).children();
-                        for(i =2 ;i < lis.length;i++)
-                        {
-                            $(lis[i]).addClass('disable');
-                        }
-                    }
-                    startPicker.scrollColumn(1, 0);
-                }
-
-            });
-
-
-            durationPicker.on('picker.select', function(selectedVal, selectedIndex){
-                durationTime.text(duration[selectedIndex[0]].text)
-                    .attr('data-content', duration[selectedIndex[0]].value);
-
-                updateEndTime();
-                updatePrice(0);
-            });
-            datePicker.on('picker.select', function (selectedVal, selectedIndex) {
-                dateTime.text(date[selectedIndex[0]].text.split(' ')[1])
-                    .attr('data-content', date[selectedIndex[0]].value);
-
-                updatePrice(1);
-            })
             function updateEndTime(){
                 endTime.text((istomorrow?'明天':'今天')+dateFormat((+startTime.attr("data-content")) + (+durationTime.attr("data-content")),
                     ' HH:MM'))
@@ -663,13 +603,12 @@ function doLoop(){
                     }
                     console.log('temptime='+temptime);
                         // night
-                        temptime = tomorrowts + dateTime.attr('data-content') * 24*60*60*1000;
                         data = {
                             _token: $("meta[name='csrf-token']").attr('content'),
                             'userId': $("#userId").attr('data-content'),
                             'roomId': $("#roomId").attr('data-content'),
                             'startTime': $("#startTime").attr('data-content'),
-                            'endTime'  : $("#endTime").attr('data-content'),
+                            'endTime'  : $("#endTime1").attr('data-content'),
                             'duration' : 12,//+durationTime.attr('data-content')/3600000,
                             'price'   : +($('#totalPrice').text()),
                             'date'     : temptime /1000|0,
@@ -702,9 +641,8 @@ function doLoop(){
 
                         },
                         error: function (e){
-                            //alert(e.responseText);
-                            alert("您还没有选择使用时间哦～");
-                            //console.log(e.responseText);
+                             $("#toPay button").text('下单失败');
+                                window.location.href=window.location.href;
                         }
                     });
                 }
