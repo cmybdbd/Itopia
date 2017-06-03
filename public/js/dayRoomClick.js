@@ -67,8 +67,21 @@ $(function () {
 
 
     $("#dxy").on('click',function () {
-        location.replace('http://itopia.localhost/getRooms/dxy');
+        window.location.href='http://itopia.localhost/getDayRooms/dxy';
     });
+    $("#dhzy").on('click',function () {
+        window.location.href='http://itopia.localhost/getDayRooms/dhzy';
+    });
+    $("#kyxq").on('click',function () {
+        window.location.href='http://itopia.localhost/getDayRooms/kyxq';
+    });
+    $("#frl").on('click',function () {
+        window.location.href='http://itopia.localhost/getDayRooms/frl';
+    });
+    $("#zgy").on('click',function () {
+        window.location.href='http://itopia.localhost/getDayRooms/zgy';
+    });
+
     var uid = $("#param .uid").attr('data-content');
     $("#myOrder").on('click',function () {
         window.location.href = window.location.href.replace('home','orderList/'+uid);

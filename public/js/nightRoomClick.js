@@ -58,8 +58,20 @@ $(function () {
 
 
 
-    $("#equipment").on('click',function () {
-        $(".equipment-content").modal();
+    $("#dxy").on('click',function () {
+        window.location.href='http://itopia.localhost/getNightRooms/dxy';
+    });
+    $("#dhzy").on('click',function () {
+        window.location.href='http://itopia.localhost/getNightRooms/dhzy';
+    });
+    $("#kyxq").on('click',function () {
+        window.location.href='http://itopia.localhost/getNightRooms/kyxq';
+    });
+    $("#frl").on('click',function () {
+        window.location.href='http://itopia.localhost/getNightRooms/frl';
+    });
+    $("#zgy").on('click',function () {
+        window.location.href='http://itopia.localhost/getNightRooms/zgy';
     });
 
     var validatePhone =$("#validatePhone");

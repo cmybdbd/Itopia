@@ -38,13 +38,13 @@
                     <ul style="padding-left:0px; top:0px;">
                         <li><a id="dxy" class="font-xl"href="#">稻香园 <b class="m-color">3</b> 间</a></li>
                         <hr class="mysplit" style="margin:0px;">
-                        <li><a class="font-xl"href="#">大河庄苑 <b class="m-color">8</b> 间</a></li>
+                        <li><a id="dhzy" class="font-xl"href="#">大河庄苑 <b class="m-color">8</b> 间</a></li>
                         <hr class="mysplit" style="margin:0px;">
-                        <li><a class="font-xl"href="#">科育小区 <b class="m-color">3</b> 间</a></li>
+                        <li><a id="kyxq" class="font-xl"href="#">科育小区 <b class="m-color">3</b> 间</a></li>
                         <hr class="mysplit" style="margin:0px;">
-                        <li><a class="font-xl"href="#">芙蓉里 <b class="m-color">3</b> 间</a></li>
+                        <li><a id="frl" class="font-xl"href="#">芙蓉里 <b class="m-color">3</b> 间</a></li>
                         <hr class="mysplit" style="margin:0px;">
-                        <li><a class="font-xl"href="#">中关园 <b class="m-color">3</b> 间</a></li>
+                        <li><a id="zgy" class="font-xl"href="#">中关园 <b class="m-color">3</b> 间</a></li>
                     </ul>
                 </div>
             </div>
