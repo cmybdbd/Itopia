@@ -22,7 +22,10 @@ class OrderController extends Controller
 
         if(!empty($order->payNum ))
         {
-            $gateDoor = Room::find(Constant::$GATE_ID);
+            $room = Room::find($order->roomId);
+            //$gateDoor = Room::find(Constant::$GATE_ID);
+            $gateDoor = Room::where('state',0)->where('parentId',$room->parentId)->first();
+            return $gateDoor
             if(strtotime($gateDoor->updated_at) < Utils::curDay() || empty($gateDoor->passwd ))
             {
                 $passwd = Utils::generatePasswd(6);
