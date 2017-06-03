@@ -39,7 +39,7 @@
             </div>
             <div class="user nav-button" id="chooseArea" style="width:34%;height:44px;">
                 <span style="margin-top: 2vh">选择小区</span>
-                <div id="triangle-down-b" style="position:absolute;right:20%;top:60%;"></div>
+                <div id="triangle-down-b" style="position:absolute;right:18%;top:52%;"></div>
                 <div class="user-nav">
                     <ul style="padding-left:0px; top:0px;">
                         <li><a id="dxy" class="font-xl"href="#">稻香园 <b class="m-color">3</b> 间</a></li>
@@ -76,8 +76,8 @@
                         <span class="item">{{$room->title}}</span>
                         <span class="m-color" style="float:right;font-weight: 500;">¥ {{$room->nightPrice}}/夜</span>
                         <br>
-                        <span class="room-state room-used {{$room->isUsing()? 'button-occupied':'button-available'}} font-s" style="width:50px;height:20px;padding:2px 8px;;border: 1px solid;border-radius:10px;justify-content: center;">
-                            {{$room->isUsing() ? '已订出':'可使用'}}
+                        <span class="room-state room-used {{$room->isUsing()? 'button-occupied':'button-available'}} font-s">
+                            {{$room->isUsing() ? '使用中':'可使用'}}
                         </span>
                         <span class="room-state b-color" style="font-size:12px;float:right;"><span name="today"></span>23:00 - 次日11:00</span>
                     </div>

@@ -99,6 +99,11 @@
             list-style-type:none;
             color:#777 !important;
         }
+
+        .picker-choose{
+            margin-top: 34px;
+        }
+
         .cancel{
             color:#aaa;
             font-size: 16px;

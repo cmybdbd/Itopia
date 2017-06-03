@@ -33,7 +33,7 @@
             </div>
             <div class="user nav-button" id="chooseArea" style="width:34%;height:44px;border-right-color:white;border-right-style:solid;border-right-width:5px;">
                 <span style="margin-top: 2vh">选择小区</span>
-                <div id="triangle-down-b" style="position:absolute;right:20%;top:60%;"></div>
+                <div id="triangle-down-b" style="position:absolute;right:18%;top:52%;"></div>
                 <div class="user-nav">
                     <ul style="padding-left:0px; top:0px;">
                         <li><a id="dxy" class="font-xl"href="#">稻香园 <b class="m-color">3</b> 间</a></li>
