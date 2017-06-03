@@ -14,7 +14,12 @@ use Illuminate\Support\Facades\Response;
 class LockController extends Controller
 {
     //线下
-    private $home_id = '58cfc78d67df5d3251f0131d';
+    //private $home_id = '58cfc78d67df5d3251f0131d';
+    //$age=array("Peter"=>"35","Ben"=>"37","Joe"=>"43");
+    private $home_id = array("zgy"=>"58cfc78d67df5d3251f0131d",
+                        "dhzy9"=>"59316c011843737a30c496de",
+                        "dhzy7"=>"592ff2aaa80fc80a2d8ff4b8",
+                        "frl"=>"592ff112a80fc80a2d8fec4d");
     private $client_id='c23b578799413d777340d7d2';
     private $client_secret='741a9ea72cf5c5c5f3051c8471de90c0';
     private $api_url = 'https://lockapi.dding.net/openapi/v1';
@@ -47,13 +52,13 @@ class LockController extends Controller
         return $token;
     }
 
-    private function addPassword($room_id, $password, $phonenumber, $permission_begin, $permission_end)
+    private function addPassword($location,$room_id, $password, $phonenumber, $permission_begin, $permission_end)
     {
         $query_url = $this->api_url.'/add_password';
 
         $params = array(
             "access_token" => $this->access_token(),
-            "home_id" => $this->home_id,
+            "home_id" => $this->home_id[$location],
             "room_id" => $room_id,
             "is_default" => 0,
             "is_send_location" => true,
@@ -84,7 +89,7 @@ class LockController extends Controller
         return $ret;
     }
 
-    private function deleteSparePasword($room_id)
+    private function deleteSparePasword($location,$room_id)
     {
         $query_url = $this->api_url.'/delete_password';
         $spare_pswds = Lock::where([
@@ -98,7 +103,7 @@ class LockController extends Controller
             $params = array(
                 'room_id' => $room_id,
                 'access_token' => $this->access_token(),
-                'home_id' => $this->home_id,
+                'home_id' => $this->home_id[$location],
                 'password_id' => $spare_pswd->password_id
             );
             $res = ApiHandle::httpPostJson($query_url, $params);
@@ -112,10 +117,10 @@ class LockController extends Controller
         }
     }
 
-    public function updatePassword($room_id, $password, $phonenumber, $permission_begin, $permission_end)
+    public function updatePassword($location,$room_id, $password, $phonenumber, $permission_begin, $permission_end)
     {
-        $this->deleteSparePasword($room_id);
-        $ret = $this->addPassword($room_id, $password, $phonenumber, $permission_begin, $permission_end);
+        $this->deleteSparePasword($location,$room_id);
+        $ret = $this->addPassword($location,$room_id, $password, $phonenumber, $permission_begin, $permission_end);
         return $ret;
     }
 

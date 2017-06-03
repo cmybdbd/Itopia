@@ -90,41 +90,7 @@
             align-items:center;
             margin-left:0.5em;
             /*color: var(--used-color)*/
-            color: #ccc;
-        }
-        /*.wheel-scroll{
-            margin-top: 0px !important;
-        }*/
-        .wheel-item{
-            list-style-type:none;
-            color:#777 !important;
-        }
-
-        .picker-choose{
-            margin-top: 34px;
-        }
-
-        .cancel{
-            color:#aaa;
-            font-size: 16px;
-            height:44px;
-            border: 1px solid #1dccb8;
-            border-radius: 44px;
-            width: 44.5% !important;
-            margin-left:3.7%;
-        }
-        .cancel::after{
-            background-image: none !important;
-        }
-        .confirm{
-            color:white !important;
-            font-size: 16px;
-            height:44px;
-            border: 1px solid #1dccb8;
-            border-radius: 44px;
-            width: 44.5% !important;
-            margin-right:3.7%;
-            background-color: #1dccb8;
+            color: #cccccc;
         }
     </style>
 @endsection

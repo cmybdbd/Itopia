@@ -25,12 +25,12 @@ class OrderController extends Controller
             $room = Room::find($order->roomId);
             //$gateDoor = Room::find(Constant::$GATE_ID);
             $gateDoor = Room::where('state',0)->where('parentId',$room->parentId)->first();
-            return $gateDoor
             if(strtotime($gateDoor->updated_at) < Utils::curDay() || empty($gateDoor->passwd ))
             {
                 $passwd = Utils::generatePasswd(6);
                 $lc = new LockController();
                 $ret = $lc->updatePassword(
+                    $gateDoor->parentId,
                     '',
                     $passwd,
                     Constant::$REPORT_PHONE,
