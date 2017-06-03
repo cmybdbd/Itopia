@@ -159,7 +159,7 @@ class OrderController extends Controller
         }
         else
         {
-            $dayTime = time()+86400*$day;
+            $dayTime = strtotime(date("Y-m-d-G"),time())+86400*$day;
         }
         if(!empty($maxNightTime))
         {

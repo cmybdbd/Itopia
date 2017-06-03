@@ -121,9 +121,9 @@
         <div class="f-color font-l">
             使用时间
         </div>
-        <div class="m-color" style="text-align:right;margin-top:-7%;float:right">
+        <div class="m-color" style="text-align:right;margin-top:-25px;float:right">
             2017年<span name="today"></span> 23:00<br>
-            — <span id="tomorrow"></span> 11:00
+            — <span id="tomorrow"></span> 10:00
         </div>
     </div>
     <br>
@@ -276,12 +276,12 @@
     </div>
 
 <?php $stTime=strtotime(date("Y-m-d")+'23:00'); 
-$edTime=$stTime + 86400/2;
+$edTime=$stTime + 11*3600;
 ?>
     <div id="param">
         <div id="startTime" data-content="{{$stTime}}"></div>
         <div id="endTime1" data-content="{{$edTime}}"></div>
-        <div id="durationTime" data-content="86400/2"></div>
+        <div id="durationTime" data-content="11*3600"></div>
         <div id="hourPrice" data-content="{{$room->hourPrice}}"></div>
         <div id="nightPrice" data-content="{{$room->nightPrice}}"></div>
         <div id="userId" data-content="{{\Illuminate\Support\Facades\Auth::id()}}"></div>
@@ -491,37 +491,6 @@ function doLoop(){
 
             }
 
-            var duration = [
-                {
-                    text: "1 小时",
-                    value: 60*60*1000
-                },
-                {
-                    text: "1.5 小时",
-                    value: 1.5*60*60*1000
-                },
-                {
-                    text: "2 小时",
-                    value: 2*60*60*1000
-                },
-                {
-                    text: "2.5 小时",
-                    value: 2.5*60*60*1000
-                },
-                {
-                    text: "3 小时",
-                    value: 3*60*60*1000
-                },
-                {
-                    text: "3.5 小时",
-                    value: 3.5 * 60 * 60 * 1000
-                },
-                {
-                    text: "4 小时",
-                    value: 4*60*60*1000
-                }
-            ];
-
 
             function creatList(obj, list){
                 obj.forEach(function(item, index, arr){
@@ -540,24 +509,6 @@ function doLoop(){
             console.log(day);
             console.log(time);
 
-            var startPicker = new Picker({
-                data: [day, time],
-                selectedIndex: [istomorrow|0, 0],
-                title: '开始时间',
-                id: 'startPicker'
-            });
-            var durationPicker = new Picker({
-                data: [duration],
-                selectIndex: [0],
-                title: '使用时长',
-                id: 'durationPicker'
-            });
-            var datePicker = new Picker({
-                data:[date],
-                selectedIndex: [isUsing|0],
-                title: '选择日期',
-                id:'datePicker'
-            });
             console.log('isusing='+isUsing);
 
             function updateEndTime(){
@@ -573,24 +524,8 @@ function doLoop(){
             function checkToPay(){
                 return $("#agreement").is(':checked') && $("#totalPrice").text() != "";
             }
-            $("#useHour").click(function(){
-                updatePrice(0);
-            });
-            $("#useNight").click(function(){
-                updatePrice(1);
-            });
 
-            startTime.parent().on('click', function () {
-                startPicker.show();
-            });
-            durationTime.parent().on('click',function () {
-                durationPicker.show();
-            });
-            dateTime.parent().on('click', function () {
-                datePicker.show();
-            });
-
-             $("#toPay").on('click', function(){
+            $("#toPay").on('click', function(){
                 if(checkToPay() && $("#toPay button").text()!= '下单中...')
                 {
                     $("#toPay button").text('下单中...');
@@ -598,20 +533,33 @@ function doLoop(){
                     temptime = new Date(dateFormat(new Date(), 'yyyy/mm/dd 00:00:00')).getTime();
                     if(dateFormat(new Date(), 'HH') > 5)
                     {
-                        temptime += 24*60*60*1000;
 
+                        temptime += 24*60*60*1000;
                     }
                     console.log('temptime='+temptime);
-                        // night
+                    // night
+                    var dayShift = document.URL[document.URL.length-1];
+                    var st,ed,dt;
+                    if(!isNaN(dayShift))
+                    {
+                        st = $("#startTime").attr('data-content')*1.0 + dayShift*86400;
+                        ed = $("#endTime1").attr('data-content')*1.0 + dayShift*86400;
+                        dt = temptime/1000 + dayShift*86400;
+                    }
+                    else{
+                        st = $("#startTime").attr('data-content')*1.0;
+                        ed = $("#endTime1").attr('data-content')*1.0;
+                        dt = temptime/1000;
+                    }
                         data = {
                             _token: $("meta[name='csrf-token']").attr('content'),
                             'userId': $("#userId").attr('data-content'),
                             'roomId': $("#roomId").attr('data-content'),
-                            'startTime': $("#startTime").attr('data-content'),
-                            'endTime'  : $("#endTime1").attr('data-content'),
-                            'duration' : 12,//+durationTime.attr('data-content')/3600000,
+                            'startTime': st,
+                            'endTime'  : ed,
+                            'duration' : 11,//+durationTime.attr('data-content')/3600000,
                             'price'   : +($('#totalPrice').text()),
-                            'date'     : temptime /1000|0,
+                            'date'     : dt|0,
                             'isDay'    : 0
                         };
 
@@ -648,56 +596,6 @@ function doLoop(){
                 }
                     //window.location.href = 'result/0';
             });
-
-
-            // ******************************
-            //   disable date
-            for (i = 0; i < 7; i++)
-            {
-                //console.log('date='+dateFormat(startts + (i+1)*24*60*60*1000, 'yyyy-mm-dd 00:00:00'))
-                //console.log(usingNight.indexOf(dateFormat(todayts + (i+1)*24*60*60*1000, 'yyyy-mm-dd 00:00:00')))
-                if(usingNight.indexOf(dateFormat(todayts + (i+1)*24*60*60*1000, 'yyyy-mm-dd 00:00:00')) != -1)
-                {
-                    $("#datePicker [data-val='"+(i)+"']").addClass('disable');
-                }
-                else
-                {
-                    if(dateTime.text() == '')
-                    {
-                        dateTime.text(date[i].text.split(' ')[1])
-                            .attr('data-content', date[i].value);
-                        if($("#useNight").parent().hasClass('active'))
-                            updatePrice(1);
-                    }
-                }
-            }
-
-            // disable duration
-            for(i = 0;i < duration.length;i++)
-            {
-                if( dateFormat(startts+duration[i].value,'HH')>= 23)
-                {
-                    for (j = i; j< duration.length; j++)
-                        $($("#durationPicker li")[j]).addClass('disable');
-                    break;
-                }
-            }
-
-            // disable time
-            if(istomorrow)
-            {
-                $($("#startPicker [data-val='0']")[0]).addClass('disable');
-            }
-            else {
-                $($("#startPicker [data-val='1']")[0]).addClass('disable');
-            }
-
-            var lis = $($("#startPicker ul")[1]).children();
-            for(i =2 ;i < lis.length;i++)
-            {
-                $(lis[i]).addClass('disable');
-            }
-
         });
     </script>
     <script src="{{url('js/roomList.js')}}"></script>

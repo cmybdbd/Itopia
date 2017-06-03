@@ -7,12 +7,12 @@
 @section('content')
     <div class="myHeader" style="margin-bottom: 2vh;">
         <div class="mybtn-group" style="position:fixed;top:0px;z-index:10;height:46px;background-color:white;">
-            <div class="nav-button-top" id="myOrder" style="height:44px;">
+            <div class="nav-button-top" id="useToday" style="height:44px;">
                 <span style="margin-top: 1vh">
                     今日使用
                 </span>
             </div>
-            <div class="nav-button-top" id="equipment" style="height:44px;">
+            <div class="nav-button-top" id="useTomorrow" style="height:44px;">
                 <span style="margin-top: 1vh">
                     明日使用
                 </span>

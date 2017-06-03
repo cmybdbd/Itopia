@@ -73,9 +73,9 @@ $(function() {
             console.log(showHumanTime(startts));
             console.log(showHumanTime(todayts));
 
-
-            startTime.text(showHumanHour(startts))
-                .attr("data-content", startts);
+            startTime.text(showHumanHour(startTime.attr('data-content')*1000));
+            console.log(startTime.attr("data-content"));
+                //.attr("data-content", startts);
             updateEndTime();
             if($("#useNight").parent().hasClass('active'))
             {
@@ -287,9 +287,9 @@ $(function() {
             })
             function updateEndTime(){
                 //(istomorrow?'明天':'今天')+
-                endTime.text(dateFormat((+startTime.attr("data-content")) + (+durationTime.attr("data-content")),
+                endTime.text(dateFormat((+startTime.attr("data-content")*1000) + (+durationTime.attr("data-content")),
                     ' HH:MM'))
-                    .attr('data-content', (+startTime.attr("data-content")) + (+durationTime.attr("data-content")));
+                    .attr('data-content', (+startTime.attr("data-content")*1000) + (+durationTime.attr("data-content")));
             }
             function updatePrice(page) {
                 if(page === 0)
@@ -334,12 +334,7 @@ $(function() {
             function checkToPay(){
                 return $("#agreement").is(':checked') && $("#totalPrice").text() != "";
             }
-            $("#useHour").click(function(){
-                updatePrice(0);
-            });
-            $("#useNight").click(function(){
-                updatePrice(1);
-            });
+
 
             /*startTime.parent().on('click', function () {
                 startPicker.show();
@@ -368,16 +363,29 @@ $(function() {
 
                     }
                     console.log('temptime='+temptime);
-                    
+                    // day
+                    var dayShift = document.URL[document.URL.length-1];
+                    var st,ed,dt;
+                    if(!isNaN(dayShift))
+                    {
+                        st = startTime.attr('data-content')*1.0 + dayShift*86400;
+                        ed = endTime.attr('data-content')/1000 + dayShift*86400;
+                        dt = temptime/1000 + dayShift*86400;
+                    }
+                    else{
+                        st = $("#startTime").attr('data-content')*1.0;
+                        ed = $("#endTime1").attr('data-content')*1.0;
+                        dt = temptime/1000;
+                    }
                         data = {
                             _token: $("meta[name='csrf-token']").attr('content'),
                             'userId': $("#userId").attr('data-content'),
                             'roomId': $("#roomId").attr('data-content'),
-                            'startTime': (+startTime.attr('data-content'))/1000|0,
-                            'endTime'  : (+endTime.attr('data-content'))/1000|0,
+                            'startTime': (+st)|0,
+                            'endTime'  : (+ed)|0,
                             'duration' : +durationTime.attr('data-content')/3600000,
                             'price'   : +($('#realPrice').text()),
-                            'date'     : temptime /1000|0,
+                            'date'     : dt|0,
                             'isDay'    : 1
                         };
 
