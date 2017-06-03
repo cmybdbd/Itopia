@@ -61,8 +61,6 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('test',function(){
         return session('dynCode');
     });
-
-    Route::get('/map', 'HomeController@mapDisplay');
 });
 Route::group(['middleware' => ['web','wechat.oauth']], function () {
     Route::get('/login', 'WeChatController@auth')->name('login');

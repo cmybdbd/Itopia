@@ -1,3 +1,19 @@
+Itopia is a room renting platform. Here you can stay and relax whenever you want!
+
+### Our website
+
+[Itopia(needs to be opened by wechat)](https://wjllance.cn)
+
+### developers
+
+    Marc Wong
+        Front end engineer
+    Leonardo Wang
+        Back end engineer
+
+
+
+
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">
@@ -39,6 +55,8 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
 
+
+## Works to do
 2 房源页：
     2.1        使用地理信息
                 进入房源页后，自行弹出框格，询问用户是否允许使用地理位置。

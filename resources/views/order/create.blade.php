@@ -124,7 +124,7 @@
         <div class="mybox selectPanel font-l" style="box-shadow:none;padding-bottom:12px;">
             时间
             <div class="m-color" style="float:right;margin-left:15%;">
-            今天(<span name="today"></span>) <span id="startTime"></span>&nbsp;&nbsp;—&nbsp;&nbsp;<div style="float:right;" id="endTime" class="present noPicker"></div>
+            今天(<span name="today"></span>) <span id="startTime" data-content="{{$room->startTime}}"></span>&nbsp;&nbsp;—&nbsp;&nbsp;<div style="float:right;" id="endTime" class="present noPicker"></div>
         </div>
         </div>
         <div class="mybox selectPanel font-l" style="display:flex;box-shadow:none;padding-top:0px;">
@@ -149,9 +149,8 @@
         <input type="checkbox" id="agreement" style="margin:0">
         <label for="agreement"></label>本人已获悉并同意<span id="tos">《iTOPIA分时空间使用条例》</span>
     </div>
-    <button class="btn btn-block btn-default btn-main" id="return">去支付<span id="timeCount"></span></button>
+    <button id="toPay" class="btn btn-block btn-default btn-main">去支付<span id="timeCount"></span></button>
 </div>
-    
 
 <div id="hourPrice" data-content="{{$room->hourPrice}}"></div>
 
@@ -291,6 +290,7 @@
         <div id="isUsing" data-content="{{$room->isUsing()}}"></div>
         <div id="nextTime" data-content="{{$room->nextTime()}}"></div>
         <div id="usingNight" data-content="{{$room->usingNight()}}"></div>
+        <div id="endTime" data-content="" ></div>
     </div>
 @endsection
 @section('scripts')
