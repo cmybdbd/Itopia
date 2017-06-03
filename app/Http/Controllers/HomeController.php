@@ -36,7 +36,10 @@ class HomeController extends Controller
     {
         return view('list.nightRoom')->withRooms(Room::where('state','<>',0)->get());
     }
-
+    function getRooms($name)
+    {
+        return view('list.dayRoom')->withRooms(Room::where('state','<>',0)->Where('parentId',$name)->get());
+    }
     function orderList()
     {
         $id = Auth::id();

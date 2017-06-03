@@ -36,7 +36,7 @@
                 <div id="triangle-down-b" style="position:absolute;right:20%;top:60%;"></div>
                 <div class="user-nav">
                     <ul style="padding-left:0px; top:0px;">
-                        <li><a class="font-xl"href="#">稻香园 <b class="m-color">3</b> 间</a></li>
+                        <li><a id="dxy" class="font-xl"href="#">稻香园 <b class="m-color">3</b> 间</a></li>
                         <hr class="mysplit" style="margin:0px;">
                         <li><a class="font-xl"href="#">大河庄苑 <b class="m-color">8</b> 间</a></li>
                         <hr class="mysplit" style="margin:0px;">
@@ -50,19 +50,21 @@
             </div>
         </div>
     <hr class="mysplit" style="margin:0;">
-    <div class="content" style="padding-top:88px;">
+    <div id="content" class="content" style="padding-top:88px;">
         @foreach($rooms as $key => $room)
             <div class="roomItem" data-content="{{$room->id}}" style="cursor:pointer;">
-                    <div class="myrow"  id="slide_{{$key}}" style="margin-bottom: 1vh;margin-left:auto;margin-right:auto;display:block;text-align:center;width: 300px;height: 200px;overflow:hidden;visibility:hidden;position:relative;top:0px;left:0px;" >
-                        <div data-u="slides" style="width: 300px;height: 200px; overflow:hidden;position:relative;top:0px;left:0px;">
+                    <div style="wdith:100%;background-color:#eeeeee;">
+                    <div class="myrow"  id="slide_{{$key}}" style="margin-bottom: 1vh;margin-left:auto;margin-right:auto;display:block;text-align:center;width:325px;height: 200px;overflow:hidden;visibility:hidden;position:relative;top:0px;left:0px;" >
+                        <div data-u="slides" style="width:325px;height: 200px; overflow:hidden;position:relative;top:0px;left:0px;">
                             <?php $imgFiles = \Illuminate\Support\Facades\File::files('storage/room'.($key+1));?>
                             @foreach($imgFiles as $img)
                                <!-- <img src="{{asset('storage/arch.jpg')}}" style="width: 100%" >-->
                                <div>
-                                   <img src="{{$img}}" data-u="image" alt="" width="300px">
+                                   <img src="../{{$img}}" data-u="image" alt="" width="300px">
                                </div>
                             @endforeach
                         </div>
+                    </div>
                     </div>
                     <div class="myrow"  style="justify-content: space-between;margin-left:12px;margin-right:12px;margin-bottom:10px;">
                         <span class="item">{{$room->title}}</span>

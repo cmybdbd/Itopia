@@ -58,9 +58,6 @@ $(function () {
 
 
 
-    $("#equipment").on('click',function () {
-        $(".equipment-content").modal();
-    });
 
     var validatePhone =$("#validatePhone");
     var phoneN = $("#phoneN");
@@ -69,6 +66,9 @@ $(function () {
     });
 
 
+    $("#dxy").on('click',function () {
+        location.replace('http://itopia.localhost/getRooms/dxy');
+    });
     var uid = $("#param .uid").attr('data-content');
     $("#myOrder").on('click',function () {
         window.location.href = window.location.href.replace('home','orderList/'+uid);
