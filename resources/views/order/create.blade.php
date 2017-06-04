@@ -124,8 +124,11 @@
         <div class="mybox selectPanel font-l" style="box-shadow:none;padding-bottom:12px;">
             时间
             <div class="m-color" style="float:right;margin-left:15%;">
+                <!--<span>{{$startDayTime}}</span>
+                <span>{{$startNightTime}}</span>-->
                 <?php
-                $t = $startDayTime % 86400 > $startNightTime % 86400 ? $startDayTime:$startNightTime;
+                //$t = $startDayTime % 86400 > $startNightTime % 86400 ? $startDayTime:$startNightTime;
+                $t = $startDayTime > $startNightTime ? $startDayTime:$startNightTime;
                  ?>
             今天(<span name="today"></span>) <span id="startTime" data-content="{{$t}}"></span>&nbsp;&nbsp;—&nbsp;&nbsp;<div style="float:right;" id="endTime" class="present noPicker"></div>
         </div>
