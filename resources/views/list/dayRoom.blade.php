@@ -11,6 +11,7 @@
                 <span style="margin-top: 1vh">
                     今日使用
                 </span>
+                <span name="today"></span>
             </div>
             <div class="nav-button-top" id="useTomorrow" style="height:46px;">
                 <span style="margin-top: 1vh">
@@ -73,7 +74,7 @@
                             {{$room->isUsing() ? '使用中':'可使用'}}
                         </span>
                         @if($room->isUsing())
-                            @if($room->nextTime() != 0)
+                            @if( date('H',$room->nextTime()) == 11 || (date('H',$room->nextTime()) < 9))
                                 <span class="room-state b-color" style="font-size:12px;float:right;">可预约<span class="m-color">{{(date('H',$room->nextTime())== 11? '明早':'' ). date('H:i',$room->nextTime())}}</span>使用</span>
                             @else
                             <!--if(in_array(date('Y-m-d 00:00:00',\App\Utils\Utils::curNight()), json_decode($room->usingNight())))-->
@@ -88,7 +89,7 @@
         @endforeach
     </div>
      <div class="footer m-color" style="text-align: center;margin-bottom:50px;">
-        <p style="margin-top:50px;">更多iTOPIA即时私人空间将陆续开放，敬请期待！</p>
+        <p style="margin-top:50px;">更多蜗壳私人空间将陆续开放，敬请期待！</p>
     </div>
     <div id="param">
         <div class="uid" data-content="{{\Illuminate\Support\Facades\Auth::id()}}"></div>
