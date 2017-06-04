@@ -16,7 +16,6 @@
                 <span style="margin-top: 1vh">
                     明日使用
                 </span>
-                <br>
                 <span id="tomorrow"></span>
             </div>
         </div>

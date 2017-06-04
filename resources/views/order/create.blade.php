@@ -92,6 +92,33 @@
             /*color: var(--used-color)*/
             color: #cccccc;
         }
+
+        .wheel-item{
+            list-style-type:none;
+            color:#777 !important;
+        }
+         .cancel{
+            color:#aaa;
+            font-size: 16px;
+            height:44px;
+            border: 1px solid #1dccb8;
+            border-radius: 44px;
+            width: 44.5% !important;
+            margin-left:3.7%;
+        }
+        .cancel::after{
+            background-image: none !important;
+        }
+        .confirm{
+            color:white !important;
+            font-size: 16px;
+            height:44px;
+            border: 1px solid #1dccb8;
+            border-radius: 44px;
+            width: 44.5% !important;
+            margin-right:3.7%;
+            background-color: #1dccb8;
+        }
     </style>
 @endsection
 @section('content')
@@ -129,6 +156,7 @@
                 <?php
                 //$t = $startDayTime % 86400 > $startNightTime % 86400 ? $startDayTime:$startNightTime;
                 $t = $startDayTime > $startNightTime ? $startDayTime:$startNightTime;
+                $t = $t - $t % 3600;
                  ?>
             今天(<span name="today"></span>) <span id="startTime" data-content="{{$t}}"></span>&nbsp;&nbsp;—&nbsp;&nbsp;<div style="float:right;" id="endTime" class="present noPicker"></div>
         </div>
