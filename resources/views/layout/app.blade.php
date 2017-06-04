@@ -357,9 +357,7 @@
                         <input type="text" class="form-control" id="RealName" placeholder="请输入姓名">
                     </div>
                 </div>
-                <div>
-                    <button class="btn btn-default btn-main form-control font-b" style="height: 3em;margin:auto;" id="validateID">确 认</button>
-                </div>
+                    <button class="btn btn-default btn-main form-control font-b" style="height: 44px;width:100%" id="validateID">确 认</button>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->

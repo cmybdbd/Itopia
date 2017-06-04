@@ -247,19 +247,19 @@ $(function () {
 
     var uid = $("#param .uid").attr('data-content');
     $("#myOrder").on('click',function () {
-        if(!$("#param .uphoneN").attr("data-content"))
+        if(!$("#param .uphoneN").attr("data-content")||!$("#param .uidN").attr("data-content"))
             login();
         else
             window.location.href = window.location.href.replace('home','orderList/'+uid);
     });
     $("#day").on('click',function () {
-        if(!$("#param .uphoneN").attr("data-content"))
+        if(!$("#param .uphoneN").attr("data-content")||!$("#param .uidN").attr("data-content"))
             login();
         else
         window.location.href = window.location.href.replace('home','dayPage');
     });
     $("#night").on('click',function () {
-        if(!$("#param .uphoneN").attr("data-content"))
+        if(!$("#param .uphoneN").attr("data-content")||!$("#param .uidN").attr("data-content"))
             login();
         else
         window.location.href = window.location.href.replace('home','nightPage');
