@@ -156,7 +156,7 @@
                 <?php
                 //$t = $startDayTime % 86400 > $startNightTime % 86400 ? $startDayTime:$startNightTime;
                 $t = $startDayTime > $startNightTime ? $startDayTime:$startNightTime;
-                $t = $t - $t % 1800 + 1800;
+                $t = $t - $t % 3600;
                  ?>
             今天(<span name="today"></span>) <span id="startTime" data-content="{{$t}}"></span>&nbsp;&nbsp;—&nbsp;&nbsp;<div style="float:right;" id="endTime" class="present noPicker"></div>
         </div>
