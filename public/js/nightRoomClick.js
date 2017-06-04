@@ -56,7 +56,7 @@ $(function () {
     $(window).bind("resize", ScaleSlider);
     $(window).bind("orientationchange", ScaleSlider);
 
-    $("#lastnight").on('click',function () {
+    $("#on-left").on('click',function () {
         if(dayShift>0){
             dayShift--;
             var date_time = new Date();
@@ -88,7 +88,7 @@ $(function () {
         }
     });
 
-    $("#nextnight").on('click',function () {
+    $("#on-right").on('click',function () {
         if(dayShift<7){
             dayShift++;
             var date_time = new Date();
@@ -119,22 +119,23 @@ $(function () {
                 tags[i].innerHTML= date_td;
         }
     });
-
-    $("#on-left").mouseover(function(){
-        $("#left-arrow").attr("src","../../../storage/order/leftarrow-main.png");
-    });
-        
-    $("#on-left").mouseout(function(){
+/*
+    $("#on-left").on('mouseout',function(){
         $("#left-arrow").attr("src","../../../storage/order/leftarrow.png");
     });
-
-    $("#on-right").mouseover(function(){
-        $("#right-arrow").attr("src","../../../storage/order/rightarrow-main.png");
-    });
         
-    $("#on-right").mouseout(function(){
+    $("#on-left").on('mouseover',function(){
+            $("#left-arrow").attr("src","../../../storage/order/leftarrow-main.png");
+    });
+
+    $("#on-right").on('mouseout',function(){
         $("#right-arrow").attr("src","../../../storage/order/rightarrow.png");
     });
+
+    $("#on-right").on('mouseover',function(){
+           $("#right-arrow").attr("src","../../../storage/order/rightarrow-main.png");
+    });
+  */      
 
     $("#dxy").on('click',function () {
         window.location.href='/getNightRooms/dxy';
