@@ -30,7 +30,7 @@
             <p class="font-l m-color" style="margin-top:-10px;font-weight:500;">19 / 小时</p></div>
         <div id='night' class="circle" style="text-align:center;position:absolute;bottom:0;right:20%">
             <p class="font-xl" style="margin-top:16px;font-weight:500;">包夜</p>
-            <p class="font-l m-color" style="margin-top:-10px;font-weight:500;">159 / 夜</p></div>
+            <p class="font-l m-color" style="margin-top:-10px;font-weight:500;">179 / 夜</p></div>
     </div>
 
     <div id="param">
@@ -121,5 +121,4 @@
 @section('scripts')
     <!--<script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>-->
     <script src="{{url('js/login.js')}}"></script>
-
 @endsection

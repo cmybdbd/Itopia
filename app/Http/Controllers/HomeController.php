@@ -24,7 +24,6 @@ class HomeController extends Controller
 
         if(!empty($exs))
         {
-            return $exs;
             return redirect()->action('OrderController@getOrderDetail',['id'=>$exs->id]);
         }
         

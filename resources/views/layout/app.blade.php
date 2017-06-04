@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>iTOPIA-随时随地的私人空间</title>
+    <title>蜗壳空间-随时随地的私人空间</title>
     <link rel="stylesheet" href="{{url('css/app.css')}}">
     <style type="text/css">
         :root {
@@ -357,9 +357,7 @@
                         <input type="text" class="form-control" id="RealName" placeholder="请输入姓名">
                     </div>
                 </div>
-                <div>
-                    <button class="btn btn-default btn-main form-control font-b" style="height: 3em;margin:auto;" id="validateID">确 认</button>
-                </div>
+                    <button class="btn btn-default btn-main form-control font-b" style="height: 44px;width:100%" id="validateID">确 认</button>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->

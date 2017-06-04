@@ -86,7 +86,7 @@
         @endforeach
     </div>
     <div class="footer m-color" style="text-align: center;margin-bottom:50px;">
-        <p style="margin-top:50px;">更多iTOPIA即时私人空间将陆续开放，敬请期待！</p>
+        <p style="margin-top:50px;">更多蜗壳私人空间将陆续开放，敬请期待！</p>
     </div>
     <div id="param">
         <div class="uid" data-content="{{\Illuminate\Support\Facades\Auth::id()}}"></div>
