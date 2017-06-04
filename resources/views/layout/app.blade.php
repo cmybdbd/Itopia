@@ -358,7 +358,7 @@
                     </div>
                 </div>
                 <div>
-                    <button class="btn btn-default btn-main form-control font-b" style="height: 3em" id="validateID">确 认</button>
+                    <button class="btn btn-default btn-main form-control font-b" style="height: 3em;margin:auto;" id="validateID">确 认</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
