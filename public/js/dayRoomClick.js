@@ -273,7 +273,7 @@ $(function () {
         
         if(t1  && t2)//if(1)              
         {   
-            if($('#btn' + $(this).attr('id')).attr('data-content')==1)
+            //if($('#btn' + $(this).attr('id')).attr('data-content')==1)
                 window.location.href = '../create/day/' + uid + '/' + $(this).attr('data-content') + '/' + dayShift;
             /*window.location.href = window.location.href.replace(
                 'create/day/' + uid + '/' + $(this).attr('data-content')

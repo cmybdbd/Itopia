@@ -73,18 +73,17 @@
                         <span class="room-state room-used {{$room->isUsing()? 'button-occupied':'button-available'}} font-s">
                             {{$room->isUsing() ? '使用中':'可使用'}}
                         </span>
+
                         @if($room->isUsing())
-                            @if( date('H',$room->nextTime()) != 0 && date('H',$room->nextTime()) > 10)
-                                <span id="btn{{$room->state}}" data-content="1" class="room-state b-color" style="font-size:12px;float:right;">可预约<span class="m-color">{{(date('H',$room->nextTime())== 11? '明早':'' ). date('H:i',$room->nextTime())}}</span>使用</span>
-                            @else
+                            @if($room->nextTime() != 0)
+                                <span class="room-state b-color" style="font-size:12px;float:right;">可预约<span class="m-color">{{( (date('H',$room->nextTime()) == 11 && date('H',$room->nextTime()) > date('H')) ? '明早':'' ). date('H:i',$room->nextTime())}}</span>使用</span>
                             <!--if(in_array(date('Y-m-d 00:00:00',\App\Utils\Utils::curNight()), json_decode($room->usingNight())))-->
-                                <span id="btn{{$room->state}}" data-content="0" class="room-state b-color" style="font-size:12px;float:right;">今日已约满</span>
                             @endif
                         @else
                             @if( date("H") >= 23 || date("H") < 11)
-                                <span id="btn{{$room->state}}" data-content="1" class="room-state b-color" style="font-size:12px;float:right;">可预约<span class="m-color">{{(date('H',$room->nextTime())== 11? '明早':'' ). date('H:i',$room->nextTime())}}</span>使用</span>
+                                <span class="room-state b-color" style="font-size:12px;float:right;">可预约<span class="m-color">{{( (date('H',$room->nextTime()) == 11 && date('H',$room->nextTime()) > date('H')) ? '明早':'' ). date('H:i',$room->nextTime())}}</span>使用</span>
                             @else
-                                <span id="btn{{$room->state}}" data-content="1" class="room-state b-color" style="font-size:12px;float:right;">即时使用</span>
+                                <span class="room-state b-color" style="font-size:12px;float:right;">即时使用</span>
                             @endif
                         @endif
                     </div>
