@@ -90,9 +90,11 @@ $(function () {
         window.location.href = window.location.href.replace('home','nightPage');
     });
     
-    $(document).ready(login());
+    //$(document).ready(login());
 
-    function login () {
+});
+
+function login () {
         var t1 =false,t2=false;
         
         if(!$("#param .uphoneN").attr("data-content")) {
@@ -265,10 +267,6 @@ $(function () {
         
         if(t1  && t2)//if(1)              
         {
-            window.location.href = window.location.href.replace(
-                'home',
-                'create/' + uid + '/' + $(this).attr('data-content')
-            );
+            window.location.replace('/home');
         }
     }
-});
