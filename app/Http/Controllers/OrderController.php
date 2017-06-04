@@ -61,6 +61,7 @@ class OrderController extends Controller
                     }
                     $lc = new LockController();
                     $ret = $lc->updatePassword(
+                        $gateDoor->parentId,
                         $order->hasRoom->roomLockId,
                         $passwd,
                         Auth::user()->phonenumber,

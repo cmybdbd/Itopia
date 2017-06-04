@@ -17,8 +17,8 @@ class LockController extends Controller
     //private $home_id = '58cfc78d67df5d3251f0131d';
     //$age=array("Peter"=>"35","Ben"=>"37","Joe"=>"43");
     private $home_id = array("zgy"=>"58cfc78d67df5d3251f0131d",
-                        "dhzy9"=>"59316c011843737a30c496de",
-                        "dhzy7"=>"592ff2aaa80fc80a2d8ff4b8",
+                        "dhz9"=>"59316c011843737a30c496de",
+                        "dhz7"=>"592ff2aaa80fc80a2d8ff4b8",
                         "frl"=>"592ff112a80fc80a2d8fec4d");
     private $client_id='c23b578799413d777340d7d2';
     private $client_secret='741a9ea72cf5c5c5f3051c8471de90c0';
