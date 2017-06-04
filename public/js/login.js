@@ -264,7 +264,5 @@ $(function () {
         else
         window.location.href = window.location.href.replace('home','nightPage');
     });
-    
-    $(document).ready(login());
 
 });

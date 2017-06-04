@@ -20,7 +20,8 @@
     </div>
     <div class="content" style="height:100%;overflow:hidden;">
         <div class="map">
-        <img class="blend" onmouseover="getMousePos(event)" style="position:absolute;top:0px;z-index:-1;height:100%;width:1000px;overflow:scroll">
+            <!--onmouseover="getMousePos(event)"-->
+        <img class="blend" style="position:absolute;top:0px;z-index:-1;height:100%;width:1000px;overflow:scroll">
         </div>
     </div>
     <div style="position:fixed;width:100%;bottom:64px;">
@@ -121,17 +122,4 @@
     <!--<script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>-->
     <script src="{{url('js/login.js')}}"></script>
 
-    <!--<script src="{{url('js/jssor.slider.min.js')}}"></script>
-    <script src="{{url('js/roomList.js')}}"></script>
-    <script type="javascript/text">
-    function getMousePos(event) {
-        var e = event || window.event;
-        var scrollX = document.documentElement.scrollLeft || document.body.scrollLeft;
-        var scrollY = document.documentElement.scrollTop || document.body.scrollTop;
-        var x = e.pageX || e.clientX + scrollX;
-        var y = e.pageY || e.clientY + scrollY;
-        return { 'x': x, 'y': y };
-        console(x + " "+ y);
-    }
-    </script>-->
 @endsection
