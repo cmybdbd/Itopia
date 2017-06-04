@@ -7,8 +7,8 @@
 @section('content')
     <div class="myHeader" style="margin-bottom: 2vh;">
         <div class="mybtn-group" style="position:fixed;top:0px;z-index:10;height:46px;background-color:white;">
-            <div class="nav-button-top" id="lastnight" style="width:33%;height:44px;">
-                <img style="position:absolute;top:15px;left:15px;width:15px;" src="{{asset('storage/order/leftarrow.png')}}"></img>
+            <div class="nav-button-top" id="on-left" style="width:33%;height:44px;">
+                <img id="left-arrow" style="position:absolute;top:15px;left:15px;width:15px;" src="{{asset('storage/order/leftarrow.png')}}"></img>
                 <span style="margin-top: 1vh">
                     前一夜
                 </span>
@@ -18,8 +18,8 @@
                 <span style="color:white;margin-top:10px;" name="today"></span>
                 <div style="position:absolute;left:0;right:0;margin:auto;top:10px;width:95.5%;height:34px;border-radius:15px;background-color:#1dccb8;z-index:-1;"></div>
             </div>
-            <div class="nav-button-top" id="nextnight" style="width:33%;height:44px;">
-                <img style="position:absolute;top:15px;right:15px;width:15px;" src="{{asset('storage/order/rightarrow.png')}}"></img>
+            <div class="nav-button-top" id="on-right" style="width:33%;height:44px;">
+                <img id="right-arrow" style="position:absolute;top:15px;right:15px;width:15px;" src="{{asset('storage/order/rightarrow.png')}}"></img>
                 <span style="margin-top: 1vh">
                     后一夜
                 </span>

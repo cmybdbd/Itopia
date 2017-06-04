@@ -120,6 +120,22 @@ $(function () {
         }
     });
 
+    $("#on-left").mouseover(function(){
+        $("#left-arrow").attr("src","../../../storage/order/leftarrow-main.png");
+    });
+        
+    $("#on-left").mouseout(function(){
+        $("#left-arrow").attr("src","../../../storage/order/leftarrow.png");
+    });
+
+    $("#on-right").mouseover(function(){
+        $("#right-arrow").attr("src","../../../storage/order/rightarrow-main.png");
+    });
+        
+    $("#on-right").mouseout(function(){
+        $("#right-arrow").attr("src","../../../storage/order/rightarrow.png");
+    });
+
     $("#dxy").on('click',function () {
         window.location.href='/getNightRooms/dxy';
     });

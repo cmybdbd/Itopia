@@ -151,14 +151,25 @@
         <div class="mybox selectPanel font-l" style="box-shadow:none;padding-bottom:12px;">
             时间
             <div class="m-color" style="float:right;margin-left:15%;">
-                <!--<span>{{$startDayTime}}</span>
-                <span>{{$startNightTime}}</span>-->
+                <!--<span>{{date('m月d日H时i分',$startDayTime)}}</span>
+                <span>{{date('m月d日H时i分',$startNightTime)}}</span>-->
                 <?php
-                //$t = $startDayTime % 86400 > $startNightTime % 86400 ? $startDayTime:$startNightTime;
-                $t = $startDayTime > $startNightTime ? $startDayTime:$startNightTime;
+                if($startNightTime % 86400 < 22*3600)
+                {
+                    $t = $startNightTime;
+                    if($startNightTime<$startDayTime)
+                    {
+                        $t = $t + 86400;
+                    }
+                    $i = 0;
+                }else
+                {   
+                    $t = $startDayTime;
+                    $i = 1;
+                }
                 $t = $t - $t % 1800 + 1800;
-                 ?>
-            今天(<span name="today"></span>) <span id="startTime" data-content="{{$t}}"></span>&nbsp;&nbsp;—&nbsp;&nbsp;<div style="float:right;" id="endTime" class="present noPicker"></div>
+                ?>
+            {{date('d',$t) == date("d") ? '今天':'明天'}}({{date('m月d日',$t)}}) <span id="startTime" data-content="{{$t}}"></span>&nbsp;&nbsp;—&nbsp;&nbsp;<div style="float:right;" id="endTime" class="present noPicker"></div>
         </div>
         </div>
         <div class="mybox selectPanel font-l" style="display:flex;box-shadow:none;padding-top:0px;">

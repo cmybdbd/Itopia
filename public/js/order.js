@@ -342,7 +342,8 @@ $(function() {
             $(document).ready(function(){
                 durationPicker.show();
                 timeCount($("#timeCount"));
-                var st = $("#startTime").attr('data-content')*1.0;
+                
+                /*var st = $("#startTime").attr('data-content')*1.0;
                 var ed = $("#endTime1").attr('data-content')*1.0;
                 
                 var stSecondsInDay = st % 86400 - 57600;
@@ -352,7 +353,7 @@ $(function() {
                 {
                     alert('已错过日间订单时间，切换为夜间模式');
                     window.location.replace('/nightPage');
-                }
+                }*/
             });
 
             durationTime.parent().on('click',function () {
@@ -395,7 +396,7 @@ $(function() {
                     if( stSecondsInDay > 22 * 3600 || stSecondsInDay < 11.5 * 3600 || edSecondsInDay > 22.5 * 3600 || edSecondsInDay < 13.5 * 3600)
                     {
                         alert('已错过日间最晚时间，不可下单');
-                        window.location.href=window.location.href;
+                        window.location.href='/nightPage';
                     }
                         data = {
                             _token: $("meta[name='csrf-token']").attr('content'),
@@ -438,7 +439,7 @@ $(function() {
                         },
                         error: function (e){
                             alert(e.responseText);
-                            alert("您还没有选择使用时间哦～");
+                            alert("使用时间出错了亲～请刷新页面～");
                             //console.log(e.responseText);
                         }
                     });
@@ -499,11 +500,11 @@ $(function() {
 
 var btn;
 var clock = '';
-var nums = 180;//5min
+var nums = 180;//3min
 
 function timeCount(thisBtn){
     btn = thisBtn;
-    btn.html('(5分0秒)');
+    btn.html('(3分0秒)');
     clock = setInterval(doLoop, 1000); //一秒执行一次
 }
 

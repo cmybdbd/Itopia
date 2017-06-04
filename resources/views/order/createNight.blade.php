@@ -304,7 +304,7 @@
 
 <?php 
     $tmp = strtotime(date("Y-m-d"));
-    $stTime = $tmp + 11*3600;
+    $stTime = $tmp + 23*3600;
     $edTime=$stTime + 11*3600;
 ?>
     <div id="param">

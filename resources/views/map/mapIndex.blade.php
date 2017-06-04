@@ -18,10 +18,10 @@
             </div>
         </div>
     </div>
-    <div class="content" style="height:100%;overflow:hidden;">
+    <div class="content" style="height:100%;width:100%;overflow:hidden;">
         <div class="map">
             <!--onmouseover="getMousePos(event)"-->
-        <img class="blend" style="position:absolute;top:0px;z-index:-1;height:100%;width:1000px;overflow:scroll">
+        <img class="blend" style="position:absolute;top:0px;z-index:-1;height:100%;width:1000px;overflow:scroll;">
         </div>
     </div>
     <div style="position:fixed;width:100%;bottom:64px;">
