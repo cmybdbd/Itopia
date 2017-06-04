@@ -18,13 +18,53 @@
             </div>
         </div>
     </div>
-    <div class="content" style="height:100%;width:100%;overflow:hidden;">
-        <div class="map">
+    <div class="content" style="height:100%;width:100%;">
             <!--onmouseover="getMousePos(event)"-->
-        <img class="blend" style="position:absolute;top:0px;z-index:-1;height:100%;width:1000px;overflow:scroll;">
+        <img id="mapImg" class="blend" scrollLeft="100" clientLeft="100" style="position:absolute;top:0px;z-index:-1;height:800px;width:1050px;overflow:scroll;">
+        
+
+        <div id = "frl">
+            <img src="{{asset('storage/map/landmark.png')}}" style="position:absolute;top:400px;left:335px;width:45px;z-index=1;">
+            <div>
+                <span style="width:80px;position:absolute;top:420px;left:395px;font-size:14px;z-index:2;">芙蓉里 <span class="m-color" style="font-weight:600;">5</span> 间</span>
+                <img src="{{asset('storage/map/label.png')}}" style="position:absolute;top:410px;left:375px;height:48px;z-index=1;">
+            </div>
         </div>
+        
+        <div id = "hdzy">
+            <img src="{{asset('storage/map/landmark.png')}}" style="position:absolute;top:520px;left:390px;width:45px;z-index=1;">
+            <div>
+                <span style="width:90px;position:absolute;top:540px;left:450px;font-size:14px;z-index:2;">大河庄苑 <span class="m-color" style="font-weight:600;">5</span> 间</span>
+                <img src="{{asset('storage/map/label.png')}}" style="position:absolute;top:530px;left:430px;width:130px;height:48px;z-index=1;">
+            </div>
+        </div>
+
+        <div id = "zgy">
+        <img src="{{asset('storage/map/landmark.png')}}" style="position:absolute;top:270px;left:680px;width:45px;z-index=1;">
+        <div>
+            <span style="width:80px;position:absolute;top:290px;left:740px;font-size:14px;z-index:2;">中关园 <span class="m-color" style="font-weight:600;">5</span> 间</span>
+            <img src="{{asset('storage/map/label.png')}}" style="position:absolute;top:280px;left:720px;height:48px;z-index=1;">
+        </div>
+        </div>
+
+        <div id = "kyxq">
+            <img src="{{asset('storage/map/landmark.png')}}" style="position:absolute;top:470px;left:730px;width:45px;z-index=1;">
+            <div>
+                <span style="width:90px;position:absolute;top:490px;left:790px;font-size:14px;z-index:2;">科育小区 <span class="m-color" style="font-weight:600;">5</span> 间</span>
+                <img src="{{asset('storage/map/label.png')}}" style="position:absolute;top:480px;left:770px;width:130px;height:48px;z-index=1;">
+            </div>
+        </div>
+
+        <div id = "dxy">
+            <img src="{{asset('storage/map/landmark.png')}}" style="position:absolute;top:580px;left:350px;width:45px;z-index=1;">
+            <div>
+                <span style="width:80px;position:absolute;top:600px;left:410px;font-size:14px;z-index:2;">稻香园 <span class="m-color" style="font-weight:600;">5</span> 间</span>
+                <img src="{{asset('storage/map/label.png')}}" style="position:absolute;top:590px;left:390px;height:48px;z-index=1;">
+            </div>
+        </div>
+
     </div>
-    <div style="position:fixed;width:100%;bottom:64px;">
+    <div style="position:fixed;width:100%;bottom:64px;z-index:10;">
         <div id='day' class="circle" style="text-align:center;position:absolute;bottom:0;left:20%">
             <p class="font-xl" style="margin-top:16px;font-weight:500;">时租</p>
             <p class="font-l m-color" style="margin-top:-10px;font-weight:500;">19 / 小时</p></div>
@@ -119,6 +159,24 @@
     </style>
 @endsection
 @section('scripts')
-    <!--<script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>-->
+    <script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
     <script src="{{url('js/login.js')}}"></script>
+    <script>
+    $("#dxy").on('click',function () {
+        window.location.replace('/getDayRooms/dxy');
+        //window.location.href='/getDayRooms/dxy';
+    });
+    $("#dhzy").on('click',function () {
+        window.location.replace('/getDayRooms/dhzy');
+    });
+    $("#kyxq").on('click',function () {
+        window.location.replace('/getDayRooms/kyxq');
+    });
+    $("#frl").on('click',function () {
+        window.location.replace('/getDayRooms/frl');
+    });
+    $("#zgy").on('click',function () {
+        window.location.replace('/getDayRooms/zgy');
+    });
+    </script>
 @endsection

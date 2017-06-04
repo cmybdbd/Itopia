@@ -340,6 +340,7 @@ $(function() {
                 startPicker.show();
             });*/
             $(document).ready(function(){
+
                 durationPicker.show();
                 timeCount($("#timeCount"));
                 
