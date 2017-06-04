@@ -58,11 +58,11 @@
     </div>
     <div class="content" style="padding-top:81px;">
         @foreach($rooms as $key => $room)
-            <div class="roomItem" data-content="{{$room->id}}">
+            <div class="roomItem" data-content="{{$room->id}}" id="{{$room->state}}">
                     <div style="wdith:100%;background-color:#eeeeee;">
                     <div class="myrow"  id="slide_{{$key}}" style="margin-bottom: 1vh;margin-left:auto;margin-right:auto;display:block;text-align:center;width:325px;height: 200px;overflow:hidden;visibility:hidden;position:relative;top:0px;left:0px;" >
                         <div data-u="slides" style="width:325px;height: 200px; overflow:hidden;position:relative;top:0px;left:0px;">
-                            <?php $imgFiles = \Illuminate\Support\Facades\File::files('storage/room'.($key+1));?>
+                            <?php $imgFiles = \Illuminate\Support\Facades\File::files('storage/room'.($room->state));?>
                             @foreach($imgFiles as $img)
                                <!-- <img src="{{asset('storage/arch.jpg')}}" style="width: 100%" >-->
                                <div>
@@ -76,7 +76,7 @@
                         <span class="item">{{$room->title}}</span>
                         <span class="m-color" style="float:right;font-weight: 500;">¥ {{$room->nightPrice}}/夜</span>
                         <br>
-                        <span class="room-state room-used {{$room->isUsing()? 'button-occupied':'button-available'}} font-s">
+                        <span id="btn{{$room->state}}" data-content="{{$room->isUsing() ? '0':'1'}}" class="room-state room-used {{$room->isUsing()? 'button-occupied':'button-available'}} font-s">
                             {{$room->isUsing() ? '使用中':'可使用'}}
                         </span>
                         <span class="room-state b-color" style="font-size:12px;float:right;"><span name="today"></span>23:00 - 次日11:00</span>

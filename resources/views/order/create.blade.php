@@ -181,7 +181,7 @@
     </div>
     <div class="cbox b-color font-m" style="margin:12px 36px 12px 36px; padding-left:10px;">
         <input type="checkbox" id="agreement" style="margin:0">
-        <label for="agreement"></label>本人已获悉并同意<span id="tos">《iTOPIA分时空间使用条例》</span>
+        <label for="agreement"></label>本人已获悉并同意<span id="tos">《蜗壳私人空间使用条例》</span>
     </div>
     <button id="toPay" class="btn btn-block btn-default btn-main">去支付<span id="timeCount"></span></button>
 </div>

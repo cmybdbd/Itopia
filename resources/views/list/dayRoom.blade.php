@@ -52,7 +52,7 @@
     <hr class="mysplit" style="margin:0;">
     <div id="content" class="content" style="padding-top:81px;">
         @foreach($rooms as $key => $room)
-            <div class="roomItem" data-content="{{$room->id}}" style="cursor:pointer;">
+            <div class="roomItem" data-content="{{$room->id}}" id="{{$room->state}}" style="cursor:pointer;">
                     <div style="wdith:100%;background-color:#eeeeee;">
                     <div class="myrow"  id="slide_{{$key}}" style="margin-bottom: 1vh;margin-left:auto;margin-right:auto;display:block;text-align:center;width:325px;height: 200px;overflow:hidden;visibility:hidden;position:relative;top:0px;left:0px;" >
                         <div data-u="slides" style="width:325px;height: 200px; overflow:hidden;position:relative;top:0px;left:0px;">
@@ -70,7 +70,7 @@
                         <span class="item">{{$room->title}}</span>
                         <span class="m-color" style="float:right;font-weight: 500;">¥ {{$room->hourPrice}}/小时</span>
                         <br>
-                        <span class="room-state room-used {{$room->isUsing()? 'button-occupied':'button-available'}} font-s">
+                        <span id="btn{{$room->state}}" data-content="{{$room->isUsing() ? '0':'1'}}" class="room-state room-used {{$room->isUsing()? 'button-occupied':'button-available'}} font-s">
                             {{$room->isUsing() ? '使用中':'可使用'}}
                         </span>
                         @if($room->isUsing())
