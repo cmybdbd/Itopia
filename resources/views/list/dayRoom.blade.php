@@ -70,18 +70,36 @@
                         <span class="item">{{$room->title}}</span>
                         <span class="m-color" style="float:right;font-weight: 500;">¥ {{$room->hourPrice}}/小时</span>
                         <br>
-                        <span class="room-state room-used {{$room->isUsing()? 'button-occupied':'button-available'}} font-s">
-                            {{$room->isUsing() ? '使用中':'可使用'}}
+                        <?php
+                            $room_state = 0;
+                            if (date('H')<11||date('H')>22)
+                            {
+                                $room_state = 1;
+                                $room_str = '包夜中';
+                            }
+                            else if($room->isUsing())
+                            {
+                                $room_state = 2;
+                                $room_str = '使用中';
+                            }
+                            else
+                            {
+                                $room_state = 0;
+                                $room_str = '可使用';
+                            }
+                        ?>
+                        <span class="room-state room-used {{$room_state>0 ? 'button-occupied':'button-available'}} font-s">
+                            {{$room_str}}
                         </span>
 
                         @if($room->isUsing())
                             @if($room->nextTime() != 0)
-                                <span class="room-state b-color" style="font-size:12px;float:right;">可预约<span class="m-color">{{( (date('H',$room->nextTime()) >= 11 && date('H',$room->nextTime()) > date('H')) ? '明天':'' ). date('H:i',$room->nextTime())}}</span>使用</span>
+                                <span class="room-state b-color" style="font-size:12px;float:right;">可预约<span class="m-color">{{( (date('H',$room->nextTime()) >= 11 && date('d',$room->nextTime()) > date('d')) ? '明天':'' ). date('H:i',$room->nextTime())}}</span>使用</span>
                             <!--if(in_array(date('Y-m-d 00:00:00',\App\Utils\Utils::curNight()), json_decode($room->usingNight())))-->
                             @endif
                         @else
                             @if( date("H") >= 23 || date("H") < 11)
-                                <span class="room-state b-color" style="font-size:12px;float:right;">可预约<span class="m-color">{{( (date('H',$room->nextTime()) >= 11 && date('H',$room->nextTime()) > date('H')) ? '明天':'' ). date('H:i',$room->nextTime())}}</span>使用</span>
+                                <span class="room-state b-color" style="font-size:12px;float:right;">可预约<span class="m-color">{{( (date('H',$room->nextTime()) >= 11 && date('d',$room->nextTime()) > date('d')) ? '明天':'' ). date('H:i',$room->nextTime())}}</span>使用</span>
                             @else
                                 <span class="room-state b-color" style="font-size:12px;float:right;">即时使用</span>
                             @endif
