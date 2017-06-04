@@ -154,12 +154,21 @@
                 <!--<span>{{date('m月d日H时i分',$startDayTime)}}</span>
                 <span>{{date('m月d日H时i分',$startNightTime)}}</span>-->
                 <?php
-                if($startNightTime<$startDayTime)
+                if($startNightTime < $startDayTime)
                 {
-                    $t = $startDayTime;
+                    if(($startDayTime - 57600)% 86400 < 11 * 3600)
+                    {
+                        $i=1;
+                        $t = $startDayTime - ($startDayTime - 57600)% 86400 + 11 * 3600;
+                        $t = $t - 1800;
+                    }else
+                    {
+                        $i = 2;
+                        $t = $startDayTime;
+                    }
                 }else
-                {   
-                    //if($startNightTime % 86400 < 22*3600)
+                {
+                    $i = 3;
                     $t = $startNightTime;
                 }
                 $t = $t - $t % 1800 + 1800;
