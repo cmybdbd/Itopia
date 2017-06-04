@@ -1,7 +1,7 @@
 /node_modules
 /storage/*.key
 /script/
-/public/storage
+
 /vendor
 
 产品原型/
