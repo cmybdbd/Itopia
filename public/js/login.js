@@ -265,10 +265,11 @@ $(function () {
         
         if(t1  && t2)//if(1)              
         {
-            window.location.href = window.location.href.replace(
+            /*window.location.href = window.location.href.replace(
                 'home',
                 'create/' + uid + '/' + $(this).attr('data-content')
-            );
+            );*/
+            window.location.href = '/home';
         }
     }
 });

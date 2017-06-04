@@ -126,14 +126,14 @@ class OrderController extends Controller
     function test()
     {
         $rid = 'ae50f8da-225e-11e7-b33a-00163e028324';
-        $maxDayTime = strtotime(Order::where([
+        $maxDayTime = Order::where([
             ['roomId','=', $rid],
-            ['isDay', '=', 1],
+            ['isDay', '=', 0],
             ['state', '>', Constant::$ORDER_STATE['REMOVE']]
-        ])->where('endTime','>','2017-05-26')->max('endTime'));
+        ])->where('endTime','<',date("Y-m-d",time()+86400*(0 + 1)))->max('endTime');
         //$nowday = time();
         $nowday = strtotime(date("Y-m-d"));//strtotime(date("Y-m-d"))+ ' ' + 
-        return $nowday;
+        return $maxDayTime;
     }
     function createDayOrder($uid, $rid, $day)
     {
