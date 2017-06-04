@@ -393,11 +393,11 @@ $(function() {
                     var stSecondsInDay = st % 86400 - 57600;
                     var edSecondsInDay = ed % 86400 - 57600;
 
-                    if( stSecondsInDay > 22 * 3600 || stSecondsInDay < 11.5 * 3600 || edSecondsInDay > 22.5 * 3600 || edSecondsInDay < 13.5 * 3600)
+                    /*if( stSecondsInDay > 22 * 3600 || stSecondsInDay < 11 * 3600 || edSecondsInDay > 22.5 * 3600 || edSecondsInDay < 13.5 * 3600)
                     {
                         alert('已错过日间最晚时间，不可下单');
                         window.location.href='/nightPage';
-                    }
+                    }*/
                         data = {
                             _token: $("meta[name='csrf-token']").attr('content'),
                             'userId': $("#userId").attr('data-content'),

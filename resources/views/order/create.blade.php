@@ -169,7 +169,7 @@
                 }
                 $t = $t - $t % 1800 + 1800;
                 ?>
-            {{date('d',$t) == date("d") ? '今天':'明天'}}({{date('m月d日',$t)}}) <span id="startTime" data-content="{{$t}}"></span>&nbsp;&nbsp;—&nbsp;&nbsp;<div style="float:right;" id="endTime" class="present noPicker"></div>
+            {{date('j',$t) == date("j") ? '今天':'明天'}}({{date('n月j日',$t)}}) <span id="startTime" data-content="{{$t}}"></span>&nbsp;&nbsp;—&nbsp;&nbsp;<div style="float:right;" id="endTime" class="present noPicker"></div>
         </div>
         </div>
         <div class="mybox selectPanel font-l" style="display:flex;box-shadow:none;padding-top:0px;">
