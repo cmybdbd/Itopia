@@ -73,10 +73,12 @@
                         <span id="btn{{$room->state}}" data-content="{{$room->isUsing() ? '0':'1'}}" class="room-state room-used {{$room->isUsing()? 'button-occupied':'button-available'}} font-s">
                             {{$room->isUsing() ? '使用中':'可使用'}}
                         </span>
+
                         @if($room->isUsing())
-                            @if( date('H',$room->nextTime()) == 11 || (date('H',$room->nextTime()) < 9))
-                                <span class="room-state b-color" style="font-size:12px;float:right;">可预约<span class="m-color">{{(date('H',$room->nextTime())== 11? '明早':'' ). date('H:i',$room->nextTime())}}</span>使用</span>
-                            @else
+                            @if($room->nextTime() != 0)
+                                @if( date('H',$room->nextTime()) == 11 || (date('H',$room->nextTime()) < 9))
+                                    <span class="room-state b-color" style="font-size:12px;float:right;">可预约<span class="m-color">{{(date('H',$room->nextTime())== 11? '明早':'' ). date('H:i',$room->nextTime())}}</span>使用</span>
+                                @endif
                             <!--if(in_array(date('Y-m-d 00:00:00',\App\Utils\Utils::curNight()), json_decode($room->usingNight())))-->
                                 <span class="room-state b-color" style="font-size:12px;float:right;">今日已约满</span>
                             @endif
