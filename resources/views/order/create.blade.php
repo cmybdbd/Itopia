@@ -161,16 +161,16 @@
                     if($room->isUsing())
                     {
                         $i = 1;
-                        $t = $startDayTime;
+                        $t = $room->nextTime();
                     }
                     else{
                         if( date("H") < 23 && date("H") > 10){
                             $i = 2;
-                            $t = $startDayTime;//??
+                            $t = $room->nextTime();//??
                         }
                         else{
                             $i = 3;
-                            $t = $startDayTime;
+                            $t = $room->nextTime();
                         }
                     }
                 }           
@@ -187,7 +187,6 @@
                     if ($room->nextDayUsingTime() == 0){
                         $i = 6;
                         $t = $startDayTime - ($startDayTime - 57600)% 86400 + 86400 + 11 * 3600;
-                        $t = $t - 1800;//11:00
                     }elseif ($room->nextDayUsingTime() == -1)
                     {   
                         $i = 7; 
@@ -198,7 +197,7 @@
                     }                                
                 }
 
-                $t = $t - $t % 1800 + 1800;
+                $t = $t - $t % 1800;
                 ?>
                 
             {{date('j',$t) == date("j") ? '今天':'明天'}}({{date('n月j日',$t)}}) <span id="startTime" data-content="{{$t}}"></span>&nbsp;&nbsp;—&nbsp;&nbsp;<div style="float:right;" id="endTime" class="present noPicker"></div>
