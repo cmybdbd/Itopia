@@ -151,12 +151,16 @@
         <div class="mybox selectPanel font-l" style="box-shadow:none;padding-bottom:12px;">
             时间
             <div class="m-color" style="float:right;margin-left:15%;">
-                <!--<span>{{$room->nextDayUsingTime()}}</span>
-                <span>Today {{date('H:i',$room->nextTime())}}</span>
-                <span>{{date('m月d日H时i分',$startDayTime)}}</span>-->
+                <span>{{$room->nextDayUsingTime()}}</span>
+                <br>
+                <span>nextTime= {{date('d-H:i',$room->nextTime())}}</span>
+                <br>
+                <span>startDayTime={{date('d-H:i',$startDayTime)}}</span>
                 <?php
-
-                if(date('H',$room->nextTime()) != 8)
+                $remainTime = (22.5 - date("H") - $room->type/2.0) + (-date("i"))/60; 
+                $remainOrderTime = (22.5 - date('H',$room->nextTime()) - $room->type/2.0) + (-date('H=i',$room->nextTime()))/60;
+                
+                if(date('H',$room->nextTime()) != 8 && $remainOrderTime > 1)
                 {
                     if($room->isUsing())
                     {
@@ -164,23 +168,32 @@
                         $t = $room->nextTime();
                     }
                     else{
-                        $i = 2;
-                        $t = $room->nextTime();
+                        //尾单
+                        if( date("H")+date("i")/60 < (21.5 - $room->type/2.0) && date("H")+date("i")/60 > (10.5 - $room->type/2.0))
+                        {
+                            $i = 2;
+                            $t = $startDayTime;
+                        }
+                        //从第二天开始订
+                        else{
+                            $i = 3;
+                            $t = $room->nextTime();
+                        }     
                     }
                 }           
                 else if(date('H',$room->nextTime()) == 8){
-                    if( date("H") < 22 && date("H") > 10)
+                    if($remainTime>1)
                     {
                         $i = 3;
                         $t = $startDayTime;
                     }else{
                         $i = 4;
-                        $t = $startDayTime - ($startDayTime - 57600)% 86400 + 86400 + 11 * 3600;
+                        $t = $startDayTime - ($startDayTime - 57600)% 86400 + 86400 + (11 - $room->type/2.0) * 3600;
                     }
                 }else{
                     if ($room->nextDayUsingTime() == 0){
                         $i = 5;
-                        $t = $startDayTime - ($startDayTime - 57600)% 86400 + 86400 + 11 * 3600;
+                        $t = $startDayTime - ($startDayTime - 57600)% 86400 + 86400 + (11 - $room->type/2.0) * 3600;
                     }elseif ($room->nextDayUsingTime() == -1)
                     {   
                         $i = 6; 
@@ -193,7 +206,7 @@
 
                 $t = $t - $t % 1800;
                 ?>
-                
+                {{$i}}
             {{date('j',$t) == date("j") ? '今天':'明天'}}({{date('n月j日',$t)}}) <span id="startTime" data-content="{{$t}}"></span>&nbsp;&nbsp;—&nbsp;&nbsp;<div style="float:right;" data-content="0" id="endTime" class="present noPicker"></div>
         </div>
         </div>

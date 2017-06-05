@@ -74,27 +74,39 @@
     </style>
 @endsection
 @section('content')
-    <div class="mybox">
-        <div class="f-color font-b">
+    <div class="center">
+        <div class="font-b"
+             style="background-color:#eeeeee;width:100%;height: 44px;margin:0;display:flex;align-items: center;justify-content: center">使用空间</div>
+        <div class="mybox" style="box-shadow:none;">
+        <div class="f-color font-xl">
             {{$order->hasRoom->title}}
         </div>
         <div class="b-color">
             地址：{{$order->hasRoom->address}}
         </div>
-        <div class="font-s b-color">
+        <!--<div class="font-s b-color">
             您可以在微信公众号“查看我的地理位置”中获得精确导航
-        </div>
-        <div class="myrow"  id="slide" style="margin-bottom: 1vh;margin-left:auto;margin-right:auto;display:block;text-align:center;width: 300px;height: 200px;overflow:hidden;visibility:hidden;position:relative;top:0px;left:0px;" >
-            <div data-u="slides" style="width: 300px;height: 200px; overflow:hidden;position:relative;top:0px;left:0px;">
+        </div>-->
+        <div class="myrow"  id="slide" style="margin-bottom: 1vh;margin-left:auto;margin-right:auto;display:block;text-align:center;width:auto;height: 200px;overflow:hidden;visibility:hidden;position:relative;top:0px;left:0px;" >
+            <div data-u="slides" style="width: 325px;height: 200px; overflow:hidden;position:relative;top:0px;left:0px;">
+                <div>
+                    <img src="{{asset('storage/map/'.$order->hasRoom->parentId.'.jpg')}}" data-u="image" alt="" width="300px">
+                </div>
                 <div>
                     <img src="{{asset('storage/map/1.jpg')}}" data-u="image" alt="" width="300px">
                 </div>
             </div>
         </div>
-
     </div>
+<div class="mybox" id="countDown" style="margin:24px;background-image:white;box-shadow:none;">
+                使用计时
+                <span class="cd m-color" style="float:right;margin-right:100px;"></span>
+            </div>
     <div style="margin:3vw">
-        <div class="m-color font-m">
+        
+        <hr class="mysplit">
+
+        <div class="b-color font-xl">
         <div class="gatepwd">
             <div >大门密码</div>
             <div class="pwd-group font-b">
@@ -106,6 +118,8 @@
                 <div></div>
             </div>
         </div>
+        
+        <hr class="mysplit">
         <div class="roompwd">
             <div>
                 房间密码
@@ -120,26 +134,27 @@
             </div>
         </div>
         </div>
+
+        <hr class="mysplit">
         <div class="b-color">
-            <div class="f-color">
+            <div class="f-color font-l">
                 温馨提示
             </div>
-            <div>私人空间密码仅在主人使用时段有效哦～</div>
-            <div>主人要爱惜空间，尽量保持安静哦！</div>
-            <div>蜗壳空间是无烟空间哦，请主人不要在屋内吸烟</div>
-            <div class="mybox" id="countDown">
-                使用计时
-                <span class="cd m-color" style="float:right;"></span>
+            <div class="mybox" style="box-shadow:none;">
+                <div>私人空间密码仅在主人使用时段有效哦～</div>
+                <div>主人要爱惜空间，尽量保持安静哦！</div>
+                <div>蜗壳空间是无烟空间哦，请主人不要在屋内吸烟</div>
             </div>
         </div>
     </div>
     <div style="width:100%;box-shadow:0 -1px 6px #eeeeee ">
         <div class="mybtn-group">
             <div class="btn btn-default" id="report">遇到问题</div>
-            <div class="btn btn-default m-color" id="finish">结束使用</div>
+            <div class="btn btn-default m-color btn-main" id="finish">返回首页</div>
 
         </div>
     </div>
+</div>
 
 
     <div class="modal fade bs-example-modal-sm confirm-content" role="dialog" style="">
