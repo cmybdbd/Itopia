@@ -72,11 +72,18 @@ $(function () {
     });
     $("#useTomorrow").on('click',function () {
         var date = new Date();
-        $("#useToday").addClass("nav-active");
-        $("#useTomorrow").removeClass("nav-active");
-        if(date.getHours()>21)
+        if(date.getHours()+8>21)
         {
             dayShift = 1;
+            $("#useTomorrow").addClass("nav-active");
+            $("#useToday").removeClass("nav-active");
+            /*
+            var tags = document.getElementsByName("timeS");
+            if(tags!=null){
+                for(var i in tags){//对标签进行遍历 
+                    tags[i].innerHTML.replace("明天","今天");
+                }
+            }*/
         }
         else
         {

@@ -235,7 +235,6 @@
 .nav-active{
     color:#1dccb8;
     z-index:100;
-    box-shadow:rgba(29,204,184,1) 0px 3px 0px 0px;
 }
 
 .nav-button-top:hover,.nav-button-top:active{
