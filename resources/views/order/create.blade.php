@@ -206,7 +206,7 @@
 
                 $t = $t - $t % 1800;
                 ?>
-                {{$i}}
+                <!--i = {{$i}}-->
             {{date('j',$t) == date("j") ? '今天':'明天'}}({{date('n月j日',$t)}}) <span id="startTime" data-content="{{$t}}"></span>&nbsp;&nbsp;—&nbsp;&nbsp;<div style="float:right;" data-content="0" id="endTime" class="present noPicker"></div>
         </div>
         </div>
