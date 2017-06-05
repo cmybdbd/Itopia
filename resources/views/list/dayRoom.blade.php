@@ -97,27 +97,27 @@
                        
                         @if(date('H',$room->nextTime()) != 8 && date('H',$room->nextTime()) < 21)
                             @if($room->isUsing())
-                                <span id="btn{{$room->state}}" data-content="1" class="room-state b-color font-s" style="float:right;">可预约<span class="m-color">{{date("H:i",$room->nextTime())}}</span>使用</span>
+                                1<span id="btn{{$room->state}}" data-content="1" class="room-state b-color font-s" style="float:right;">可预约<span class="m-color">{{date("H:i",$room->nextTime())}}</span>使用</span>
                             @else
                                 @if( date("H") < 21 && date("H") > 10)
-                                <span id="btn{{$room->state}}" data-content="1" class="room-state b-color font-s" style="float:right;">即时使用</span>
+                                2<span id="btn{{$room->state}}" data-content="1" class="room-state b-color font-s" style="float:right;">即时使用</span>
                                 @else
-                                <span id="btn{{$room->state}}" data-content="1" class="room-state b-color font-s" style="float:right;">可预约<span class="m-color">{{date("H")>=21 ? '明天':''}}{{date("H:i",$room->nextTime())}}</span>使用</span>
+                                3<span id="btn{{$room->state}}" data-content="1" class="room-state b-color font-s" style="float:right;">可预约<span class="m-color">{{date("H")>=21 ? '明天':''}}{{date("H:i",$room->nextTime())}}</span>使用</span>
                                 @endif
                             @endif
                         @elseif(date('H',$room->nextTime()) == 8)
                             @if( date("H") < 21 && date("H") > 10)
-                                <span id="btn{{$room->state}}" data-content="1" class="room-state b-color font-s" style="float:right;">即时使用</span>
+                                4<span id="btn{{$room->state}}" data-content="1" class="room-state b-color font-s" style="float:right;">即时使用</span>
                             @else
-                                <span id="btn{{$room->state}}" data-content="1" class="room-state b-color font-s" style="float:right;">可预约<span class="m-color">{{date("H")>=21 ? '明天':''}}{{$room->type==0 ? '10:30':'11:00'}}</span>使用</span>
+                                5<span id="btn{{$room->state}}" data-content="1" class="room-state b-color font-s" style="float:right;">可预约<span class="m-color">{{date("H")>=21 ? '明天':''}}{{$room->type==0 ? '10:30':'11:00'}}</span>使用</span>
                             @endif
                         @else
                             @if ($room->nextDayUsingTime() == 0)
-                                <span id="btn{{$room->state}}" data-content="1" class="room-state b-color font-s" style="float:right;">可预约<span class="m-color">{{date("H")>=21 ? '明天':''}}{{$room->type==0 ? '10:30':'11:00'}}</span>使用</span>
+                                6<span id="btn{{$room->state}}" data-content="1" class="room-state b-color font-s" style="float:right;">可预约<span class="m-color">{{date("H")>=21 ? '明天':''}}{{$room->type==0 ? '10:30':'11:00'}}</span>使用</span>
                             @elseif ($room->nextDayUsingTime() == -1)
-                                <span id="btn{{$room->state}}" data-content="0" class="room-state b-color button-occupied font-s" style="float:right;">已约满</span>
+                                7<span id="btn{{$room->state}}" data-content="0" class="room-state b-color button-occupied font-s" style="float:right;">已约满</span>
                             @else
-                                <span id="btn{{$room->state}}" data-content="1" class="room-state b-color font-s" style="float:right;">可预约<span class="m-color">明天{{$room->nextDayUsingTime()}}</span>使用</span>
+                                8<span id="btn{{$room->state}}" data-content="1" class="room-state b-color font-s" style="float:right;">可预约<span class="m-color">明天{{$room->nextDayUsingTime()}}</span>使用</span>
                             @endif                                
                         @endif
                     </div>
