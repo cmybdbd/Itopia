@@ -318,7 +318,6 @@ $(function() {
                             $("#realPrice").text("96");
                             break;
                         default:
-                            //$("#totalPrice").css('visiblity','hidden');
                             $("#realPrice").text("0");
                             break;
                     };
@@ -348,8 +347,8 @@ $(function() {
                 var edSecondsInDay = (ed - 57600) % 86400;
                 var Day0 = ed - edSecondsInDay;
                 console.log(showHumanHour(Day0*1000));
-                if(stSecondsInDay > 21 * 3600){    
-                    s = (Day0 - 3600);
+                if(stSecondsInDay > 20.5 * 3600){    
+                    s = (Day0 - (2 - $("#roomType").attr('data-content') / 2.0) * 3600);
                      console.log(showHumanHour(s*1000));
                     $("#endTime").attr('data-content',s*1000);
                     $("#endTime").text(showHumanHour(s*1000));
@@ -405,17 +404,17 @@ $(function() {
                         ed = $("#endTime").attr('data-content')*1.0;
                         dt = temptime/1000;
                     }
-
-                    var st = $("#startTime").attr('data-content')*1.0 / 1000;
-                    var ed = $("#endTime").attr('data-content')*1.0 / 1000;
                 
                     var stSecondsInDay = (st - 57600) % 86400;
                     var edSecondsInDay = (ed - 57600) % 86400;
 
-                    if(edSecondsInDay > 23 * 3600 || edSecondsInDay < 13 * 3600)
+                    edSecondsInDay -= $("#roomType").attr('data-content') / 2.0 *  3600
+
+                    if(edSecondsInDay > 22 * 3600 || edSecondsInDay < 12.5 * 3600)
                     {
                         console.log(edSecondsInDay/3600);
-                        alert('已错过日间订单时间，切换为夜间模式');
+                        alert('当日订单已满');
+                        window.location.href = window.location.href.replace('home','dayPage');
                     }
                         data = {
                             _token: $("meta[name='csrf-token']").attr('content'),
@@ -452,7 +451,7 @@ $(function() {
                                 $("#toPay button").text('下单失败');
                                 alert('下单失败');
                                 console.log('下单失败');
-                                window.location.href=window.location.href;
+                                window.location.href = window.location.href.replace('home','nightPage');
                             }
 
                         },

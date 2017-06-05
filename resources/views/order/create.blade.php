@@ -156,7 +156,7 @@
                 <span>{{date('m月d日H时i分',$startDayTime)}}</span>-->
                 <?php
 
-                if(date('H',$room->nextTime()) != 8 && date('H',$room->nextTime()) < 23)
+                if(date('H',$room->nextTime()) != 8 && date('H',$room->nextTime()) < 22)
                 {
                     if($room->isUsing())
                     {
@@ -164,7 +164,7 @@
                         $t = $room->nextTime();
                     }
                     else{
-                        if( date("H") < 23 && date("H") > 10){
+                        if( date("H") < 22 && date("H") > 10){
                             $i = 2;
                             $t = $room->nextTime();//??
                         }
@@ -175,7 +175,7 @@
                     }
                 }           
                 else if(date('H',$room->nextTime()) == 8){
-                    if( date("H") < 23 && date("H") > 10)
+                    if( date("H") < 22 && date("H") > 10)
                     {
                         $i = 4;
                         $t = $startDayTime;
@@ -200,7 +200,7 @@
                 $t = $t - $t % 1800;
                 ?>
                 
-            {{date('j',$t) == date("j") ? '今天':'明天'}}({{date('n月j日',$t)}}) <span id="startTime" data-content="{{$t}}"></span>&nbsp;&nbsp;—&nbsp;&nbsp;<div style="float:right;" id="endTime" class="present noPicker"></div>
+            {{date('j',$t) == date("j") ? '今天':'明天'}}({{date('n月j日',$t)}}) <span id="startTime" data-content="{{$t}}"></span>&nbsp;&nbsp;—&nbsp;&nbsp;<div style="float:right;" data-content="0" id="endTime" class="present noPicker"></div>
         </div>
         </div>
         <div class="mybox selectPanel font-l" style="display:flex;box-shadow:none;padding-top:0px;">
@@ -366,6 +366,7 @@
         <div id="isUsing" data-content="{{$room->isUsing()}}"></div>
         <div id="nextTime" data-content="{{$room->nextTime()}}"></div>
         <div id="usingNight" data-content="{{$room->usingNight()}}"></div>
+        <div id="roomType" data-content="{{$room->type}}"></div>
     </div>
 @endsection
 @section('scripts')
