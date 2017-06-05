@@ -155,25 +155,52 @@
                 <span>Today {{date('H:i',$room->nextTime())}}</span>
                 <span>{{date('m月d日H时i分',$startDayTime)}}</span>-->
                 <?php
-                if(date('H',$room->nextTime()) > 9 && date('H',$room->nextTime()) < 23){
-                    $i=1;
-                    $t = $startDayTime;
-                }
-                else{
-                    if ($room->nextDayUsingTime() == 0){
-                        $i = 2;
-                        //$startDayTime - ($startDayTime - 57600)% 86400 //today 0:00
-                        //$startDayTime - ($startDayTime - 57600)% 86400 + 86400 //tomorrow 0:00
-                        $t = $startDayTime - ($startDayTime - 57600)% 86400 + 86400 + 11 * 3600;
-                        $t = $t - 1800;//11:00
+
+                if(date('H',$room->nextTime()) != 8 && date('H',$room->nextTime()) < 23)
+                {
+                    if($room->isUsing())
+                    {
+                        $i = 1;
+                        $t = $startDayTime;
                     }
                     else{
-                        $i = 3;
+                        if( date("H") < 23 && date("H") > 10){
+                            $i = 2;
+                            $t = $startDayTime;//??
+                        }
+                        else{
+                            $i = 3;
+                            $t = $startDayTime;
+                        }
+                    }
+                }           
+                else if(date('H',$room->nextTime()) == 8){
+                    if( date("H") < 23 && date("H") > 10)
+                    {
+                        $i = 4;
+                        $t = $startDayTime;
+                    }else{
+                        $i = 5;
+                        $t = $startDayTime - ($startDayTime - 57600)% 86400 + 86400 + 11 * 3600;
+                    }
+                }else{
+                    if ($room->nextDayUsingTime() == 0){
+                        $i = 6;
+                        $t = $startDayTime - ($startDayTime - 57600)% 86400 + 86400 + 11 * 3600;
+                        $t = $t - 1800;//11:00
+                    }elseif ($room->nextDayUsingTime() == -1)
+                    {   
+                        $i = 7; 
+                        $t=-1;
+                    }else{
+                        $i = 8;
                         $t = $startDayTime - ($startDayTime - 57600)% 86400 + 86400 + $room->nextDayUsingTime()*3600;
                     }                                
                 }
+
                 $t = $t - $t % 1800 + 1800;
                 ?>
+                
             {{date('j',$t) == date("j") ? '今天':'明天'}}({{date('n月j日',$t)}}) <span id="startTime" data-content="{{$t}}"></span>&nbsp;&nbsp;—&nbsp;&nbsp;<div style="float:right;" id="endTime" class="present noPicker"></div>
         </div>
         </div>
@@ -340,7 +367,6 @@
         <div id="isUsing" data-content="{{$room->isUsing()}}"></div>
         <div id="nextTime" data-content="{{$room->nextTime()}}"></div>
         <div id="usingNight" data-content="{{$room->usingNight()}}"></div>
-        <div id="endTime" data-content="" ></div>
     </div>
 @endsection
 @section('scripts')

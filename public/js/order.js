@@ -341,20 +341,35 @@ $(function() {
             });*/
             $(document).ready(function(){
 
-                durationPicker.show();
-                timeCount($("#timeCount"));
+                var st = $("#startTime").attr('data-content')*1.0;
+                var ed = $("#endTime").attr('data-content')*1.0 / 1000;
                 
-                /*var st = $("#startTime").attr('data-content')*1.0;
-                var ed = $("#endTime1").attr('data-content')*1.0;
-                
-                var stSecondsInDay = st % 86400 - 57600;
-                var edSecondsInDay = ed % 86400 - 57600;
+                var stSecondsInDay = (st - 57600) % 86400;
+                var edSecondsInDay = (ed - 57600) % 86400;
+                var Day0 = ed - edSecondsInDay;
+                console.log(showHumanHour(Day0*1000));
+                if(stSecondsInDay > 21 * 3600){    
+                    s = (Day0 - 3600);
+                     console.log(showHumanHour(s*1000));
+                    $("#endTime").attr('data-content',s*1000);
+                    $("#endTime").text(showHumanHour(s*1000));
+                }
+                else{
+                    durationPicker.show();
+                    timeCount($("#timeCount"));
+                }
 
-                if( stSecondsInDay > 22 * 3600 || stSecondsInDay < 11.5 * 3600 || edSecondsInDay > 22.5 * 3600 || edSecondsInDay < 13.5 * 3600)
+                var ed = $("#endTime").attr('data-content')*1.0 / 1000;
+                var edSecondsInDay = (ed - 57600) % 86400;
+               
+                
+                if(edSecondsInDay > 23 * 3600 || edSecondsInDay < 13 * 3600)
                 {
+                    console.log(edSecondsInDay/3600);
                     alert('已错过日间订单时间，切换为夜间模式');
                     window.location.replace('/nightPage');
-                }*/
+                }
+                
             });
 
             durationTime.parent().on('click',function () {
@@ -387,18 +402,21 @@ $(function() {
                     }
                     else{
                         st = $("#startTime").attr('data-content')*1.0;
-                        ed = $("#endTime1").attr('data-content')*1.0;
+                        ed = $("#endTime").attr('data-content')*1.0;
                         dt = temptime/1000;
                     }
 
-                    var stSecondsInDay = st % 86400 - 57600;
-                    var edSecondsInDay = ed % 86400 - 57600;
+                    var st = $("#startTime").attr('data-content')*1.0 / 1000;
+                    var ed = $("#endTime").attr('data-content')*1.0 / 1000;
+                
+                    var stSecondsInDay = (st - 57600) % 86400;
+                    var edSecondsInDay = (ed - 57600) % 86400;
 
-                    /*if( stSecondsInDay > 22 * 3600 || stSecondsInDay < 11 * 3600 || edSecondsInDay > 22.5 * 3600 || edSecondsInDay < 13.5 * 3600)
+                    if(edSecondsInDay > 23 * 3600 || edSecondsInDay < 13 * 3600)
                     {
-                        alert('已错过日间最晚时间，不可下单');
-                        window.location.href='/nightPage';
-                    }*/
+                        console.log(edSecondsInDay/3600);
+                        alert('已错过日间订单时间，切换为夜间模式');
+                    }
                         data = {
                             _token: $("meta[name='csrf-token']").attr('content'),
                             'userId': $("#userId").attr('data-content'),
