@@ -19,7 +19,7 @@ class OrderController extends Controller
     {
         PageViewController::updatePageView('result');
         $order = Order::with('hasRoom')->find($id);
-        //return view('order.result')->with(['order' => $order, 'gatepass'=>'123456']);
+        return view('order.result')->with(['order' => $order, 'gatepass'=>'123456']);
         if(!empty($order->payNum ))
         {
             $room = Room::find($order->roomId);
