@@ -334,7 +334,7 @@ var nums = 300;//5min
 
 function timeCount(thisBtn){
     btn = thisBtn;
-    btn.html('(5分0秒)');
+    btn.html('(3分0秒)');
     clock = setInterval(doLoop, 1000); //一秒执行一次
 }
 

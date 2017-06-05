@@ -152,6 +152,7 @@
 
         .blend
         {
+            overflow: scroll;
             background-size:1068px;
             -moz-background-image: url({{asset('storage/map/mapPKU.png')}}), -moz-linear-gradient( top,#aaa,#000);
             background-image: url({{asset('storage/map/mapPKU.png')}}), -webkit-linear-gradient( top,#aaa,#000);
@@ -160,24 +161,30 @@
     </style>
 @endsection
 @section('scripts')
-    <script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
     <script src="{{url('js/login.js')}}"></script>
     <script>
+    $("#equipment").on('click',function () {
+        $(".equipment-content").modal('show');
+    });
     $("#dxy").on('click',function () {
-        window.location.replace('/getDayRooms/dxy');
-        //window.location.href='/getDayRooms/dxy';
+        //window.location.replace('/getDayRooms/dxy');
+        window.location.href='/getDayRooms/dxy';
     });
     $("#dhzy").on('click',function () {
-        window.location.replace('/getDayRooms/dhzy');
+        //window.location.replace('/getDayRooms/dhzy');
+        window.location.href='/getDayRooms/dhzy';
     });
     $("#kyxq").on('click',function () {
-        window.location.replace('/getDayRooms/kyxq');
+        //window.location.replace('/getDayRooms/kyxq');
+        window.location.href='/getDayRooms/kyxq';
     });
     $("#frl").on('click',function () {
-        window.location.replace('/getDayRooms/frl');
+        //window.location.replace('/getDayRooms/frl');
+        window.location.href='/getDayRooms/frl';
     });
     $("#zgy").on('click',function () {
-        window.location.replace('/getDayRooms/zgy');
+        //window.location.replace('/getDayRooms/zgy');
+        window.location.href='/getDayRooms/zgy';
     });
     </script>
 @endsection

@@ -241,10 +241,7 @@ $(function () {
         }
     }
 
-    
-    $("#equipment").on('click',function () {
-        $(".equipment-content").modal();
-    });
+
 
     var validatePhone =$("#validatePhone");
     var phoneN = $("#phoneN");

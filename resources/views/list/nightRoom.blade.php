@@ -76,8 +76,8 @@
                         <span class="item">{{$room->title}}</span>
                         <span class="m-color" style="float:right;font-weight: 500;">¥ {{$room->nightPrice}}/夜</span>
                         <br>
-                        <span id="btn{{$room->state}}" data-content="{{$room->isUsing() ? '0':'1'}}" class="room-state room-used {{$room->isUsing()? 'button-occupied':'button-available'}} font-s">
-                            {{$room->isUsing() ? '使用中':'可使用'}}
+                        <span id="btn{{$room->state}}" data-content="{{$room->isNightBooked(0) ? '0':'1'}}" class="room-state room-used {{$room->isNightBooked(0)? 'button-occupied':'button-available'}} font-s">
+                            {{$room->isNightBooked(0) ? '已订出':'可使用'}}
                         </span>
                         <span class="room-state b-color" style="font-size:12px;float:right;"><span name="today"></span>23:00 - 次日11:00</span>
                     </div>
