@@ -59,6 +59,8 @@ $(function () {
     $("#on-left").on('click',function () {
         if(dayShift>0){
             dayShift--;
+
+            /*update time*/
             var date_time = new Date();
             date_time.setTime(date_time.getTime() + dayShift * 24*60*60*1000);
 
@@ -85,6 +87,9 @@ $(function () {
             var tags = document.getElementsByName("today");
             for(var i in tags)//对标签进行遍历 
                 tags[i].innerHTML= date_td;
+
+            /*update btn*/
+            
         }
     });
 

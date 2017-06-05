@@ -87,9 +87,6 @@
         <div class="myrow"  id="slide" style="margin-bottom: 1vh;margin-left:auto;margin-right:auto;display:block;text-align:center;width: 300px;height: 200px;overflow:hidden;visibility:hidden;position:relative;top:0px;left:0px;" >
             <div data-u="slides" style="width: 300px;height: 200px; overflow:hidden;position:relative;top:0px;left:0px;">
                 <div>
-                    <img src="{{asset('storage/map/0.jpg')}}" data-u="image" alt="" width="300px">
-                </div>
-                <div>
                     <img src="{{asset('storage/map/1.jpg')}}" data-u="image" alt="" width="300px">
                 </div>
             </div>
@@ -129,7 +126,7 @@
             </div>
             <div>私人空间密码仅在主人使用时段有效哦～</div>
             <div>主人要爱惜空间，尽量保持安静哦！</div>
-            <div>iTOPIA是无烟空间哦，请主人不要在屋内吸烟</div>
+            <div>蜗壳空间是无烟空间哦，请主人不要在屋内吸烟</div>
             <div class="mybox" id="countDown">
                 使用计时
                 <span class="cd m-color" style="float:right;"></span>

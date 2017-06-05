@@ -28,6 +28,7 @@ Route::group(['middleware' => 'auth'], function (){
         \App\User::savePhone($phone, \Illuminate\Support\Facades\Auth::id());
     });
 
+    Route::get('/getIsNightBooked/{id}','OrderController@getOrderDetail');
     Route::get('/timetest', 'OrderController@test');
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/dayPage','HomeController@dayPage');

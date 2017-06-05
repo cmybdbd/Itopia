@@ -72,17 +72,17 @@ $(function () {
     });
     $("#useTomorrow").on('click',function () {
         var date = new Date();
+        $("#useToday").addClass("nav-active");
+        $("#useTomorrow").removeClass("nav-active");
         if(date.getHours()>21)
         {
             dayShift = 1;
-            $("#useTomorrow").addClass("nav-active");
-            $("#useToday").removeClass("nav-active");
         }
         else
         {
             console.log(date);
             alert("亲，当天22:00后才能预订第二天的房子哦~");
-        }
+        }    
     });
 
     $("#dxy").on('click',function () {

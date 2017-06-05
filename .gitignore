@@ -4,6 +4,7 @@
 
 /vendor
 
+.DS_Store
 产品原型/
 /.idea
 Homestead.json
