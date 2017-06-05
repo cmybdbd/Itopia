@@ -65,6 +65,9 @@
         .f-color {
             color: #000000;
         }
+        .w-color {
+            color: #ffffff;
+        }
         .custom-textarea{
             resize: none;
 
@@ -110,6 +113,28 @@
             font-size: 14px;
             height:44px;
             background-color: white;
+            border-color: #1dccb8;
+        }
+
+        .btn-main-2{
+            color:white;
+            width: 46.3%;
+            margin:auto;
+            font-size: 16px;
+            height:44px;
+            background-color: #1dccb8;
+            border-radius: 22px;
+            border-color: white;
+        }
+
+        .btn-main-secondary-2{
+            color:#aaa;
+            width: 46.3%;
+            margin:auto;
+            font-size: 16px;
+            height:44px;
+            background-color: white;
+            border-radius: 22px;
             border-color: #1dccb8;
         }
 

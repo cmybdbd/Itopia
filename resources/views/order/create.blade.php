@@ -151,11 +151,11 @@
         <div class="mybox selectPanel font-l" style="box-shadow:none;padding-bottom:12px;">
             时间
             <div class="m-color" style="float:right;margin-left:15%;">
-                <span>{{$room->nextDayUsingTime()}}</span>
+                <!--<span>{{$room->nextDayUsingTime()}}</span>
                 <br>
                 <span>nextTime= {{date('d-H:i',$room->nextTime())}}</span>
                 <br>
-                <span>startDayTime={{date('d-H:i',$startDayTime)}}</span>
+                <span>startDayTime={{date('d-H:i',$startDayTime)}}</span>-->
                 <?php
                 $remainTime = (22.5 - date("H") - $room->type/2.0) + (-date("i"))/60; 
                 $remainOrderTime = (22.5 - date('H',$room->nextTime()) - $room->type/2.0) + (-date('H=i',$room->nextTime()))/60;

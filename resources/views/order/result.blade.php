@@ -70,7 +70,17 @@
             /*background-image: -webkit-gradient(linear,0 0, 0 100% ,from(transparent), to(transparent),color-stop(20%, var(--main-color)) , color-stop(80%, var(--main-color)));*/
             background-image: -webkit-gradient(linear,0 0, 100% 0 ,from(transparent), to(transparent),color-stop(20%,  #1dccb8) , color-stop(80%,  #1dccb8));
         }
-
+        .xTimer{
+            width: 84%;
+            position:absolute;
+            text-align: center;
+            top:240px;
+            margin: 20px 8% 20px 8%;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            background:rgba(0,0,0,0.4);
+            box-shadow:none;
+        }
     </style>
 @endsection
 @section('content')
@@ -90,26 +100,25 @@
         <div class="myrow"  id="slide" style="margin-bottom: 1vh;margin-left:auto;margin-right:auto;display:block;text-align:center;width:auto;height: 200px;overflow:hidden;visibility:hidden;position:relative;top:0px;left:0px;" >
             <div data-u="slides" style="width: 325px;height: 200px; overflow:hidden;position:relative;top:0px;left:0px;">
                 <div>
-                    <img src="{{asset('storage/map/'.$order->hasRoom->parentId.'.jpg')}}" data-u="image" alt="" width="300px">
+                    <img src="{{asset('storage/map/'.$order->hasRoom->parentId.'.jpg')}}" data-u="image" alt="" width="325px">
                 </div>
                 <div>
-                    <img src="{{asset('storage/map/1.jpg')}}" data-u="image" alt="" width="300px">
+                    <img src="{{asset('storage/map/1.jpg')}}" data-u="image" alt="" width="325px">
                 </div>
             </div>
         </div>
     </div>
-<div class="mybox" id="countDown" style="margin:24px;background-image:white;box-shadow:none;">
-                使用计时
-                <span class="cd m-color" style="float:right;margin-right:100px;"></span>
+<div class="xTimer font-xl w-color" id="countDown">
+                使用计时&nbsp;&nbsp;&nbsp;
+                <span class="cd font-xl"></span>
             </div>
     <div style="margin:3vw">
         
         <hr class="mysplit">
 
-        <div class="b-color font-xl">
-        <div class="gatepwd">
+        <div class="gatepwd b-color font-xl">
             <div >大门密码</div>
-            <div class="pwd-group font-b">
+            <div class="pwd-group font-b m-color">
                 <div></div>
                 <div></div>
                 <div></div>
@@ -120,11 +129,11 @@
         </div>
         
         <hr class="mysplit">
-        <div class="roompwd">
+        <div class="roompwd b-color font-xl">
             <div>
                 房间密码
             </div>
-            <div class="pwd-group font-b">
+            <div class="pwd-group font-b m-color">
                 <div></div>
                 <div></div>
                 <div></div>
@@ -132,12 +141,11 @@
                 <div></div>
                 <div></div>
             </div>
-        </div>
         </div>
 
         <hr class="mysplit">
         <div class="b-color">
-            <div class="f-color font-l">
+            <div class="b-color font-xl">
                 温馨提示
             </div>
             <div class="mybox" style="box-shadow:none;">
@@ -147,12 +155,9 @@
             </div>
         </div>
     </div>
-    <div style="width:100%;box-shadow:0 -1px 6px #eeeeee ">
-        <div class="mybtn-group">
-            <div class="btn btn-default" id="report">遇到问题</div>
-            <div class="btn btn-default m-color btn-main" id="finish">返回首页</div>
-
-        </div>
+    <div style="width:100%;height:56px;text-align:center;">
+        <div class="btn btn-default btn-main-secondary-2" id="report">遇到问题</div>
+        <div class="btn btn-default btn-main-2" id="finish">返回首页</div>
     </div>
 </div>
 
