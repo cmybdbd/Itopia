@@ -59,7 +59,8 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 room 1-3： 中关园
 room 4-6： 芙蓉里
 
-
+A room->type=1
+B room->type=0
 ## Works to do
 2 房源页：
     2.1        使用地理信息

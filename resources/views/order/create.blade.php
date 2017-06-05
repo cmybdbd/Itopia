@@ -156,7 +156,7 @@
                 <span>{{date('m月d日H时i分',$startDayTime)}}</span>-->
                 <?php
 
-                if(date('H',$room->nextTime()) != 8 && date('H',$room->nextTime()) < 22)
+                if(date('H',$room->nextTime()) != 8)
                 {
                     if($room->isUsing())
                     {
@@ -164,35 +164,29 @@
                         $t = $room->nextTime();
                     }
                     else{
-                        if( date("H") < 22 && date("H") > 10){
-                            $i = 2;
-                            $t = $room->nextTime();//??
-                        }
-                        else{
-                            $i = 3;
-                            $t = $room->nextTime();
-                        }
+                        $i = 2;
+                        $t = $room->nextTime();
                     }
                 }           
                 else if(date('H',$room->nextTime()) == 8){
                     if( date("H") < 22 && date("H") > 10)
                     {
-                        $i = 4;
+                        $i = 3;
                         $t = $startDayTime;
                     }else{
-                        $i = 5;
+                        $i = 4;
                         $t = $startDayTime - ($startDayTime - 57600)% 86400 + 86400 + 11 * 3600;
                     }
                 }else{
                     if ($room->nextDayUsingTime() == 0){
-                        $i = 6;
+                        $i = 5;
                         $t = $startDayTime - ($startDayTime - 57600)% 86400 + 86400 + 11 * 3600;
                     }elseif ($room->nextDayUsingTime() == -1)
                     {   
-                        $i = 7; 
+                        $i = 6; 
                         $t=-1;
                     }else{
-                        $i = 8;
+                        $i = 7;
                         $t = $startDayTime - ($startDayTime - 57600)% 86400 + 86400 + $room->nextDayUsingTime()*3600;
                     }                                
                 }
