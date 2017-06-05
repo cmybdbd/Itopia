@@ -108,7 +108,7 @@ $(function () {
                 console.log('r= '+r);
                 //$("#btn"+i).text(r);
                 $("#btn"+i).attr('data-content',r);
-                if(r==1)
+                if(r==0)
                 {
                     $("#btn"+i).text('已订出');
                     $("#btn"+i).addClass('button-occupied');
@@ -175,7 +175,7 @@ $(function () {
                 console.log('r= '+r);
                 //$("#btn"+i).text(r);
                 $("#btn"+i).attr('data-content',r);
-                if(r==1)
+                if(r==0)
                 {
                     $("#btn"+i).text('已订出');
                     $("#btn"+i).addClass('button-occupied');
