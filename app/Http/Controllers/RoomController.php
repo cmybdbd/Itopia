@@ -53,7 +53,11 @@ class RoomController extends Controller
     function isRoomNightBooked($rid,$day)
     {
         $room = Room::find($rid);
-        return Response::json(['isBooked' => $room->isNightBooked($day) ]);
+        if($room->isNightBooked($day))
+            $res = 0;
+        else
+            $res = 1;
+        return Response::json(['isBooked' => $res]);
     }
     
 }
