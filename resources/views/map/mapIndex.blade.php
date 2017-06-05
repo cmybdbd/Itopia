@@ -20,8 +20,9 @@
     </div>
     <div class="content" style="height:100%;width:100%;">
             <!--onmouseover="getMousePos(event)"-->
-        <img id="mapImg" class="blend" scrollLeft="100" clientLeft="100" style="position:absolute;top:0px;z-index:-1;height:800px;width:1050px;overflow:scroll;">
-        
+        <div style="max-wdith:100%;max-height:100%;overflow:scroll;">
+            <img id="mapImg" class="blend" scrollLeft="100" clientLeft="100" style="position:absolute;top:0px;z-index:-1;height:800px;width:1050px;overflow:hidden;">
+        </div>
 
         <div id = "frl">
             <img src="{{asset('storage/map/landmark.png')}}" style="position:absolute;top:400px;left:335px;width:45px;z-index=1;">
