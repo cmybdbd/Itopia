@@ -151,25 +151,26 @@
         <div class="mybox selectPanel font-l" style="box-shadow:none;padding-bottom:12px;">
             时间
             <div class="m-color" style="float:right;margin-left:15%;">
-                <!--<span>{{date('m月d日H时i分',$startDayTime)}}</span>
-                <span>{{date('m月d日H时i分',$startNightTime)}}</span>-->
+                <!--<span>{{$room->nextDayUsingTime()}}</span>
+                <span>Today {{date('H:i',$room->nextTime())}}</span>
+                <span>{{date('m月d日H时i分',$startDayTime)}}</span>-->
                 <?php
-                if($startNightTime < $startDayTime)
-                {
-                    if(($startDayTime - 57600)% 86400 < 11 * 3600)
-                    {
-                        $i=1;
-                        $t = $startDayTime - ($startDayTime - 57600)% 86400 + 11 * 3600;
-                        $t = $t - 1800;
-                    }else
-                    {
+                if(date('H',$room->nextTime()) > 9 && date('H',$room->nextTime()) < 23){
+                    $i=1;
+                    $t = $startDayTime;
+                }
+                else{
+                    if ($room->nextDayUsingTime() == 0){
                         $i = 2;
-                        $t = $startDayTime;
+                        //$startDayTime - ($startDayTime - 57600)% 86400 //today 0:00
+                        //$startDayTime - ($startDayTime - 57600)% 86400 + 86400 //tomorrow 0:00
+                        $t = $startDayTime - ($startDayTime - 57600)% 86400 + 86400 + 11 * 3600;
+                        $t = $t - 1800;//11:00
                     }
-                }else
-                {
-                    $i = 3;
-                    $t = $startNightTime;
+                    else{
+                        $i = 3;
+                        $t = $startDayTime - ($startDayTime - 57600)% 86400 + 86400 + $room->nextDayUsingTime()*3600;
+                    }                                
                 }
                 $t = $t - $t % 1800 + 1800;
                 ?>
