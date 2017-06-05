@@ -19,6 +19,20 @@ class Room extends Model
         return $this->hasMany('App\Order','roomId','id');
     }
 
+    public function isNightBooked($id)
+    {
+
+        $night = $this->hasManyOrders()->where([
+            ['isDay' , '=', 0],
+            ['state', '>=', Constant::$ORDER_STATE['UNPAY']],
+            ['state', "<", Constant::$ORDER_STATE['HISTORY']]
+        ])->where('startTime','>=',date('Y-m-d 00:00:00', time()+24*60*60*$id) )->where('startTime','<=',date('Y-m-d 23:30:00', time()+24*60*60*$id) )->max('startTime');
+        if(empty($night))
+            return 0;
+        else
+            return 1;
+
+    }
     public function usingNight(){
         $night = $this->hasManyOrders()->where([
             ['isDay' , '=', 0],
@@ -69,7 +83,7 @@ class Room extends Model
             ['state','>=', Constant::$ORDER_STATE['UNPAY']],
             ['state', '<', Constant::$ORDER_STATE['HISTORY']],
             ['isDay', '=', 1],
-        ])->max('endTime');
+        ])->where('endTime','<',date('Y-m-d 00:00:00', time()+24*60*60))->max('endTime');
         if(empty($nextTime))
         {
             $nextTime= 0;
@@ -93,6 +107,27 @@ class Room extends Model
         {
             return $dayStartTime + 35*60*60;
         }
+        return 0;
+    }
+    public function nextDayUsingTime(){
+        $nextTime = $this -> hasManyOrders()->where([
+            ['state','>=', Constant::$ORDER_STATE['UNPAY']],
+            ['state', '<', Constant::$ORDER_STATE['HISTORY']],
+            ['isDay', '=', 1],
+        ])->where('endTime','<=',date('Y-m-d 23:30:00', time()+24*60*60))->where('endTime','>',date('Y-m-d 00:00:00', time()+24*60*60))->max('endTime');
+        if(empty($nextTime))
+        {
+            $nextTime= 0;
+        }
+        else
+        {
+            $nextTime = strtotime($nextTime) + 30 * 60;
+        }
+        $tmptime = strtotime(date('Y-m-d 20:00:00', time()+24*60*60));
+        if($nextTime > $tmptime) 
+            return -1;
+        else 
+            return $nextTime;
         return 0;
     }
 }

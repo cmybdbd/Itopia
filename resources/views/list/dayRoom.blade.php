@@ -91,7 +91,9 @@
                         <span class="room-state room-used {{$room_state>0 ? 'button-occupied':'button-available'}} font-s">
                             {{$room_str}}
                         </span>
-
+                        <!--<p>Night {{$room->isNightBooked(0)}}</p>-->
+                        <!--<p>next {{$room->nextDayUsingTime()}}</p>-->
+                        <!--<p>nextUsing {{date('H',$room->nextTime())}}</p>-->
                         @if($room->isUsing())
                             @if($room->nextTime() != 0)
                                 <span class="room-state b-color" style="font-size:12px;float:right;">可预约<span class="m-color">{{( (date('H',$room->nextTime()) >= 11 && date('d',$room->nextTime()) > date('d')) ? '明天':'' ). date('H:i',$room->nextTime())}}</span>使用</span>
