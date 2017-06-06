@@ -172,7 +172,7 @@
                         if( date("H")+date("i")/60 < (21.5 - $room->type/2.0) && date("H")+date("i")/60 > (10.5 - $room->type/2.0))
                         {
                             $i = 2;
-                            $t = $startDayTime;
+                            $t = $startDayTime + 1800; 
                         }
                         //从第二天开始订
                         else{
@@ -184,22 +184,22 @@
                 else if(date('H',$room->nextTime()) == 8){
                     if($remainTime>1)
                     {
-                        $i = 3;
-                        $t = $startDayTime;
-                    }else{
                         $i = 4;
+                        $t = $startDayTime + 1800;
+                    }else{
+                        $i = 5;
                         $t = $startDayTime - ($startDayTime - 57600)% 86400 + 86400 + (11 - $room->type/2.0) * 3600;
                     }
                 }else{
                     if ($room->nextDayUsingTime() == 0){
-                        $i = 5;
+                        $i = 6;
                         $t = $startDayTime - ($startDayTime - 57600)% 86400 + 86400 + (11 - $room->type/2.0) * 3600;
                     }elseif ($room->nextDayUsingTime() == -1)
                     {   
-                        $i = 6; 
+                        $i = 7; 
                         $t=-1;
                     }else{
-                        $i = 7;
+                        $i = 8;
                         $t = $startDayTime - ($startDayTime - 57600)% 86400 + 86400 + $room->nextDayUsingTime()*3600;
                     }                                
                 }
