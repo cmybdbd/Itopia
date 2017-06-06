@@ -126,7 +126,17 @@ class OrderController extends Controller
      */
     function test()
     {
-        $rid = 'ae50f8da-225e-11e7-a07c-01163e028101';
+        $rid = 'ae50f8da-225e-11e7-a09c-03163e028801';
+        $night = Order::where([
+            ['isDay' , '=', 0],
+            ['state', '>=', Constant::$ORDER_STATE['UNPAY']],
+            ['state', "<", Constant::$ORDER_STATE['HISTORY']]
+        ])->where('startTime','>=',date('Y-m-d 00:00:00', time()+24*60*60*0) )->where('startTime','<=',date('Y-m-d 23:30:00', time()+24*60*60*0) )->max('startTime');
+        if(empty($night))
+            return 0;
+        else
+            return 1;
+
         $night = Order::where([
             ['roomId','=', $rid],
             ['isDay' , '=', 0],
