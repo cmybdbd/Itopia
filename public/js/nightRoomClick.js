@@ -89,13 +89,45 @@ $(function () {
                 tags[i].innerHTML= date_td;
 
             /*update btn*/
-            
+            room_num = 6;
+            var r;
+            for(i=1;i<=room_num;i++)
+            {   
+                $.ajax({
+                    url: '/isNightBooked/' + $("#"+i).attr("data-content")  + "/"+dayShift,
+                    type: 'GET',
+                    async : false,
+                    success:function(p){
+                        r = p.isBooked;
+                        //console.log(p.isBooked);
+                    },
+                    error:function(msg){
+                        console.log(msg);
+                    }
+                });
+                console.log('r= '+r);
+                //$("#btn"+i).text(r);
+                $("#btn"+i).attr('data-content',r);
+                if(r==0)
+                {
+                    $("#btn"+i).text('已订出');
+                    $("#btn"+i).addClass('button-occupied');
+                    $("#btn"+i).removeClass('button-available');
+                }
+                else{
+                    $("#btn"+i).text('可使用');
+                    $("#btn"+i).removeClass('button-occupied');
+                    $("#btn"+i).addClass('button-available');
+                }
+            }
         }
     });
 
     $("#on-right").on('click',function () {
         if(dayShift<7){
             dayShift++;
+
+            /*update date*/
             var date_time = new Date();
             date_time.setTime(date_time.getTime() + dayShift * 24*60*60*1000);
 
@@ -122,6 +154,39 @@ $(function () {
             var tags = document.getElementsByName("today");
             for(var i in tags)//对标签进行遍历 
                 tags[i].innerHTML= date_td;
+
+            /*update btn*/
+            room_num = 6;
+            var r;
+            for(i=1;i<=room_num;i++)
+            {   
+                $.ajax({
+                    url: '/isNightBooked/' + $("#"+i).attr("data-content")  + "/"+dayShift,
+                    type: 'GET',
+                    async : false,
+                    success:function(p){
+                        r = p.isBooked;
+                        //console.log(p.isBooked);
+                    },
+                    error:function(msg){
+                        console.log(msg);
+                    }
+                });
+                console.log('r= '+r);
+                //$("#btn"+i).text(r);
+                $("#btn"+i).attr('data-content',r);
+                if(r==0)
+                {
+                    $("#btn"+i).text('已订出');
+                    $("#btn"+i).addClass('button-occupied');
+                    $("#btn"+i).removeClass('button-available');
+                }
+                else{
+                    $("#btn"+i).text('可使用');
+                    $("#btn"+i).removeClass('button-occupied');
+                    $("#btn"+i).addClass('button-available');
+                }
+            }
         }
     });
 /*

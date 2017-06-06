@@ -39,6 +39,7 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('/create/day/{uid}/{rid}/{day}', 'OrderController@createDayOrder');
     Route::get('/create/night/{uid}/{rid}/{day}', 'OrderController@createNightOrder');
     Route::get('/result/{id}','OrderController@getOrderDetail');
+    Route::get('/isNightBooked/{rid}/{day}', 'RoomController@isRoomNightBooked');
 
     Route::post('/order/complete','OrderController@completeOrder');
 
