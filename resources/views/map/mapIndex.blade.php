@@ -21,7 +21,7 @@
     <div class="content" style="height:100%;width:100%;">
             <!--onmouseover="getMousePos(event)"-->
         <div style="max-wdith:100%;max-height:100%;overflow:scroll;">
-            <img id="mapImg" class="blend" scrollLeft="100" clientLeft="100" style="position:absolute;top:0px;z-index:-1;height:800px;width:1050px;overflow:hidden;">
+            <img id="mapImg" class="blend" style="position:absolute;top:0px;z-index:-1;height:800px;width:1050px;overflow:hidden;">
         </div>
 
         <div id = "frl">

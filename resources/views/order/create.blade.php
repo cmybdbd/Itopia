@@ -160,48 +160,41 @@
                 $remainTime = (22.5 - date("H") - $room->type/2.0) + (-date("i"))/60; 
                 $remainOrderTime = (22.5 - date('H',$room->nextTime()) - $room->type/2.0) + (-date('H=i',$room->nextTime()))/60;
                 if($startDayTime %86400 == 0)
-                    $startDayTime = strtotime(date("Y-n-d")) + (11 - $room->type/2.0) * 3600 + 86400;
+                    $startDayTime = strtotime(date("Y-n-d")) + (11 - $room->type/2.0) * 3600 + 86400; //start time
+
 
                 if(date('H',$room->nextTime()) != 8 && $remainOrderTime > 1)
                 {
-                    if($room->isUsing())
-                    {
-                        $i = 1;
-                        $t = $room->nextTime();
-                    }
-                    else{
-                        //尾单
                         if( date("H")+date("i")/60 < (21.5 - $room->type/2.0) && date("H")+date("i")/60 > (10.5 - $room->type/2.0))
                         {
-                            $i = 2;
+                            $i = 1;
                             $t = $startDayTime + 1800; 
                         }
                         //从第二天开始订
                         else{
-                            $i = 3;
+                            $i = 2;
                             $t = $room->nextTime();
                         }     
-                    }
                 }           
                 else if(date('H',$room->nextTime()) == 8){
                     if($remainTime>1)
                     {
-                        $i = 4;
+                        $i = 3;
                         $t = $startDayTime + 1800;
                     }else{
-                        $i = 5;
+                        $i = 4;
                         $t = $startDayTime - ($startDayTime - 57600)% 86400 + 86400 + (11 - $room->type/2.0) * 3600;
                     }
                 }else{
                     if ($room->nextDayUsingTime() == 0){
-                        $i = 6;
+                        $i = 5;
                         $t = $startDayTime - ($startDayTime - 57600)% 86400 + 86400 + (11 - $room->type/2.0) * 3600;
                     }elseif ($room->nextDayUsingTime() == -1)
                     {   
-                        $i = 7; 
+                        $i = 6; 
                         $t=-1;
                     }else{
-                        $i = 8;
+                        $i = 7;
                         $t = $startDayTime - ($startDayTime - 57600)% 86400 + 86400 + $room->nextDayUsingTime()*3600;
                     }                                
                 }
