@@ -132,11 +132,11 @@
                                 <span id="btn{{$room->state}}" data-content="1" class="room-state b-color font-s" style="float:right;">即时使用</span>
                                 <!--state 3-->
                             @else
-                                <span id="btn{{$room->state}}" data-content="0" class="room-state b-color button-occupied font-s" style="float:right;">今日已约满</span>
+                                <span id="btn{{$room->state}}" data-content="0" class="room-state b-color font-s" style="float:right;">今日已约满</span>
                                 <!--state 4-->
                             @endif
                         @else
-                                <span id="btn{{$room->state}}" data-content="0" class="room-state b-color button-occupied font-s" style="float:right;">今日已约满</span>
+                                <span id="btn{{$room->state}}" data-content="0" class="room-state b-color font-s" style="float:right;">今日已约满</span>
                                 <!--state 6-->
                         @endif
                         <div id="nextdaytime{{$room->state}}" data-content="{{$tomorrowTime}}"></div>
