@@ -192,6 +192,84 @@ $(function() {
                 }
             ];
 
+            var duration1h = [
+                {
+                    text: "1 小时",
+                    value: 2*60*60*1000
+                },
+                {
+                    text: "尾单为默认时长",
+                    value: 3*60*60*1000
+                }
+            ];
+
+
+            var duration1h5 = [
+                {
+                    text: "1.5 小时",
+                    value: 1.5*60*60*1000
+                },
+                {
+                    text: "尾单为默认时长",
+                    value: 1.5*60*60*1000
+                }
+            ];
+
+            var duration2h = [
+                {
+                    text: "2 小时",
+                    value: 2*60*60*1000
+                },
+                {
+                    text: "尾单为默认时长",
+                    value: 2*60*60*1000
+                }
+            ];
+            
+            var duration3h = [
+                {
+                    text: "2 小时",
+                    value: 2*60*60*1000
+                },
+                {
+                    text: "3 小时",
+                    value: 3*60*60*1000
+                }
+            ];
+            
+            var duration4h = [
+                {
+                    text: "2 小时",
+                    value: 2*60*60*1000
+                },
+                {
+                    text: "3 小时",
+                    value: 3*60*60*1000
+                },
+                {
+                    text: "4 小时",
+                    value: 4*60*60*1000
+                }
+            ];
+            
+            var duration5h = [
+                {
+                    text: "2 小时",
+                    value: 2*60*60*1000
+                },
+                {
+                    text: "3 小时",
+                    value: 3*60*60*1000
+                },
+                {
+                    text: "4 小时",
+                    value: 4*60*60*1000
+                },
+                {
+                    text: "5 小时",
+                    value: 5*60*60*1000
+                }
+            ];
 
             function creatList(obj, list){
                 obj.forEach(function(item, index, arr){
@@ -217,13 +295,51 @@ $(function() {
                 id: 'startPicker'
             });
 
-            //使用时长
+            //使用时长,因要处理尾单，生成多个picker
             var durationPicker = new Picker({
                 data: [duration],
                 selectIndex: [0],
                 title: '',
                 id: 'durationPicker'
             });
+            var durationPicker1h = new Picker({
+                data: [duration1h],
+                selectIndex: [0],
+                title: '',
+                id: 'durationPicker1h'
+            });
+            var durationPicker1h5 = new Picker({
+                data: [duration1h5],
+                selectIndex: [0],
+                title: '',
+                id: 'durationPicker1h5'
+            });
+            var durationPicker2h = new Picker({
+                data: [duration2h],
+                selectIndex: [0],
+                title: '',
+                id: 'durationPicker2h'
+            });
+            var durationPicker3h = new Picker({
+                data: [duration3h],
+                selectIndex: [0],
+                title: '',
+                id: 'durationPicker3h'
+            });
+            var durationPicker4h = new Picker({
+                data: [duration4h],
+                selectIndex: [0],
+                title: '',
+                id: 'durationPicker4h'
+            });
+            var durationPicker5h = new Picker({
+                data: [duration5h],
+                selectIndex: [0],
+                title: '',
+                id: 'durationPicker5h'
+            });
+            
+/******************************************/
             var datePicker = new Picker({
                 data:[date],
                 selectedIndex: [isUsing|0],
@@ -279,6 +395,52 @@ $(function() {
                 updateEndTime();
                 updatePrice(0);
             });
+            durationPicker1h.on('picker.select', function(selectedVal, selectedIndex){
+                durationTime.text(duration1h[selectedIndex[0]].text)
+                    .attr('data-content', duration1h[selectedIndex[0]].value);
+
+                updateEndTime();
+                updatePrice(0);
+            });
+            durationPicker1h5.on('picker.select', function(selectedVal, selectedIndex){
+                durationTime.text(duration1h5[selectedIndex[0]].text)
+                    .attr('data-content', duration1h5[selectedIndex[0]].value);
+
+                updateEndTime();
+                updatePrice(0);
+            });
+            durationPicker2h.on('picker.select', function(selectedVal, selectedIndex){
+                durationTime.text(duration2h[selectedIndex[0]].text)
+                    .attr('data-content', duration2h[selectedIndex[0]].value);
+
+                updateEndTime();
+                updatePrice(0);
+            });
+            durationPicker3h.on('picker.select', function(selectedVal, selectedIndex){
+                durationTime.text(duration3h[selectedIndex[0]].text)
+                    .attr('data-content', duration3h[selectedIndex[0]].value);
+
+                updateEndTime();
+                updatePrice(0);
+            });
+            durationPicker4h.on('picker.select', function(selectedVal, selectedIndex){
+                durationTime.text(duration4h[selectedIndex[0]].text)
+                    .attr('data-content', duration4h[selectedIndex[0]].value);
+
+                updateEndTime();
+                updatePrice(0);
+            });
+            durationPicker5h.on('picker.select', function(selectedVal, selectedIndex){
+                durationTime.text(duration5h[selectedIndex[0]].text)
+                    .attr('data-content', duration5h[selectedIndex[0]].value);
+
+                updateEndTime();
+                updatePrice(0);
+            });
+/************************************************/
+
+
+
             datePicker.on('picker.select', function (selectedVal, selectedIndex) {
                 dateTime.text(date[selectedIndex[0]].text.split(' ')[1])
                     .attr('data-content', date[selectedIndex[0]].value);
@@ -297,6 +459,10 @@ $(function() {
                     $("#totalPrice").text((+durationTime.attr("data-content"))/(3600*1000) * (+$("#hourPrice").attr("data-content")) );
                     tsum = durationTime.attr("data-content")/(3600*1000);
                     switch (tsum){
+                        case 1:
+                            //$("#totalPrice").css('visiblity','hidden');
+                            $("#realPrice").text("19");
+                            break;
                         case 2:
                             //$("#totalPrice").css('visiblity','hidden');
                             $("#realPrice").text("38");
@@ -331,7 +497,7 @@ $(function() {
                 }
             }
             function checkToPay(){
-                return $("#agreement").is(':checked') && $("#totalPrice").text() != "";
+                return $("#agreement").is(':checked') && $("#realPrice").text() != "";
             }
 
 
@@ -342,21 +508,51 @@ $(function() {
 
                 var st = $("#startTime").attr('data-content')*1.0;
                 var ed = $("#endTime").attr('data-content')*1.0 / 1000;
-                
+                var room_type = $("#roomType").attr('data-content')*1.0;
                 var stSecondsInDay = (st - 57600) % 86400;
                 var edSecondsInDay = (ed - 57600) % 86400;
                 var Day0 = ed - edSecondsInDay;
                 console.log(showHumanHour(Day0*1000));
-                if(stSecondsInDay > 20.5 * 3600){    
-                    s = (Day0 - (2 - $("#roomType").attr('data-content') / 2.0) * 3600);
+                /*if(stSecondsInDay > (20.5-room_type*0.5) * 3600){    
+                    s = (Day0 - (2 - room_type) / 2.0) * 3600;
                      console.log(showHumanHour(s*1000));
                     $("#endTime").attr('data-content',s*1000);
                     $("#endTime").text(showHumanHour(s*1000));
-                }
-                else{
-                    durationPicker.show();
+                }*/ 
+                    timeR = 22.5 - room_type*0.5 - st%86400 / 3600 - 8
+                    //console.log(timeR);
+                    if(timeR<=1){
+                        alert('亲，今天的日间房已经来不及定了哦，请看看包夜吧');
+                        window.location.href = window.location.href.replace('home','nightPage');
+                    }
+                    else if(timeR<1.5){
+                        durationPicker1h.show();
+                    }
+                    else if (timeR<2)
+                    {
+                        durationPicker1h5.show();
+                    }
+                    else if (timeR<3)
+                    {
+                        durationPicker2h.show();
+                    }
+                    else if (timeR<4)
+                    {
+                        durationPicker3h.show();
+                    }
+                    else if (timeR<5)
+                    {
+                        durationPicker4h.show();
+                    }
+                    else if (timeR<6)
+                    {
+                        durationPicker5h.show();
+                    }
+                    else{
+                        durationPicker.show();
+                    }
+
                     timeCount($("#timeCount"));
-                }
 
                 var ed = $("#endTime").attr('data-content')*1.0 / 1000;
                 var edSecondsInDay = (ed - 57600) % 86400;
@@ -372,7 +568,36 @@ $(function() {
             });
 
             durationTime.parent().on('click',function () {
-                durationPicker.show();
+                var st = $("#startTime").attr('data-content')*1.0;
+                var room_type = $("#roomType").attr('data-content')*1.0;
+                timeR = 22.5 - room_type*0.5 - st%86400 / 3600 - 8
+                    //console.log(timeR);
+                    if(timeR<1.5){
+                        durationPicker1h.show();
+                    }
+                    else if (timeR<2)
+                    {
+                        durationPicker1h5.show();
+                    }
+                    else if (timeR<3)
+                    {
+                        durationPicker2h.show();
+                    }
+                    else if (timeR<4)
+                    {
+                        durationPicker3h.show();
+                    }
+                    else if (timeR<5)
+                    {
+                        durationPicker4h.show();
+                    }
+                    else if (timeR<6)
+                    {
+                        durationPicker5h.show();
+                    }
+                    else{
+                        durationPicker.show();
+                    }
             });
             dateTime.parent().on('click', function () {
                 datePicker.show();
@@ -410,7 +635,7 @@ $(function() {
 
                     edSecondsInDay -= $("#roomType").attr('data-content') / 2.0 *  3600
 
-                    if(edSecondsInDay > 22 * 3600 || edSecondsInDay < 12.5 * 3600)
+                    if(edSecondsInDay > 22.5 * 3600 || edSecondsInDay < 12.5 * 3600)
                     {
                         console.log(edSecondsInDay/3600);
                         alert('当日订单已满');
@@ -488,16 +713,18 @@ $(function() {
                 }
             }
 
-            // disable duration
+                var room_type = $("#roomType").attr('data-content')*1.0;
+                
+            /* disable duration
             for(i = 0;i < duration.length;i++)
             {
-                if( dateFormat(startts+duration[i].value,'HH')>= 23)
+                if( dateFormat(startts+duration[i].value,'HH')>= 22.5-room_type/2)
                 {
                     for (j = i; j< duration.length; j++)
-                        $($("#durationPicker li")[j]).addClass('disable');
+                        $($("#durationPicker li")[j]).remove();
                     break;
                 }
-            }
+            }*/
 
             // disable time
             if(istomorrow)
