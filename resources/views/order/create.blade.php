@@ -159,7 +159,6 @@
                 <?php
                 $remainTime = (22.5 - date("H") - $room->type/2.0) + (-date("i"))/60; 
                 $remainOrderTime = (22.5 - date('H',$room->nextTime()) - $room->type/2.0) + (-date('H=i',$room->nextTime()))/60;
-                if($startDayTime == 0) echo "666";
                 if($startDayTime %86400 == 0)
                     $startDayTime = strtotime(date("Y-n-d")) + (11 - $room->type/2.0) * 3600 + 86400;
 
