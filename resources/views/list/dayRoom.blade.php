@@ -36,12 +36,12 @@
                 <div id="triangle-down-b" style="position:absolute;right:14%;top:52%;"></div>
                 <div class="user-nav">
                     <ul style="padding-left:0px; top:0px;">
-                        <li><a id="dxy" class="font-xl"href="#">稻香园 <b class="m-color">0</b> 间</a></li><!--3-->
+                        <li><a id="dxy" class="font-xl"href="#">稻香园 <b class="m-color">3</b> 间</a></li>
                         <hr class="mysplit" style="margin:0px;">
-                        <li><a id="dhzy" class="font-xl"href="#">大河庄苑 <b class="m-color">0</b> 间</a></li><!--8-->
+                        <li><a id="dhzy" class="font-xl"href="#">大河庄苑 <b class="m-color">8</b> 间</a></li>
                         <hr class="mysplit" style="margin:0px;">
-                        <li><a id="kyxq" class="font-xl"href="#">科育小区 <b class="m-color">0</b> 间</a></li><!--3-->
-                        <hr class="mysplit" style="margin:0px;">
+                        <!--<li><a id="kyxq" class="font-xl"href="#">科育小区 <b class="m-color">0</b> 间</a></li>
+                        <hr class="mysplit" style="margin:0px;">-->
                         <li><a id="frl" class="font-xl"href="#">芙蓉里 <b class="m-color">3</b> 间</a></li>
                         <hr class="mysplit" style="margin:0px;">
                         <li><a id="zgy" class="font-xl"href="#">中关园 <b class="m-color">3</b> 间</a></li>
@@ -72,7 +72,7 @@
                         <br>
                         <?php
                             $room_state = 0;
-                            if (date("H")+date("i")/60 >= (21.5 - $room->type/2.0) || date("H")+date("i")/60 <= (10.5 - $room->type/2.0))
+                            if (date("H")+date("i")/60 >= (21.5 - $room->type/2.0) || date("H")+date("i")/60 <= (11.5 - $room->type/2.0))
                             {
                                 $room_state = 1;
                                 $room_str = '包夜中';
@@ -119,8 +119,14 @@
                                 <span id="btn{{$room->state}}" data-content="1" class="room-state b-color font-s" style="float:right;">可预约<span name="timeS" class="m-color">{{date("H:i",$room->nextTime())}}</span>使用</span>
                                 <!--state 0-->
                                 @else
-                                <span id="btn{{$room->state}}" data-content="0" class="room-state b-color font-s" style="float:right;">今日已约满</span>
-                                <!--state 1-->
+                                    @if ( date("H")+date("i")/60 >= (21.5 - $room->type/2.0))
+                                        <span id="btn{{$room->state}}" data-content="0" class="room-state b-color font-s" style="float:right;">今日已约满</span>
+                                        <!--state 3-->
+                                    @else
+                                        <span id="btn{{$room->state}}" data-content="1" class="room-state b-color font-s" style="float:right;">可预约<span name="timeS" class="m-color">{{date("H:i",$room->nextTime())}}</span>使用</span>
+                                        <!--state 4-->
+                                    @endif
+                                
                                 @endif
 
                             @else
