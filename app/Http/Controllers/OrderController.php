@@ -126,7 +126,7 @@ class OrderController extends Controller
      */
     function test()
     {
-        $rid = 'ae50f8da-225e-11e7-a09c-01163e028801';
+        $rid = 'ae50f8da-225e-11e7-b33c-00163e028324';
         /*
         $rid = 'ae50f8da-225e-11e7-a09c-03163e028801';
         $night = Order::where([
@@ -149,12 +149,12 @@ class OrderController extends Controller
             return date('Y-m-d 00:00:00', time()+24*60*60*0);
         else
             return $night;*/
-        $day = 1;
+        $day = 0;
         $maxDayTime = strtotime(Order::where([
             ['roomId','=', $rid],
             ['isDay', '=', 1],
             ['state', '>', Constant::$ORDER_STATE['REMOVE']]
-        ])->where('endTime','<',date("Y-m-d",time()+86400*($day + 1)))->where('endTime','>',date("Y-m-d 1:00:00",time()+86400*($day + 1)))->max('endTime'));
+        ])->where('endTime','<',date("Y-m-d",time()+86400*($day+1)))->where('endTime','>',date("Y-m-d",time()+86400*($day)))->max('endTime'));
         $maxNightTime = strtotime(Order::where([
             ['roomId','=', $rid],
             ['isDay', '=', 0],
@@ -192,12 +192,12 @@ class OrderController extends Controller
             ['roomId','=', $rid],
             ['isDay', '=', 1],
             ['state', '>', Constant::$ORDER_STATE['REMOVE']]
-        ])->where('endTime','<',date("Y-m-d",time()+86400*($day + 1)))->where('endTime','>',date("Y-m-d 1:00:00",time()+86400*($day + 1)))->max('endTime'));
+        ])->where('endTime','<',date("Y-m-d",time()+86400*($day + 1)))->where('endTime','>',date("Y-m-d",time()+86400*($day)))->max('endTime'));
         $maxNightTime = strtotime(Order::where([
             ['roomId','=', $rid],
             ['isDay', '=', 0],
             ['state', '>', Constant::$ORDER_STATE['REMOVE']]
-        ])->where('endTime','<',date("Y-m-d",time()+86400*($day + 1)))->where('endTime','>',date("Y-m-d 1:00:00",time()+86400*($day + 1)))->max('endTime'));
+        ])->where('endTime','<',date("Y-m-d",time()+86400*($day + 1)))->where('endTime','>',date("Y-m-d",time()+86400*($day)))->max('endTime'));
         $existOrder = Order::where([
             ['userId' , '=', $uid],
             ['roomId', '=', $rid],
