@@ -95,13 +95,19 @@
                         <span class="room-state room-used {{$room_state>0 ? 'button-occupied':'button-available'}} font-s">
                             {{$room_str}}
                         </span>
+
                         <!--
-                        <p>nextDay {{$room->nextDayUsingTime()}}</p>
                         <p>Today {{date('n-H:i',$room->nextTime())}}</p>-->
                        
                         <?php
                             $remainTime = (22.5 - date("H") - $room->type/2.0) + (-date("i"))/60; 
                             $remainOrderTime = (22.5 - date('H',$room->nextTime()) - $room->type/2.0) + (-date('H=i',$room->nextTime()))/60;
+                            if($room->nextDayUsingTime() == 0)
+                                $tomorrowTime = $room->type==0 ? '10:30':'11:00';
+                            else if ($room->nextDayUsingTime() == -1)
+                                $tomorrowTime = -1;
+                            else
+                                $tomorrowTime = date("H:i",$room->nextDayUsingTime());
                         ?>
                         <!--
                         {{$remainTime}}
@@ -141,6 +147,7 @@
                                 <!--state 7-->
                             @endif
                         @endif
+                        <div id="nextdaytime{{$room->state}}" data-content="{{$tomorrowTime}}"></div>
                     </div>
             </div>
             <hr class="mysplit" style="margin:0;">
