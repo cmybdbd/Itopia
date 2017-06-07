@@ -160,6 +160,9 @@
                 $remainTime = (22.5 - date("H") - $room->type/2.0) + (-date("i"))/60; 
                 $remainOrderTime = (22.5 - date('H',$room->nextTime()) - $room->type/2.0) + (-date('H=i',$room->nextTime()))/60;
                 
+                if(($startDayTime- 57600) %86400 == 0)
+                    $startDayTime = $startDayTime + (11 - $room->type/2.0) * 3600;
+
                 if(date('H',$room->nextTime()) != 8 && $remainOrderTime > 1)
                 {
                     if($room->isUsing())
