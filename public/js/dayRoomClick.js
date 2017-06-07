@@ -1,6 +1,7 @@
 var dayShift = 0;
 var td = new Array(7);
-var tm = new Array(7);
+var tdbtn = new Array(7);
+var tdstate = new Array(7);
 $(function () {
 
     var jssor_1_SlideshowTransitions = [
@@ -77,6 +78,8 @@ $(function () {
             {
                 str = $('#nextdaytime'+j).attr('data-content');
                 document.getElementById('btn'+j).innerHTML = td[j];
+                document.getElementById('roomState'+j).innerHTML = tdstate[j];
+                $('#btn' + j).attr('data-content',tdbtn[j]);
                 //console.log(td[j]);
             }
         }
@@ -91,11 +94,29 @@ $(function () {
         for(var j=1;j<=6;j++)
         {
             //console.log('j ='+ j +  $('#nextdaytime'+j).attr('data-content'));
-            str = $('#nextdaytime'+j).attr('data-content');
+            ndt = $('#nextdaytime'+j).attr('data-content');
+            tp = $('#roomtype'+j).attr('data-content');
             td[j] = document.getElementById('btn'+j).innerHTML;
-            tmp = '可预约<span name="timeS" class="m-color">明天'+ str +'</span>使用';
+            tdbtn[j] =  $('#btn' + j).attr('data-content');
+            tdstate[j] = document.getElementById('roomState'+j).innerHTML; 
+            
+            tmp = '可预约<span name="timeS" class="m-color">明天'+ ndt +'</span>使用';
             document.getElementById('btn'+j).innerHTML = tmp;
-            console.log(td[j]);
+            t=ndt.split(":");
+            a = t[0]*1.0 + t[1]/60;
+            if(a<=21.5-tp/2.0){
+                $('#roomState'+j).addClass('button-available');
+                $('#roomState'+j).removeClass('button-occupied');
+                $('#roomState'+j).text('可预订');
+                $('#btn' + j).attr('data-content','1');
+            }
+            else{
+                $('#roomState'+j).removeClass('button-available');
+                $('#roomState'+j).addClass('button-occupied');
+                $('#roomState'+j).text('已订满');
+                $('#btn' + j).attr('data-content','0');
+            }
+            console.log(a);
         }
     });
 

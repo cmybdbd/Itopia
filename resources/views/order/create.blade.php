@@ -148,7 +148,7 @@
         <div class="f-color font-l">
             选择使用时长
         </div>
-        <div class="mybox selectPanel font-l" style="box-shadow:none;padding-bottom:12px;">
+        <div class="mybox selectPanel font-m" style="box-shadow:none;padding-bottom:12px;">
             时间
             <div class="m-color" style="float:right;margin-left:15%;">
                 <!--<span>nextUseTime={{$room->nextDayUsingTime()}}</span>
@@ -205,7 +205,7 @@
             {{date('j',$t) == date("j") ? '今天':'明天'}}({{date('n月j日',$t)}}) <span id="startTime" data-content="{{$t}}"></span>&nbsp;&nbsp;—&nbsp;&nbsp;<div style="float:right;" data-content="0" id="endTime" class="present noPicker"></div>
         </div>
         </div>
-        <div class="mybox selectPanel font-l" style="display:flex;box-shadow:none;padding-top:0px;">
+        <div class="mybox selectPanel font-m" style="display:flex;box-shadow:none;padding-top:0px;">
                 时长
                 <div id="durationTime" class="scrollPicker" data-content="7200000" >2小时</div>
                 <button class="btn btn-block btn-default btn-main-secondary" style="position:absolute;position:absolute;width:70%;right:12px;height:32px;padding:0;color:#1dccb8;" id="selectTime">选择时长</button>
@@ -223,11 +223,13 @@
             </div>
         </div>
     </div>
-    <div class="cbox b-color font-m" style="margin:12px 36px 12px 36px; padding-left:10px;">
+    <div class="cbox b-color font-s" style="margin:12px 12px 12px 36px; padding-left:10px;">
         <input type="checkbox" id="agreement" style="margin:0">
-        <label for="agreement"></label>本人已获悉并同意<span id="tos">《蜗壳私人空间使用条例》</span>
+        <label for="agreement"></label>本人已获悉并同意<span id="tos" class="m-color">《蜗壳私人空间使用条例》</span>
     </div>
+    <div style="margin-bottom:24px;">
     <button id="toPay" class="btn btn-block btn-default btn-main">去支付<span id="timeCount"></span></button>
+    </div>
 </div>
 
 <div id="hourPrice" data-content="{{$room->hourPrice}}"></div>
