@@ -79,7 +79,7 @@
                         <span id="btn{{$room->state}}" data-content="{{$room->isNightBooked(0) ? '0':'1'}}" class="room-state room-used {{$room->isNightBooked(0)? 'button-occupied':'button-available'}} font-s">
                             {{$room->isNightBooked(0) ? '已订出':'可使用'}}
                         </span>
-                        <span class="room-state b-color" style="font-size:12px;float:right;"><span name="today"></span>23:00 - 次日11:00</span>
+                        <span class="room-state b-color" style="font-size:12px;float:right;"><span name="today"></span>23:00 - 次日10:00</span>
                     </div>
             </div>
             <hr class="mysplit" style="margin:0;">
