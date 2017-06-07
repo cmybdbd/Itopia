@@ -252,7 +252,7 @@
             color:#777777;
         }
 
-        a:hover,a:active,a:after{
+        a:active{
             color:#1dccb8;
             text-decoration : none;
         }
@@ -262,7 +262,7 @@
     z-index:100;
 }
 
-.nav-button-top:hover,.nav-button-top:active{
+.nav-button-top:active{
     color:#1dccb8;
     z-index:100;
     /*box-shadow:rgba(29,204,184,1) 0px 3px 0px 0px;*/
@@ -273,7 +273,7 @@
     box-shadow:rgba(228,228,228,1) 0px 2px 0px 0px;
 }
 
-.nav-button:hover,.nav-button:active{
+.nav-button:active{
     color:#1dccb8;
     z-index:100;
     box-shadow:rgba(29,204,184,1) 0px 3px 0px 0px;
