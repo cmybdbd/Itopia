@@ -5,22 +5,22 @@
     <div class="content" style="height:100%;width:100%;">
         <div class="mybtn-group" style="position:fixed;z-index:1000;top:0px;width:100%;height:60px;position:absolute;">
             <div id="myOrder">
-                <img src="{{asset('storage/map/myOrder.png')}}" style="z-index:1000;position:absolute;width:40px;top:24px;left:30px;" alt="">
-                <span style="font-size:14px;font-weight:500;position:absolute;top:68px;left:22px;">
+                <img src="{{asset('storage/map/myOrder.png')}}" style="z-index:1000;position:fixed;width:40px;top:24px;left:30px;" alt="">
+                <span style="font-size:14px;font-weight:500;position:fixed;top:68px;left:22px;">
                 我的订单
                 </span>
             </div>
             <div id="equipment">
-                <img src="{{asset('storage/map/roomFacilities.png')}}" style="z-index:1000;position:absolute;width:40px;top:24px;right:30px;" alt="">
-                <span style="font-size:14px;font-weight:500;position:absolute;top:68px;right:22px;">
+                <img src="{{asset('storage/map/roomFacilities.png')}}" style="z-index:1000;position:fixed;width:40px;top:24px;right:30px;" alt="">
+                <span style="font-size:14px;font-weight:500;position:fixed;top:68px;right:22px;">
                     小屋设施
                 </span>
             </div>
         </div>
             <!--onmouseover="getMousePos(event)"-->
         <div style="width:100%;height:100%;">
-            <img id="mapImg" src="{{asset('storage/map/mapPKU.png')}}" style="position:absolute;top:0px;z-index:-1;height:800px;width:1050px;overflow:hidden;">
-            <div style="position:absolute;top:0px;width:100%;height:800px;z-index:10;" class="e">
+            <img id="mapImg" src="{{asset('storage/map/mapPKU.png')}}" style="position:absolute;top:0px;z-index:-1;height:941px;width:1050px;overflow:hidden;">
+            <div style="position:fixed;top:0px;width:100%;height:700px;z-index:10;" class="e">
         </div>
 
         <div id = "frl">
@@ -151,7 +151,7 @@
         .e{
             background-image: -webkit-linear-gradient( top,#fff,transparent);
             -moz-background-image: -moz-linear-gradient( top,#fff,transparent);
-           opacity:0.6;
+           opacity:0.65;
         }
 
         .blend
