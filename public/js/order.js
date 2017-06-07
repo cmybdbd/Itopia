@@ -362,7 +362,7 @@ $(function() {
                 var edSecondsInDay = (ed - 57600) % 86400;
                
                 
-                if(edSecondsInDay > 23 * 3600 || edSecondsInDay < 13 * 3600)
+                if(edSecondsInDay > 22.5 * 3600 || edSecondsInDay < 12.5 * 3600)
                 {
                     console.log(edSecondsInDay/3600);
                     alert('已错过日间订单时间，切换为夜间模式');
