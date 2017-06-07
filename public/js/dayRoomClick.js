@@ -1,4 +1,6 @@
 var dayShift = 0;
+var td = new Array(7);
+var tm = new Array(7);
 $(function () {
 
     var jssor_1_SlideshowTransitions = [
@@ -69,27 +71,32 @@ $(function () {
         dayShift = 0;
         $("#useToday").addClass("nav-active");
         $("#useTomorrow").removeClass("nav-active");
+        
+        if(td[1]!=null){
+            for(var j=1;j<=6;j++)
+            {
+                str = $('#nextdaytime'+j).attr('data-content');
+                document.getElementById('btn'+j).innerHTML = td[j];
+                //console.log(td[j]);
+            }
+        }
     });
+    
     $("#useTomorrow").on('click',function () {
         var date = new Date();
-        if(date.getHours()+8>21)
+        dayShift = 1;
+        $("#useTomorrow").addClass("nav-active");
+        $("#useToday").removeClass("nav-active");
+            
+        for(var j=1;j<=6;j++)
         {
-            dayShift = 1;
-            $("#useTomorrow").addClass("nav-active");
-            $("#useToday").removeClass("nav-active");
-            /*
-            var tags = document.getElementsByName("timeS");
-            if(tags!=null){
-                for(var i in tags){//对标签进行遍历 
-                    tags[i].innerHTML.replace("明天","今天");
-                }
-            }*/
+            //console.log('j ='+ j +  $('#nextdaytime'+j).attr('data-content'));
+            str = $('#nextdaytime'+j).attr('data-content');
+            td[j] = document.getElementById('btn'+j).innerHTML;
+            tmp = '可预约<span name="timeS" class="m-color">明天'+ str +'</span>使用';
+            document.getElementById('btn'+j).innerHTML = tmp;
+            console.log(td[j]);
         }
-        else
-        {
-            console.log(date);
-            alert("亲，当天22:00后才能预订第二天的房子哦~");
-        }    
     });
 
     $("#dxy").on('click',function () {
