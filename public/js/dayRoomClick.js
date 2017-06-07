@@ -79,6 +79,16 @@ $(function () {
                 str = $('#nextdaytime'+j).attr('data-content');
                 document.getElementById('btn'+j).innerHTML = td[j];
                 document.getElementById('roomState'+j).innerHTML = tdstate[j];
+                state = $('#roomState'+j).attr('data-content');
+                if(state == 0)
+                {
+                    $('#roomState' + j).addClass('button-available');
+                    $('#roomState' + j).removeClass('button-occupied');
+                }
+                else{
+                    $('#roomState' + j).removeClass('button-available');
+                    $('#roomState' + j).addClass('button-occupied');
+                }
                 $('#btn' + j).attr('data-content',tdbtn[j]);
                 //console.log(td[j]);
             }
