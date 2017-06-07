@@ -150,7 +150,7 @@
         </div>
         <div class="m-color" style="text-align:right;margin-top:-25px;float:right">
             2017年<span name="today"></span> 23:00<br>
-            — <span id="tomorrow"></span> 10:00
+            — <span id="tomorrow"></span> 11:00
         </div>
     </div>
     <br>
@@ -166,11 +166,13 @@
             </div>
         </div>
     </div>
-    <div class="cbox b-color font-m" style="margin:12px 36px 12px 36px; padding-left:10px;">
+    <div class="cbox b-color font-s" style="margin:12px 12px 12px 36px; padding-left:10px;">
         <input type="checkbox" id="agreement" style="margin:0">
-        <label for="agreement"></label>本人已获悉并同意<span id="tos">《蜗壳私人空间使用条例》</span>
+        <label for="agreement"></label>本人已获悉并同意<span id="tos" class="m-color">《蜗壳私人空间使用条例》</span>
     </div>
+    <div style="margin-bottom:24px;">
     <button class="btn btn-block btn-default btn-main" id="toPay">去支付<span id="timeCount"></span></button>
+    </div>
 </div>
 
 
@@ -305,13 +307,12 @@
 <?php 
     $tmp = strtotime(date("Y-m-d"));
     $stTime = $tmp + 23*3600;
-    $edTime=$stTime + 11*3600;
+    $edTime=$stTime + 12*3600;
 ?>
     <div id="param">
         <div id="startTime" data-content="{{$stTime}}"></div>
         <div id="endTime1" data-content="{{$edTime}}"></div>
-        <div id="durationTime" data-content="11*3600"></div>
-        <div id="hourPrice" data-content="{{$room->hourPrice}}"></div>
+        <div id="durationTime" data-content="12*3600"></div>
         <div id="nightPrice" data-content="{{$room->nightPrice}}"></div>
         <div id="userId" data-content="{{\Illuminate\Support\Facades\Auth::id()}}"></div>
         <div id="roomId" data-content="{{$room->id}}"></div>
@@ -330,7 +331,7 @@
 
 var btn;
 var clock = '';
-var nums = 300;//5min
+var nums = 180;//3min
 
 function timeCount(thisBtn){
     btn = thisBtn;
@@ -418,7 +419,7 @@ function doLoop(){
                             'roomId': $("#roomId").attr('data-content'),
                             'startTime': st,
                             'endTime'  : ed,
-                            'duration' : 11,//+durationTime.attr('data-content')/3600000,
+                            'duration' : 12,//+durationTime.attr('data-content')/3600000,
                             'price'   : +($('#totalPrice').text()),
                             'date'     : dt|0,
                             'isDay'    : 0

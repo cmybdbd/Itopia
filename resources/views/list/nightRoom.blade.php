@@ -42,12 +42,12 @@
                 <div id="triangle-down-b" style="position:absolute;right:18%;top:52%;"></div>
                 <div class="user-nav">
                     <ul style="padding-left:0px; top:0px;">
-                        <li><a id="dxy" class="font-xl"href="#">稻香园 <b class="m-color">0</b> 间</a></li><!--3-->
+                        <li><a id="dxy" class="font-xl"href="#">稻香园 <b class="m-color">3</b> 间</a></li>
                         <hr class="mysplit" style="margin:0px;">
-                        <li><a id="dhzy" class="font-xl"href="#">大河庄苑 <b class="m-color">0</b> 间</a></li><!--8-->
+                        <li><a id="dhzy" class="font-xl"href="#">大河庄苑 <b class="m-color">8</b> 间</a></li>
                         <hr class="mysplit" style="margin:0px;">
-                        <li><a id="kyxq" class="font-xl"href="#">科育小区 <b class="m-color">0</b> 间</a></li><!--3-->
-                        <hr class="mysplit" style="margin:0px;">
+                        <!--<li><a id="kyxq" class="font-xl"href="#">科育小区 <b class="m-color">0</b> 间</a></li>
+                        <hr class="mysplit" style="margin:0px;">-->
                         <li><a id="frl" class="font-xl"href="#">芙蓉里 <b class="m-color">3</b> 间</a></li>
                         <hr class="mysplit" style="margin:0px;">
                         <li><a id="zgy" class="font-xl"href="#">中关园 <b class="m-color">3</b> 间</a></li>
@@ -79,7 +79,7 @@
                         <span id="btn{{$room->state}}" data-content="{{$room->isNightBooked(0) ? '0':'1'}}" class="room-state room-used {{$room->isNightBooked(0)? 'button-occupied':'button-available'}} font-s">
                             {{$room->isNightBooked(0) ? '已订出':'可使用'}}
                         </span>
-                        <span class="room-state b-color" style="font-size:12px;float:right;"><span name="today"></span>23:00 - 次日10:00</span>
+                        <span class="room-state b-color" style="font-size:12px;float:right;"><span name="today"></span>23:00 - 次日11:00</span>
                     </div>
             </div>
             <hr class="mysplit" style="margin:0;">
@@ -95,39 +95,13 @@
     </div>
 </div>
 
-    <div class="modal fade bs-example-modal-sm equipment-content" role="dialog">
+<!--
+    <div class="modal fade bs-example-modal-sm heute-content" role="dialog">
         <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
                 <div class="modal-body">
                     <div style="margin-left:5%;margin-right:5%;">
-                        <div>
-                        <div class="font-m m-color">基础设施</div>
-                            <div class="center">
-                            <p><img src="{{asset('storage/u340.png')}}" alt=""><span>懒人沙发</span></p>
-                            <p><img src="{{asset('storage/u342.png')}}" alt=""><span>榻榻米</span></p>
-                            <p><img src="{{asset('storage/u354.png')}}" alt=""><span>智能蓝牙投影</span></p>
-                            <p><img src="{{asset('storage/u356.png')}}" alt=""><span>双人床</span></p>
-                            <p><img src="{{asset('storage/u362.png')}}" alt=""><span>智能门锁</span></p>
-                            <p><img src="{{asset('storage/u364.png')}}" alt=""><span>冰箱</span></p>
-                            <p><img src="{{asset('storage/u370.png')}}" alt=""><span>空调</span></p>
-                            <p><img src="{{asset('storage/u372.png')}}" alt=""><span>电吹风</span></p>
-                            <p><img src="{{asset('storage/u374.png')}}" alt=""><span>洗衣机</span></p>
-                            <p><img src="{{asset('storage/u376.png')}}" alt=""><span>饮水机</span></p>
-                            <p><img src="{{asset('storage/u382.png')}}" alt=""><span>24小时热水</span></p>
-                            <p><img src="{{asset('storage/u384.png')}}" alt=""><span>Wi-Fi</span></p>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="font-m m-color">有偿服务</div>
-                            <div class="center">
-                            <p><img src="{{asset('storage/u398.png')}}" alt=""><span>桌游棋牌</span></p>
-                            <p><img src="{{asset('storage/u396.png')}}" alt=""><span>零食饮料</span></p>
-                            <p><img src="{{asset('storage/u392.png')}}" alt=""><span>一次性洗漱用品</span></p>
-                            <p><img src="{{asset('storage/u394.png')}}" alt=""><span>床品四件套</span></p>
-                            </div>
-                        </div>
-                    </div>
-                    <hr class="mysplit" style="margin: 0.5em;">
+                        <div id="durationTime" class="scrollPicker" data-content="7200000" >2小时</div>
                     <button class="m-color font-m"
                             data-dismiss="modal"
                               style="border:none;width:100%;height:100%;background-color:white;">朕知道了</button>
@@ -135,6 +109,7 @@
             </div>
         </div>
     </div>
+-->
 @endsection
 @section('style')
     <style>

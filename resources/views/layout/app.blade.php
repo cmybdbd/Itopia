@@ -273,7 +273,7 @@
     box-shadow:rgba(228,228,228,1) 0px 2px 0px 0px;
 }
 
-.nav-button:active{
+.nav-button:active,.nav-button:hover{
     color:#1dccb8;
     z-index:100;
     box-shadow:rgba(29,204,184,1) 0px 3px 0px 0px;
