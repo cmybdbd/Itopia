@@ -151,7 +151,7 @@
         <div class="mybox selectPanel font-m" style="box-shadow:none;padding-bottom:12px;">
             时间
             <div class="m-color" style="float:right;margin-left:15%;">
-                <!--<span>nextUseTime={{$room->nextDayUsingTime()}}</span>
+                <!--<span>nextUseTime={{date('d-H:i',$room->nextDayUsingTime())}}</span>
                 <br>
                 <span>nextTime= {{date('d-H:i',$room->nextTime())}}</span>
                 <br>
@@ -160,12 +160,13 @@
                 $remainTime = (22.5 - date("H") - $room->type/2.0) + (-date("i"))/60; 
                 $remainOrderTime = (22.5 - date('H',$room->nextTime()) - $room->type/2.0) + (-date('H=i',$room->nextTime()))/60;
                 if($startDayTime %86400 == 0)
-                    $startDayTime = strtotime(date("Y-n-d")) + (11 - $room->type/2.0) * 3600 + 86400; //start time
+                    $startDayTime = strtotime(date("Y-n-d")) + (11.5 + $room->type/2.0) * 3600 + 86400; //start time
 
-
+                if($dayCount==0)
+                {
                 if(date('H',$room->nextTime()) != 8 && $remainOrderTime > 1)
                 {
-                        if( date("H")+date("i")/60 < (21.5 - $room->type/2.0) && date("H")+date("i")/60 > (10.5 - $room->type/2.0))
+                        if( date("H")+date("i")/60 < (21.5 - $room->type/2.0) && date("H")+date("i")/60 >= (12 - $room->type/2.0))
                         {
                             $i = 1;
                             $t = $startDayTime + 1800; 
@@ -173,7 +174,7 @@
                         //从第二天开始订
                         else{
                             $i = 2;
-                            $t = $room->nextTime();
+                            $t = $room->nextTime() - $room->type/2.0 * 3600;
                         }     
                 }           
                 else if(date('H',$room->nextTime()) == 8){
@@ -183,12 +184,12 @@
                         $t = $startDayTime + 1800;
                     }else{
                         $i = 4;
-                        $t = $startDayTime - ($startDayTime - 57600)% 86400 + 86400 + (11 - $room->type/2.0) * 3600;
+                        $t = $startDayTime - ($startDayTime - 57600)% 86400 + 86400 + (12 - $room->type/2.0) * 3600;
                     }
                 }else{
                     if ($room->nextDayUsingTime() == 0){
                         $i = 5;
-                        $t = $startDayTime - ($startDayTime - 57600)% 86400 + 86400 + (11 - $room->type/2.0) * 3600;
+                        $t = $startDayTime - ($startDayTime - 57600)% 86400 + 86400 + (12 - $room->type/2.0) * 3600;
                     }elseif ($room->nextDayUsingTime() == -1)
                     {   
                         $i = 6; 
@@ -197,6 +198,20 @@
                         $i = 7;
                         $t = $startDayTime - ($startDayTime - 57600)% 86400 + 86400 + $room->nextDayUsingTime()*3600;
                     }                                
+                }
+                }
+                else{//tomorrow
+                    if ($room->nextDayUsingTime() == 0){
+                        $i = 5;
+                        $t = $startDayTime - ($startDayTime - 57600)% 86400+ (12 - $room->type/2.0) * 3600;
+                    }elseif ($room->nextDayUsingTime() == -1)
+                    {   
+                        $i = 6; 
+                        $t=-1;
+                    }else{
+                        $i = 7;
+                        $t = $room->nextDayUsingTime();
+                    }
                 }
 
                 $t = $t - $t % 1800;
