@@ -164,7 +164,7 @@
 
                 if($dayCount==0)
                 {
-                if(date('H',$room->nextTime()) != 8 && $remainOrderTime > 1)
+                if(date('H',$room->nextTime()) != 8 && $remainOrderTime > 0.5)
                 {
                         if( date("H")+date("i")/60 < (21.5 - $room->type/2.0) && date("H")+date("i")/60 >= (12 - $room->type/2.0))
                         {

@@ -550,19 +550,25 @@ $(function() {
                     $("#endTime").text(showHumanHour(s*1000));
                 }*/ 
                     timeR = 22.5 - room_type*0.5 - st%86400 / 3600 - 8
-                    //console.log(timeR);
+                    console.log('timeR = ' + timeR);
                     if(timeR<=0.5){
                         alert('亲，今天的日间房已经来不及定了哦，请看看包夜吧');
                         window.location.href = window.location.href.replace('home','nightPage');
                     }
                     else if(timeR<1){
+                        $('#durationTime').attr('data-content',1800000);
+                        $('#durationTime').text('0.5小时');
                         durationPickerh5.show();
                     }
                     else if(timeR<1.5){
+                        $('#durationTime').attr('data-content',3600000);
+                        $('#durationTime').text('1小时');
                         durationPicker1h.show();
                     }
                     else if (timeR<2)
                     {
+                        $('#durationTime').attr('data-content',5400000);
+                        $('#durationTime').text('1.5小时');
                         durationPicker1h5.show();
                     }
                     else if (timeR<3)
@@ -586,17 +592,6 @@ $(function() {
                     }
 
                     timeCount($("#timeCount"));
-
-                var ed = $("#endTime").attr('data-content')*1.0 / 1000;
-                var edSecondsInDay = (ed - 57600) % 86400;
-               
-                
-                if(edSecondsInDay > 22.5 * 3600 || edSecondsInDay < 12.5 * 3600)
-                {
-                    console.log(edSecondsInDay/3600);
-                    alert('亲，今天的日间房已经来不及定了哦，请看看包夜吧');
-                    window.location.replace('/nightPage');
-                }
                 
             });
 
@@ -604,7 +599,7 @@ $(function() {
                 var st = $("#startTime").attr('data-content')*1.0;
                 var room_type = $("#roomType").attr('data-content')*1.0;
                 timeR = 22.5 - room_type*0.5 - st%86400 / 3600 - 8
-                    //console.log(timeR);
+                    console.log('timeR= ' + timeR);
                     if(timeR<0.5){
                         alert('亲，今天的日间房已经来不及定了哦，请看看包夜吧');
                         window.location.replace('/nightPage');
