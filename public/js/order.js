@@ -550,12 +550,8 @@ $(function() {
                     $("#endTime").text(showHumanHour(s*1000));
                 }*/ 
                     timeR = 22.5 - room_type*0.5 - st%86400 / 3600 - 8
-                    console.log('timeR = ' + timeR);
-                    if(timeR<0.5){
-                        alert('亲，今天的日间房已经来不及定了哦，请看看包夜吧1');
-                        window.location.href = window.location.href.replace('home','nightPage');
-                    }
-                    else if(timeR<1){
+                    //console.log('timeR = ' + timeR);
+                    if(timeR<1){
                         $('#durationTime').attr('data-content',1800000);
                         $('#durationTime').text('0.5小时');
                         durationPickerh5.show();
@@ -599,12 +595,7 @@ $(function() {
                 var st = $("#startTime").attr('data-content')*1.0;
                 var room_type = $("#roomType").attr('data-content')*1.0;
                 timeR = 22.5 - room_type*0.5 - st%86400 / 3600 - 8
-                    console.log('timeR= ' + timeR);
-                    if(timeR<0.5){
-                        alert('亲，今天的日间房已经来不及定了哦，请看看包夜吧2');
-                        window.location.replace('/nightPage');
-                    }
-                    else if(timeR<1){
+                    if(timeR<1){
                         durationPickerh5.show();
                     }
                     if(timeR<1.5){
