@@ -26,7 +26,7 @@ class Room extends Model
             ['isDay' , '=', 0],
             ['state', '>=', Constant::$ORDER_STATE['UNPAY']],
             ['state', "<", Constant::$ORDER_STATE['HISTORY']]
-        ])->where('startTime','>=',date('Y-m-d 00:00:00', time()+24*60*60*$id) )->where('startTime','<=',date('Y-m-d 23:30:00', time()+24*60*60*$id) )->max('startTime');
+        ])->where('startTime','>=',date('Y-m-d', time()+24*60*60*$id) )->where('startTime','<=',date('Y-m-d', time()+24*60*60*($id+1)) )->max('startTime');
         if(empty($night))
             return 0;
         else
@@ -109,7 +109,7 @@ class Room extends Model
         }
         return 0;
     }
-    public function nextDayUsingTime(){
+    public function nextDayUsingTime(){//nextDay
         $nextTime = $this -> hasManyOrders()->where([
             ['state','>=', Constant::$ORDER_STATE['UNPAY']],
             ['state', '<', Constant::$ORDER_STATE['HISTORY']],
@@ -124,6 +124,27 @@ class Room extends Model
             $nextTime = strtotime($nextTime) + 30 * 60;
         }
         $tmptime = strtotime(date('Y-m-d 20:00:00', time()+24*60*60));
+        if($nextTime > $tmptime) 
+            return -1;
+        else 
+            return $nextTime;
+        return 0;
+    }
+    public function nextUsingTime(){//today
+        $nextTime = $this -> hasManyOrders()->where([
+            ['state','>=', Constant::$ORDER_STATE['UNPAY']],
+            ['state', '<', Constant::$ORDER_STATE['HISTORY']],
+            ['isDay', '=', 1],
+        ])->where('endTime','<=',date('Y-m-d 23:30:00', time()))->where('endTime','>',date('Y-m-d 00:00:00', time()))->max('endTime');
+        if(empty($nextTime))
+        {
+            $nextTime= 0;
+        }
+        else
+        {
+            $nextTime = strtotime($nextTime) + 30 * 60;
+        }
+        $tmptime = strtotime(date('Y-m-d 20:00:00', time()));
         if($nextTime > $tmptime) 
             return -1;
         else 
