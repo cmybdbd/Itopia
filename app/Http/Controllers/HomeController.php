@@ -32,23 +32,126 @@ class HomeController extends Controller
 
     function dayPage()
     {
-        return view('list.dayRoom')->withRooms(Room::where('state','<>',0)->get());
+        $rooms = Room::where('state','<>',0)->get();
+        $rooms = $this->arrayDaySort($rooms,0);
+        return view('list.dayRoom')->withRooms($rooms);
+        //return view('list.dayRoom')->withRooms(Room::where('state','<>',0)->get());
     }
     function nightPage()
     {
-        return view('list.nightRoom')->withRooms(Room::where('state','<>',0)->get());
+        $rooms = Room::where('state','<>',0)->get();
+        $rooms = $this->arrayNightSort($rooms,0);
+        return view('list.nightRoom')->withRooms($rooms);
+        //return view('list.nightRoom')->withRooms(Room::where('state','<>',0)->get());
     }
     function getDayRooms($name)
     {
-        return view('list.dayRoom')->withRooms(Room::where('state','<>',0)->Where('parentId',$name)->get());
+        $rooms = Room::where('state','<>',0)->Where('parentId',$name)->get();
+        $rooms = $this->arrayDaySort($rooms,0);
+        return view('list.dayRoom')->withRooms($rooms);
+        //return view('list.dayRoom')->withRooms(Room::where('state','<>',0)->Where('parentId',$name)->get());
     }
     function getNightRooms($name)
     {
-        return view('list.nightRoom')->withRooms(Room::where('state','<>',0)->Where('parentId',$name)->get());
+        $rooms = Room::where('state','<>',0)->Where('parentId',$name)->get();
+        $rooms = $this->arrayNightSort($rooms,0);
+        return view('list.nightRoom')->withRooms($rooms);
+        //return view('list.nightRoom')->withRooms(Room::where('state','<>',0)->Where('parentId',$name)->get());
     }
     function orderList()
     {
         $id = Auth::id();
         return redirect()->action('OrderController@getOrderList',['id'=>$id]);
+    }
+    function my_sort($a,$b)
+    {
+        $time1 = $a->nextTime();
+        $time2 = $b->nextTime();
+        if($time1 == $time2 || $time2 == 0)
+            return 0;
+        return 1;
+
+    }
+    function arrayDaySort($rooms,$day)
+    {
+        $array_rooms = array();
+        $i = 0;
+        foreach($rooms as $key => $room)
+        {
+            $array_rooms[$i] = $room;
+            $i++;
+        }
+        $number = $i;
+        for($i = 0;$i< $number;$i++)
+        {
+            for($j=$i+1;$j < $number; $j++)
+            {
+                $tmp1 = $array_rooms[$i];
+                $tmp2 = $array_rooms[$j];
+                $time1 = 0;
+                $time2 = 0;
+                if($day == 0)
+                {
+                    $time1 = $tmp1->nextUsingTime();
+                    $time2 = $tmp2->nextUsingTime();
+                }
+                else
+                {
+                    $time1 = $tmp1->nextDayUsingTime();
+                    $time2 = $tmp2->nextDayUsingTime();
+                }
+                if($time1 == $time2)
+                {
+                    if($time1 == 0)
+                        if($tmp1->state > $tmp2->state)
+                        {
+                            $array_rooms[$i] = $tmp2;
+                            $array_rooms[$j] = $tmp1;
+                            continue;
+                        }
+                }
+                if($time1 == -1)
+                {
+                    $array_rooms[$i] = $tmp2;
+                    $array_rooms[$j] = $tmp1;
+                    continue;
+                }
+                if($time1 > $time2 && $time2 != -1)
+                {
+                    $array_rooms[$i] = $tmp2;
+                    $array_rooms[$j] = $tmp1;
+                    continue;
+                }
+                
+            }
+        }
+        return $array_rooms;
+    }
+    function arrayNightSort($rooms,$day)
+    {
+        $array_rooms = array();
+        $i = 0;
+        foreach($rooms as $key => $room)
+        {
+            $array_rooms[$i] = $room;
+            $i++;
+        }
+        $number = $i;
+        for($i = 0;$i< $number;$i++)
+        {
+            for($j=$i+1;$j < $number; $j++)
+            {
+                $tmp1 = $array_rooms[$i];
+                $tmp2 = $array_rooms[$j];
+                $time1 = $tmp1->isNightBooked($day);
+                $time2 = $tmp2->isNightBooked($day);
+                if(!($time1 == $time2 || $time2 > $time1))
+                {
+                    $array_rooms[$i] = $tmp2;
+                    $array_rooms[$j] = $tmp1;
+                }
+            }
+        }
+        return $array_rooms;
     }
 }
