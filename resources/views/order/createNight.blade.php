@@ -390,6 +390,9 @@ function doLoop(){
             $("#toPay").on('click', function(){
                 if(checkToPay() && $("#toPay button").text()!= '下单中...')
                 {
+                    var r=confirm("提前四小时以上才可取消订单哟，主人确认支付吗")
+                if (r==true)
+                {
                     $("#toPay button").text('下单中...');
 
                     temptime = new Date(dateFormat(new Date(), 'yyyy/mm/dd 00:00:00')).getTime();
@@ -457,6 +460,7 @@ function doLoop(){
                     });
                 }
                     //window.location.href = 'result/0';
+            }else{;}
             });
         });
     </script>

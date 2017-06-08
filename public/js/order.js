@@ -192,14 +192,25 @@ $(function() {
                 }
             ];
 
-            var duration1h = [
+            var durationh5 = [
                 {
-                    text: "1 小时",
-                    value: 2*60*60*1000
+                    text: "0.5 小时",
+                    value: 0.5*60*60*1000
                 },
                 {
                     text: "尾单为默认时长",
-                    value: 3*60*60*1000
+                    value: 0.5*60*60*1000
+                }
+            ];
+
+            var duration1h = [
+                {
+                    text: "1 小时",
+                    value: 1*60*60*1000
+                },
+                {
+                    text: "尾单为默认时长",
+                    value: 1*60*60*1000
                 }
             ];
 
@@ -302,6 +313,12 @@ $(function() {
                 title: '',
                 id: 'durationPicker'
             });
+            var durationPickerh5 = new Picker({
+                data: [durationh5],
+                selectIndex: [0],
+                title: '',
+                id: 'durationPickerh5'
+            });
             var durationPicker1h = new Picker({
                 data: [duration1h],
                 selectIndex: [0],
@@ -395,6 +412,13 @@ $(function() {
                 updateEndTime();
                 updatePrice(0);
             });
+            durationPickerh5.on('picker.select', function(selectedVal, selectedIndex){
+                durationTime.text(durationh5[selectedIndex[0]].text)
+                    .attr('data-content', durationh5[selectedIndex[0]].value);
+
+                updateEndTime();
+                updatePrice(0);
+            });
             durationPicker1h.on('picker.select', function(selectedVal, selectedIndex){
                 durationTime.text(duration1h[selectedIndex[0]].text)
                     .attr('data-content', duration1h[selectedIndex[0]].value);
@@ -459,7 +483,13 @@ $(function() {
                     $("#totalPrice").text((+durationTime.attr("data-content"))/(3600*1000) * (+$("#hourPrice").attr("data-content")) );
                     tsum = durationTime.attr("data-content")/(3600*1000);
                     switch (tsum){
+                        case 0.5:
+                            $("#realPrice").text("9.5");
+                            break;
                         case 1:
+                            $("#realPrice").text("19");
+                            break;
+                        case 1.5:
                             //$("#totalPrice").css('visiblity','hidden');
                             $("#realPrice").text("19");
                             break;
@@ -521,9 +551,12 @@ $(function() {
                 }*/ 
                     timeR = 22.5 - room_type*0.5 - st%86400 / 3600 - 8
                     //console.log(timeR);
-                    if(timeR<=1){
+                    if(timeR<=0.5){
                         alert('亲，今天的日间房已经来不及定了哦，请看看包夜吧');
                         window.location.href = window.location.href.replace('home','nightPage');
+                    }
+                    else if(timeR<1){
+                        durationPickerh5.show();
                     }
                     else if(timeR<1.5){
                         durationPicker1h.show();
@@ -561,7 +594,7 @@ $(function() {
                 if(edSecondsInDay > 22.5 * 3600 || edSecondsInDay < 12.5 * 3600)
                 {
                     console.log(edSecondsInDay/3600);
-                    alert('已错过日间订单时间，切换为夜间模式');
+                    alert('亲，今天的日间房已经来不及定了哦，请看看包夜吧');
                     window.location.replace('/nightPage');
                 }
                 
@@ -572,6 +605,13 @@ $(function() {
                 var room_type = $("#roomType").attr('data-content')*1.0;
                 timeR = 22.5 - room_type*0.5 - st%86400 / 3600 - 8
                     //console.log(timeR);
+                    if(timeR<0.5){
+                        alert('亲，今天的日间房已经来不及定了哦，请看看包夜吧');
+                        window.location.replace('/nightPage');
+                    }
+                    else if(timeR<1){
+                        durationPickerh5.show();
+                    }
                     if(timeR<1.5){
                         durationPicker1h.show();
                     }
@@ -605,6 +645,9 @@ $(function() {
 
             $("#toPay").on('click', function(){
                 if(checkToPay() && $("#toPay button").text()!= '下单中...')
+                {
+                var r=confirm("时租一旦支付将无法取消哟，主人确认支付吗")
+                if (r==true)
                 {
                     $("#toPay button").text('下单中...');
 
@@ -687,6 +730,12 @@ $(function() {
                         }
                     });
                 }
+            }
+            else
+            {
+                ;
+            }
+    
                     //window.location.href = 'result/0';
             });
 
