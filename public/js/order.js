@@ -552,7 +552,7 @@ $(function() {
                     timeR = 22.5 - room_type*0.5 - st%86400 / 3600 - 8
                     console.log('timeR = ' + timeR);
                     if(timeR<0.5){
-                        alert('亲，今天的日间房已经来不及定了哦，请看看包夜吧1111');
+                        alert('亲，今天的日间房已经来不及定了哦，请看看包夜吧');
                         window.location.href = window.location.href.replace('home','nightPage');
                     }
                     else if(timeR<1){
@@ -601,7 +601,7 @@ $(function() {
                 timeR = 22.5 - room_type*0.5 - st%86400 / 3600 - 8
                     console.log('timeR= ' + timeR);
                     if(timeR<0.5){
-                        alert('亲，今天的日间房已经来不及定了哦，请看看包夜吧22222');
+                        alert('亲，今天的日间房已经来不及定了哦，请看看包夜吧');
                         window.location.replace('/nightPage');
                     }
                     else if(timeR<1){
