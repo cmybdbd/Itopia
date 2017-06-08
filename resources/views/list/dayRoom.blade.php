@@ -117,11 +117,11 @@
                         
                         @if(date('H',$room->nextTime()) != 8 && $remainOrderTime > 0.5)
                             @if($room->isUsing())
-                                @if( date("H")+date("i")/60 < (21.5 - $room->type/2.0) && date("H")+date("i")/60 > (12 - $room->type/2.0))
+                                @if( date("H")+date("i")/60 < (22 - $room->type/2.0) && date("H")+date("i")/60 > (12 - $room->type/2.0))
                                 <span id="btn{{$room->state}}" data-content="1" class="room-state b-color font-s" style="float:right;">可预约<span name="timeS" class="m-color">{{date("H:i",$s)}}</span>使用</span>
                                 <!--state 0-->
                                 @else
-                                    @if ( date("H")+date("i")/60 >= (21.5 - $room->type/2.0))
+                                    @if ( date("H")+date("i")/60 >= (22 - $room->type/2.0))
                                         <span id="btn{{$room->state}}" data-content="0" class="room-state b-color font-s" style="float:right;">今日已约满</span>
                                         <!--state 3-->
                                     @else
@@ -132,11 +132,11 @@
                                 @endif
 
                             @else
-                                @if( date("H")+date("i")/60 < (21.5 - $room->type/2.0) && date("H")+date("i")/60 > (12 - $room->type/2.0))
+                                @if( date("H")+date("i")/60 < (22 - $room->type/2.0) && date("H")+date("i")/60 > (12 - $room->type/2.0))
                                 <span id="btn{{$room->state}}" data-content="1" class="room-state b-color font-s" style="float:right;">即时使用</span>
                                 <!--state 2-->
                                 @else
-                                    @if ( date("H")+date("i")/60 >= (21.5 - $room->type/2.0))
+                                    @if ( date("H")+date("i")/60 >= (22 - $room->type/2.0))
                                         <span id="btn{{$room->state}}" data-content="0" class="room-state b-color font-s" style="float:right;">今日已约满</span>
                                         <!--state 3-->
                                     @else
@@ -146,7 +146,7 @@
                                 @endif
                             @endif
                         @elseif(date('H',$room->nextTime()) == 8)
-                            @if($remainTime>1)
+                            @if($remainTime>0.5)
                                 <span id="btn{{$room->state}}" data-content="1" class="room-state b-color font-s" style="float:right;">即时使用</span>
                                 <!--state 5-->
                             @else

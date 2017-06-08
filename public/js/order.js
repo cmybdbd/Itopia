@@ -537,12 +537,12 @@ $(function() {
             $(document).ready(function(){
 
                 var st = $("#startTime").attr('data-content')*1.0;
-                var ed = $("#endTime").attr('data-content')*1.0 / 1000;
+                //var ed = $("#endTime").attr('data-content')*1.0 / 1000;
                 var room_type = $("#roomType").attr('data-content')*1.0;
                 var stSecondsInDay = (st - 57600) % 86400;
-                var edSecondsInDay = (ed - 57600) % 86400;
-                var Day0 = ed - edSecondsInDay;
-                console.log(showHumanHour(Day0*1000));
+                //var edSecondsInDay = (ed - 57600) % 86400;
+                //var Day0 = ed - edSecondsInDay;
+                //console.log(showHumanHour(Day0*1000));
                 /*if(stSecondsInDay > (20.5-room_type*0.5) * 3600){    
                     s = (Day0 - (2 - room_type) / 2.0) * 3600;
                      console.log(showHumanHour(s*1000));
@@ -551,8 +551,8 @@ $(function() {
                 }*/ 
                     timeR = 22.5 - room_type*0.5 - st%86400 / 3600 - 8
                     console.log('timeR = ' + timeR);
-                    if(timeR<=0.5){
-                        alert('亲，今天的日间房已经来不及定了哦，请看看包夜吧');
+                    if(timeR<0.5){
+                        alert('亲，今天的日间房已经来不及定了哦，请看看包夜吧1111');
                         window.location.href = window.location.href.replace('home','nightPage');
                     }
                     else if(timeR<1){
@@ -601,7 +601,7 @@ $(function() {
                 timeR = 22.5 - room_type*0.5 - st%86400 / 3600 - 8
                     console.log('timeR= ' + timeR);
                     if(timeR<0.5){
-                        alert('亲，今天的日间房已经来不及定了哦，请看看包夜吧');
+                        alert('亲，今天的日间房已经来不及定了哦，请看看包夜吧22222');
                         window.location.replace('/nightPage');
                     }
                     else if(timeR<1){
