@@ -97,7 +97,7 @@ class Room extends Model
         $dayMaxTime = $dayStartTime + 22 * 60 * 60;
 
         $time = time() - time() % (30*60) + 30*60;
-        $time = $time > $dayStartTime + 11*60*60 ? $time : $dayStartTime + 11*60*60;
+        $time = $time > $dayStartTime + 12*60*60 ? $time : $dayStartTime + 12*60*60;
 
         if ($dayMaxTime > $nextTime && $dayMaxTime > $time)
         {

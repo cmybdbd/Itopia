@@ -2,65 +2,64 @@
 @extends('layout.app')
 
 @section('content')
-    <div class="myHeader" style="position:fixed;top:0px;width:100%;margin-bottom: 2vh;box-shadow:0 1px 6px #eeeeee">
-        <div class="mybtn-group" style="top:0px;width:100%;height:60px;position:absolute;">
+    <div class="content" style="height:100%;width:100%;">
+        <div class="mybtn-group" style="position:fixed;z-index:1000;top:0px;width:100%;height:60px;position:absolute;">
             <div id="myOrder">
-                <img src="{{asset('storage/map/myOrder.png')}}" style="position:absolute;width:40px;top:24px;left:30px;" alt="">
-                <span style="font-size:14px;font-weight:500;position:absolute;top:68px;left:22px;">
+                <img src="{{asset('storage/map/myOrder.png')}}" style="z-index:1000;position:fixed;width:40px;top:24px;left:30px;" alt="">
+                <span style="font-size:14px;font-weight:500;position:fixed;top:68px;left:22px;">
                 我的订单
                 </span>
             </div>
             <div id="equipment">
-                <img src="{{asset('storage/map/roomFacilities.png')}}" style="position:absolute;width:40px;top:24px;right:30px;" alt="">
-                <span style="font-size:14px;font-weight:500;position:absolute;top:68px;right:22px;">
+                <img src="{{asset('storage/map/roomFacilities.png')}}" style="z-index:1000;position:fixed;width:40px;top:24px;right:30px;" alt="">
+                <span style="font-size:14px;font-weight:500;position:fixed;top:68px;right:22px;">
                     小屋设施
                 </span>
             </div>
         </div>
-    </div>
-    <div class="content" style="height:100%;width:100%;">
             <!--onmouseover="getMousePos(event)"-->
-        <div style="max-wdith:100%;max-height:100%;overflow:scroll;">
-            <img id="mapImg" class="blend" style="position:absolute;top:0px;z-index:-1;height:800px;width:1050px;overflow:hidden;">
+        <div style="width:100%;height:100%;">
+            <img id="mapImg" src="{{asset('storage/map/mapPKU.png')}}" style="position:absolute;top:-150px;left:-250px;z-index:-1;height:941px;width:1050px;overflow:hidden;">
+            <div style="position:fixed;top:0px;width:100%;height:700px;z-index:10;" class="e">
         </div>
 
         <div id = "frl">
-            <img src="{{asset('storage/map/landmark.png')}}" style="position:absolute;top:400px;left:335px;width:45px;z-index=1;">
+            <img src="{{asset('storage/map/landmark.png')}}" style="position:absolute;top:250px;left:85px;width:45px;z-index=11;">
             <div>
-                <span style="width:80px;position:absolute;top:420px;left:395px;font-size:14px;z-index:2;">芙蓉里 <span class="m-color" style="font-weight:600;">5</span> 间</span>
-                <img src="{{asset('storage/map/label.png')}}" style="position:absolute;top:410px;left:375px;height:48px;z-index=1;">
+                <span style="width:80px;position:absolute;top:270px;left:145px;font-size:14px;z-index:11;">芙蓉里 <span class="m-color" style="font-weight:600;">5</span> 间</span>
+                <img src="{{asset('storage/map/label.png')}}" style="position:absolute;top:260px;left:125px;height:48px;z-index=11;">
             </div>
         </div>
         
         <div id = "hdzy">
-            <img src="{{asset('storage/map/landmark.png')}}" style="position:absolute;top:520px;left:390px;width:45px;z-index=1;">
+            <img src="{{asset('storage/map/landmark.png')}}" style="position:absolute;top:370px;left:140px;width:45px;z-index=11;">
             <div>
-                <span style="width:90px;position:absolute;top:540px;left:450px;font-size:14px;z-index:2;">大河庄苑 <span class="m-color" style="font-weight:600;">5</span> 间</span>
-                <img src="{{asset('storage/map/label.png')}}" style="position:absolute;top:530px;left:430px;width:130px;height:48px;z-index=1;">
+                <span style="width:90px;position:absolute;top:390px;left:200px;font-size:14px;z-index:11;">大河庄苑 <span class="m-color" style="font-weight:600;">5</span> 间</span>
+                <img src="{{asset('storage/map/label.png')}}" style="position:absolute;top:380px;left:180px;width:130px;height:48px;z-index=11;">
             </div>
         </div>
 
         <div id = "zgy">
-        <img src="{{asset('storage/map/landmark.png')}}" style="position:absolute;top:270px;left:680px;width:45px;z-index=1;">
+        <img src="{{asset('storage/map/landmark.png')}}" style="position:absolute;top:120px;left:430px;width:45px;z-index=11;">
         <div>
-            <span style="width:80px;position:absolute;top:290px;left:740px;font-size:14px;z-index:2;">中关园 <span class="m-color" style="font-weight:600;">5</span> 间</span>
-            <img src="{{asset('storage/map/label.png')}}" style="position:absolute;top:280px;left:720px;height:48px;z-index=1;">
+            <span style="width:80px;position:absolute;top:140px;left:490px;font-size:14px;z-index:11;">中关园 <span class="m-color" style="font-weight:600;">5</span> 间</span>
+            <img src="{{asset('storage/map/label.png')}}" style="position:absolute;top:130px;left:470px;height:48px;z-index=11;">
         </div>
         </div>
-
-        <div id = "kyxq">
-            <img src="{{asset('storage/map/landmark.png')}}" style="position:absolute;top:470px;left:730px;width:45px;z-index=1;">
+<!--
+        <div id = "kyxq"
+            <img src="{{asset('storage/map/landmark.png')}}" style="position:absolute;top:470px;left:730px;width:45px;z-index=11;">
             <div>
-                <span style="width:90px;position:absolute;top:490px;left:790px;font-size:14px;z-index:2;">科育小区 <span class="m-color" style="font-weight:600;">5</span> 间</span>
-                <img src="{{asset('storage/map/label.png')}}" style="position:absolute;top:480px;left:770px;width:130px;height:48px;z-index=1;">
+                <span style="width:90px;position:absolute;top:490px;left:790px;font-size:14px;z-index:11;">科育小区 <span class="m-color" style="font-weight:600;">5</span> 间</span>
+                <img src="{{asset('storage/map/label.png')}}" style="position:absolute;top:480px;left:770px;width:130px;height:48px;z-index=11;">
             </div>
         </div>
-
+-->
         <div id = "dxy">
-            <img src="{{asset('storage/map/landmark.png')}}" style="position:absolute;top:580px;left:350px;width:45px;z-index=1;">
+            <img src="{{asset('storage/map/landmark.png')}}" style="position:absolute;top:430px;left:100px;width:45px;z-index=1;">
             <div>
-                <span style="width:80px;position:absolute;top:600px;left:410px;font-size:14px;z-index:2;">稻香园 <span class="m-color" style="font-weight:600;">5</span> 间</span>
-                <img src="{{asset('storage/map/label.png')}}" style="position:absolute;top:590px;left:390px;height:48px;z-index=1;">
+                <span style="width:80px;position:absolute;top:450px;left:160px;font-size:14px;z-index:2;">稻香园 <span class="m-color" style="font-weight:600;">5</span> 间</span>
+                <img src="{{asset('storage/map/label.png')}}" style="position:absolute;top:440px;left:140px;height:48px;z-index=1;">
             </div>
         </div>
 
@@ -147,6 +146,12 @@
         }
         span.room-state{
             height: 1.6em;
+        }
+
+        .e{
+            background-image: -webkit-linear-gradient( top,#fff,transparent);
+            -moz-background-image: -moz-linear-gradient( top,#fff,transparent);
+           opacity:0.5;
         }
 
         .blend
