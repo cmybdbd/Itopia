@@ -34,7 +34,7 @@
         <div id = "hdzy">
             <img src="{{asset('storage/map/landmark.png')}}" style="position:absolute;top:370px;left:140px;width:45px;z-index:11;">
             <div>
-                <span style="width:90px;position:absolute;top:390px;left:200px;font-size:14px;z-index:11;">大河庄苑 <span class="m-color" style="font-weight:600;">3</span> 间</span>
+                <span style="width:90px;position:absolute;top:390px;left:200px;font-size:14px;z-index:11;">大河庄苑 <span class="m-color" style="font-weight:600;">8</span> 间</span>
                 <img src="{{asset('storage/map/label.png')}}" style="position:absolute;top:380px;left:180px;width:130px;height:48px;z-index:10;">
             </div>
         </div>
