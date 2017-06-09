@@ -149,7 +149,7 @@
             } else {
                 num = len;
             }
-            if(num<15)
+            if(num<5)
             {
                 $("#wordcount").css('color','red');
                 if(starNum !=5)
