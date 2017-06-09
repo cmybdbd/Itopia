@@ -68,7 +68,7 @@
             </div>
             <hr class="mysplit" style="margin-top:6.4px;">
             <div class="flex-center b-color font-m">
-            希望主人能留下对iTOPIA的意见建议(*￣︶￣*)
+            希望主人能留下对蜗壳私人空间的意见建议(*￣︶￣*)
             </div>
             <div class="flex-center b-color font-m">
             填写就有机会获得小蜗送出的多小时免费体验哦

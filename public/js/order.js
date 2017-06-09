@@ -531,23 +531,27 @@ $(function() {
                             break;
                         case 1.5:
                             //$("#totalPrice").css('visiblity','hidden');
-                            $("#realPrice").text("19");
+                            $("#realPrice").text("28.5");
                             break;
                         case 2:
                             //$("#totalPrice").css('visiblity','hidden');
-                            $("#realPrice").text("38");
+                            //$("#realPrice").text("38");
+                            $("#realPrice").text("0.01");
                             break;
                         case 3:
                             //$("#totalPrice").css('visiblity','hidden');
-                            $("#realPrice").text("57");
+                            //$("#realPrice").text("57");
+                            $("#realPrice").text("0.01");
                             break;
                         case 4:
                             //$("#totalPrice").css('visiblity','visible');
-                            $("#realPrice").text("72");
+                            //$("#realPrice").text("72");
+                            $("#realPrice").text("0.01");
                             break;
                         case 5:
                             //$("#totalPrice").css('visiblity','visible');
-                            $("#realPrice").text("85");
+                            $("#realPrice").text("0.01");
+                            //$("#realPrice").text("85");
                             break;
                         case 6:
                             //$("#totalPrice").css('visiblity','visible');
@@ -682,11 +686,11 @@ $(function() {
             $("#toPay").on('click', function(){
                 if(checkToPay() && $("#toPay button").text()!= '下单中...')
                 {
-                var r=confirm("时租一旦支付将无法取消哟，主人确认支付吗")
+                var r=confirm("时租一旦支付成功将无法取消哟，主人确认支付吗")
                 if (r==true)
                 {
-                    alert('系统维护中，请您明日再订~');
-                    return;
+                    //alert('系统维护中，请您明日再订~');
+                    //return;
                     $("#toPay button").text('下单中...');
 
                     temptime = new Date(dateFormat(new Date(), 'yyyy/mm/dd 00:00:00')).getTime();
@@ -750,6 +754,7 @@ $(function() {
                             console.log(param);
                             if(param['code'] == '200' && param['param']['code'] == 200)
                             {
+                                
                                 window.location.href = param['param']['content']['payUrl'];
                             }
                             else

@@ -32,6 +32,8 @@
                         <span class="list-button button-occupied font-s" style="width:55px;height:24px;float:right;">已结束</span>
                     @elseif($order->state == 3 || $order->state == 11)
                         <span class="list-button button-available font-s" style="width:55px;height:24px;float:right;">待评价</span>
+                    @elseif($order->state == 4)
+                        <span class="list-button button-available font-s" style="width:55px;height:24px;float:right;">待支付</span>
                     @else
                         @if(strtotime($order->startTime) + 1800 > time())
                         <span class="list-button button-available font-s" style="width:55px;height:24px;float:right;">使用中</span>
@@ -72,13 +74,19 @@
                 state = $(this).attr('data-content');
                 switch(state)
                 {
+                    case '3':
+                        window.location.href = '/comment/'+$(this).attr("id");
+                        break;
+                    case '4':
+                        //window.location.href = '/result/'+$(this).attr("id");
+                        break;
                     case '5':
                         window.location.href = '/result/'+$(this).attr("id");
                         break;
                     case '6':
                         window.location.href = '/result/'+$(this).attr("id");
                         break;
-                    case '10':
+                    case '11':
                         window.location.href = '/comment/'+$(this).attr("id");
                         break;
                     default:

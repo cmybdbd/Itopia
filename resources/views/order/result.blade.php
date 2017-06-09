@@ -308,7 +308,7 @@ var map = new AMap.Map('container',{
                             time(o,w)
                         },
                         1000)
-                    $.ajax({
+                    /*$.ajax({
                     url:'/order/complete',
                     type: 'POST',
                     data: {
@@ -320,7 +320,7 @@ var map = new AMap.Map('container',{
                             /result/,
                             'comment'
                         )
-                    }
+                    }*/
                 });
                 }
                 else

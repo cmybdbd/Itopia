@@ -44,7 +44,7 @@
                     <ul style="padding-left:0px; top:0px;">
                         <li><a id="dxy" class="font-xl"href="#">稻香园 <b class="m-color">0</b> 间</a></li>
                         <hr class="mysplit" style="margin:0px;">
-                        <li><a id="dhzy" class="font-xl"href="#">大河庄苑 <b class="m-color">0</b> 间</a></li>
+                        <li><a id="dhzy" class="font-xl"href="#">大河庄苑 <b class="m-color">8</b> 间</a></li>
                         <hr class="mysplit" style="margin:0px;">
                         <!--<li><a id="kyxq" class="font-xl"href="#">科育小区 <b class="m-color">0</b> 间</a></li>
                         <hr class="mysplit" style="margin:0px;">-->
