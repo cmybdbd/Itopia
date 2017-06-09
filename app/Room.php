@@ -24,7 +24,7 @@ class Room extends Model
 
         $night = $this->hasManyOrders()->where([
             ['isDay' , '=', 0],
-            ['state', '>=', Constant::$ORDER_STATE['UNPAY']],
+            ['state', '>=', Constant::$ORDER_STATE['COMPLETE']],
             ['state', "<", Constant::$ORDER_STATE['HISTORY']]
         ])->where('startTime','>=',date('Y-m-d', time()+24*60*60*$id) )->where('startTime','<=',date('Y-m-d', time()+24*60*60*($id+1)) )->max('startTime');
         if(empty($night))
@@ -37,7 +37,7 @@ class Room extends Model
         $night = $this->hasManyOrders()->where([
             ['isDay' , '=', 0],
             ['startDate', ">=", Utils::curNight()],
-            ['state', '>=', Constant::$ORDER_STATE['UNPAY']],
+            ['state', '>=', Constant::$ORDER_STATE['COMPLETE']],
             ['state', "<", Constant::$ORDER_STATE['HISTORY']]
         ])->pluck('startDate');
         $res = [];
@@ -80,7 +80,7 @@ class Room extends Model
     }
     public function nextTime(){
         $nextTime = $this -> hasManyOrders()->where([
-            ['state','>=', Constant::$ORDER_STATE['UNPAY']],
+            ['state','>=', Constant::$ORDER_STATE['COMPLETE']],
             ['state', '<', Constant::$ORDER_STATE['HISTORY']],
             ['isDay', '=', 1],
         ])->where('endTime','<',date('Y-m-d 00:00:00', time()+24*60*60))->max('endTime');
@@ -111,7 +111,7 @@ class Room extends Model
     }
     public function nextDayUsingTime(){//nextDay
         $nextTime = $this -> hasManyOrders()->where([
-            ['state','>=', Constant::$ORDER_STATE['UNPAY']],
+            ['state','>=', Constant::$ORDER_STATE['COMPLETE']],
             ['state', '<', Constant::$ORDER_STATE['HISTORY']],
             ['isDay', '=', 1],
         ])->where('endTime','<=',date('Y-m-d 23:30:00', time()+24*60*60))->where('endTime','>',date('Y-m-d 00:00:00', time()+24*60*60))->max('endTime');
@@ -132,7 +132,7 @@ class Room extends Model
     }
     public function nextUsingTime(){//today
         $nextTime = $this -> hasManyOrders()->where([
-            ['state','>=', Constant::$ORDER_STATE['UNPAY']],
+            ['state','>=', Constant::$ORDER_STATE['COMPLETE']],
             ['state', '<', Constant::$ORDER_STATE['HISTORY']],
             ['isDay', '=', 1],
         ])->where('endTime','<=',date('Y-m-d 23:30:00', time()))->where('endTime','>',date('Y-m-d 00:00:00', time()))->max('endTime');
