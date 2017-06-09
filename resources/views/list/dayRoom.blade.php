@@ -163,7 +163,7 @@
                         <div id="nexttime{{$room->state}}" data-content = "{{$room->nextTime()}}"></div>
                         <div id="nextdaytime{{$room->state}}" data-content = "{{$tomorrowTime}}"></div>
                         <div id="remaintime{{$room->state}}" data-content = "{{$remainTime}}"></div>
-                         <div id="remainordertime{{$room->state}}" data-content = "{{$remainOrderTime}}"></div>
+                        <div id="remainordertime{{$room->state}}" data-content = "{{$remainOrderTime}}"></div>
                         <div id="roomtype{{$room->state}}" data-content = "{{$room->type}}"></div>
                     </div>
             </div>
