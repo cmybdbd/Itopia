@@ -40,7 +40,7 @@
                 </div>
                 <div>
                     <span>使用时间：</span>
-                    <span>20{{date('y年m月d日G:i',strtotime($order->startTime))}} — {{date('G:i',strtotime($order->endTime))}}</span>
+                    <span>20{{date('y年m月d日G:i',strtotime($order->startTime))}} — {{$order->isDay?'':'明日'}}{{date('G:i',strtotime($order->endTime))}}</span>
                 </div>
                 <div>
                     <span>消费金额：</span>
