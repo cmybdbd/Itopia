@@ -15,18 +15,23 @@ class HomeController extends Controller
     function index(){
 
         PageViewController::updatePageView('home');
-        /*
+        
         $exs = Order::where([
             ['userId',Auth::id()],
             ['state', '>=', Constant::$ORDER_STATE['TOUSE']],
                 ['state','<', Constant::$ORDER_STATE['HISTORY']]]
-        )->first();
+        )->get();
 
         if(!empty($exs))
         {
-            return redirect()->action('OrderController@getOrderDetail',['id'=>$exs->id]);
+            foreach($exs as $ex_order)
+            {
+                if($ex_order->endTime < time())
+                    Order::find($ex_order->id)->update(['state'=> Constant::$ORDER_STATE['COMPLETE']]);
+            }
+            //return redirect()->action('OrderController@getOrderDetail',['id'=>$exs->id]);
         }
-        */
+        
         return view('map.mapIndex')->withRooms(Room::where('state','<>',0)->get());
     }
 
