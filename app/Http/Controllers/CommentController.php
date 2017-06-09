@@ -26,6 +26,7 @@ class CommentController extends Controller
         $comment-> tags = $request->tags;
         $comment->state = 1;
         $res = $comment->save();
+        Order::find($request->orderId)->update(['state'=> Constant::$ORDER_STATE['HISTORY']]);
         if($res)
         {
             return Response::json(['code'=>200]);
