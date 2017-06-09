@@ -97,16 +97,16 @@
         <!--<div class="font-s b-color">
             您可以在微信公众号“查看我的地理位置”中获得精确导航
         </div>-->
+        <!--<div id="container" style="width:500px; height:300px"></div>-->
         <div class="myrow"  id="slide" style="margin-bottom: 1vh;margin-left:auto;margin-right:auto;display:block;text-align:center;width:auto;height: 200px;overflow:hidden;visibility:hidden;position:relative;top:0px;left:0px;" >
-            <div id="container" style="width:500px; height:300px"></div>
-            <!--<div data-u="slides" style="width: 325px;height: 200px; overflow:hidden;position:relative;top:0px;left:0px;">
+            <div data-u="slides" style="width: 325px;height: 200px; overflow:hidden;position:relative;top:0px;left:0px;">
                 <div>
                     <img src="{{asset('storage/map/'.$order->hasRoom->parentId.'.jpg')}}" data-u="image" alt="" width="325px">
                 </div>
                 <div>
                     <img src="{{asset('storage/map/1.jpg')}}" data-u="image" alt="" width="325px">
                 </div>
-            </div>-->
+            </div>
         </div>
     </div>
 <div class="xTimer font-xl w-color" id="countDown">
