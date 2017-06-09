@@ -5,7 +5,10 @@
         .center> div{
             text-align: center;
         }
-
+        .list-button{
+            margin-right:24px;
+            margin-top: 32px;
+        }
     </style>
 @endsection
 @section('content')
@@ -15,7 +18,7 @@
         </div>
 
         @if(count($orders))
-        <div class="mybox" style="text-align: left;box-shadow:none;">
+        <div class="mybox" style="text-align: left;">
             @foreach($orders as $key => $order)
                 @if($key != 0)
                     <hr class="mysplit">
@@ -26,13 +29,13 @@
                     -
                     <span>{{$order->isDay?'分时使用':'包夜使用'}}</span>
                     @if($order->state < 4)
-                        <span class="button-occupied font-s" style="width:55px;height:24px;float:right;">已结束</span>
+                        <span class="list-button button-occupied font-s" style="width:55px;height:24px;float:right;">已结束</span>
                     @elseif($order->state ==10)
-                        <span class="button-available font-s" style="width:55px;height:24px;float:right;">待评价</span>
+                        <span class="list-button button-available font-s" style="width:55px;height:24px;float:right;">待评价</span>
                     @elseif($order->state <7)
-                        <span class="button-available font-s" style="width:55px;height:24px;float:right;">使用中</span>
+                        <span class="list-button button-available font-s" style="width:55px;height:24px;float:right;">使用中</span>
                     @else
-                        <span class="button-available font-s" style="width:55px;height:24px;float:right;">可使用</span>
+                        <span class="list-button button-available font-s" style="width:55px;height:24px;float:right;">可使用</span>
                     
                     @endif
                 </div>
