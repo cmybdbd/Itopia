@@ -31,7 +31,7 @@
             </div>
         </div>
         
-        <div id = "hdzy">
+        <div id = "dhzy">
             <img src="{{asset('storage/map/landmark.png')}}" style="position:absolute;top:370px;left:140px;width:45px;z-index:11;">
             <div>
                 <span style="width:90px;position:absolute;top:390px;left:200px;font-size:14px;z-index:11;">大河庄苑 <span class="m-color" style="font-weight:600;">8</span> 间</span>

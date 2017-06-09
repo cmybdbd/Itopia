@@ -56,12 +56,7 @@ $(function () {
     $(window).bind("resize", ScaleSlider);
     $(window).bind("orientationchange", ScaleSlider);
 */
-    $(document).ready(function(){
-        if($("#mapImg")!=null){
-            console.log('adjust initial position');
-            $("#mapImg").scrollLeft(150);
-        }
-    });
+    //$(document).ready(function(){    });
                 
 
     function login () {

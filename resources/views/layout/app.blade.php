@@ -10,7 +10,8 @@
     <title>蜗壳空间-按小时租的私人空间</title>
     <link rel="shortcut icon" href="{{asset('storage/logo.png')}}" type="image/x-icon" />
     <link rel="stylesheet" href="{{url('css/app.css')}}">
-    <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=b93c07bfd3e6dd8a6a9c61ca784c2cb5"></script> 
+    <!--<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=b93c07bfd3e6dd8a6a9c61ca784c2cb5"></script>-->
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=QAlK6BpG4luI1tu8ParPmfbA"></script>  
     <style type="text/css">
         :root {
             --main-color: #1dccb8;
@@ -412,11 +413,37 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
+<div id="lng" data-content=""></div>
+<div id="lat" data-content=""></div>
+
 <script src="{{url('js/app.js')}}"></script>
 <script>
     $("#report").on('click',function () {
         $(".report-content").modal();
     });
+    /*new BMap.LocalCity().get(function (r) { //定位城市  
+        alert("当前定位城市:" + r.name);  
+    });*/  
+    new BMap.Geolocation().getCurrentPosition(function (r) { //定位位置  
+        if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+            $('#lng').attr('data-content',r.point.lng);
+            $('#lat').attr('data-content',r.point.lat);
+            //alert('您的位置：' + r.point.lng + ',' + r.point.lat);  
+        }  
+        else {  
+            alert('failed' + this.getStatus());  
+        }  
+    }, { enableHighAccuracy: true })  
+    //关于状态码  
+    //BMAP_STATUS_SUCCESS   检索成功。对应数值“0”。  
+    //BMAP_STATUS_CITY_LIST 城市列表。对应数值“1”。  
+    //BMAP_STATUS_UNKNOWN_LOCATION  位置结果未知。对应数值“2”。  
+    //BMAP_STATUS_UNKNOWN_ROUTE 导航结果未知。对应数值“3”。  
+    //BMAP_STATUS_INVALID_KEY   非法密钥。对应数值“4”。  
+    //BMAP_STATUS_INVALID_REQUEST   非法请求。对应数值“5”。  
+    //BMAP_STATUS_PERMISSION_DENIED 没有权限。对应数值“6”。(自 1.1 新增)  
+    //BMAP_STATUS_SERVICE_UNAVAILABLE   服务不可用。对应数值“7”。(自 1.1 新增)  
+    //BMAP_STATUS_TIMEOUT   超时。对应数值“8”。(自 1.1 新增) 
 </script>
 @yield('scripts')
 </body>
