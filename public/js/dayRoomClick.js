@@ -73,9 +73,9 @@ $(function () {
         $("#useToday").addClass("nav-active");
         $("#useTomorrow").removeClass("nav-active");
         
-        if(td[1]!=null){
-            for(var j=1;j<=6;j++)
-            {
+        for(var j=1;j<=6;j++)
+        {
+             if(td[j]!=null){
                 str = $('#nextdaytime'+j).attr('data-content');
                 document.getElementById('btn'+j).innerHTML = td[j];
                 document.getElementById('roomState'+j).innerHTML = tdstate[j];
@@ -106,14 +106,19 @@ $(function () {
             //console.log('j ='+ j +  $('#nextdaytime'+j).attr('data-content'));
             ndt = $('#nextdaytime'+j).attr('data-content');
             tp = $('#roomtype'+j).attr('data-content');
+            console.log(document.getElementById('btn'+j).innerHTML);
             td[j] = document.getElementById('btn'+j).innerHTML;
             tdbtn[j] =  $('#btn' + j).attr('data-content');
             tdstate[j] = document.getElementById('roomState'+j).innerHTML; 
             
             tmp = '可预约<span name="timeS" class="m-color">明天'+ ndt +'</span>使用';
             document.getElementById('btn'+j).innerHTML = tmp;
-            t=ndt.split(":");
-            a = t[0]*1.0 + t[1]/60;
+            if(ndt!='-1')
+            {   t=ndt.split(":");
+                a = t[0]*1.0 + t[1]/60;
+            }
+            else
+                a=25;
             if(a<=21.5-tp/2.0){
                 $('#roomState'+j).addClass('button-available');
                 $('#roomState'+j).removeClass('button-occupied');
@@ -125,8 +130,9 @@ $(function () {
                 $('#roomState'+j).addClass('button-occupied');
                 $('#roomState'+j).text('已订满');
                 $('#btn' + j).attr('data-content','0');
+                $('#btn' + j).text('已约满');
             }
-            console.log(a);
+            //console.log(a);
         }
     });
 

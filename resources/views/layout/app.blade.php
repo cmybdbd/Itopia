@@ -8,6 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>蜗壳空间-按小时租的私人空间</title>
+    <link rel="shortcut icon" href="{{asset('storage/logo.png')}}" type="image/x-icon" />
     <link rel="stylesheet" href="{{url('css/app.css')}}">
     <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=b93c07bfd3e6dd8a6a9c61ca784c2cb5"></script> 
     <style type="text/css">
