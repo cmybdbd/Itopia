@@ -64,7 +64,7 @@
         </div>
 
     </div>
-    <div style="position:fixed;width:100%;bottom:64px;z-index:10;">
+    <div style="position:fixed;width:100%;bottom:64px;z-index:100;">
         <div id='day' class="circle" style="text-align:center;position:absolute;bottom:0;left:20%">
             <p class="font-xl" style="margin-top:16px;font-weight:500;">时租</p>
             <p class="font-l m-color" style="margin-top:-10px;font-weight:500;">19 / 小时</p></div>
