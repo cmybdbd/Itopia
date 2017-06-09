@@ -536,21 +536,21 @@ $(function() {
                         case 2:
                             //$("#totalPrice").css('visiblity','hidden');
                             //$("#realPrice").text("38");
-                            $("#realPrice").text("0");
+                            $("#realPrice").text("0.01");
                             break;
                         case 3:
                             //$("#totalPrice").css('visiblity','hidden');
                             //$("#realPrice").text("57");
-                            $("#realPrice").text("0");
+                            $("#realPrice").text("0.01");
                             break;
                         case 4:
                             //$("#totalPrice").css('visiblity','visible');
                             //$("#realPrice").text("72");
-                            $("#realPrice").text("0");
+                            $("#realPrice").text("0.01");
                             break;
                         case 5:
                             //$("#totalPrice").css('visiblity','visible');
-                            $("#realPrice").text("0");
+                            $("#realPrice").text("0.01");
                             //$("#realPrice").text("85");
                             break;
                         case 6:
