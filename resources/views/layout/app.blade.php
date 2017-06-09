@@ -116,6 +116,17 @@
             border-color: #1dccb8;
         }
 
+        .btn-main-third{
+            color:#eee;
+            width: 92.6%;
+            margin:auto;
+            font-size: 18px;
+            height:44px;
+            background-color: #aaa;
+            border-radius: 22px;
+            border-color: #eee;
+        }
+
         .btn-main-2{
             color:white;
             width: 46.3%;

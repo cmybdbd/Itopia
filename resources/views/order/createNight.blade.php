@@ -390,7 +390,7 @@ function doLoop(){
             $("#toPay").on('click', function(){
                 if(checkToPay() && $("#toPay button").text()!= '下单中...')
                 {
-                    var r=confirm("提前四小时以上才可取消订单哟，主人确认支付吗")
+                    var r=confirm("提前24小时以上才可取消订单哟，主人确认支付吗")
                 if (r==true)
                 {
                     $("#toPay button").text('下单中...');
