@@ -157,8 +157,8 @@
         </div>
     </div>
     <div style="width:100%;height:56px;text-align:center;">
-        <div class="btn btn-default btn-main-secondary-2" id="report">遇到问题</div>
-        <div class="btn btn-default btn-main-2" id="finish">返回首页</div>
+        <div class="btn btn-default btn-main" id="report">遇到问题</div>
+        <!--<div class="btn btn-default btn-main-2" id="finish">返回首页</div>-->
     </div>
 </div>
 
