@@ -337,12 +337,20 @@ class OrderController extends Controller
         $order = Uuid::generate()->string;
         if($request->isDay)
         {
+            $maxDayTime = strtotime(Order::where([
+                ['roomId','=', $request->roomId],
+                ['isDay', '=', 1],
+                ['state', '>=', Constant::$ORDER_STATE['UNPAY']]
+            ])->where('endTime','<',date("Y-m-d",$request->startTime+24*60*60))->max('endTime'));
+            if(!empty($maxDayTime))
+                if($maxDayTime > strtotime(date('Y-m-d H:i:s', $request->startTime)))
+                    return Response::json(['code' => '300', 'param' => 'isday']);
             DB::beginTransaction();
             DB::insert('insert into `orders` ' .
                 '(`userId`, `roomId`, `startDate`, `startTime`, `endTime`, `duration`, `price`,`isDay`, `state`, `id`, `updated_at`, `created_at`)' .
-                'select ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? from users ' .
-                'where ((select max(endTime) from orders where `isDay` = 1 and `state` > 3 and `roomId` = ?) is null or '.
-                ' (select max(endTime) from orders where `roomId` = ? and `isDay`=1 and `state` > 3) < ? )and id= ?',
+                'select ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? from users where id = ?' ,//.
+                //'where ((select max(endTime) from orders where `isDay` = 1 and `state` > 3 and `roomId` = ?) is null or '.
+                //' (select max(endTime) from orders where `roomId` = ? and `isDay`=1 and `state` > 3) < ? ) and id= ?',
                 [
                     $request->userId,
                     $request->roomId,
@@ -356,13 +364,17 @@ class OrderController extends Controller
                     $order,
                     date('Y-m-d H:i:s', time()),
                     date('Y-m-d H:i:s', time()),
-                    $request->roomId,
-                    $request->roomId,
-                    date('Y-m-d H:i:s', $request->startTime),
+                    //$request->roomId,
+                    //$request->roomId,
+                    //date('Y-m-d', $request->startTime + 24*60*60),// new add
+                    //date('Y-m-d', $request->startTime + 24*60*60),// new add
+                    //date('Y-m-d H:i:s', $request->startTime),
                     $request->userId
                 ]
             );
+            //return Response::json(['code' => '300', 'param' => 'isday']);
             DB::commit();
+
         }
         else
         {
@@ -418,7 +430,7 @@ class OrderController extends Controller
             return Response::json(['code' => '200', 'param' => $json]);
         } else
         {
-            return Response::json(['code' => '300']);
+            return Response::json(['code' => '300','param' => $json]);
         }
     }
     function cancelOrder()
