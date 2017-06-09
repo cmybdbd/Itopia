@@ -89,7 +89,7 @@ class OrderController extends Controller
         return view('order.list')->withOrders(Order::with('hasRoom')->where([
             ['userId','=',$id],
         ['state' ,'>=',Constant::$ORDER_STATE['COMPLETE']]
-        ])->get());
+        ])->orderBy('endTime','DESC')->get());
     }
     function manageOrder()
     {
