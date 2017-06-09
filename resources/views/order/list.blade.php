@@ -25,12 +25,14 @@
                     <span>{{date('m月d日',strtotime($order->startTime))}}</span>
                     -
                     <span>{{$order->isDay?'分时使用':'包夜使用'}}</span>
-                    @if($order->state < 4 || $order->state > 8)
-                        <span class="button-occupied font-s" style="width:55px;height:24px;float:right;">已结束</span>
+                    @if($order->state < 4)
+                        <span id="{{$order->id}}" class="button-occupied font-s" style="width:55px;height:24px;float:right;">已结束</span>
+                    @elseif($order->state ==10)
+                        <span id="{{$order->id}}" class="button-available font-s" style="width:55px;height:24px;float:right;">待评价</span>
                     @elseif($order->state <6)
-                        <span class="button-available font-s" style="width:55px;height:24px;float:right;">可使用</span>
+                        <span id="{{$order->id}}" class="button-available font-s" style="width:55px;height:24px;float:right;">可使用</span>
                     @else
-                        <span class="button-available font-s" style="width:55px;height:24px;float:right;">使用中</span>
+                        <span id="{{$order->id}}" class="button-available font-s" style="width:55px;height:24px;float:right;">使用中</span>
                     @endif
                 </div>
                 <div class="b-color">
@@ -47,6 +49,7 @@
                     <span>{{$order->price}}元</span>
                 </div>
                 </div>
+                <div id = "state{{$order->id}}" data-content="{{$order->state}}"></div>
             </div>
             @endforeach
         </div>
@@ -55,12 +58,13 @@
                 您还没有订单哟，快来体验吧！
             </div>
         @endif
-    </div>
+    </div><div id = "state{{$order->id}}" data-content="{{$order->state}}"></div><div id = "state{{$order->id}}" data-content="{{$order->state}}"></div>
 @endsection
 @section('scripts')
     <script>
         $(function () {
             $(".order-item").on('click',function(){
+                /switch
                 window.location.href = '/result/'+$(this).attr("data-content");
             });
         })
