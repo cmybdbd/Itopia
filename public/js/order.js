@@ -751,10 +751,10 @@ $(function() {
                         type: 'POST',
                         datatype: 'json',
                         success: function(param){
-                            console.log(param);
+                            alert(param);
                             if(param['code'] == '200' && param['param']['code'] == 200)
                             {
-                                alert(param['param']['content']['payUrl']);
+                                //alert(param['param']['content']['payUrl']);
                                 window.location.href = param['param']['content']['payUrl'];
                             }
                             else
