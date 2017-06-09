@@ -169,7 +169,7 @@
                         if( date("H")+date("i")/60 < (22 - $room->type/2.0) && date("H")+date("i")/60 >= (12 - $room->type/2.0))
                         {
                             $i = 1;
-                            $t =  $startDayTime+1800; 
+                            $t =  $startDayTime;
                         }
                         //从第二天开始订
                         else{
