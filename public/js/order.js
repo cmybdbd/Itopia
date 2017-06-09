@@ -754,13 +754,13 @@ $(function() {
                             console.log(param);
                             if(param['code'] == '200' && param['param']['code'] == 200)
                             {
-                                
+
                                 window.location.href = param['param']['content']['payUrl'];
                             }
                             else
                             {
                                 $("#toPay button").text('下单失败');
-                                alert('下单失败');
+                                alert(param['param'];
                                 console.log('下单失败');
                                 window.location.href = window.location.href.replace('home','nightPage');
                             }
