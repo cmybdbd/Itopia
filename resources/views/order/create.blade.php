@@ -164,12 +164,12 @@
 
                 if($dayCount==0)
                 {
-                if(date('H',$room->nextTime()) != 8 && $remainOrderTime > 1)
+                if(date('H',$room->nextTime()) != 8 && $remainOrderTime > 0.5)
                 {
-                        if( date("H")+date("i")/60 < (21.5 - $room->type/2.0) && date("H")+date("i")/60 >= (12 - $room->type/2.0))
+                        if( date("H")+date("i")/60 < (22 - $room->type/2.0) && date("H")+date("i")/60 >= (12 - $room->type/2.0))
                         {
                             $i = 1;
-                            $t = $startDayTime + 1800; 
+                            $t =  $room->nextTime(); 
                         }
                         //从第二天开始订
                         else{
@@ -178,7 +178,7 @@
                         }     
                 }           
                 else if(date('H',$room->nextTime()) == 8){
-                    if($remainTime>1)
+                    if($remainTime>0.5)
                     {
                         $i = 3;
                         $t = $startDayTime + 1800;
@@ -215,6 +215,25 @@
                 }
 
                 $t = $t - $t % 1800;
+
+                if($remainOrderTime<0.5){
+                    }
+                    else if($remainOrderTime<1){
+                        $dt = 1800000;
+                        $strdt = '0.5小时';
+                    }
+                    else if($remainOrderTime<1){
+                        $dt = 3600000;
+                        $strdt = '1小时';
+                    }
+                    else if($remainOrderTime<1){
+                        $dt = 5400000;
+                        $strdt = '1.5小时';
+                    }
+                    else{
+                        $dt = 7200000;
+                        $strdt = '2小时';   
+                    }
                 ?>
                 <!--i = {{$i}}-->
             {{date('j',$t) == date("j") ? '今天':'明天'}}({{date('n月j日',$t)}}) <span id="startTime" data-content="{{$t}}"></span>&nbsp;&nbsp;—&nbsp;&nbsp;<div style="float:right;" data-content="0" id="endTime" class="present noPicker"></div>
@@ -222,7 +241,7 @@
         </div>
         <div class="mybox selectPanel font-m" style="display:flex;box-shadow:none;padding-top:0px;">
                 时长
-                <div id="durationTime" class="scrollPicker" data-content="7200000" >2小时</div>
+                <div id="durationTime" class="scrollPicker" data-content="{{$dt}}" >{{$strdt}}</div>
                 <button class="btn btn-block btn-default btn-main-secondary" style="position:absolute;position:absolute;width:70%;right:12px;height:32px;padding:0;color:#1dccb8;" id="selectTime">选择时长</button>
         </div>
     </div>
