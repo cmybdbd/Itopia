@@ -760,7 +760,6 @@ $(function() {
                             else
                             {
                                 $("#toPay button").text('下单失败');
-                                alert(param['param']);
                                 console.log('下单失败');
                                 window.location.href = window.location.href.replace('home','nightPage');
                             }
