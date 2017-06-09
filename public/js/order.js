@@ -751,7 +751,7 @@ $(function() {
                         type: 'POST',
                         datatype: 'json',
                         success: function(param){
-                            alert(param);
+                            alert(JSON.parse(param));
                             if(param['code'] == '200' && param['param']['code'] == 200)
                             {
                                 //alert(param['param']['content']['payUrl']);
