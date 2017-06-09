@@ -590,7 +590,7 @@ $(function() {
                     $("#endTime").text(showHumanHour(s*1000));
                 }*/ 
                 console.log('room_type = ' + room_type);
-                    timeR = 22.5 - room_type*0.5 - st%86400 / 3600.0 - 8
+                    timeR = 22.5 - room_type*0.5 - st%86400 / 3600.0 - 8;
                     console.log('timeR = ' + timeR);
                     //if(timeR<0.5){
                         //alert('亲，今天的日间房已经来不及定了哦，请看看包夜吧1');
@@ -639,7 +639,7 @@ $(function() {
             durationTime.parent().on('click',function () {
                 var st = $("#startTime").attr('data-content')*1.0;
                 var room_type = $("#roomType").attr('data-content')*1.0;
-                timeR = 22.5 - room_type*0.5 - st%86400 / 3600 - 8
+                timeR = 22.5 - room_type*0.5 - st%86400 / 3600 - 8;
                     console.log('timeR= ' + timeR);
                     if(timeR<0.5){
                         alert('亲，今天的日间房已经来不及定了哦，请看看包夜吧2');
