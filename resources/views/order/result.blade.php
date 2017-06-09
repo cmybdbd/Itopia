@@ -158,7 +158,7 @@
     </div>
     <div style="width:100%;height:56px;text-align:center;">
         <div class="btn btn-default btn-main-secondary-2" id="report">遇到问题</div>
-        <div class="btn btn-default btn-main-2" id="finish">返回首页</div>
+        <div class="btn btn-default btn-main-2" id="confirmFinish">返回首页</div>
     </div>
 </div>
 
@@ -275,9 +275,7 @@ var map = new AMap.Map('container',{
             })
 
             $("#confirmFinish").on('click', function () {
-                window.location.href = window.location.href.replace(
-                            /home/,
-                        );
+                window.location.href = '/home';
 /*
                 $.ajax({
                     url:'/order/complete',

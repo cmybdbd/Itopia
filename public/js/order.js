@@ -685,6 +685,8 @@ $(function() {
                 var r=confirm("时租一旦支付将无法取消哟，主人确认支付吗")
                 if (r==true)
                 {
+                    alert('系统维护中，请您明日再订~');
+                    return;
                     $("#toPay button").text('下单中...');
 
                     temptime = new Date(dateFormat(new Date(), 'yyyy/mm/dd 00:00:00')).getTime();

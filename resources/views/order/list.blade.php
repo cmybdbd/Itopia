@@ -5,7 +5,10 @@
         .center> div{
             text-align: center;
         }
-
+        .list-button{
+            margin-right:24px;
+            margin-top: 32px;
+        }
     </style>
 @endsection
 @section('content')
@@ -15,22 +18,25 @@
         </div>
 
         @if(count($orders))
-        <div class="mybox" style="text-align: left;box-shadow:none;">
+        <div class="mybox" style="text-align: left;">
             @foreach($orders as $key => $order)
                 @if($key != 0)
                     <hr class="mysplit">
                 @endif
-            <div class="order-item" data-content="{{$order->id}}">
+            <div class="order-item" id="{{$order->id}}" data-content="{{$order->state}}">
                 <div class="f-color">
                     <span>{{date('m月d日',strtotime($order->startTime))}}</span>
                     -
                     <span>{{$order->isDay?'分时使用':'包夜使用'}}</span>
-                    @if($order->state < 4 || $order->state > 8)
-                        <span class="button-occupied font-s" style="width:55px;height:24px;float:right;">已结束</span>
-                    @elseif($order->state <6)
-                        <span class="button-available font-s" style="width:55px;height:24px;float:right;">可使用</span>
+                    @if($order->state < 4)
+                        <span class="list-button button-occupied font-s" style="width:55px;height:24px;float:right;">已结束</span>
+                    @elseif($order->state ==10)
+                        <span class="list-button button-available font-s" style="width:55px;height:24px;float:right;">待评价</span>
+                    @elseif($order->state <7)
+                        <span class="list-button button-available font-s" style="width:55px;height:24px;float:right;">使用中</span>
                     @else
-                        <span class="button-available font-s" style="width:55px;height:24px;float:right;">使用中</span>
+                        <span class="list-button button-available font-s" style="width:55px;height:24px;float:right;">可使用</span>
+                    
                     @endif
                 </div>
                 <div class="b-color">
@@ -56,12 +62,28 @@
             </div>
         @endif
     </div>
+    <div id = "state{{$order->id}}" data-content="{{$order->state}}"></div>
 @endsection
 @section('scripts')
     <script>
         $(function () {
             $(".order-item").on('click',function(){
-                window.location.href = '/result/'+$(this).attr("data-content");
+                state = $(this).attr('data-content');
+                switch(state)
+                {
+                    case '5':
+                        window.location.href = '/result/'+$(this).attr("id");
+                        break;
+                    case '6':
+                        window.location.href = '/result/'+$(this).attr("id");
+                        break;
+                    case '10':
+                        window.location.href = '/comment/'+$(this).attr("id");
+                        break;
+                    default:
+                        break;
+                }
+                
             });
         })
     </script>
