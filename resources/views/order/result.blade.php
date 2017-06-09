@@ -276,6 +276,8 @@ var map = new AMap.Map('container',{
             })
 
             $("#confirmFinish").on('click', function () {
+                alert("主人，暂时不可以提前取消使用哦~");
+/*
                 $.ajax({
                     url:'/order/complete',
                     type: 'POST',
@@ -290,9 +292,7 @@ var map = new AMap.Map('container',{
                         )
                     }
                 });
-                /*
-
-                */
+  */              
             });
             var wait = -(+$("#startTime").attr("data-content")*1000- (new Date().getTime()));
             console.log(wait);
@@ -309,6 +309,20 @@ var map = new AMap.Map('container',{
                             time(o,w)
                         },
                         1000)
+                    $.ajax({
+                    url:'/order/complete',
+                    type: 'POST',
+                    data: {
+                        _token: $("meta[name='csrf-token']").attr('content'),
+                        oid:  $("#oid").attr('data-content')
+                    },
+                    success:function(){
+                        window.location.href = window.location.href.replace(
+                            /result/,
+                            'comment'
+                        )
+                    }
+                });
                 }
                 else
                 {
