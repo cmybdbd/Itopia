@@ -15,7 +15,7 @@ class HomeController extends Controller
     function index(){
 
         PageViewController::updatePageView('home');
-        
+        /*
         $exs = Order::where([
             ['userId',Auth::id()],
             ['state', '>=', Constant::$ORDER_STATE['TOUSE']],
@@ -26,7 +26,7 @@ class HomeController extends Controller
         {
             return redirect()->action('OrderController@getOrderDetail',['id'=>$exs->id]);
         }
-        
+        */
         return view('map.mapIndex')->withRooms(Room::where('state','<>',0)->get());
     }
 
