@@ -146,7 +146,7 @@
                                 @endif
                             @endif
                         @elseif(date('H',$room->nextTime()) == 8)
-                            @if($remainTime>0.5)
+                            @if($remainTime>1)
                                 <span id="btn{{$room->state}}" data-content="1" class="room-state b-color font-s" style="float:right;">即时使用</span>
                                 <!--state 5-->
                             @else
@@ -159,6 +159,7 @@
                         @endif
                         <div id="nextdaytime{{$room->state}}" data-content = "{{$tomorrowTime}}"></div>
                         <div id="remaintime{{$room->state}}" data-content = "{{$remainTime}}"></div>
+                         <div id="remainordertime{{$room->state}}" data-content = "{{$remainOrderTime}}"></div>
                         <div id="roomtype{{$room->state}}" data-content = "{{$room->type}}"></div>
                     </div>
             </div>

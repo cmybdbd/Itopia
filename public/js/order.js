@@ -549,7 +549,8 @@ $(function() {
                     $("#endTime").attr('data-content',s*1000);
                     $("#endTime").text(showHumanHour(s*1000));
                 }*/ 
-                    timeR = 22.5 - room_type*0.5 - st%86400 / 3600 - 8
+                console.log('room_type = ' + room_type);
+                    timeR = 22.5 - room_type*0.5 - st%86400 / 3600.0 - 8
                     console.log('timeR = ' + timeR);
                     if(timeR<0.5){
                         alert('亲，今天的日间房已经来不及定了哦，请看看包夜吧1');

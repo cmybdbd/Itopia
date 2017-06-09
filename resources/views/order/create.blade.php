@@ -151,11 +151,11 @@
         <div class="mybox selectPanel font-m" style="box-shadow:none;padding-bottom:12px;">
             时间
             <div class="m-color" style="float:right;margin-left:15%;">
-                <!--<span>nextUseTime={{date('d-H:i',$room->nextDayUsingTime())}}</span>
+                <span>nextUseTime={{date('d-H:i',$room->nextDayUsingTime())}}</span>
                 <br>
                 <span>nextTime= {{date('d-H:i',$room->nextTime())}}</span>
                 <br>
-                <span>startDayTime={{date('d-H:i',$startDayTime)}}</span>-->
+                <span>startDayTime={{date('d-H:i',$startDayTime)}}</span>
                 <?php
                 $remainTime = (22.5 - date("H") - $room->type/2.0) + (-date("i"))/60; 
                 $remainOrderTime = (22.5 - date('H',$room->nextTime()) - $room->type/2.0) + (-date('H=i',$room->nextTime()))/60;
@@ -169,7 +169,7 @@
                         if( date("H")+date("i")/60 < (22 - $room->type/2.0) && date("H")+date("i")/60 >= (12 - $room->type/2.0))
                         {
                             $i = 1;
-                            $t = $startDayTime + 1800; 
+                            $t =  $room->nextTime(); 
                         }
                         //从第二天开始订
                         else{
@@ -215,15 +215,8 @@
                 }
 
                 $t = $t - $t % 1800;
-                ?>
-                <!--i = {{$i}}-->
-            {{date('j',$t) == date("j") ? '今天':'明天'}}({{date('n月j日',$t)}}) <span id="startTime" data-content="{{$t}}"></span>&nbsp;&nbsp;—&nbsp;&nbsp;<div style="float:right;" data-content="0" id="endTime" class="present noPicker"></div>
-        </div>
-        </div>
-        <div class="mybox selectPanel font-m" style="display:flex;box-shadow:none;padding-top:0px;">
-                时长
-                <?php 
-                    if($remainOrderTime<0.5){
+
+                if($remainOrderTime<0.5){
                     }
                     else if($remainOrderTime<1){
                         $dt = 1800000;
@@ -242,6 +235,12 @@
                         $strdt = '2小时';   
                     }
                 ?>
+                i = {{$i}}
+            {{date('j',$t) == date("j") ? '今天':'明天'}}({{date('n月j日',$t)}}) <span id="startTime" data-content="{{$t}}"></span>&nbsp;&nbsp;—&nbsp;&nbsp;<div style="float:right;" data-content="0" id="endTime" class="present noPicker"></div>
+        </div>
+        </div>
+        <div class="mybox selectPanel font-m" style="display:flex;box-shadow:none;padding-top:0px;">
+                时长
                 <div id="durationTime" class="scrollPicker" data-content="{{$dt}}" >{{$strdt}}</div>
                 <button class="btn btn-block btn-default btn-main-secondary" style="position:absolute;position:absolute;width:70%;right:12px;height:32px;padding:0;color:#1dccb8;" id="selectTime">选择时长</button>
         </div>
