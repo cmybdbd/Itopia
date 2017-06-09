@@ -191,12 +191,12 @@ class OrderController extends Controller
         $maxDayTime = strtotime(Order::where([
             ['roomId','=', $rid],
             ['isDay', '=', 1],
-            ['state', '>=', Constant::$ORDER_STATE['UNPAY']]
+            ['state', '>=', Constant::$ORDER_STATE['COMPLETE']]
         ])->where('endTime','<',date("Y-m-d",time()+86400*($day + 1)))->where('endTime','>',date("Y-m-d",time()+86400*($day)))->max('endTime'));
         $maxNightTime = strtotime(Order::where([
             ['roomId','=', $rid],
             ['isDay', '=', 0],
-            ['state', '>=', Constant::$ORDER_STATE['UNPAY']]
+            ['state', '>=', Constant::$ORDER_STATE['COMPLETE']]
         ])->where('endTime','<',date("Y-m-d",time()+86400*($day + 1)))->where('endTime','>',date("Y-m-d",time()+86400*($day)))->max('endTime'));
         $existOrder = Order::where([
             ['userId' , '=', $uid],
@@ -236,12 +236,12 @@ class OrderController extends Controller
         $maxDayTime = strtotime(Order::where([
             ['roomId','=', $rid],
             ['isDay', '=', 1],
-            ['state', '>=', Constant::$ORDER_STATE['UNPAY']]
+            ['state', '>=', Constant::$ORDER_STATE['COMPLETE']]
         ])->where('endTime','<',date("Y-m-d",time()+86400*($day + 1)))->max('endTime'));
         $maxNightTime = strtotime(Order::where([
             ['roomId','=', $rid],
             ['isDay', '=', 0],
-            ['state', '>=', Constant::$ORDER_STATE['UNPAY']]
+            ['state', '>=', Constant::$ORDER_STATE['COMPLETE']]
         ])->where('startTime','<',date("Y-m-d",time()+86400*($day + 1)))->where('startTime','>',date("Y-m-d",time()+86400*$day))->max('startTime'));
         $existOrder = Order::where([
             ['userId' , '=', $uid],
@@ -340,11 +340,11 @@ class OrderController extends Controller
             $maxDayTime = strtotime(Order::where([
                 ['roomId','=', $request->roomId],
                 ['isDay', '=', 1],
-                ['state', '>=', Constant::$ORDER_STATE['UNPAY']]
+                ['state', '>=', Constant::$ORDER_STATE['COMPLETE']]
             ])->where('endTime','<',date("Y-m-d",$request->startTime+24*60*60))->max('endTime'));
             if(!empty($maxDayTime))
                 if($maxDayTime > strtotime(date('Y-m-d H:i:s', $request->startTime)))
-                    return Response::json(['code' => '300', 'param' => 'isday']);
+                    return Response::json(['code' => '300']);
             DB::beginTransaction();
             DB::insert('insert into `orders` ' .
                 '(`userId`, `roomId`, `startDate`, `startTime`, `endTime`, `duration`, `price`,`isDay`, `state`, `id`, `updated_at`, `created_at`)' .
@@ -430,7 +430,7 @@ class OrderController extends Controller
             return Response::json(['code' => '200', 'param' => $json]);
         } else
         {
-            return Response::json(['code' => '300','param' => $json]);
+            return Response::json(['code' => '300']);
         }
     }
     function cancelOrder()
