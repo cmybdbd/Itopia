@@ -89,12 +89,12 @@ class HomeController extends Controller
             $i++;
         }
         $number = $i;
-        for($i = 0;$i< $number;$i++)
+        for($i = 0;$i< $number-1;$i++)
         {
-            for($j=$i+1;$j < $number; $j++)
+            for($j=$0;$j < $number - $i - 1; $j++)
             {
-                $tmp1 = $array_rooms[$i];
-                $tmp2 = $array_rooms[$j];
+                $tmp1 = $array_rooms[$j];
+                $tmp2 = $array_rooms[$j+1];
                 $time1 = 0;
                 $time2 = 0;
                 if($day == 0)
