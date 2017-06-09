@@ -49,7 +49,6 @@
                     <span>{{$order->price}}元</span>
                 </div>
                 </div>
-                <div id = "state{{$order->id}}" data-content="{{$order->state}}"></div>
             </div>
             @endforeach
         </div>
@@ -58,13 +57,14 @@
                 您还没有订单哟，快来体验吧！
             </div>
         @endif
-    </div><div id = "state{{$order->id}}" data-content="{{$order->state}}"></div><div id = "state{{$order->id}}" data-content="{{$order->state}}"></div>
+    </div>
+    <div id = "state{{$order->id}}" data-content="{{$order->state}}"></div>
 @endsection
 @section('scripts')
     <script>
         $(function () {
             $(".order-item").on('click',function(){
-                /switch
+                //switch
                 window.location.href = '/result/'+$(this).attr("data-content");
             });
         })
