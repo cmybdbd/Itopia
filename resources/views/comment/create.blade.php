@@ -138,6 +138,8 @@
 @section('scripts')
     <script src="{{url('/js/starrr.js')}}"></script>
     <script>
+        var t1=0,t2=0;
+        var starNum = -1;
         function countChar(val){
             var len = val.value.length;
             var num;
@@ -148,32 +150,54 @@
                 num = len;
             }
             if(num<15)
+            {
                 $("#wordcount").css('color','red');
-            else
+                if(starNum !=5)
+                {
+                    idCommit.addClass('disabled');
+                    idCommit.removeClass('m-color');
+                }
+            }
+            else{
                 $("#wordcount").css('color','#777');
+                t1 = 1;
+                if(t1&&t2)
+                {  
+                    idCommit.removeClass('disabled');
+                    idCommit.addClass('m-color');
+                }
+            }
             $("#wordcount").html(num);
         };
         //var a = getElementById("#commentText");
         //countChar(a);
         $(function () {
-            var starNum = -1;
             idCommit =$("#commit");
             idCommit.addClass('disabled');
             $('.starrr').starrr({
                 change: function(e, value){
-                    if(idCommit.hasClass('disabled'))
+                    t2=1;
+                    starNum = value;
+                    if(t1&&t2 || starNum == 5)
                     {
                         idCommit.removeClass('disabled');
                         idCommit.addClass('m-color');
                     }
-                    starNum = value;
                     console.log(starNum);
                     if(value != 5)
                     {
+                        idCommit.addClass('disabled');
+                        if(t1&&t2)
+                        {
+                            idCommit.removeClass('disabled');
+                            idCommit.addClass('m-color');
+                        }
                         $(".mainTag").css('display','flex');
                     }
                     else
                     {
+                        idCommit.removeClass('disabled');
+                        idCommit.addClass('m-color');
                         $(".show").removeClass('show');
                         $(".selected").removeClass('selected');
                         $(".mainTag").css('display','none');

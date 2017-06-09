@@ -28,15 +28,16 @@
                     <span>{{date('m月d日',strtotime($order->startTime))}}</span>
                     -
                     <span>{{$order->isDay?'分时使用':'包夜使用'}}</span>
-                    @if($order->state < 4)
+                    @if($order->state == 2 || $order->state == 10)
                         <span class="list-button button-occupied font-s" style="width:55px;height:24px;float:right;">已结束</span>
-                    @elseif($order->state ==10)
+                    @elseif($order->state == 3 || $order->state == 11)
                         <span class="list-button button-available font-s" style="width:55px;height:24px;float:right;">待评价</span>
-                    @elseif($order->state <7)
-                        <span class="list-button button-available font-s" style="width:55px;height:24px;float:right;">使用中</span>
                     @else
+                        @if(strtotime($order->startTime) + 1800 > time())
+                        <span class="list-button button-available font-s" style="width:55px;height:24px;float:right;">使用中</span>
+                        @else
                         <span class="list-button button-available font-s" style="width:55px;height:24px;float:right;">可使用</span>
-                    
+                        @endif
                     @endif
                 </div>
                 <div class="b-color">
