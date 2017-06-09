@@ -27,7 +27,7 @@
             <img src="{{asset('storage/map/landmark.png')}}" style="position:absolute;top:250px;left:85px;width:45px;z-index:11;">
             <div>
                 <span style="width:80px;position:absolute;top:270px;left:145px;font-size:14px;z-index:11;">芙蓉里 <span class="m-color" style="font-weight:600;">3</span> 间</span>
-                <img src="{{asset('storage/map/label.png')}}" style="position:absolute;top:260px;left:125px;height:48px;z-index:11;">
+                <img src="{{asset('storage/map/label.png')}}" style="position:absolute;top:260px;left:125px;height:48px;z-index:10;">
             </div>
         </div>
         
@@ -35,7 +35,7 @@
             <img src="{{asset('storage/map/landmark.png')}}" style="position:absolute;top:370px;left:140px;width:45px;z-index:11;">
             <div>
                 <span style="width:90px;position:absolute;top:390px;left:200px;font-size:14px;z-index:11;">大河庄苑 <span class="m-color" style="font-weight:600;">3</span> 间</span>
-                <img src="{{asset('storage/map/label.png')}}" style="position:absolute;top:380px;left:180px;width:130px;height:48px;z-index:11;">
+                <img src="{{asset('storage/map/label.png')}}" style="position:absolute;top:380px;left:180px;width:130px;height:48px;z-index:10;">
             </div>
         </div>
 
@@ -43,7 +43,7 @@
         <img src="{{asset('storage/map/landmark.png')}}" style="position:absolute;top:120px;left:430px;width:45px;z-index:11;">
         <div>
             <span style="width:80px;position:absolute;top:140px;left:490px;font-size:14px;z-index:11;">中关园 <span class="m-color" style="font-weight:600;">3</span> 间</span>
-            <img src="{{asset('storage/map/label.png')}}" style="position:absolute;top:130px;left:470px;height:48px;z-index:11;">
+            <img src="{{asset('storage/map/label.png')}}" style="position:absolute;top:130px;left:470px;height:48px;z-index:10;">
         </div>
         </div>
 <!--
@@ -56,10 +56,10 @@
         </div>
 -->
         <div id = "dxy">
-            <img src="{{asset('storage/map/landmark.png')}}" style="position:absolute;top:430px;left:100px;width:45px;z-index=11;">
+            <img src="{{asset('storage/map/landmark.png')}}" style="position:absolute;top:430px;left:100px;width:45px;z-index:11;">
             <div>
                 <span style="width:80px;position:absolute;top:450px;left:160px;font-size:14px;z-index:11;">稻香园 <span class="m-color" style="font-weight:600;">3</span> 间</span>
-                <img src="{{asset('storage/map/label.png')}}" style="position:absolute;top:440px;left:140px;height:48px;z-index=11;">
+                <img src="{{asset('storage/map/label.png')}}" style="position:absolute;top:440px;left:140px;height:48px;z-index:10;">
             </div>
         </div>
 
