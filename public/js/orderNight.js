@@ -36,6 +36,17 @@ function doLoop(){
                 $(".tos-content").modal();
             });
 
+             $("#agreement").click(function(){
+                if ($(this).is(':checked')) {
+                    $('#toPay').addClass('btn-main');
+                    $('#toPay').removeClass('btn-main-third');
+                }
+                else{
+                    $('#toPay').removeClass('btn-main');
+                    $('#toPay').addClass('btn-main-third');
+                }
+            });
+             
             function showHumanDay(ts)
             {
                 return dateFormat(ts, "yyyy年mm月dd日");

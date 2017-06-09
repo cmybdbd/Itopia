@@ -171,7 +171,7 @@
         <label for="agreement"></label>本人已获悉并同意<span id="tos" class="m-color">《蜗壳私人空间使用条例》</span>
     </div>
     <div style="margin-bottom:24px;">
-    <button class="btn btn-block btn-default btn-main" id="toPay">去支付<span id="timeCount"></span></button>
+    <button class="btn btn-block btn-default btn-main-third" id="toPay">去支付<span id="timeCount"></span></button>
     </div>
 </div>
 
