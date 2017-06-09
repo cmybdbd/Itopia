@@ -84,9 +84,9 @@
                         //window.location.href = '/result/'+$(this).attr("id");
                         break;
                     case '5':
-                        if( $(this).attr('name')=='1')
+                        //if( $(this).attr('name')=='1')
                             window.location.href = '/result/'+$(this).attr("id");
-                        else;
+                        //else;
                         break;
                     case '6':
                         window.location.href = '/result/'+$(this).attr("id");
