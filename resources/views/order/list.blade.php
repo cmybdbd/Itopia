@@ -40,7 +40,7 @@
                         @if(strtotime($order->startTime) - 1800 < time())
                         <span class="list-button button-available font-s" style="width:55px;height:24px;float:right;">使用中</span>
                         @else
-                        <span class="list-button button-available font-s" style="width:55px;height:24px;float:right;">可使用</span>
+                        <span class="list-button button-available font-s" style="width:55px;height:24px;float:right;">未使用</span>
                         @endif
                     @endif
                 </div>
@@ -51,7 +51,48 @@
                 </div>
                 <div>
                     <span>使用时间：</span>
-                    <span>20{{date('y年m月d日G:i',strtotime($order->startTime))}} — {{$order->isDay?'':'明日'}}{{date('G:i',strtotime($order->endTime))}}</span>
+                     <?php
+                    //if(!$order->isDay)
+                    //{
+                    //    $startDD = 20 . date('y年m月d日G:i',strtotime($order->startTime));
+                    //}
+                    //else{
+                        if (date('m月d日') == date('m月d日',strtotime($order->startTime))) //today
+                        {
+                            $startDD = '今天' . date('G:i',strtotime($order->startTime));
+                        }
+                        else if(date('m月d日') == date('m月d日',strtotime($order->startTime)-86400)){ //tomorrow
+                            $startDD = '明天' . date('G:i',strtotime($order->startTime));
+                        }
+                        else if(date('m月d日') == date('m月d日',strtotime($order->startTime)+86400)){ //yesterday
+                            $startDD = '昨天' . date('G:i',strtotime($order->startTime));
+                        }
+                        else{
+                            $startDD = 20 . date('y年m月d日G:i',strtotime($order->startTime));}
+                    //}
+                        
+                    if(!$order->isDay)
+                    {
+                        if (date('m月d日') == date('m月d日',strtotime($order->endTime))) //today
+                        {
+                            $endDD = '今天' . date('G:i',strtotime($order->endTime));
+                        }
+                        else if(date('m月d日') == date('m月d日',strtotime($order->endTime)-86400)){ //tomorrow
+                            $endDD = '明天' . date('G:i',strtotime($order->endTime));
+                        }
+                        else if(date('m月d日') == date('m月d日',strtotime($order->endTime)+86400)){ //yesterday
+                            $endDD = '昨天' . date('G:i',strtotime($order->endTime));
+                        }
+                        else{
+                            $endDD = 20 . date('y年m月d日G:i',strtotime($order->endTime));}
+                    }
+                    else
+                    {
+                        $endDD = date('G:i',strtotime($order->endTime));
+                    }
+                        
+                    ?>
+                    <span>{{$startDD}} — {{$endDD}}</span>
                 </div>
                 <div>
                     <span>消费金额：</span>
