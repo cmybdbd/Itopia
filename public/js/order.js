@@ -530,31 +530,21 @@ $(function() {
                             $("#realPrice").text("19");
                             break;
                         case 1.5:
-                            //$("#totalPrice").css('visiblity','hidden');
                             $("#realPrice").text("28.5");
                             break;
                         case 2:
-                            //$("#totalPrice").css('visiblity','hidden');
-                            //$("#realPrice").text("38");
-                            $("#realPrice").text("0.01");
+                            $("#realPrice").text("38");
                             break;
                         case 3:
-                            //$("#totalPrice").css('visiblity','hidden');
-                            //$("#realPrice").text("57");
-                            $("#realPrice").text("0.01");
+                            $("#realPrice").text("57");
                             break;
                         case 4:
-                            //$("#totalPrice").css('visiblity','visible');
-                            //$("#realPrice").text("72");
-                            $("#realPrice").text("0.01");
+                            $("#realPrice").text("72");
                             break;
                         case 5:
-                            //$("#totalPrice").css('visiblity','visible');
-                            $("#realPrice").text("0.01");
-                            //$("#realPrice").text("85");
+                            $("#realPrice").text("85");
                             break;
                         case 6:
-                            //$("#totalPrice").css('visiblity','visible');
                             $("#realPrice").text("96");
                             break;
                         default:
