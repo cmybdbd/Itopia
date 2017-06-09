@@ -86,6 +86,12 @@ class OrderController extends Controller
     function getOrderList($id)
     {
         PageViewController::updatePageView('orderList');
+        $orders =Order::with('hasRoom')->where([['userId','=',$id],
+            ['state' ,'>=',Constant::$ORDER_STATE['COMPLETE']]
+            ])->get();
+        $orders= $this->arrayOrderSort($orders);
+        //return $orders;
+        //return view('order.list')->withOrders($orders);
         return view('order.list')->withOrders(Order::with('hasRoom')->where([
             ['userId','=',$id],
         ['state' ,'>=',Constant::$ORDER_STATE['COMPLETE']]
@@ -433,6 +439,49 @@ class OrderController extends Controller
             return Response::json(['code' => '300']);
         }
     }
+    function restoreOrder(Request $request)
+    {
+        $this->validate($request, [
+            'orderId' => 'required',
+            'userId' => 'required',
+            'roomId' => 'required',
+            'date' => 'required',
+            'startTime' => 'required',
+            'endTime' => 'required',
+            'duration' => 'required',
+            'price' => 'required',
+            'isDay'  => 'required'
+        ]);
+
+        $order = $request->orderId;
+        
+        $user =User::find($request->userId);
+        $succ = Order::find($order);
+
+        $json = '';
+
+        if (!empty($succ))
+        {
+            $pay =new PayController();
+            $json = $pay->generateOrder($order,
+                $request->price,
+                $user->id,
+                $user->name,
+                $user->idnumber,
+                'info',
+                $user->phonenumber
+            );
+        }
+
+
+        if (is_array($json))
+        {
+            return Response::json(['code' => '200', 'param' => $json]);
+        } else
+        {
+            return Response::json(['code' => '300']);
+        }
+    }
     function cancelOrder()
     {}
     function completeOrder(Request $request)
@@ -455,5 +504,77 @@ class OrderController extends Controller
     {
         $order = Order::with('hasRoom')->find($id);
         return $order;
+    }
+
+    function arrayOrderSort($orders)
+    {
+        $array_orders = array();
+        $i = 0;
+        foreach($orders as $key => $order)
+        {
+            $array_orders[$i] = $order;
+            $i++;
+        }
+        $number = $i;
+        for($i = 0;$i< $number;$i++)
+        {
+            for($j= 0;$j < $number -$i -1; $j++)
+            {
+                $tmp1 = $array_orders[$j];
+                $tmp2 = $array_orders[$j+1];
+                $rank1 = 0;
+                $rank2 = 0;
+                switch($tmp1->state)
+                {
+                    case 10:
+                        $rank1 = 4;
+                        break;
+                    case 5:
+                        $rank1 = 1;
+                        break;
+                    case 4:
+                        $rank1 = 2;
+                        break;
+                    case 3:
+                        $rank1 = 3;
+                        break;
+                    default:
+                        $rank1 = 5;
+                }
+                switch($tmp2->state)
+                {
+                    case 10:
+                        $rank2 = 4;
+                        break;
+                    case 5:
+                        $rank2 = 1;
+                        break;
+                    case 4:
+                        $rank2 = 2;
+                        break;
+                    case 3:
+                        $rank2 = 3;
+                        break;
+                    default:
+                        $rank2 = 5;
+                }
+                $time1 = $tmp1->endTime;
+                $time2 = $tmp2->endTime;
+                if($rank1 > $rank2)
+                {
+                    $array_rooms[$j] = $tmp2;
+                    $array_rooms[$j+1] = $tmp1;
+                    continue;
+                }
+                else if(($rank1 == $rank2)&&($time1 < $time2))
+                {
+                    $array_rooms[$j] = $tmp2;
+                    $array_rooms[$j+1] = $tmp1;
+                    continue;
+                }
+                
+            }
+        }
+        return $array_orders;
     }
 }

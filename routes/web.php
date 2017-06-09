@@ -23,6 +23,7 @@ Route::get('/manage/order', 'OrderController@manageOrder');
 Route::group(['middleware' => 'auth'], function (){
 
     Route::post('/order/create', 'OrderController@storeOrder');
+    Route::post('/order/recreate', 'OrderController@restoreOrder');
     Route::post('/comment/create', 'CommentController@store');
     Route::post('/savePhone/{phone}', function($phone){
         \App\User::savePhone($phone, \Illuminate\Support\Facades\Auth::id());

@@ -112,8 +112,8 @@ class HomeController extends Controller
                     if($time1 == 0)
                         if($tmp1->state > $tmp2->state)
                         {
-                            $array_rooms[$i] = $tmp2;
-                            $array_rooms[$j] = $tmp1;
+                            $array_rooms[$j] = $tmp2;
+                            $array_rooms[$j+1] = $tmp1;
                             continue;
                         }
                 }
@@ -146,16 +146,16 @@ class HomeController extends Controller
         $number = $i;
         for($i = 0;$i< $number;$i++)
         {
-            for($j=$i+1;$j < $number; $j++)
+            for(j= 0;$j < $number -$i -1; $j++)
             {
-                $tmp1 = $array_rooms[$i];
-                $tmp2 = $array_rooms[$j];
+                $tmp1 = $array_rooms[$j];
+                $tmp2 = $array_rooms[$j+1];
                 $time1 = $tmp1->isNightBooked($day);
                 $time2 = $tmp2->isNightBooked($day);
                 if(!($time1 == $time2 || $time2 > $time1))
                 {
-                    $array_rooms[$i] = $tmp2;
-                    $array_rooms[$j] = $tmp1;
+                    $array_rooms[$j] = $tmp2;
+                    $array_rooms[$j+1] = $tmp1;
                 }
             }
         }
