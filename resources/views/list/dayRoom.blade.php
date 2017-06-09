@@ -102,7 +102,9 @@
                        
                         <?php
                             $remainTime = (22.5 - date("H") - $room->type/2.0) + (-date("i"))/60; 
-                            $s = $room->nextTime() - $room->type/2.0 * 3600; 
+                            $s = $room->nextTime() - $room->type/2.0 * 3600;
+                            if(date('H',$room->nextTime())>12)
+                                $s = $s + 1800;
                             $remainOrderTime = (22.5 - date('H',$room->nextTime()) - $room->type/2.0) + (-date('H:i',$room->nextTime()))/60;
 
                             if($room->nextDayUsingTime() == 0)
