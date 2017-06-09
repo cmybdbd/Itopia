@@ -23,19 +23,21 @@
                 @if($key != 0)
                     <hr class="mysplit">
                 @endif
-            <div class="order-item" id="{{$order->id}}" data-content="{{$order->state}}">
+            @if($order->state != 4)
+            <div class="order-item" id="{{$order->id}}" name="{{strtotime($order->startTime) - 1800 < time()}}" data-content="{{$order->state}}">
                 <div class="f-color">
                     <span>{{date('m月d日',strtotime($order->startTime))}}</span>
                     -
                     <span>{{$order->isDay?'分时使用':'包夜使用'}}</span>
+                    <!--{{strtotime($order->startTime)-1800}}
+                    {{time()}}-->
                     @if($order->state == 2 || $order->state == 10)
                         <span class="list-button button-occupied font-s" style="width:55px;height:24px;float:right;">已结束</span>
                     @elseif($order->state == 3 || $order->state == 11)
                         <span class="list-button button-available font-s" style="width:55px;height:24px;float:right;">待评价</span>
-                    @elseif($order->state == 4)
-                        <span class="list-button button-available font-s" style="width:55px;height:24px;float:right;">待支付</span>
+                    <!--    <span class="list-button button-available font-s" style="width:55px;height:24px;float:right;">待支付</span>-->
                     @else
-                        @if(strtotime($order->startTime) + 1800 > time())
+                        @if(strtotime($order->startTime) - 1800 < time())
                         <span class="list-button button-available font-s" style="width:55px;height:24px;float:right;">使用中</span>
                         @else
                         <span class="list-button button-available font-s" style="width:55px;height:24px;float:right;">可使用</span>
@@ -58,6 +60,7 @@
                 </div>
             </div>
             <div id = "state{{$order->id}}" data-content="{{$order->state}}"></div>
+            @endif
             @endforeach
         </div>
         @else
@@ -81,7 +84,9 @@
                         //window.location.href = '/result/'+$(this).attr("id");
                         break;
                     case '5':
-                        window.location.href = '/result/'+$(this).attr("id");
+                        //if( $(this).attr('name')=='1')
+                            window.location.href = '/result/'+$(this).attr("id");
+                        //else;
                         break;
                     case '6':
                         window.location.href = '/result/'+$(this).attr("id");
