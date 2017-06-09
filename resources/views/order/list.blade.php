@@ -54,6 +54,7 @@
                 </div>
                 </div>
             </div>
+            <div id = "state{{$order->id}}" data-content="{{$order->state}}"></div>
             @endforeach
         </div>
         @else
@@ -62,7 +63,6 @@
             </div>
         @endif
     </div>
-    <div id = "state{{$order->id}}" data-content="{{$order->state}}"></div>
 @endsection
 @section('scripts')
     <script>
