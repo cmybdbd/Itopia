@@ -46,7 +46,7 @@ class OrderController extends Controller
             }
             else
             {
-                $gatePasswd = $gateDoor-> passwd;
+                $gatePasswd = $gateDoor->passwd;
             }
             if(empty($order->passwd))
             {
