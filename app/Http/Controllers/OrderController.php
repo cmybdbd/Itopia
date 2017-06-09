@@ -126,7 +126,7 @@ class OrderController extends Controller
      */
     function test()
     {
-        $rid = 'ae50f8da-225e-11e7-b33c-00163e028324';
+        $rid = 'ae50f8da-225e-11e7-b33b-00163e028924';
         /*
         $rid = 'ae50f8da-225e-11e7-a09c-03163e028801';
         $night = Order::where([
@@ -153,12 +153,12 @@ class OrderController extends Controller
         $maxDayTime = strtotime(Order::where([
             ['roomId','=', $rid],
             ['isDay', '=', 1],
-            ['state', '>', Constant::$ORDER_STATE['REMOVE']]
+            ['state', '>=', Constant::$ORDER_STATE['UNPAY']]
         ])->where('endTime','<',date("Y-m-d",time()+86400*($day+1)))->where('endTime','>',date("Y-m-d",time()+86400*($day)))->max('endTime'));
         $maxNightTime = strtotime(Order::where([
             ['roomId','=', $rid],
             ['isDay', '=', 0],
-            ['state', '>', Constant::$ORDER_STATE['REMOVE']]
+            ['state', '>=', Constant::$ORDER_STATE['UNPAY']]
         ])->where('endTime','<',date("Y-m-d",time()+86400*(0 + 1)))->max('endTime'));
         //$nowday = time();
         //return $maxDayTime;
@@ -191,12 +191,12 @@ class OrderController extends Controller
         $maxDayTime = strtotime(Order::where([
             ['roomId','=', $rid],
             ['isDay', '=', 1],
-            ['state', '>', Constant::$ORDER_STATE['REMOVE']]
+            ['state', '>=', Constant::$ORDER_STATE['UNPAY']]
         ])->where('endTime','<',date("Y-m-d",time()+86400*($day + 1)))->where('endTime','>',date("Y-m-d",time()+86400*($day)))->max('endTime'));
         $maxNightTime = strtotime(Order::where([
             ['roomId','=', $rid],
             ['isDay', '=', 0],
-            ['state', '>', Constant::$ORDER_STATE['REMOVE']]
+            ['state', '>=', Constant::$ORDER_STATE['UNPAY']]
         ])->where('endTime','<',date("Y-m-d",time()+86400*($day + 1)))->where('endTime','>',date("Y-m-d",time()+86400*($day)))->max('endTime'));
         $existOrder = Order::where([
             ['userId' , '=', $uid],
@@ -236,12 +236,12 @@ class OrderController extends Controller
         $maxDayTime = strtotime(Order::where([
             ['roomId','=', $rid],
             ['isDay', '=', 1],
-            ['state', '>', Constant::$ORDER_STATE['REMOVE']]
+            ['state', '>=', Constant::$ORDER_STATE['UNPAY']]
         ])->where('endTime','<',date("Y-m-d",time()+86400*($day + 1)))->max('endTime'));
         $maxNightTime = strtotime(Order::where([
             ['roomId','=', $rid],
             ['isDay', '=', 0],
-            ['state', '>', Constant::$ORDER_STATE['REMOVE']]
+            ['state', '>=', Constant::$ORDER_STATE['UNPAY']]
         ])->where('startTime','<',date("Y-m-d",time()+86400*($day + 1)))->where('startTime','>',date("Y-m-d",time()+86400*$day))->max('startTime'));
         $existOrder = Order::where([
             ['userId' , '=', $uid],
