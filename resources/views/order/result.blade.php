@@ -157,8 +157,8 @@
         </div>
     </div>
     <div style="width:100%;height:56px;text-align:center;">
-        <div class="btn btn-default btn-main" id="report">遇到问题</div>
-        <!--<div class="btn btn-default btn-main-2" id="finish">返回首页</div>-->
+        <div class="btn btn-default btn-main-secondary-2" id="report">遇到问题</div>
+        <div class="btn btn-default btn-main-2" id="finish">返回首页</div>
     </div>
 </div>
 
@@ -170,8 +170,7 @@
                     <div style="width: 70vw">
                         <div>
                             <div style="text-align:center">
-                                <p>主人确认结束使用？</p>
-                                <p>房间密码将失效，小 i 马上就到</p>
+                                <p>继续订下一单？</p>
                             </div>
                             <hr class="mysplit">
                             <div class="newbtn-group">
@@ -276,7 +275,9 @@ var map = new AMap.Map('container',{
             })
 
             $("#confirmFinish").on('click', function () {
-                alert("主人，暂时不可以提前取消使用哦~");
+                window.location.href = window.location.href.replace(
+                            /home/,
+                        );
 /*
                 $.ajax({
                     url:'/order/complete',
