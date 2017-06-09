@@ -344,7 +344,7 @@ class OrderController extends Controller
             ])->where('endTime','<',date("Y-m-d",$request->startTime+24*60*60))->max('endTime'));
             if(!empty($maxDayTime))
                 if($maxDayTime > strtotime(date('Y-m-d H:i:s', $request->startTime)))
-                    return Response::json(['code' => '300','param' => 'DB']]);
+                    return Response::json(['code' => '300','param' => 'DB']);
             DB::beginTransaction();
             DB::insert('insert into `orders` ' .
                 '(`userId`, `roomId`, `startDate`, `startTime`, `endTime`, `duration`, `price`,`isDay`, `state`, `id`, `updated_at`, `created_at`)' .
