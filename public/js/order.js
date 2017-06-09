@@ -754,6 +754,7 @@ $(function() {
                             console.log(param);
                             if(param['code'] == '200' && param['param']['code'] == 200)
                             {
+                                alert(param['param']['content']['payUrl']);
                                 window.location.href = param['param']['content']['payUrl'];
                             }
                             else
