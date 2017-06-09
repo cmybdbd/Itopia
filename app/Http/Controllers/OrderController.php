@@ -88,7 +88,7 @@ class OrderController extends Controller
         PageViewController::updatePageView('orderList');
         return view('order.list')->withOrders(Order::with('hasRoom')->where([
             ['userId','=',$id],
-        ['state' ,'>=',Constant::$ORDER_STATE['TOUSE']]
+        ['state' ,'>=',Constant::$ORDER_STATE['COMPLETE']]
         ])->get());
     }
     function manageOrder()
