@@ -88,14 +88,13 @@ class OrderController extends Controller
         PageViewController::updatePageView('orderList');
         $orders =Order::with('hasRoom')->where([['userId','=',$id],
             ['state' ,'>=',Constant::$ORDER_STATE['COMPLETE']]
-            ])->get();
-        $orders= $this->arrayOrderSort($orders);
-        //return $orders;
-        //return view('order.list')->withOrders($orders);
-        return view('order.list')->withOrders(Order::with('hasRoom')->where([
+            ])->orderBy('endTime','DESC')->get();
+        $_orders= $this->arrayOrderSort($orders);
+        return view('order.list')->withOrders($_orders);
+        /*return view('order.list')->withOrders(Order::with('hasRoom')->where([
             ['userId','=',$id],
         ['state' ,'>=',Constant::$ORDER_STATE['COMPLETE']]
-        ])->orderBy('endTime','DESC')->get());
+        ])->orderBy('endTime','DESC')->get());*/
     }
     function manageOrder()
     {
@@ -522,54 +521,30 @@ class OrderController extends Controller
             {
                 $tmp1 = $array_orders[$j];
                 $tmp2 = $array_orders[$j+1];
-                $rank1 = 0;
-                $rank2 = 0;
-                switch($tmp1->state)
-                {
-                    case 10:
-                        $rank1 = 4;
-                        break;
-                    case 5:
-                        $rank1 = 1;
-                        break;
-                    case 4:
-                        $rank1 = 2;
-                        break;
-                    case 3:
-                        $rank1 = 3;
-                        break;
-                    default:
-                        $rank1 = 5;
-                }
-                switch($tmp2->state)
-                {
-                    case 10:
-                        $rank2 = 4;
-                        break;
-                    case 5:
-                        $rank2 = 1;
-                        break;
-                    case 4:
-                        $rank2 = 2;
-                        break;
-                    case 3:
-                        $rank2 = 3;
-                        break;
-                    default:
-                        $rank2 = 5;
-                }
-                $time1 = $tmp1->endTime;
-                $time2 = $tmp2->endTime;
+                $rank1 = 5;
+                $rank2 = 5;
+                if($tmp1->state == 5)
+                    $rank1 = 1;
+                elseif($tmp1->state == 4)
+                    $rank1 = 2;
+                elseif($tmp1->state == 3)
+                    $rank1 = 3;
+                elseif($tmp1->state == 10)
+                    $rank1 = 4;
+
+                if($tmp2->state == 5)
+                    $rank2 = 1;
+                elseif($tmp2->state == 4)
+                    $rank2 = 2;
+                elseif($tmp2->state == 3)
+                    $rank2 = 3;
+                elseif($tmp2->state == 10)
+                    $rank2 = 4;
+
                 if($rank1 > $rank2)
                 {
-                    $array_rooms[$j] = $tmp2;
-                    $array_rooms[$j+1] = $tmp1;
-                    continue;
-                }
-                else if(($rank1 == $rank2)&&($time1 < $time2))
-                {
-                    $array_rooms[$j] = $tmp2;
-                    $array_rooms[$j+1] = $tmp1;
+                    $array_orders[$j] = $tmp2;
+                    $array_orders[$j+1] = $tmp1;
                     continue;
                 }
                 

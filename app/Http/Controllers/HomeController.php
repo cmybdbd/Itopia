@@ -146,7 +146,7 @@ class HomeController extends Controller
         $number = $i;
         for($i = 0;$i< $number;$i++)
         {
-            for(j= 0;$j < $number -$i -1; $j++)
+            for($j= 0;$j < $number -$i -1; $j++)
             {
                 $tmp1 = $array_rooms[$j];
                 $tmp2 = $array_rooms[$j+1];
