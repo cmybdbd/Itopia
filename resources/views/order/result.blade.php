@@ -320,8 +320,8 @@ var map = new AMap.Map('container',{
                             /result/,
                             'comment'
                         )
-                    }*/
-                });
+                    }
+                });*/
                 }
                 else
                 {
