@@ -72,7 +72,7 @@
                         <br>
                         <?php
                             $room_state = 0;
-                            if (date("H")+date("i")/60 >= (22.5 - $room->type/2.0) || date("H")+date("i")/60 <= (12 - $room->type/2.0))
+                            if (date("H")+date("i")/60 >= (21.5 - $room->type/2.0) || date("H")+date("i")/60 <= (12 - $room->type/2.0))
                             {
                                 $room_state = 1;
                                 $room_str = '包夜中';
@@ -88,7 +88,7 @@
                                 $room_str = '可使用';
                             }
                         ?>
-                        <!--
+                        
                         {{date("H")+date("i")/60}}
                         {{(22.5 - $room->type/2.0)}}
                         {{(12 - $room->type/2.0)}}
@@ -101,7 +101,7 @@
                        
                         <?php
                             $remainTime = (22 - date("H") - $room->type/2.0) + (-date("i"))/60; 
-                            $s = $room->nextUsingTime() - $room->type/2.0 * 3600;
+                            $s = $room->nextUsingTime();
                             if(date('H',$room->nextUsingTime())>12)
                                 $s = $s + 1800;
                             $remainOrderTime = (22 - date('H',$room->nextUsingTime()) - $room->type/2.0) + (-date('H:i',$room->nextUsingTime()))/60;
