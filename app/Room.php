@@ -47,6 +47,11 @@ class Room extends Model
     }
     public function isUsing()
     {
+        $use = $this->nextUsingTime();
+        if($use == 0 || $use < time())
+            return 0;
+        else 
+            return 1;
         /*
         $hour = date('H',time());
         if($hour <=  5 || $hour >= 22)
@@ -124,7 +129,7 @@ class Room extends Model
         {
             $nextTime = strtotime($nextTime);
         }
-        $tmptime = strtotime(date('Y-m-d 21:30:00', time()+24*60*60)) - $this->type/2*60*60;
+        $tmptime = strtotime(date('Y-m-d 21:00:00', time()+24*60*60)) - $this->type/2*60*60;
         if($nextTime > $tmptime) 
             return -1;
         else 
@@ -145,7 +150,7 @@ class Room extends Model
         {
             $nextTime = strtotime($nextTime);
         }
-        $tmptime = strtotime(date('Y-m-d 21:30:00', time())) - $this->type/2*60*60;
+        $tmptime = strtotime(date('Y-m-d 21:00:00', time())) - $this->type/2*60*60;
         if($nextTime > $tmptime) 
             return -1;
         else 
