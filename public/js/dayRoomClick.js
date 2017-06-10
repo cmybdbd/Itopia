@@ -142,7 +142,7 @@ $(function () {
         //window.location.href='/getDayRooms/dxy';
     });
     $("#dhzy").on('click',function () {
-        window.location.replace('/getDayRooms/dhzy');
+        window.location.replace('/getDayRooms/dhz9');
     });
     $("#kyxq").on('click',function () {
         window.location.replace('/getDayRooms/kyxq');

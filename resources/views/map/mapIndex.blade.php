@@ -176,7 +176,7 @@
     });
     $("#dhzy").on('click',function () {
         //window.location.replace('/getDayRooms/dhzy');
-        window.location.href='/getDayRooms/dhzy';
+        window.location.href='/getDayRooms/dhz9';
     });
     $("#kyxq").on('click',function () {
         //window.location.replace('/getDayRooms/kyxq');
