@@ -77,7 +77,7 @@ $(function () {
         for(var j=1;j<=roomSum;j++)
         {
              if(td[j]!=null){
-                str = $('#nextdaytime'+j).attr('data-content');
+                str = $('#tomorrowNextTime'+j).attr('data-content');
                 document.getElementById('btn'+j).innerHTML = td[j];
                 document.getElementById('roomState'+j).innerHTML = tdstate[j];
                 state = $('#roomState'+j).attr('data-content');
@@ -97,7 +97,6 @@ $(function () {
     });
     
     $("#useTomorrow").on('click',function () {
-        var date = new Date();
         dayShift = 1;
         $("#useTomorrow").addClass("nav-active");
         $("#useToday").removeClass("nav-active");
@@ -105,36 +104,30 @@ $(function () {
         for(var j=1;j<=roomSum;j++)
         {
             //console.log('j ='+ j +  $('#nextdaytime'+j).attr('data-content'));
-            ndt = $('#nextdaytime'+j).attr('data-content');
+            ndt = $('#tomorrowNextTime'+j).attr('data-content');
             tp = $('#roomtype'+j).attr('data-content');
             console.log(document.getElementById('btn'+j).innerHTML);
             td[j] = document.getElementById('btn'+j).innerHTML;
             tdbtn[j] =  $('#btn' + j).attr('data-content');
             tdstate[j] = document.getElementById('roomState'+j).innerHTML; 
-            var tmp;   
+            var tmp = '';   
 
-            if(ndt =='0')
+            if(ndt =='-1')
             {
-                a = 11.5 + tp * 0.5;
-                if(tp == '1')
-                    tmp = '可预约<span name="timeS" class="m-color">明日11:30</span>使用';
-                else
-                    tmp = '可预约<span name="timeS" class="m-color">明日12:00</span>使用';
+                a=1;
             }
-            else if(ndt!='-1')
+            else
             {
-                ndt = dateFormat(ndt*1000,'HH:MM');
+                ndt = dateFormat(1000*ndt,'HH:MM');
                 console.log(ndt);
                 t=ndt.split(":");
                 a = t[0]*1.0 + t[1]/60;
                 tmp = '可预约<span name="timeS" class="m-color">明日'+t[0]+':'+t[1]+'</span>使用';
             }
-            else
-                a=25;
-
+           
             document.getElementById('btn'+j).innerHTML = tmp;
             
-            if(a<=21.5-tp/2.0){
+            if(a!=-1){
                 $('#roomState'+j).addClass('button-available');
                 $('#roomState'+j).removeClass('button-occupied');
                 $('#roomState'+j).text('可预订');

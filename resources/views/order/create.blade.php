@@ -160,73 +160,47 @@
                 {{$room->type/2.0}}
                 -->
                 <?php
-                $remainTime = (22.5 - date("H") - $room->type/2.0) + (-date("i"))/60;
-                $startBookTime = (12 - $room->type/2.0) * 3600;
+                $td = $room->today_nextTime();
+                $tm = $room->next_day_time();
+                $remainOrderTime = (22.5 - date('H',$room->nextUsingTime()) - $room->type/2.0) + (-date('H:i',$room->nextUsingTime()))/60; 
+
                 if($dayCount == 0)
                 {
-                    $remainOrderTime = (22.5 - date('H',$room->nextUsingTime()) - $room->type/2.0) + (-date('H:i',$room->nextUsingTime()))/60; 
-                    if($room->nextUsingTime() == 0)
-                    {
-                        $t = strtotime(date('Y-M-d')) + $startBookTime;
-                        $i = 1;
-                    }
-                    else if($room->nextUsingTime() == -1){
+                   if($td == -1)
+                   {
                         $t = -1;
-                        $i = 2;
-                    }
-                    else
-                    {
-                        if($room->nextUsingTime() > time())
-                        {
-                            $t = $room->nextUsingTime();
-                            $t = $t - $t % 1800 + 1800;
-                            $i = 3;
-                        }
-                        else{
-                            $t = time();
-                            $t = $t - $t % 1800 + 1800;
-                            $i = 6;
-                        }
-                    }
+                   }
+                   else{
+                        $t = $td;
+                   }
                 }
                 else{ //tomorrow
-                    $remainOrderTime = (22.5 - date('H',$room->nextDayUsingTime()) - $room->type/2.0) + (-date('H:i',$room->nextDayUsingTime()))/60;
-                    if($room->nextDayUsingTime() == 0)
+                    if($tm == -1)
                     {
-                        $t = strtotime(date('Y-M-d')) + $startBookTime + 86400;
-                        $i = 4;
-                    }
-                    else if($room->nextDayUsingTime() == -1){
                         $t = -1;
-                        $i = 2;
                     }
-                    else
-                    {
-                        $t = $room->nextDayUsingTime();
-                        $t = $t - $t % 1800 + 1800;
-                        $i = 5;
+                    else{
+                        $t = $tm;
                     }
 
                 }
-                if($remainOrderTime>2){
-                        $dt = 7200000;
-                        //$strdt = '2小时';
-                    }
-                    else if($remainOrderTime>1.5){
-                        $dt = 5400000;
-                        //$strdt = '1.5小时';
-                    }
-                    else if($remainOrderTime>1){
-                        $dt = 3600000;
-                        //$strdt = '1小时';
-                    }
-                    else{
-                        $dt = 1800000;
-                        //$strdt = '0.5小时';
-                    }
-                  
+                if($remainOrderTime>=2){
+                    $dt = 7200000;
+                    //$strdt = '2小时';
+                }
+                else if($remainOrderTime>=1.5){
+                    $dt = 5400000;
+                    //$strdt = '1.5小时';
+                }
+                else if($remainOrderTime>=1){
+                    $dt = 3600000;
+                    //$strdt = '1小时';
+                }
+                else{
+                    $dt = 0;
+                }
                 ?>
-               <!--i = {{$i}}-->
+
             {{date('j',$t) == date("j") ? '今天':'明天'}}({{date('n月j日',$t)}}) <span id="startTime" data-content="{{$t}}"></span>&nbsp;&nbsp;—&nbsp;&nbsp;<div style="float:right;" data-content="0" id="endTime" class="present noPicker">{{date('m:i',$dt)}}</div>
         </div>
         </div>
@@ -393,10 +367,9 @@
         <div id="roomId" data-content="{{$room->id}}"></div>
         <div id="exs" data-content="{{$olderOrder}}"></div>
         <div id="isUsing" data-content="{{$room->isUsing()}}"></div>
-        <div id="nextTime" data-content="{{$room->nextTime()}}"></div>
-        <div id="usingNight" data-content="{{$room->usingNight()}}"></div>
         <div id="roomType" data-content="{{$room->type}}"></div>
-        <div id="remainOrderTime" data-content="{{$remainOrderTime}}"></div>
+        <div id="todayNextTime" data-content = "{{$room->today_nextTime()}}"></div>
+        <div id="tomorrowNextTime" data-content = "{{$room->next_day_time()}}"></div>
     </div>
 @endsection
 @section('scripts')

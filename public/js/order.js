@@ -50,40 +50,6 @@ $(function() {
                 endTime = $("#endTime"),
                 remainOrderTime = $("#remainOrderTime"),
                 dateTime = $("#dateTime");
-            console.log(startTime.attr('data-content'));
-            //var startts = startTime.attr('data-content')*1000;
-            var startts = $("#nextTime").attr('data-content')*1000;
-            var isUsing = $("#isUsing").attr('data-content');
-            var usingNight = JSON.parse($("#usingNight").attr("data-content"));
-            if(startts == 0)
-            {
-                $("#useNight").click();
-                //updatePrice(1);
-                $("#useHour").parent().click(function(e){
-                    e.preventDefault();
-                    return false;
-                })
-                startts = new Date(dateFormat(new Date(), 'yyyy/mm/dd 00:00:00')).getTime();
-            }
-
-            var todayts, tomorrowts;
-            var selectedDay = todayts, selectedTime;
-            var istomorrow = false;
-            if(dateFormat(startts, 'dd') > dateFormat(new Date(), 'dd'))
-            {
-                istomorrow = true;
-            }
-
-            todayts = new Date(dateFormat(startts, 'yyyy/mm/dd 00:00:00')).getTime();
-            if(istomorrow)
-            {
-                todayts = todayts -24*60*60*1000;
-            }
-
-            tomorrowts = todayts + 24 * 60 * 60 * 1000;
-            console.log(istomorrow)
-            console.log(showHumanTime(startts));
-            console.log(showHumanTime(todayts));
 
             startTime.text(showHumanHour(startTime.attr('data-content')*1000));
             var room_type = $("#roomType").attr('data-content')*1.0;
@@ -120,89 +86,6 @@ $(function() {
             else
             {
                 updatePrice(0);
-            }
-
-            var daytime = [{
-                text: '今天',
-                value: 0,
-                sub: [
-                ]
-            },{
-                text: '明天',
-                value: 1,
-                sub: [
-
-                ]
-            }];
-            var weekday = [
-                '星期天',
-                '星期一',
-                '星期二',
-                '星期三',
-                '星期四',
-                '星期五',
-                '星期六'
-            ];
-            var date = [];
-            for(i = 0;i < 2; i++)
-            {
-                date[i] = {
-                    text: daytime[i].text + ' ' + dateFormat(todayts+i*24*60*60*1000,'mm月dd日'),
-                    value: i
-                };
-            }
-            console.log(startts);
-            for(i = 2;i < 7; i++)
-            {
-                temp = new Date(startts + i * 24*60*60*1000);
-
-                date[i] = {
-                    text: weekday[temp.getDay()] + ' ' + dateFormat(temp,'mm月dd日'),
-                    value: i
-                };
-                console.log(date[i]);
-            }
-
-            if(!istomorrow)
-            {
-                for(i = 0; i< 4; i++)
-                {
-                    temp = startts + i * 30*60*1000;
-                    if(dateFormat(temp, 'HH') > 22)
-                        break;
-                    daytime[0].sub[i+1] = {
-                        text: showHumanHour(temp),
-                        value: i * 30*60*1000
-                    };
-                }
-                for (i = 0; i< 4; i++)
-                {
-                    daytime[1].sub[i] = {
-                        text: showHumanHour(tomorrowts + (22 + i) * 30*60*1000),
-                        value: (22+i) * 30*60*1000
-                    }
-                }
-
-            }
-            else {
-                for(i = 0; i< 5; i++)
-                {
-                    temp = new Date('2000/01/01 20:00:00').getTime() + i * 30*60*1000;
-
-                    daytime[0].sub[i] = {
-                        text: showHumanHour(temp),
-                        value: i * 30*60*1000
-                    };
-                }
-                console.log(daytime);
-                for (i = 0; i< 4; i++)
-                {
-                    daytime[1].sub[i] = {
-                        text: showHumanHour(tomorrowts + (22 + i) * 30*60*1000),
-                        value: (22+i) * 30*60*1000
-                    }
-                }
-
             }
 
             var duration = [
@@ -318,29 +201,6 @@ $(function() {
                 }
             ];
 
-            function creatList(obj, list){
-                obj.forEach(function(item, index, arr){
-                    var temp = {};
-                    temp.text = item.text;
-                    temp.value = item.value;
-                    list.push(temp);
-                })
-            }
-            var day = [];
-            var time = [];
-
-            creatList(daytime, day);
-
-            creatList(daytime[istomorrow|0].sub, time);
-            console.log(day);
-            console.log(time);
-
-            var startPicker = new Picker({
-                data: [day, time],
-                selectedIndex: [istomorrow|0, 0],
-                title: '开始时间',
-                id: 'startPicker'
-            });
 
             //使用时长,因要处理尾单，生成多个picker
             var durationPicker = new Picker({
@@ -394,53 +254,6 @@ $(function() {
             });
             
 /******************************************/
-            var datePicker = new Picker({
-                data:[date],
-                selectedIndex: [isUsing|0],
-                title: '选择日期',
-                id:'datePicker'
-            });
-            console.log('isusing='+isUsing);
-
-            startPicker.on('picker.select', function (selectedVal, selectedIndex) {
-                var d = day[selectedIndex[0]].value;
-                selectedDay = d === 0 ? '今天' : '明天';
-                startTime.text(selectedDay + ' ' + time[selectedIndex[1]].text)
-                    .attr("data-content", (d===0 ? startts :tomorrowts) + time[selectedIndex[1]].value);
-
-                updateEndTime();
-            });
-            startPicker.on('picker.change', function (index, selectedIndex) {
-                if (index === 0){
-                    firstChange();
-                }
-
-                function firstChange() {
-                    time = [];
-                    checked = [];
-                    checked[0] = selectedIndex;
-                    var firstDay = daytime[selectedIndex];
-                    creatList(firstDay.sub, time);
-
-                    startPicker.refillColumn(1, time);
-                    if(selectedIndex != istomorrow)
-                    {
-                        $($("#startPicker ul")[1]).children().addClass('disable');
-                    }
-                    else
-                    {
-                        var lis = $($("#startPicker ul")[1]).children();
-                        for(i =2 ;i < lis.length;i++)
-                        {
-                            $(lis[i]).addClass('disable');
-                        }
-                    }
-                    startPicker.scrollColumn(1, 0);
-                }
-
-            });
-
-
 
             durationPicker.on('picker.select', function(selectedVal, selectedIndex){
                 durationTime.text(duration[selectedIndex[0]].text)
@@ -502,13 +315,6 @@ $(function() {
 /************************************************/
 
 
-
-            datePicker.on('picker.select', function (selectedVal, selectedIndex) {
-                dateTime.text(date[selectedIndex[0]].text.split(' ')[1])
-                    .attr('data-content', date[selectedIndex[0]].value);
-
-                updatePrice(1);
-            })
             function updateEndTime(){
                 //(istomorrow?'明天':'今天')+
                 endTime.text(dateFormat((+startTime.attr("data-content")*1000) + (+durationTime.attr("data-content")),
@@ -726,7 +532,7 @@ $(function() {
                     {
                         console.log(edSecondsInDay/3600);
                         alert('当日订单已满');
-                        window.location.href = window.location.href.replace('home','dayPage');
+                        window.location.href = '/home';
                     }
                         data = {
                             _token: $("meta[name='csrf-token']").attr('content'),
@@ -784,27 +590,6 @@ $(function() {
             });
 
 
-            // ******************************
-            //   disable date
-            for (i = 0; i < 7; i++)
-            {
-                //console.log('date='+dateFormat(startts + (i+1)*24*60*60*1000, 'yyyy-mm-dd 00:00:00'))
-                //console.log(usingNight.indexOf(dateFormat(todayts + (i+1)*24*60*60*1000, 'yyyy-mm-dd 00:00:00')))
-                if(usingNight.indexOf(dateFormat(todayts + (i+1)*24*60*60*1000, 'yyyy-mm-dd 00:00:00')) != -1)
-                {
-                    $("#datePicker [data-val='"+(i)+"']").addClass('disable');
-                }
-                else
-                {
-                    if(dateTime.text() == '')
-                    {
-                        dateTime.text(date[i].text.split(' ')[1])
-                            .attr('data-content', date[i].value);
-                        if($("#useNight").parent().hasClass('active'))
-                            updatePrice(1);
-                    }
-                }
-            }
 
                 var room_type = $("#roomType").attr('data-content')*1.0;
                 
@@ -818,21 +603,6 @@ $(function() {
                     break;
                 }
             }*/
-
-            // disable time
-            if(istomorrow)
-            {
-                $($("#startPicker [data-val='0']")[0]).addClass('disable');
-            }
-            else {
-                $($("#startPicker [data-val='1']")[0]).addClass('disable');
-            }
-
-            var lis = $($("#startPicker ul")[1]).children();
-            for(i =2 ;i < lis.length;i++)
-            {
-                $(lis[i]).addClass('disable');
-            }
 
 });
 
