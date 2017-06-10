@@ -145,7 +145,6 @@ function doLoop(){
                         }
                     });
                 }
-                    //window.location.href = 'result/0';
             }else{;}
             });
         });

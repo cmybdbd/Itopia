@@ -581,17 +581,10 @@ $(function() {
                     });
                 }
             }
-            else
-            {
-                ;
-            }
-    
-                    //window.location.href = 'result/0';
+            else{;}
             });
-
-
-
-                var room_type = $("#roomType").attr('data-content')*1.0;
+            
+            var room_type = $("#roomType").attr('data-content')*1.0;
                 
             /* disable duration
             for(i = 0;i < duration.length;i++)
