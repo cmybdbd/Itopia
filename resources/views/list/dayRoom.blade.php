@@ -38,7 +38,7 @@
                     <ul style="padding-left:0px; top:0px;">
                         <li><a id="dxy" class="font-xl"href="#">稻香园 <b class="m-color">0</b> 间</a></li>
                         <hr class="mysplit" style="margin:0px;">
-                        <li><a id="dhzy" class="font-xl"href="#">大河庄苑 <b class="m-color">8</b> 间</a></li>
+                        <li><a id="dhzy" class="font-xl"href="#">大河庄苑 <b class="m-color">4</b> 间</a></li>
                         <hr class="mysplit" style="margin:0px;">
                         <!--<li><a id="kyxq" class="font-xl"href="#">科育小区 <b class="m-color">0</b> 间</a></li>
                         <hr class="mysplit" style="margin:0px;">-->
@@ -257,6 +257,8 @@
 @section('scripts')
     <script src="{{url('js/jssor.slider.min.js')}}"></script>
     <script src="{{url('js/roomList.js')}}"></script>
-    <!--<script src="{{url('js/login.js')}}"></script>-->
+    <script>
+    alert('今日(6月10日)17:30-20:00为内测时间，请非测试人员不要下单，否则后果自负！ps:先前已下订单不受影响');
+    </script>
     <script src="{{url('js/dayRoomClick.js')}}"></script>
 @endsection

@@ -167,6 +167,7 @@
 @section('scripts')
     <script src="{{url('js/login.js')}}"></script>
     <script>
+    alert('今日(6月10日)17:30-20:00为内测时间，请非测试人员不要下单，否则后果自负！ps:先前已下订单不受影响');
     $("#equipment").on('click',function () {
         $(".equipment-content").modal('show');
     });

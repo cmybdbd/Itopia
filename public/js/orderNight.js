@@ -1,6 +1,6 @@
-    $(document).ready(function(){
-                timeCount($("#timeCount"));
-            });
+$(document).ready(function(){
+    timeCount($("#timeCount"));
+});
 
 var btn;
 var clock = '';
