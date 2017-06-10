@@ -74,8 +74,7 @@ function doLoop(){
             $("#toPay").on('click', function(){
                 if(checkToPay() && $("#toPay button").text()!= '下单中...')
                 {
-               var r=confirm("请主人再次确认您的订单：\n"++$('#roomTitle').attr('data-content')+'\n'+
-                showHumanTime(startTime.attr('data-content')*1000) + "-次日11:00\n提前24小时以上才可取消订单哟，主人确认支付吗")
+               var r=confirm("请主人再次确认您的订单：\n"+$('#roomTitle').attr('data-content')+'\n'+showHumanTime(startTime.attr('data-content')*1000) + "-次日11:00\n提前24小时以上才可取消订单哟，主人确认支付吗")
                 if (r==true)
                 {
                     //alert('系统维护中，请您明日再订~');
