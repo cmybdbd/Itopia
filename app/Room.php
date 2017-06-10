@@ -47,6 +47,7 @@ class Room extends Model
     }
     public function isUsing()
     {
+        /*
         $hour = date('H',time());
         if($hour <=  5 || $hour >= 22)
         {
@@ -55,7 +56,7 @@ class Room extends Model
         }
         else
         {
-            /*
+            
             if($hour < 11)
             {
                 $time =  strtotime(date('Y-m-d 00:00:00',time()))+11*60*60;
@@ -72,11 +73,11 @@ class Room extends Model
                 ['isDay', '=', 1],
                 ['state', '>=', Constant::$ORDER_STATE['UNPAY']],
             ])->get();
-*/
+
             //return count($used);
             $nextTime = $this->nextTime();
             return (date('m-d H',$nextTime) != date('m-d 11', time()) && ($nextTime - time())>= 30*60) || $nextTime == 0;
-        }
+        }*/
     }
     public function nextTime(){
         $nextTime = $this -> hasManyOrders()->where([
