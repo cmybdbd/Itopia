@@ -1,11 +1,7 @@
 @extends('layout.app')
 @section('content')
-    <div>
-        <div style="text-align:center">
-            订单后台页
-            <hr class="mysplit-color">
-        </div>
-
+        <div class="font-b" style="background-color:#eeeeee;width:100%;height: 44px;margin:0;display:flex;align-items: center;justify-content: center">订单后台</div>
+       
         <div>
             <div id="date" class="input-group date" style="float:left; padding-right:2em;">
                 <p class="input-group-addon" style="position: absolute;opacity:0">
@@ -82,7 +78,6 @@
 
             @endforeach
         </div>
-    </div>
 @endsection
 @section('style')
     <style>

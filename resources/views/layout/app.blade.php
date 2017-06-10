@@ -152,6 +152,17 @@
             border-color: #1dccb8;
         }
 
+        .btn-main-3{
+            color:white;
+            width: 72px;
+            font-size: 14px;
+            height:28px;
+            background-color: #1dccb8;
+            border-radius: 14px;
+            border-color: white;
+        }
+
+
         .mybtn-group{
             width: 99%;
             height: 12vh;
