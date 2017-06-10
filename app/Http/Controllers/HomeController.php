@@ -51,6 +51,30 @@ class HomeController extends Controller
         return view('list.nightRoom')->withRooms($rooms);
         //return view('list.nightRoom')->withRooms(Room::where('state','<>',0)->get());
     }
+    function dayPageLocation(Request $request)
+    {
+        $this->validate($request, [
+            'lo' => 'required',
+            'la' => 'required',
+        ]);
+        $rooms = Room::where('state','<>',0)->orderBy('state','ASC')->get();
+        $rooms = $this->arrayDaySort($rooms,0);
+        $rooms = $this->arrayLocationSort($rooms,$request->lo,$request->la);
+        return view('list.dayRoom')->withRooms($rooms);
+        //return view('list.dayRoom')->withRooms(Room::where('state','<>',0)->get());
+    }
+    function nightPageLocation(Request $request)
+    {
+        $this->validate($request, [
+            'lo' => 'required',
+            'la' => 'required',
+        ]);
+        $rooms = Room::where('state','<>',0)->orderBy('state','ASC')->get();
+        $rooms = $this->arrayNightSort($rooms,0);
+        $rooms = $this->arrayLocationSort($rooms,$request->lo,$request->la);
+        return view('list.nightRoom')->withRooms($rooms);
+        //return view('list.nightRoom')->withRooms(Room::where('state','<>',0)->get());
+    }
     function getDayRooms($name)
     {
         $rooms = Room::where('state','<>',0)->Where('parentId',$name)->orderBy('state','ASC')->get();
@@ -148,6 +172,41 @@ class HomeController extends Controller
                     $array_rooms[$j] = $tmp2;
                     $array_rooms[$j+1] = $tmp1;
                 }
+            }
+        }
+        return $array_rooms;
+    }
+
+    function arrayLocationSort($rooms,$lo,$la)
+    {
+        $array_rooms = array();
+        $i = 0;
+        foreach($rooms as $key => $room)
+        {
+            $array_rooms[$i] = $room;
+            $i++;
+        }
+        $number = $i;
+        for($i = 0;$i< $number;$i++)
+        {
+            for($j= 0;$j < $number -$i -1; $j++)
+            {
+                $tmp1 = $array_rooms[$j];
+                $tmp2 = $array_rooms[$j+1];
+                $lenth_11 = 0.76*111*abs($tmp1->longitude - $lo) * 0.76*111*abs($tmp1->longitude - $lo);
+                $lenth_12 = 111*abs($tmp1->latitude - $la) * 111*abs($tmp1->latitude - $la);
+                $lenth_21 = 0.76*111*abs($tmp2->longitude - $lo) * 0.76*111*abs($tmp2->longitude - $lo);
+                $lenth_22 = 111*abs($tmp2->latitude - $la) * 111*abs($tmp2->latitude - $la);
+                $lenth1 = $lenth_11 + $lenth_12;
+                $lenth2 = $lenth_21 + $lenth_22;
+
+                if($lenth1 > $lenth2)
+                {
+                    $array_rooms[$j] = $tmp2;
+                    $array_rooms[$j+1] = $tmp1;
+                    continue;
+                }
+                
             }
         }
         return $array_rooms;

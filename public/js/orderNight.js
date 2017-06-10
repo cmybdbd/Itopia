@@ -128,6 +128,7 @@ function doLoop(){
                         datatype: 'json',
                         success: function(param){
                             console.log(param);
+                            //alert(' ');
                             if(param['code'] == '200' && param['param']['code'] == 200)
                             {
                                 window.location.href = param['param']['content']['payUrl'];

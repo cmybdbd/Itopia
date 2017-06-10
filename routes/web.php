@@ -34,6 +34,8 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/dayPage','HomeController@dayPage');
     Route::get('/nightPage','HomeController@nightPage');
+    Route::get('/dayPageLocation','HomeController@dayPageLocation');
+    Route::get('/nightPageLocation','HomeController@nightPageLocation');
     Route::get('/getDayRooms/{name}','HomeController@getDayRooms');
     Route::get('/getNightRooms/{name}','HomeController@getNightRooms');
     Route::get('/create/{uid}/{rid}', 'OrderController@createOrder');
@@ -60,6 +62,7 @@ Route::group(['middleware' => 'auth'], function (){
 
     Route::post('/session/vcode','SMSController@storeCode');
     Route::post('/vcode/validate','SMSController@checkCode');
+    Route::post('/manage/fakeOrder','OrderController@fakeOrderCreate');
 
     Route::post('/updatePageView/{page}', 'PageViewController@updatePageView');
     Route::get('test',function(){
