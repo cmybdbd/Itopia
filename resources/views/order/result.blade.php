@@ -104,7 +104,7 @@
                     <img src="{{asset('storage/map/'.$order->hasRoom->parentId.'.jpg')}}" data-u="image" alt="" width="325px">
                 </div>
                 <div>
-                    @if ($order->hasRoom->parentId == 'dxz9')
+                    @if ($order->hasRoom->parentId == 'dhz9')
                     <img src="{{asset('storage/map/2.jpg')}}" data-u="image" alt="" width="325px">
                     @else
                     <img src="{{asset('storage/map/1.jpg')}}" data-u="image" alt="" width="325px">

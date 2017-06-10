@@ -524,36 +524,36 @@ $(function() {
                     tsum = durationTime.attr("data-content")/(3600*1000);
                     switch (tsum){
                         case 0.5:
-                            $("#realPrice").text("9.5");
-                            //$("#realPrice").text("0.01");
+                            //$("#realPrice").text("9.5");
+                            $("#realPrice").text("0.01");
                             break;
                         case 1:
-                            $("#realPrice").text("19");
-                            //$("#realPrice").text("0.01");
+                            //$("#realPrice").text("19");
+                            $("#realPrice").text("0.01");
                             break;
                         case 1.5:
-                            $("#realPrice").text("28.5");
-                            //$("#realPrice").text("0.01");
+                            //$("#realPrice").text("28.5");
+                            $("#realPrice").text("0.01");
                             break;
                         case 2:
-                            $("#realPrice").text("38");
-                            //$("#realPrice").text("0.01");
+                            //$("#realPrice").text("38");
+                            $("#realPrice").text("0.01");
                             break;
                         case 3:
-                            $("#realPrice").text("57");
-                            //$("#realPrice").text("0.01");
+                            //$("#realPrice").text("57");
+                            $("#realPrice").text("0.01");
                             break;
                         case 4:
-                            $("#realPrice").text("72");
-                            //$("#realPrice").text("0.01");
+                            //$("#realPrice").text("72");
+                            $("#realPrice").text("0.01");
                             break;
                         case 5:
-                            $("#realPrice").text("85");
-                            //$("#realPrice").text("0.01");
+                            //$("#realPrice").text("85");
+                            $("#realPrice").text("0.01");
                             break;
                         case 6:
-                            $("#realPrice").text("96");
-                            //$("#realPrice").text("0.01");
+                            //$("#realPrice").text("96");
+                            $("#realPrice").text("0.01");
                             break;
                         default:
                             $("#realPrice").text("0");
@@ -684,7 +684,7 @@ $(function() {
             $("#toPay").on('click', function(){
                 if(checkToPay() && $("#toPay button").text()!= '下单中...')
                 {
-                var r=confirm("时租一旦支付成功将无法取消哟，主人确认支付吗")
+                var r=confirm("请主人再次确认您的订单：\n"++"\n时租一旦支付成功将无法取消哟，主人确认支付吗")
                 if (r==true)
                 {
                     //alert('系统维护中，请您明日再订~');
