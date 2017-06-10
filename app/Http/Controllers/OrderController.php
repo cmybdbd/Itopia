@@ -549,7 +549,7 @@ class OrderController extends Controller
                 ['roomId','=', $request->roomId],
                 ['isDay', '=', 1],
                 ['state', '>=', Constant::$ORDER_STATE['COMPLETE']]
-            ])->where('endTime','>=',date("Y-m-d",$request->startTime+24*60*60*$request->day))->('endTime','<',date("Y-m-d",$request->startTime+24*60*60*($request->day+1)))->max('endTime'));
+            ])->where('endTime','>=',date("Y-m-d",$request->startTime+24*60*60*$request->day))->where('endTime','<',date("Y-m-d",$request->startTime+24*60*60*($request->day+1)))->max('endTime'));
 
             if(!empty($maxDayTime))
                 if($maxDayTime > strtotime(date('Y-m-d H:i:s', $request->startTime)))
@@ -576,7 +576,7 @@ class OrderController extends Controller
                 ['roomId','=', $request->roomId],
                 ['isDay', '=', 0],
                 ['state', '>=', Constant::$ORDER_STATE['COMPLETE']]
-            ])->where('startTime','>=',date("Y-m-d",$request->startTime+24*60*60*$request->day))->('startTime','<',date("Y-m-d",$request->startTime+24*60*60*($request->day+1)))->max('startTime'));
+            ])->where('startTime','>=',date("Y-m-d",$request->startTime+24*60*60*$request->day))->where('startTime','<',date("Y-m-d",$request->startTime+24*60*60*($request->day+1)))->max('startTime'));
             if(!empty($night))
                 return 'error';
 

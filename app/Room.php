@@ -110,7 +110,7 @@ class Room extends Model
             $time = time() - time()%(30*60) + 30*60;
             if($time <= $day_start_time)
                 return $day_start_time;
-            if($time >= $day_end_time)
+            if($time > $day_end_time)
                 return -1;
             return $time;
         }
