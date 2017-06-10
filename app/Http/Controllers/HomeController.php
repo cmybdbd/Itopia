@@ -39,28 +39,28 @@ class HomeController extends Controller
 
     function dayPage()
     {
-        $rooms = Room::where('state','<>',0)->get();
+        $rooms = Room::where('state','<>',0)->orderBy('state','ASC')->get();
         $rooms = $this->arrayDaySort($rooms,0);
         return view('list.dayRoom')->withRooms($rooms);
         //return view('list.dayRoom')->withRooms(Room::where('state','<>',0)->get());
     }
     function nightPage()
     {
-        $rooms = Room::where('state','<>',0)->get();
+        $rooms = Room::where('state','<>',0)->orderBy('state','ASC')->get();
         $rooms = $this->arrayNightSort($rooms,0);
         return view('list.nightRoom')->withRooms($rooms);
         //return view('list.nightRoom')->withRooms(Room::where('state','<>',0)->get());
     }
     function getDayRooms($name)
     {
-        $rooms = Room::where('state','<>',0)->Where('parentId',$name)->get();
+        $rooms = Room::where('state','<>',0)->Where('parentId',$name)->orderBy('state','ASC')->get();
         $rooms = $this->arrayDaySort($rooms,0);
         return view('list.dayRoom')->withRooms($rooms);
         //return view('list.dayRoom')->withRooms(Room::where('state','<>',0)->Where('parentId',$name)->get());
     }
     function getNightRooms($name)
     {
-        $rooms = Room::where('state','<>',0)->Where('parentId',$name)->get();
+        $rooms = Room::where('state','<>',0)->Where('parentId',$name)->orderBy('state','ASC')->get();
         $rooms = $this->arrayNightSort($rooms,0);
         return view('list.nightRoom')->withRooms($rooms);
         //return view('list.nightRoom')->withRooms(Room::where('state','<>',0)->Where('parentId',$name)->get());
@@ -107,17 +107,16 @@ class HomeController extends Controller
                     $time1 = $tmp1->nextDayUsingTime();
                     $time2 = $tmp2->nextDayUsingTime();
                 }
-                if($time1 == $time2)
+                if($time1 == $time2 && $time1 != 0)
                 {
-                    if($time1 == 0)
-                        if($tmp1->state > $tmp2->state)
-                        {
-                            $array_rooms[$j] = $tmp2;
-                            $array_rooms[$j+1] = $tmp1;
-                            continue;
-                        }
+                    if($tmp1->type > $tmp2->type)
+                    {
+                        $array_rooms[$j] = $tmp2;
+                        $array_rooms[$j+1] = $tmp1;
+                        continue;
+                    }
                 }
-                if($time1 == -1)
+                if($time1 == -1 && $time2 != -1)
                 {
                     $array_rooms[$j] = $tmp2;
                     $array_rooms[$j+1] = $tmp1;
