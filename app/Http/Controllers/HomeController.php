@@ -107,7 +107,7 @@ class HomeController extends Controller
                     $time1 = $tmp1->nextDayUsingTime();
                     $time2 = $tmp2->nextDayUsingTime();
                 }
-                if($time1 == $time2 && $time1 != 0)
+                if($time1 == $time2 && $time1 == 0)
                 {
                     if($tmp1->type > $tmp2->type)
                     {
