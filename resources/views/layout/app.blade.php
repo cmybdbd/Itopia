@@ -421,19 +421,22 @@
     $("#report").on('click',function () {
         $(".report-content").modal();
     });
+    if( $('#lng').attr('data-content',r.point.lng) == null || $('#lat').attr('data-content',r.point.lat) == null)
+    {
+        
     /*new BMap.LocalCity().get(function (r) { //定位城市  
         alert("当前定位城市:" + r.name);  
-    });*/  
-    new BMap.Geolocation().getCurrentPosition(function (r) { //定位位置  
-        if (this.getStatus() == BMAP_STATUS_SUCCESS) {
-            $('#lng').attr('data-content',r.point.lng);
-            $('#lat').attr('data-content',r.point.lat);
-            //alert('您的位置：' + r.point.lng + ',' + r.point.lat);  
-        }  
-        else {  
-            alert('failed' + this.getStatus());  
-        }  
-    }, { enableHighAccuracy: true })  
+    });*/
+        new BMap.Geolocation().getCurrentPosition(function (r) { //定位位置  
+            if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+                $('#lng').attr('data-content',r.point.lng);
+                $('#lat').attr('data-content',r.point.lat);
+                //alert('您的位置：' + r.point.lng + ',' + r.point.lat);  
+            }  
+            else {  
+                alert('failed' + this.getStatus());  
+            }  
+        }, { enableHighAccuracy: true })  
     //关于状态码  
     //BMAP_STATUS_SUCCESS   检索成功。对应数值“0”。  
     //BMAP_STATUS_CITY_LIST 城市列表。对应数值“1”。  
@@ -443,7 +446,8 @@
     //BMAP_STATUS_INVALID_REQUEST   非法请求。对应数值“5”。  
     //BMAP_STATUS_PERMISSION_DENIED 没有权限。对应数值“6”。(自 1.1 新增)  
     //BMAP_STATUS_SERVICE_UNAVAILABLE   服务不可用。对应数值“7”。(自 1.1 新增)  
-    //BMAP_STATUS_TIMEOUT   超时。对应数值“8”。(自 1.1 新增) 
+    //BMAP_STATUS_TIMEOUT   超时。对应数值“8”。(自 1.1 新增)
+    }
 </script>
 @yield('scripts')
 </body>

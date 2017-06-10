@@ -88,17 +88,16 @@
                                 $room_str = '可使用';
                             }
                         ?>
-                        <!--{{date("H")+date("i")/60}}
-                        A类房type1
+                        <!--
+                        {{date("H")+date("i")/60}}
                         {{(22.5 - $room->type/2.0)}}
                         {{(12 - $room->type/2.0)}}
-                        -->
+                         <p>Today {{date('n-H:i',$room->nextTime())}}</p>-->
+                        
                             <span id="roomState{{$room->state}}" data-content="{{$room_state>0 ? '1':'0'}}" class="room-state room-used {{$room_state>0 ? 'button-occupied':'button-available'}} font-s">
                                 {{$room_str}}
                             </span>
                         
-                        <!--
-                        <p>Today {{date('n-H:i',$room->nextTime())}}</p>-->
                        
                         <?php
                             $remainTime = (22.5 - date("H") - $room->type/2.0) + (-date("i"))/60; 
@@ -128,10 +127,10 @@
                                 @else
                                     @if ( date("H")+date("i")/60 >= (22 - $room->type/2.0))
                                         <span id="btn{{$room->state}}" data-content="0" class="room-state b-color font-s" style="float:right;">今日已约满</span>
-                                        <!--state 3-->
+                                        <!--state 1-1-->
                                     @else
                                         <span id="btn{{$room->state}}" data-content="1" class="room-state b-color font-s" style="float:right;">可预约<span name="timeS" class="m-color">{{date("H:i",$s)}}</span>使用</span>
-                                        <!--state 4-->
+                                        <!--state 0-1-->
                                     @endif
                                 
                                 @endif
@@ -143,24 +142,24 @@
                                 @else
                                     @if ( date("H")+date("i")/60 >= (22 - $room->type/2.0))
                                         <span id="btn{{$room->state}}" data-content="0" class="room-state b-color font-s" style="float:right;">今日已约满</span>
-                                        <!--state 3-->
+                                        <!--state 1-2-->
                                     @else
                                         <span id="btn{{$room->state}}" data-content="1" class="room-state b-color font-s" style="float:right;">可预约<span name="timeS" class="m-color">{{date("H:i",$s)}}</span>使用</span>
-                                        <!--state 4-->
+                                        <!--state 0-2-->
                                     @endif
                                 @endif
                             @endif
                         @elseif(date('H',$room->nextTime()) == 8)
                             @if($remainOrderTime>0.5)
                                 <span id="btn{{$room->state}}" data-content="1" class="room-state b-color font-s" style="float:right;">即时使用</span>
-                                <!--state 5-->
+                                <!--state 2-1-->
                             @else
                                 <span id="btn{{$room->state}}" data-content="0" class="room-state b-color font-s" style="float:right;">今日已约满</span>
-                                <!--state 6-->
+                                <!--state 1-3-->
                             @endif
                         @else
                                 <span id="btn{{$room->state}}" data-content="0" class="room-state b-color font-s" style="float:right;">今日已约满</span>
-                                <!--state 7-->
+                                <!--state 1-4-->
                         @endif
                         <div id="nexttime{{$room->state}}" data-content = "{{$room->nextTime()}}"></div>
                         <div id="nextdaytime{{$room->state}}" data-content = "{{$tomorrowTime}}"></div>

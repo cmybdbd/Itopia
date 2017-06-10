@@ -2,6 +2,7 @@ var dayShift = 0;
 var td = new Array(7);
 var tdbtn = new Array(7);
 var tdstate = new Array(7);
+var roomSum =10;
 $(function () {
 
     var jssor_1_SlideshowTransitions = [
@@ -73,7 +74,7 @@ $(function () {
         $("#useToday").addClass("nav-active");
         $("#useTomorrow").removeClass("nav-active");
         
-        for(var j=1;j<=6;j++)
+        for(var j=1;j<=roomSum;j++)
         {
              if(td[j]!=null){
                 str = $('#nextdaytime'+j).attr('data-content');
@@ -101,7 +102,7 @@ $(function () {
         $("#useTomorrow").addClass("nav-active");
         $("#useToday").removeClass("nav-active");
             
-        for(var j=1;j<=6;j++)
+        for(var j=1;j<=roomSum;j++)
         {
             //console.log('j ='+ j +  $('#nextdaytime'+j).attr('data-content'));
             ndt = $('#nextdaytime'+j).attr('data-content');
