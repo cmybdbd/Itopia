@@ -421,7 +421,7 @@
     $("#report").on('click',function () {
         $(".report-content").modal();
     });
-    if( $('#lng').attr('data-content',r.point.lng) == null || $('#lat').attr('data-content',r.point.lat) == null)
+    if( $('#lng').attr('data-content') == null || $('#lat').attr('data-content') == null)
     {
         
     /*new BMap.LocalCity().get(function (r) { //定位城市  
