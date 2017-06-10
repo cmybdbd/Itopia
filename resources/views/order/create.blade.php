@@ -161,9 +161,9 @@
                 -->
                 <?php
                 $td = $room->today_nextTime();
-                $tm = $room->tomorrowNextTime();
-                $remainTime = (22 - date("H") - $room->type/2.0) + (-date("i"))/60;
-                
+                $tm = $room->next_day_time();
+                $remainOrderTime = (22.5 - date('H',$room->nextUsingTime()) - $room->type/2.0) + (-date('H:i',$room->nextUsingTime()))/60; 
+
                 if($dayCount == 0)
                 {
                    if($td == -1)
@@ -184,24 +184,23 @@
                     }
 
                 }
-                if($remainOrderTime>2.5)
-                {
-                    ;
-                }
-                else if($remainOrderTime>2){
+                if($remainOrderTime>=2){
                     $dt = 7200000;
                     //$strdt = '2小时';
                 }
-                else if($remainOrderTime>1.5){
+                else if($remainOrderTime>=1.5){
                     $dt = 5400000;
                     //$strdt = '1.5小时';
                 }
-                else if($remainOrderTime>1){
+                else if($remainOrderTime>=1){
                     $dt = 3600000;
                     //$strdt = '1小时';
                 }
+                else{
+                    $dt = 0;
+                }
                 ?>
-                
+
             {{date('j',$t) == date("j") ? '今天':'明天'}}({{date('n月j日',$t)}}) <span id="startTime" data-content="{{$t}}"></span>&nbsp;&nbsp;—&nbsp;&nbsp;<div style="float:right;" data-content="0" id="endTime" class="present noPicker">{{date('m:i',$dt)}}</div>
         </div>
         </div>
