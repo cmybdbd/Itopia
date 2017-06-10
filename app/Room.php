@@ -91,9 +91,9 @@ class Room extends Model
     {
         $tmp = $this->nextUsingTime();
         $type = $this->type;
-        $day_start_time = strtotime(date('Y-m-d 11:00:00', time())) - $type/2*60*60;
-            //type A = 1 , 10:30 begin
-            //type B = 0 , 11:00 begin 
+        $day_start_time = strtotime(date('Y-m-d 12:00:00', time())) - $type/2*60*60;
+            //type A = 1 , 11:30 begin
+            //type B = 0 , 12:00 begin 
         $day_end_time = strtotime(date('Y-m-d 21:00:00', time())) - $type/2*60*60;
             //type A , 20:30 end
             //type B , 21:00 end
@@ -116,14 +116,14 @@ class Room extends Model
         }
 
         $next_time = $tmp - $tmp%(30*60) + 30*60;
-        if($next_time >= $day_end_time)
+        if($next_time > $day_end_time)
             return -1;
         if($next_time > time())
             return $next_time;
         else
         {
             $time = time() - time()%(30*60) + 30*60;
-            if($time >= $day_end_time)
+            if($time > $day_end_time)
                 return -1;
             return $time;
         }
@@ -134,9 +134,9 @@ class Room extends Model
     {
         $tmp = $this->nextDayUsingTime();
         $type = $this->type;
-        $day_start_time = strtotime(date('Y-m-d 11:00:00', time() + 24*60*60)) - $type/2*60*60;
-            //type A = 1 , 10:30 begin
-            //type B = 0 , 11:00 begin 
+        $day_start_time = strtotime(date('Y-m-d 12:00:00', time() + 24*60*60)) - $type/2*60*60;
+            //type A = 1 , 11:30 begin
+            //type B = 0 , 12:00 begin 
         $day_end_time = strtotime(date('Y-m-d 21:00:00', time() + 24*60*60)) - $type/2*60*60;
             //type A , 20:30 end
             //type B , 21:00 end
@@ -151,7 +151,7 @@ class Room extends Model
         }
 
         $next_time = $tmp - $tmp%(30*60) + 30*60;
-        if($next_time >= $day_end_time)
+        if($next_time > $day_end_time)
             return -1;
         return $next_time;
     }
