@@ -211,7 +211,7 @@ $(function () {
         window.location.href='/getNightRooms/dxy';
     });
     $("#dhzy").on('click',function () {
-        window.location.replace('/getDayRooms/dhz9');
+        window.location.href='/getNightRooms/dhz9';
     });
     $("#kyxq").on('click',function () {
         window.location.href='/getNightRooms/kyxq';

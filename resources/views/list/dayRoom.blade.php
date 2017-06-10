@@ -150,7 +150,7 @@
                                 @endif
                             @endif
                         @elseif(date('H',$room->nextTime()) == 8)
-                            @if($remainOrderTime>0.5)
+                            @if($remainOrderTime>=0.5)
                                 <span id="btn{{$room->state}}" data-content="1" class="room-state b-color font-s" style="float:right;">即时使用</span>
                                 <!--state 2-1-->
                             @else
