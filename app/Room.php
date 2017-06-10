@@ -123,7 +123,7 @@ class Room extends Model
         {
             $nextTime = strtotime($nextTime) + 30 * 60;
         }
-        $tmptime = strtotime(date('Y-m-d 20:00:00', time()+24*60*60));
+        $tmptime = strtotime(date('Y-m-d 22:00:00', time()+24*60*60 - $this->type/2*60*60));
         if($nextTime > $tmptime) 
             return -1;
         else 
