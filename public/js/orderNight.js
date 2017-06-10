@@ -109,7 +109,7 @@ function doLoop(){
                             'startTime': st,
                             'endTime'  : ed,
                             'duration' : 12,//+durationTime.attr('data-content')/3600000,
-                            'price'   : 0.01,//+($('#totalPrice').text()),
+                            'price'   : 179,//+($('#totalPrice').text()),
                             'date'     : dt|0,
                             'isDay'    : 0
                         };
