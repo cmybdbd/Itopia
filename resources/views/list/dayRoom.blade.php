@@ -122,15 +122,15 @@
                         @if(date('H',$room->nextTime()) != 8 && $remainOrderTime > 0.5)
                             @if($room->isUsing())
                                 @if( date("H")+date("i")/60 < (22 - $room->type/2.0) && date("H")+date("i")/60 > (12 - $room->type/2.0))
-                                <span id="btn{{$room->state}}" data-content="1" class="room-state b-color font-s" style="float:right;">可预约<span name="timeS" class="m-color">{{date("H:i",$s)}}</span>使用</span>
-                                <!--state 0-->
+                                <span id="btn{{$room->state}}" data-content="1" class="room-state b-color font-s" style="float:right;">可预约<span name="timeS" class="m-color">{{date("H:i",$s-1800*(1-$room->type))}}</span>使用</span>
+                                <!--state 0-1-->
                                 @else
                                     @if ( date("H")+date("i")/60 >= (22 - $room->type/2.0))
                                         <span id="btn{{$room->state}}" data-content="0" class="room-state b-color font-s" style="float:right;">今日已约满</span>
                                         <!--state 1-1-->
                                     @else
                                         <span id="btn{{$room->state}}" data-content="1" class="room-state b-color font-s" style="float:right;">可预约<span name="timeS" class="m-color">{{date("H:i",$s)}}</span>使用</span>
-                                        <!--state 0-1-->
+                                        <!--state 0-2-->
                                     @endif
                                 
                                 @endif
@@ -145,7 +145,7 @@
                                         <!--state 1-2-->
                                     @else
                                         <span id="btn{{$room->state}}" data-content="1" class="room-state b-color font-s" style="float:right;">可预约<span name="timeS" class="m-color">{{date("H:i",$s)}}</span>使用</span>
-                                        <!--state 0-2-->
+                                        <!--state 0-3-->
                                     @endif
                                 @endif
                             @endif
