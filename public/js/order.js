@@ -328,36 +328,28 @@ $(function() {
                     tsum = durationTime.attr("data-content")/(3600*1000);
                     switch (tsum){
                         case 0.5:
-                            //$("#realPrice").text("9.5");
-                            $("#realPrice").text("0.01");
+                            $("#realPrice").text("9.5");
                             break;
                         case 1:
-                            //$("#realPrice").text("19");
-                            $("#realPrice").text("0.01");
+                            $("#realPrice").text("19");
                             break;
                         case 1.5:
-                            //$("#realPrice").text("28.5");
-                            $("#realPrice").text("0.01");
+                            $("#realPrice").text("28.5");
                             break;
                         case 2:
-                            //$("#realPrice").text("38");
-                            $("#realPrice").text("0.01");
+                            $("#realPrice").text("38");
                             break;
                         case 3:
-                            //$("#realPrice").text("57");
-                            $("#realPrice").text("0.01");
+                            $("#realPrice").text("57");
                             break;
                         case 4:
-                            //$("#realPrice").text("72");
-                            $("#realPrice").text("0.01");
+                            $("#realPrice").text("72");
                             break;
                         case 5:
-                            //$("#realPrice").text("85");
-                            $("#realPrice").text("0.01");
+                            $("#realPrice").text("85");
                             break;
                         case 6:
-                            //$("#realPrice").text("96");
-                            $("#realPrice").text("0.01");
+                            $("#realPrice").text("96");
                             break;
                         default:
                             $("#realPrice").text("0");
