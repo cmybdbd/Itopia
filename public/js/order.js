@@ -693,7 +693,7 @@ $(function() {
                     // day
                     var dayShift = document.URL[document.URL.length-1];
                     var st,ed,dt;
-                    if(!isNaN(dayShift))
+                    /*if(!isNaN(dayShift))
                     {
                         st = startTime.attr('data-content')*1.0 + dayShift*86400;
                         ed = endTime.attr('data-content')/1000 + dayShift*86400;
@@ -703,8 +703,11 @@ $(function() {
                         st = $("#startTime").attr('data-content')*1.0;
                         ed = $("#endTime").attr('data-content')*1.0;
                         dt = temptime/1000;
-                    }
-                
+                    }*/
+                    st = startTime.attr('data-content')*1.0;
+                    ed = endTime.attr('data-content')/1000;
+                    dt = temptime/1000;
+
                     var stSecondsInDay = (st - 57600) % 86400;
                     var edSecondsInDay = (ed - 57600) % 86400;
 
