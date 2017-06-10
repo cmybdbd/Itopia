@@ -684,7 +684,8 @@ $(function() {
             $("#toPay").on('click', function(){
                 if(checkToPay() && $("#toPay button").text()!= '下单中...')
                 {
-                var r=confirm("请主人再次确认您的订单：\n"+showHumanTime(startTime.attr('data-content')*1000) + '-' +showHumanHour(endTime.attr('data-content')*1.0)+"\n时租一旦支付成功将无法取消哟，主人确认支付吗")
+                var r=confirm("请主人再次确认您的订单：\n"+$('#roomTitle').attr('data-content')+'\n'+
+                    showHumanTime(startTime.attr('data-content')*1000) + '-' +showHumanHour(endTime.attr('data-content')*1.0)+"\n时租一旦支付成功将无法取消哟，主人确认支付吗")
                 if (r==true)
                 {
                     //alert('系统维护中，请您明日再订~');

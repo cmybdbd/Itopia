@@ -126,7 +126,7 @@
     <div class="font-l"
              style="background-color:#eeeeee;width:100%;height: 44px;margin:0;display:flex;align-items: center;justify-content: center">填写订单</div>
     <div class="mybox" style="box-shadow:none;">
-        <div class="f-color font-l">
+        <div class="f-color font-l" id="roomTitle" data-content="{{$room->title}}">
             {{$room->title}}
         </div>
         <div class="b-color">
