@@ -88,13 +88,12 @@
                                 $room_str = '可使用';
                             }
                         ?>
-                        
+                        <!--
                         {{date("H")+date("i")/60}}
                         {{(22.5 - $room->type/2.0)}}
-                        {{(12 - $room->type/2.0)}}
-
+                        {{$room->nextDayUsingTime()}}
                          <p>Today {{date('n-H:i',$room->nextUsingTime())}}</p>
-                        
+                        -->
                             <span id="roomState{{$room->state}}" data-content="{{$room_state>0 ? '1':'0'}}" class="room-state room-used {{$room_state>0 ? 'button-occupied':'button-available'}} font-s">
                                 {{$room_str}}
                             </span>
@@ -106,13 +105,6 @@
                             if(date('H',$room->nextUsingTime())>12)
                                 $s = $s + 1800;
                             $remainOrderTime = (22 - date('H',$room->nextUsingTime()) - $room->type/2.0) + (-date('H:i',$room->nextUsingTime()))/60;
-
-                            if($room->nextDayUsingTime() == 0)
-                                $tomorrowTime = $room->type==1 ? '11:30':'12:00';
-                            else if ($room->nextDayUsingTime() == -1)
-                                $tomorrowTime = -1;
-                            else
-                                $tomorrowTime = date("H:i",$room->nextDayUsingTime());
                         ?>
                         
                     
@@ -162,7 +154,7 @@
                         
                         @endif
                         <div id="nextUsingTime{{$room->state}}" data-content = "{{$room->nextUsingTime()}}"></div>
-                        <div id="nextdaytime{{$room->state}}" data-content = "{{$tomorrowTime}}"></div>
+                        <div id="nextdaytime{{$room->state}}" data-content = "{{$room->nextDayUsingTime()}}"></div>
                         <div id="remaintime{{$room->state}}" data-content = "{{$remainTime}}"></div>
                         <div id="remainordertime{{$room->state}}" data-content = "{{$remainOrderTime}}"></div>
                         <div id="roomtype{{$room->state}}" data-content = "{{$room->type}}"></div>
@@ -258,7 +250,7 @@
     <script src="{{url('js/jssor.slider.min.js')}}"></script>
     <script src="{{url('js/roomList.js')}}"></script>
     <script>
-    alert('今日(6月10日)17:30-20:00为内测时间，请非测试人员不要下单，否则后果自负！ps:先前已下订单不受影响');
+    alert('今日(6月10日)17:30-22:00为内测时间，请非测试人员不要下单，否则后果自负！ps:先前已下订单不受影响');
     </script>
     <script src="{{url('js/dayRoomClick.js')}}"></script>
 @endsection
