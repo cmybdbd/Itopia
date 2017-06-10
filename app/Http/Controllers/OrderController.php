@@ -215,10 +215,7 @@ class OrderController extends Controller
         }
         else
         {
-            if($day == 0)
-                $dayTime = strtotime(date("Y-m-d H:i:s",time()));
-            else
-                $dayTime = 0;
+            $dayTime = 0;
         }
         if(!empty($maxNightTime))
         {
