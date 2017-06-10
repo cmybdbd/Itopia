@@ -312,14 +312,10 @@
     <div id="param">
         <div id="startTime" data-content="{{$stTime}}"></div>
         <div id="endTime1" data-content="{{$edTime}}"></div>
-        <div id="durationTime" data-content="12*3600"></div>
         <div id="nightPrice" data-content="{{$room->nightPrice}}"></div>
         <div id="userId" data-content="{{\Illuminate\Support\Facades\Auth::id()}}"></div>
         <div id="roomId" data-content="{{$room->id}}"></div>
         <div id="exs" data-content="{{$olderOrder}}"></div>
-        <div id="isUsing" data-content="{{$room->isUsing()}}"></div>
-        <div id="nextTime" data-content="{{$room->nextTime()}}"></div>
-        <div id="usingNight" data-content="{{$room->usingNight()}}"></div>
     </div>
 @endsection
 @section('scripts')
