@@ -111,15 +111,29 @@ $(function () {
             td[j] = document.getElementById('btn'+j).innerHTML;
             tdbtn[j] =  $('#btn' + j).attr('data-content');
             tdstate[j] = document.getElementById('roomState'+j).innerHTML; 
-            
-            tmp = '可预约<span name="timeS" class="m-color">明天'+ ndt +'</span>使用';
-            document.getElementById('btn'+j).innerHTML = tmp;
-            if(ndt!='-1')
-            {   t=ndt.split(":");
+            var tmp;   
+
+            if(ndt =='0')
+            {
+                a = 11.5 + tp * 0.5;
+                if(tp == '1')
+                    tmp = '可预约<span name="timeS" class="m-color">明日11:30</span>使用';
+                else
+                    tmp = '可预约<span name="timeS" class="m-color">明日12:00</span>使用';
+            }
+            else if(ndt!='-1')
+            {
+                ndt = dateFormat(ndt*1000,'HH:MM');
+                console.log(ndt);
+                t=ndt.split(":");
                 a = t[0]*1.0 + t[1]/60;
+                tmp = '可预约<span name="timeS" class="m-color">明日'+t[0]+':'+t[1]+'</span>使用';
             }
             else
                 a=25;
+
+            document.getElementById('btn'+j).innerHTML = tmp;
+            
             if(a<=21.5-tp/2.0){
                 $('#roomState'+j).addClass('button-available');
                 $('#roomState'+j).removeClass('button-occupied');

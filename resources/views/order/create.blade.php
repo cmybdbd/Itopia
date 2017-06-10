@@ -151,96 +151,82 @@
         <div class="mybox selectPanel font-m" style="box-shadow:none;padding-bottom:12px;">
             时间
             <div class="m-color" style="float:right;margin-left:15%;">
-                <span>nextUseTime={{date('d-H:i',$room->nextDayUsingTime())}}</span>
+                <!--<span>nextDayTime={{date('d-H:i',$room->nextDayUsingTime())}}</span>
                 <br>
-                <span>nextTime= {{date('d-H:i',$room->nextTime())}}</span>
+                <span>nextTime= {{date('d-H:i',$room->nextUsingTime())}}</span>
                 <br>
-                <span>startDayTime={{date('d-H:i',$startDayTime)}}</span>
+                <span>date={{date('Y-M-d-H:i')}}</span>
+                <br>
+                {{$room->type/2.0}}
+                -->
                 <?php
-                $remainTime = (22.5 - date("H") - $room->type/2.0) + (-date("i"))/60; 
-                $remainOrderTime = (22.5 - date('H',$room->nextTime()) - $room->type/2.0) + (-date('H=i',$room->nextTime()))/60;
-                if($startDayTime %86400 == 0)
-                    $startDayTime = strtotime(date("Y-n-d")) + (11.5 + $room->type/2.0) * 3600 + 86400; //start time
-
-                if($dayCount==0)
+                $remainTime = (22.5 - date("H") - $room->type/2.0) + (-date("i"))/60;
+                $startBookTime = (12 - $room->type/2.0) * 3600;
+                if($dayCount == 0)
                 {
-                if(date('H',$room->nextTime()) != 8 && $remainOrderTime > 0.5)
-                {
-                        if( date("H")+date("i")/60 < (22 - $room->type/2.0) && date("H")+date("i")/60 >= (12 - $room->type/2.0))
-                        {
-                            $i = 1;
-                            $t =  $startDayTime;
-                            if($startDayTime>12- $room->type/2.0)
-                                $t = $t+1800;
-                        }
-                        //从第二天开始订
-                        else{
-                            $i = 2;
-                            $t = $room->nextTime() - $room->type/2.0 * 3600;
-                            if(date('H',$room->nextTime())>12)
-                                $t = $t + 1800;
-                        }     
-                }           
-                else if(date('H',$room->nextTime()) == 8){
-                    if($remainTime>0.5)
+                    $remainOrderTime = (22.5 - date('H',$room->nextUsingTime()) - $room->type/2.0) + (-date('H:i',$room->nextUsingTime()))/60; 
+                    if($room->nextUsingTime() == 0)
                     {
-                        $i = 3;
-                        $t = $startDayTime + 1800;
-                    }else{
+                        $t = strtotime(date('Y-M-d')) + $startBookTime;
+                        $i = 1;
+                    }
+                    else if($room->nextUsingTime() == -1){
+                        $t = -1;
+                        $i = 2;
+                    }
+                    else
+                    {
+                        if($room->nextUsingTime() > time())
+                        {
+                            $t = $room->nextUsingTime();
+                            $t = $t - $t % 1800 + 1800;
+                            $i = 3;
+                        }
+                        else{
+                            $t = time();
+                            $t = $t - $t % 1800 + 1800;
+                            $i = 6;
+                        }
+                    }
+                }
+                else{ //tomorrow
+                    $remainOrderTime = (22.5 - date('H',$room->nextDayUsingTime()) - $room->type/2.0) + (-date('H:i',$room->nextDayUsingTime()))/60;
+                    if($room->nextDayUsingTime() == 0)
+                    {
+                        $t = strtotime(date('Y-M-d')) + $startBookTime + 86400;
                         $i = 4;
-                        $t = $startDayTime - ($startDayTime - 57600)% 86400 + 86400 + (12 - $room->type/2.0) * 3600;
                     }
-                }else{
-                    if ($room->nextDayUsingTime() == 0){
-                        $i = 5;
-                        $t = $startDayTime - ($startDayTime - 57600)% 86400 + 86400 + (12 - $room->type/2.0) * 3600;
-                    }elseif ($room->nextDayUsingTime() == -1)
-                    {   
-                        $i = 6; 
-                        $t=-1;
-                    }else{
-                        $i = 7;
-                        $t = $startDayTime - ($startDayTime - 57600)% 86400 + 86400 + $room->nextDayUsingTime()*3600;
-                    }                                
-                }
-                }
-                else{//tomorrow
-                    if ($room->nextDayUsingTime() == 0){
-                        $i = 5;
-                        $t = $startDayTime - ($startDayTime - 57600)% 86400+ (12 - $room->type/2.0) * 3600;
-                    }elseif ($room->nextDayUsingTime() == -1)
-                    {   
-                        $i = 6; 
-                        $t=-1;
-                    }else{
-                        $i = 7;
+                    else if($room->nextDayUsingTime() == -1){
+                        $t = -1;
+                        $i = 2;
+                    }
+                    else
+                    {
                         $t = $room->nextDayUsingTime();
+                        $t = $t - $t % 1800 + 1800;
+                        $i = 5;
                     }
+
                 }
-
-                $t = $t - $t % 1800;
-
                 if($remainOrderTime>2){
-                    $dt = 7200000;
-                    //$strdt = '2小时';
+                        $dt = 7200000;
+                        //$strdt = '2小时';
                     }
                     else if($remainOrderTime>1.5){
                         $dt = 5400000;
                         //$strdt = '1.5小时';
                     }
-                    else if($remainOrderTime<1.5){
+                    else if($remainOrderTime>1){
                         $dt = 3600000;
                         //$strdt = '1小时';
                     }
-                    else if($remainOrderTime<2){
+                    else{
                         $dt = 1800000;
                         //$strdt = '0.5小时';
                     }
-                    else{
-                        ;    
-                    }
+                  
                 ?>
-                <!--i = {{$i}}-->
+               <!--i = {{$i}}-->
             {{date('j',$t) == date("j") ? '今天':'明天'}}({{date('n月j日',$t)}}) <span id="startTime" data-content="{{$t}}"></span>&nbsp;&nbsp;—&nbsp;&nbsp;<div style="float:right;" data-content="0" id="endTime" class="present noPicker">{{date('m:i',$dt)}}</div>
         </div>
         </div>

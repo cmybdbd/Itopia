@@ -88,20 +88,16 @@ $(function() {
             startTime.text(showHumanHour(startTime.attr('data-content')*1000));
             var room_type = $("#roomType").attr('data-content')*1.0;
             if(room_type==1)
-                endstr="10:30";
+                endstr="10:00";
             else
-                endstr="11:00"
+                endstr="10:30"
             console.log(startTime.attr("data-content"));
                 //.attr("data-content", startts);
 
                 t = remainOrderTime.attr('data-content');
-                if(t<0.5){
-                    console.log('???');
-                    }
-                else if(t<1){
-                        remainOrderTime.attr('data-content', '1800000');
-                        endTime.text(endstr);
-                    }
+                if(t<1){
+                    ;
+                }
                 else if(t<1.5){
                         remainOrderTime.attr('data-content', '3600000');
                         endTime.text(endstr);
@@ -353,12 +349,13 @@ $(function() {
                 title: '',
                 id: 'durationPicker'
             });
+            /*
             var durationPickerh5 = new Picker({
                 data: [durationh5],
                 selectIndex: [0],
                 title: '',
                 id: 'durationPickerh5'
-            });
+            });*/
             var durationPicker1h = new Picker({
                 data: [duration1h],
                 selectIndex: [0],
@@ -452,13 +449,14 @@ $(function() {
                 updateEndTime();
                 updatePrice(0);
             });
+            /*
             durationPickerh5.on('picker.select', function(selectedVal, selectedIndex){
                 durationTime.text(durationh5[selectedIndex[0]].text)
                     .attr('data-content', durationh5[selectedIndex[0]].value);
 
                 updateEndTime();
                 updatePrice(0);
-            });
+            });*/
             durationPicker1h.on('picker.select', function(selectedVal, selectedIndex){
                 durationTime.text(duration1h[selectedIndex[0]].text)
                     .attr('data-content', duration1h[selectedIndex[0]].value);
@@ -599,9 +597,11 @@ $(function() {
                         //window.location.href = window.location.href.replace('home','nightPage');
                     //}
                      if(timeR<1){
-                        $('#durationTime').attr('data-content',1800000);
+                        alert('亲，今天的日间房已经来不及定了哦，请看看包夜吧1');
+                        window.location.href = window.location.href.replace('home','nightPage');
+                        /*$('#durationTime').attr('data-content',1800000);
                         $('#durationTime').text('0.5小时');
-                        durationPickerh5.show();
+                        durationPickerh5.show();*/
                     }
                     else if(timeR<1.5){
                         $('#durationTime').attr('data-content',3600000);
