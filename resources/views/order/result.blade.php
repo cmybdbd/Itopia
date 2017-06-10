@@ -250,14 +250,6 @@
             $(window).bind("resize", ScaleSlider);
             $(window).bind("orientationchange", ScaleSlider);
 
-
-            /*map init*/
-var map = new AMap.Map('container',{
-   zoom: 14,
-   center: [116.327000,39.991000]
-});
-
-
             var gatepwd = $(".gatepwd>.pwd-group");
             var roompwd = $(".roompwd>.pwd-group");
             var gatepass =$("#gatepass").attr("data-content");
