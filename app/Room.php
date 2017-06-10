@@ -142,13 +142,8 @@ class Room extends Model
         }
         else
         {
-            $nextTime = strtotime($nextTime) + 30 * 60;
+            $nextTime = strtotime($nextTime);
         }
-        $tmptime = strtotime(date('Y-m-d 20:00:00', time()));
-        if($nextTime > $tmptime) 
-            return -1;
-        else 
-            return $nextTime;
-        return 0;
+        return $nextTime;
     }
 }
