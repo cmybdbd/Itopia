@@ -170,6 +170,8 @@
                         {
                             $i = 1;
                             $t =  $startDayTime;
+                            if($startDayTime>12- $room->type/2.0)
+                                $t = $t+1800;
                         }
                         //从第二天开始订
                         else{
