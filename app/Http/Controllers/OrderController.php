@@ -132,28 +132,6 @@ class OrderController extends Controller
     function test()
     {
         $rid = 'ae50f8da-225e-11e7-b33b-00163e028924';
-        /*
-        $rid = 'ae50f8da-225e-11e7-a09c-03163e028801';
-        $night = Order::where([
-            ['isDay' , '=', 0],
-            ['state', '>=', Constant::$ORDER_STATE['UNPAY']],
-            ['state', "<", Constant::$ORDER_STATE['HISTORY']]
-        ])->where('startTime','>=',date('Y-m-d 00:00:00', time()+24*60*60*0) )->where('startTime','<=',date('Y-m-d 23:30:00', time()+24*60*60*0) )->max('startTime');
-        if(empty($night))
-            return 0;
-        else
-            return 1;
-
-        $night = Order::where([
-            ['roomId','=', $rid],
-            ['isDay' , '=', 0],
-            ['state', '>=', Constant::$ORDER_STATE['UNPAY']],
-            ['state', "<", Constant::$ORDER_STATE['HISTORY']]
-        ])->where('startTime','>=',date('Y-m-d 00:00:00', time()+24*60*60*0) )->where('startTime','<=',date('Y-m-d 23:00:00', time()+24*60*60*0) )->max('startTime');
-        if(empty($night))
-            return date('Y-m-d 00:00:00', time()+24*60*60*0);
-        else
-            return $night;*/
         $day = 0;
         $maxDayTime = strtotime(Order::where([
             ['roomId','=', $rid],
@@ -548,5 +526,77 @@ class OrderController extends Controller
             }
         }
         return $array_orders;
+    }
+
+
+
+    function fakeOrderCreate(Request $request)
+    {
+        $this->validate($request, [
+            'roomId' => 'required',
+            'date' => 'required',
+            'startTime' => 'required',
+            'endTime' => 'required',
+            'duration' => 'required',
+            'isDay'  => 'required',
+            'day' => 'required'
+        ]);
+
+        $order = Uuid::generate()->string;
+        if($request->isDay)
+        {
+            $maxDayTime = strtotime(Order::where([
+                ['roomId','=', $request->roomId],
+                ['isDay', '=', 1],
+                ['state', '>=', Constant::$ORDER_STATE['COMPLETE']]
+            ])->where('endTime','>=',date("Y-m-d",$request->startTime+24*60*60*$request->day))->('endTime','<',date("Y-m-d",$request->startTime+24*60*60*($request->day+1)))->max('endTime'));
+
+            if(!empty($maxDayTime))
+                if($maxDayTime > strtotime(date('Y-m-d H:i:s', $request->startTime)))
+                    return 'error';
+            $fake_order = new Order();
+            $fake_order->userId = '0000';
+            $fake_order->roomId = $request->roomId;
+            $fake_order->startTime = $request->startTime;
+            $fake_order->endTime = $request->endTime;
+            $fake_order->duration = $request->duration;
+            $fake_order->isDay = $request->isDay;
+            $fake_order->state = $request->state;
+            $fake_order->payNum = '{"tenantId":"11","tenantOrder":"86886010-4dc6-11e7-b30f-2bc8b6b87266","cardno":"****","bank_name":"****","amount":"0.01","transDate":"2017-06-10 18:21:17","resultCode":"SUCCESS","orderno":"2017061001933649843"}';
+            $fake_order->updated_at = date('Y-m-d H:i:s', time());
+            $fake_order->created_at = date('Y-m-d H:i:s', time());
+            if($fake_order->save())
+                return 'success';
+            else
+                return 'error';
+        }
+        else
+        {
+            $night = strtotime(Order::where([
+                ['roomId','=', $request->roomId],
+                ['isDay', '=', 0],
+                ['state', '>=', Constant::$ORDER_STATE['COMPLETE']]
+            ])->where('startTime','>=',date("Y-m-d",$request->startTime+24*60*60*$request->day))->('startTime','<',date("Y-m-d",$request->startTime+24*60*60*($request->day+1)))->max('startTime'));
+            if(!empty($night))
+                return 'error';
+
+            $fake_order = new Order();
+            $fake_order->userId = '0000';
+            $fake_order->roomId = $request->roomId;
+            $fake_order->startTime = $request->startTime;
+            $fake_order->endTime = $request->endTime;
+            $fake_order->duration = $request->duration;
+            $fake_order->isDay = $request->isDay;
+            $fake_order->state = $request->state;
+            $fake_order->payNum = '{"tenantId":"11","tenantOrder":"86886010-4dc6-11e7-b30f-2bc8b6b87266","cardno":"****","bank_name":"****","amount":"0.01","transDate":"2017-06-10 18:21:17","resultCode":"SUCCESS","orderno":"2017061001933649843"}';
+            $fake_order->updated_at = date('Y-m-d H:i:s', time());
+            $fake_order->created_at = date('Y-m-d H:i:s', time());
+
+            if($fake_order->save())
+                return 'success';
+            else
+                return 'error';
+        }
+
     }
 }

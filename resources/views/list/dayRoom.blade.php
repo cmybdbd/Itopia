@@ -88,10 +88,13 @@
                                 $room_str = '可使用';
                             }
                         ?>
-                        <!--
+                        
                         {{date("H")+date("i")/60}}
                         {{(22.5 - $room->type/2.0)}}
                         {{$room->nextDayUsingTime()}}
+                        "today "{{date('Y-m-d H:i:s',$room->today_nextTime())}}" "
+                        "nextday "{{date('Y-m-d H:i:s',$room->next_day_time())}}" "
+                        "nextday "{{date('Y-m-d H:i:s',$room->nextDayUsingTime())}}" "
                          <p>Today {{date('n-H:i',$room->nextUsingTime())}}</p>
                         -->
                             <span id="roomState{{$room->state}}" data-content="{{$room_state>0 ? '1':'0'}}" class="room-state room-used {{$room_state>0 ? 'button-occupied':'button-available'}} font-s">

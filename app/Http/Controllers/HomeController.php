@@ -99,23 +99,15 @@ class HomeController extends Controller
                 $time2 = 0;
                 if($day == 0)
                 {
-                    $time1 = $tmp1->nextUsingTime();
-                    $time2 = $tmp2->nextUsingTime();
+                    $time1 = $tmp1->today_nextTime();
+                    $time2 = $tmp2->today_nextTime();
                 }
                 else
                 {
-                    $time1 = $tmp1->nextDayUsingTime();
-                    $time2 = $tmp2->nextDayUsingTime();
+                    $time1 = $tmp1->next_day_time();
+                    $time2 = $tmp2->next_day_time();
                 }
-                if($time1 == $time2 && $time1 == 0)
-                {
-                    if($tmp1->type > $tmp2->type)
-                    {
-                        $array_rooms[$j] = $tmp2;
-                        $array_rooms[$j+1] = $tmp1;
-                        continue;
-                    }
-                }
+
                 if($time1 == -1 && $time2 != -1)
                 {
                     $array_rooms[$j] = $tmp2;

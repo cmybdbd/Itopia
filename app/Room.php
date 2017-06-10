@@ -50,39 +50,10 @@ class Room extends Model
         $use = $this->nextUsingTime();
         if($use >= 0 && $use < time())
             return 0;
+        if($use == -1)
+            return -1;
         else 
             return 1;
-        /*
-        $hour = date('H',time());
-        if($hour <=  5 || $hour >= 22)
-        {
-            //return json_encode([Utils::curNight(),$this->usingNight()]);
-            return in_array(date('Y-m-d H:i:s',Utils::curNight()), json_decode($this->usingNight()));
-        }
-        else
-        {
-            
-            if($hour < 11)
-            {
-                $time =  strtotime(date('Y-m-d 00:00:00',time()))+11*60*60;
-            }
-            else
-            {
-                $time = time();
-            }
-            $starttime = date('Y-m-d H:i:s', $time+30*60);
-            $endtime = date('Y-m-d H:i:s', $time - 30*60);
-            $used = $this->hasManyOrders()->where([
-                ['startTime', '<=', $starttime],
-                ['endTime', '>=', $endtime],
-                ['isDay', '=', 1],
-                ['state', '>=', Constant::$ORDER_STATE['UNPAY']],
-            ])->get();
-
-            //return count($used);
-            $nextTime = $this->nextTime();
-            return (date('m-d H',$nextTime) != date('m-d 11', time()) && ($nextTime - time())>= 30*60) || $nextTime == 0;
-        }*/
     }
     public function nextTime(){
         $nextTime = $this -> hasManyOrders()->where([
@@ -114,6 +85,75 @@ class Room extends Model
             return $dayStartTime + 35*60*60;
         }
         return 0;
+    }
+
+    public function today_nextTime()
+    {
+        $tmp = $this->nextUsingTime();
+        $type = $this->type;
+        $day_start_time = strtotime(date('Y-m-d 11:00:00', time())) - $type/2*60*60;
+            //type A = 1 , 10:30 begin
+            //type B = 0 , 11:00 begin 
+        $day_end_time = strtotime(date('Y-m-d 21:00:00', time())) - $type/2*60*60;
+            //type A , 20:30 end
+            //type B , 21:00 end
+        if(time() >= $day_end_time)
+            return -1;
+
+        if($tmp == -1)
+        {
+            return -1;
+        }
+
+        if($tmp == 0)
+        {
+            $time = time() - time()%(30*60) + 30*60;
+            if($time <= $day_start_time)
+                return $day_start_time;
+            if($time >= $day_end_time)
+                return -1;
+            return $time;
+        }
+
+        $next_time = $tmp - $tmp%(30*60) + 30*60;
+        if($next_time >= $day_end_time)
+            return -1;
+        if($next_time > time())
+            return $next_time;
+        else
+        {
+            $time = time() - time()%(30*60) + 30*60;
+            if($time >= $day_end_time)
+                return -1;
+            return $time;
+        }
+
+
+    }
+    public function next_day_time()
+    {
+        $tmp = $this->nextDayUsingTime();
+        $type = $this->type;
+        $day_start_time = strtotime(date('Y-m-d 11:00:00', time() + 24*60*60)) - $type/2*60*60;
+            //type A = 1 , 10:30 begin
+            //type B = 0 , 11:00 begin 
+        $day_end_time = strtotime(date('Y-m-d 21:00:00', time() + 24*60*60)) - $type/2*60*60;
+            //type A , 20:30 end
+            //type B , 21:00 end
+        if($tmp == -1)
+        {
+            return -1;
+        }
+
+        if($tmp == 0)
+        {
+            return $day_start_time;
+        }
+
+        $next_time = $tmp - $tmp%(30*60) + 30*60;
+        if($next_time >= $day_end_time)
+            return -1;
+        return $next_time;
     }
     public function nextDayUsingTime(){//nextDay
         $nextTime = $this -> hasManyOrders()->where([
