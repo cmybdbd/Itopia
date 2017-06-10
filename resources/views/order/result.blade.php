@@ -104,12 +104,11 @@
                     <img src="{{asset('storage/map/'.$order->hasRoom->parentId.'.jpg')}}" data-u="image" alt="" width="325px">
                 </div>
                 <div>
-                    @if ($order->hasRoom->parentId == 'dhz9')
-                    <img src="{{asset('storage/map/2.jpg')}}" data-u="image" alt="" width="325px">
-                    @else
-                    <img src="{{asset('storage/map/1.jpg')}}" data-u="image" alt="" width="325px">
-                    @endif
+                    <img src="{{asset('storage/map/'.$order->hasRoom->parentId.'-2.jpg')}}" data-u="image" alt="" width="325px">
                 </div>
+                @if($order->hasRoom->parentId=='dhz9')
+                    <img src="{{asset('storage/map/'.$order->hasRoom->parentId.'-3.jpg')}}" data-u="image" alt="" width="325px">
+                @endif
             </div>
         </div>
     </div>
