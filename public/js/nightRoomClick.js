@@ -89,9 +89,33 @@ $(function () {
                 tags[i].innerHTML= date_td;
 
             /*update btn*/
-            room_num = 6;
+           roomGroup =  document.URL[document.URL.length-3];
+        console.log(roomGroup);
+        switch (roomGroup){
+            case 'z': //zgy
+            startIndex = 1;
+            endIndex = 3;
+                break;
+            case 'h': //dhz9
+            startIndex = 7;
+            endIndex = 10;
+                break;
+            case 'f': //frl
+            startIndex = 4;
+            endIndex = 6;
+                break;
+            case 'd': //dxy
+            startIndex = 1;
+            endIndex = 3;
+                break;
+            default: //dayPage
+            startIndex = 1;
+            endIndex = 10;
+            break;    
+        }
+
             var r;
-            for(i=1;i<=room_num;i++)
+            for(i=startIndex;i<=endIndex;i++)
             {   
                 $.ajax({
                     url: '/isNightBooked/' + $("#"+i).attr("data-content")  + "/"+dayShift,
@@ -156,9 +180,34 @@ $(function () {
                 tags[i].innerHTML= date_td;
 
             /*update btn*/
-            room_num = 10;
+
+        roomGroup =  document.URL[document.URL.length-3];
+        console.log(roomGroup);
+        switch (roomGroup){
+            case 'z': //zgy
+            startIndex = 1;
+            endIndex = 3;
+                break;
+            case 'h': //dhz9
+            startIndex = 7;
+            endIndex = 10;
+                break;
+            case 'f': //frl
+            startIndex = 4;
+            endIndex = 6;
+                break;
+            case 'd': //dxy
+            startIndex = 1;
+            endIndex = 3;
+                break;
+            default: //dayPage
+            startIndex = 1;
+            endIndex = 10;
+            break;    
+        }
+
             var r;
-            for(i=1;i<=room_num;i++)
+            for(i=startIndex;i<=endIndex;i++)
             {   
                 //console.log($("#"+i).attr("data-content"));
                 $.ajax({
