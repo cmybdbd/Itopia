@@ -309,8 +309,8 @@ class OrderController extends Controller
             'price' => 'required',
             'isDay'  => 'required'
         ]);
-        $room = Room::find($order->roomId);
-        if($request->price <= 1 && empty($room))
+        $room = Room::find($request->roomId);
+        if($request->price <= 1 && empty($room) && ($request->startTime % 60*30)!=0 && ($request->endTime % 60*30)!=0 )
             return Response::json(['code' => '300','param' => 'price']);
         if (isset($request->uuid))
         {
