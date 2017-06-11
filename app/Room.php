@@ -47,7 +47,7 @@ class Room extends Model
     }
     public function isUsing()
     {
-        $use = $this->nextUsingTime();
+        $use = $this->today_nextTime();
         if($use >= 0 && $use < time())
             return 0;
         if($use == -1)

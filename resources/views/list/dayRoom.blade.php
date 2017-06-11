@@ -94,6 +94,7 @@
                         "today "{{date('Y-m-d H:i:s',$room->today_nextTime())}}" "
                         "nextday "{{date('Y-m-d H:i:s',$room->next_day_time())}}" "
                         "nextDayUsingTime "{{date('Y-m-d H:i:s',$room->nextDayUsingTime())}}" "
+                        "isusing "{{$room->isUsing()}}" "
                          <p>Today {{date('n-H:i',$room->nextUsingTime())}}</p>
                         -->
                             <span id="roomState{{$room->state}}" data-content="{{$room_state>0 ? '1':'0'}}" class="room-state room-used {{$room_state>0 ? 'button-occupied':'button-available'}} font-s">
@@ -116,11 +117,12 @@
                                     <!--state 0-1-->
                                 @endif
                             @else
-                                @if($s <= time())
-                                <span id="btn{{$room->state}}" data-content="1" class="room-state b-color font-s" style="float:right;">即时使用</span>
-                                <!--state 2-->
-                                @elseif($s ==-1)
+                                @if($s == -1)
                                     <span id="btn{{$room->state}}" data-content="0" class="room-state b-color font-s" style="float:right;">今日已约满</span>
+                                <!--state 2-->
+                                @elseif($s <= time())
+                                    
+                                    <span id="btn{{$room->state}}" data-content="1" class="room-state b-color font-s" style="float:right;">即时使用</span>
                                     <!--state 1-2-->
                                 @else
                                     <span id="btn{{$room->state}}" data-content="1" class="room-state b-color font-s" style="float:right;">可预约<span name="timeS" class="m-color">{{date("H:i",$s)}}</span>使用</span>
