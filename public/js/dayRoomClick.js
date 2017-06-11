@@ -2,7 +2,9 @@ var dayShift = 0;
 var td = new Array(7);
 var tdbtn = new Array(7);
 var tdstate = new Array(7);
-var roomSum =10;
+var startIndex = 1;
+var endIndex = 10;
+
 $(function () {
 
     var jssor_1_SlideshowTransitions = [
@@ -74,7 +76,32 @@ $(function () {
         $("#useToday").addClass("nav-active");
         $("#useTomorrow").removeClass("nav-active");
         
-        for(var j=1;j<=roomSum;j++)
+        roomGroup =  document.URL[document.URL.length-3];
+        console.log(roomGroup);
+        switch (roomGroup){
+            case 'z': //zgy
+            startIndex = 1;
+            endIndex = 3;
+                break;
+            case 'h': //dhz9
+            startIndex = 7;
+            endIndex = 10;
+                break;
+            case 'f': //frl
+            startIndex = 4;
+            endIndex = 6;
+                break;
+            case 'd': //dxy
+            startIndex = 1;
+            endIndex = 3;
+                break;
+            default: //dayPage
+            startIndex = 1;
+            endIndex = 10;
+            break;    
+        }
+
+        for(var j=startIndex;j<=endIndex;j++)
         {
              if(td[j]!=null){
                 str = $('#tomorrowNextTime'+j).attr('data-content');
@@ -100,13 +127,38 @@ $(function () {
         dayShift = 1;
         $("#useTomorrow").addClass("nav-active");
         $("#useToday").removeClass("nav-active");
-            
-        for(var j=1;j<=roomSum;j++)
+ 
+        roomGroup =  document.URL[document.URL.length-3];
+        console.log(roomGroup);
+        switch (roomGroup){
+            case 'z': //zgy
+            startIndex = 1;
+            endIndex = 3;
+                break;
+            case 'h': //dhz9
+            startIndex = 7;
+            endIndex = 10;
+                break;
+            case 'f': //frl
+            startIndex = 4;
+            endIndex = 6;
+                break;
+            case 'd': //dxy
+            startIndex = 1;
+            endIndex = 3;
+                break;
+            default: //dayPage
+            startIndex = 1;
+            endIndex = 10;
+            break;    
+        }
+
+        for(var j=startIndex;j<=endIndex;j++)
         {
             //console.log('j ='+ j +  $('#nextdaytime'+j).attr('data-content'));
             ndt = $('#tomorrowNextTime'+j).attr('data-content');
             tp = $('#roomtype'+j).attr('data-content');
-            console.log(document.getElementById('btn'+j).innerHTML);
+            //console.log(document.getElementById('btn'+j).innerHTML);
             td[j] = document.getElementById('btn'+j).innerHTML;
             tdbtn[j] =  $('#btn' + j).attr('data-content');
             tdstate[j] = document.getElementById('roomState'+j).innerHTML; 
