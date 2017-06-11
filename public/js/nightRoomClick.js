@@ -156,17 +156,18 @@ $(function () {
                 tags[i].innerHTML= date_td;
 
             /*update btn*/
-            room_num = 6;
+            room_num = 10;
             var r;
             for(i=1;i<=room_num;i++)
             {   
+                //console.log($("#"+i).attr("data-content"));
                 $.ajax({
                     url: '/isNightBooked/' + $("#"+i).attr("data-content")  + "/"+dayShift,
                     type: 'GET',
                     async : false,
                     success:function(p){
                         r = p.isBooked;
-                        //console.log(p.isBooked);
+                        //console.log( "i: "+i+" r: "+r);
                     },
                     error:function(msg){
                         console.log(msg);
