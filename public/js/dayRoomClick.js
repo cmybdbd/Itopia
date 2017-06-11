@@ -222,7 +222,7 @@ $(function () {
             lng = 0;
         if(lat==null)
             lat = 0;
-        window.location.replace('/dayPageLocation?lo=' +lng+'&la='+lat);
+        window.location.href = window.location.href.replace('/dayPageLocation?lo=' +lng+'&la='+lat);
     });
 
     var uid = $("#param .uid").attr('data-content');
