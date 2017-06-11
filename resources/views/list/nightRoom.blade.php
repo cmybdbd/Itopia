@@ -27,32 +27,24 @@
             </div>
         </div>
         <div class="mybtn-group" style="position:fixed;z-index:10;top:46px;height:44px;background-color:white;">
-            <div class="nav-button" id="allHome" style="width:33%;height:44px;">
+            <div class="nav-button" id="allHome" style="width:25%;height:44px;">
                 <span style="margin-top: 1vh">
-                    全   部
+                    全部
                 </span>
             </div>
-            <div class="nav-button" id="nearestHome" style="width:33%;height:44px;">
+            
+            <div class="nav-button" id="zgy" style="width:25%;height:44px;">
                 <span style="margin-top: 1vh">
-                    离我最近
+                    中关园
                 </span>
             </div>
-            <div class="user nav-button" id="chooseArea" style="width:34%;height:44px;">
-                <span style="margin-top: 2vh">选择小区</span>
-                <div id="triangle-down-b" style="position:absolute;right:18%;top:52%;"></div>
-                <div class="user-nav">
-                    <ul style="padding-left:0px; top:0px;">
-                        <li><a id="dxy" class="font-xl"href="#">稻香园 <b class="m-color">0</b> 间</a></li>
-                        <hr class="mysplit" style="margin:0px;">
-                        <li><a id="dhzy" class="font-xl"href="#">大河庄苑 <b class="m-color">4</b> 间</a></li>
-                        <hr class="mysplit" style="margin:0px;">
-                        <!--<li><a id="kyxq" class="font-xl"href="#">科育小区 <b class="m-color">0</b> 间</a></li>
-                        <hr class="mysplit" style="margin:0px;">-->
-                        <li><a id="frl" class="font-xl"href="#">芙蓉里 <b class="m-color">3</b> 间</a></li>
-                        <hr class="mysplit" style="margin:0px;">
-                        <li><a id="zgy" class="font-xl"href="#">中关园 <b class="m-color">3</b> 间</a></li>
-                    </ul>
-                </div>
+            <div class="nav-button" id="frl" style="width:25%;height:44px;">
+                <span style="margin-top: 1vh">
+                    芙蓉里
+                </span>
+            </div>
+            <div class="nav-button" id="dhzy" style="width:25%;height:44px;">
+                <span style="margin-top: 1vh">大河庄苑</span>
             </div>
         </div>
     </div>
