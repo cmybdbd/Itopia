@@ -1,7 +1,7 @@
 window.onload=function(){
     var date_time = new Date();
     var dayShift = document.URL[document.URL.length-1];
-    if(!isNaN(dayShift))
+    if(!isNaN(dayShift)&&dayShift!='9')
       date_time.setTime(date_time.getTime() + dayShift * 24*60*60*1000);
 
 
