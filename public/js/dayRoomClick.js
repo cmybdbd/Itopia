@@ -218,6 +218,10 @@ $(function () {
     $("#nearestHome").on('click',function () {
         lng = $('#lng').attr('data-content');
         lat = $('#lat').attr('data-content');
+        if(lng==null)
+            lng = 0;
+        if(lat==null)
+            lat = 0;
         window.location.replace('/dayPageLocation?lo=' +lng+'&la='+lat);
     });
 
