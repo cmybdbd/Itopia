@@ -215,6 +215,12 @@ $(function () {
     $("#allHome").on('click',function () {
         window.location.replace('/dayPage');
     });
+    $("#nearestHome").on('click',function () {
+        lng = $('#lng').attr('data-content');
+        lat = $('#lat').attr('data-content');
+        window.location.replace('/dayPageLocation?lo=' +lng+'&la='+lat);
+    });
+
     var uid = $("#param .uid").attr('data-content');
     $("#myOrder").on('click',function () {
         window.location.href = window.location.href.replace('home','orderList/'+uid);
