@@ -309,7 +309,8 @@ class OrderController extends Controller
             'price' => 'required',
             'isDay'  => 'required'
         ]);
-
+        if($request->price <= 1)
+            return Response::json(['code' => '300','param' => 'price']);
         if (isset($request->uuid))
         {
             Order::where([['id', $request->uuid],['isDay',$request->isDay]])->update(['state' => Constant::$ORDER_STATE['REMOVE']]);
@@ -401,10 +402,8 @@ class OrderController extends Controller
                 'info',
                 $user->phonenumber
             );
-           // $json = json_decode($json,true);
         }
 
-        //return Response::json(['code' => '300','param'=>$json]);
         if (is_array($json))
         {
             return Response::json(['code' => '200', 'param' => $json]);
