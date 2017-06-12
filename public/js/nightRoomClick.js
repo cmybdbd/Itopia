@@ -88,7 +88,7 @@ $(function () {
   */      
 
 function updateDate(dayShift){
-                  /*update time*/
+            /*update time*/
             var date_time = new Date();
             date_time.setTime(date_time.getTime() + dayShift * 24*60*60*1000);
 
@@ -117,7 +117,7 @@ function updateDate(dayShift){
                 tags[i].innerHTML= date_td;
 
             /*update btn*/
-           roomGroup =  document.URL[document.URL.length-3];
+        roomGroup =  document.URL[document.URL.length-3];
         console.log(roomGroup);
         switch (roomGroup){
             case 'z': //zgy

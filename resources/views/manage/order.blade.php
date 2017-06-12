@@ -19,39 +19,39 @@
                 <div id="triangle-down-b" style="position:absolute;right:14%;top:52%;"></div>
                 <div class="user-nav">
                     <ul style="padding-left:0px; top:0px;">
-                        <li data-content="ae50f8da-225e-11e7-b33a-00163e028324"><a class="room font-xl m-color"href="#">A01</a></li>
+                        <li data-content="ae50f8da-225e-11e7-b33a-00163e028324"><a class="room font-xl m-color"href="#">A01室</a></li>
                         <hr class="mysplit" style="margin:0px;">
-                        <li data-content="ae50f8da-225e-11e7-b33b-00163e028924"><a class="room font-xl m-color"href="#">A02</a></li>
+                        <li data-content="ae50f8da-225e-11e7-b33b-00163e028924"><a class="room font-xl m-color"href="#">A02室</a></li>
                         <hr class="mysplit" style="margin:0px;">
-                        <li data-content="ae50f8da-225e-11e7-b33c-00163e028324"><a class="room font-xl m-color"href="#">A03</a></li>
+                        <li data-content="ae50f8da-225e-11e7-b33c-00163e028324"><a class="room font-xl m-color"href="#">A03室</a></li>
                     </ul>
                 </div>
             </div>
             <div class="user nav-button" data-content="frl" style="width:25%;height:44px;">
                 <span class="room" style="margin-top: 2vh">芙蓉里</span>
-                <div id="triangle-down-b" style="position:absolute;right:13%;top:52%;"></div>
+                <div id="triangle-down-b" style="position:absolute;right:12%;top:52%;"></div>
                 <div class="user-nav">
                     <ul style="padding-left:0px; top:0px;">
-                        <li data-content="ae50f8da-225e-11e7-a09c-01163e028801"><a class="room font-xl m-color"href="#">A01</a></li>
+                        <li data-content="ae50f8da-225e-11e7-a09c-01163e028801"><a class="room font-xl m-color"href="#">A01室</a></li>
                         <hr class="mysplit" style="margin:0px;">
-                        <li data-content="ae50f8da-225e-11e7-a09c-02163e028801"><a class="room font-xl m-color"href="#">A02</a></li>
+                        <li data-content="ae50f8da-225e-11e7-a09c-02163e028801"><a class="room font-xl m-color"href="#">A02室</a></li>
                         <hr class="mysplit" style="margin:0px;">
-                        <li data-content="ae50f8da-225e-11e7-a09c-03163e028801"><a class="room font-xl m-color"href="#">A03</a></li>
+                        <li data-content="ae50f8da-225e-11e7-a09c-03163e028801"><a class="room font-xl m-color"href="#">A03室</a></li>
                     </ul>
                 </div>
             </div>
             <div class="user nav-button" data-content="dhzy" style="width:25%;height:44px;">
                 <span class="room" style="margin-top: 2vh">大河庄苑</span>
-                <div id="triangle-down-b" style="position:absolute;right:12%;top:52%;"></div>
+                <div id="triangle-down-b" style="position:absolute;right:10%;top:52%;"></div>
                 <div class="user-nav">
                     <ul style="padding-left:0px; top:0px;">
-                        <li data-content="ae50f8da-225e-11e7-b09c-01163e028206"><a class="room font-xl m-color"href="#">B01</a></li>
+                        <li data-content="ae50f8da-225e-11e7-b09c-01163e028206"><a class="room font-xl m-color"href="#">B01室</a></li>
                         <hr class="mysplit" style="margin:0px;">
-                        <li data-content="ae50f8da-225e-11e7-b09c-02163e028206"><a class="room font-xl m-color"href="#">B02</a></li>
+                        <li data-content="ae50f8da-225e-11e7-b09c-02163e028206"><a class="room font-xl m-color"href="#">B02室</a></li>
                         <hr class="mysplit" style="margin:0px;">
-                        <li data-content="ae50f8da-225e-11e7-b09c-03163e028206"><a class="room font-xl m-color"href="#">B03</a></li>
+                        <li data-content="ae50f8da-225e-11e7-b09c-03163e028206"><a class="room font-xl m-color"href="#">B03室</a></li>
                         <hr class="mysplit" style="margin:0px;">
-                        <li data-content="ae50f8da-225e-11e7-b09c-04163e028206"><a class="room font-xl m-color"href="#">B04</a></li>
+                        <li data-content="ae50f8da-225e-11e7-b09c-04163e028206"><a class="room font-xl m-color"href="#">B04室</a></li>
                     </ul>
                 </div>
             </div>
@@ -97,7 +97,7 @@
                 </li>
             </ul>
         </div>
-        <div style="margin-left:70px;border-left:1px solid #aaa;">
+        <div style="margin-left:65px;box-shadow:rgba(228,228,228,1) 0px 0px 0px 2px;">
             <div style="width:1px;height:88px;"></div>
             @foreach($orders as $key => $order)
                 <div id="{{$order->id}}" roomId="{{$order->roomId}}"

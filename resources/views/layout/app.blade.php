@@ -312,7 +312,7 @@
 
 .user-name{margin-top:1vh;font-size:14px;color:#777777; position:relative;}
 
-.user-nav{text-align:center;z-index:1;position:relative; visibility:hidden; opacity:0;-webkit-transition:all .15s; top:40px;-webkit-transform: translate3d(0, 0, 0)}
+.user-nav{text-align:center;z-index:1000;position:relative; visibility:hidden; opacity:0;-webkit-transition:all .15s; top:40px;-webkit-transform: translate3d(0, 0, 0)}
 
 .user-nav ul{position:absolute; width:175px;background:#fff; left:-100px; color:#777; border-radius:10px;box-shadow:rgba(0,0,0,.3) 0px 2px 4px;}
 
@@ -329,7 +329,7 @@
   position:absolute;
 }
 
-.user-nav ul li {display:block; padding:10px; text-transform:uppercase; position:relative;
+.user-nav ul li {z-index:100;display:block; padding:10px; position:relative;
 }
 
 .user-nav ul li:first-child{border-radius:10px 10px 0 0}

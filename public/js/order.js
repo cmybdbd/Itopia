@@ -2,24 +2,6 @@ $(function() {
             $("#tos").on('click',function(){
                 $(".tos-content").modal();
             });
-            $("#useHour").parent().click(function(e){
-                $.ajax({
-                    url: '/updatePageView/useHour',
-                    type:'POST',
-                    data: {
-                        _token: $("meta[name='csrf-token']").attr('content')
-                    }
-                });
-            })
-            $("#useNight").parent().click(function(e){
-                $.ajax({
-                    url: '/updatePageView/useNight',
-                    type:'POST',
-                    data: {
-                        _token: $("meta[name='csrf-token']").attr('content')
-                    }
-                });
-            });
 
             $("#agreement").click(function(){
                 if ($(this).is(':checked')) {
@@ -77,17 +59,8 @@ $(function() {
                         endTime.text(endstr); 
                     }
 
-
             updateEndTime();
-            if($("#useNight").parent().hasClass('active'))
-            {
-                updatePrice(1);
-            }
-            else
-            {
-                updatePrice(0);
-            }
-
+          
             var duration = [
                 {
                     text: "2 小时",
