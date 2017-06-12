@@ -59,8 +59,36 @@ $(function () {
     $("#on-left").on('click',function () {
         if(dayShift>0){
             dayShift--;
+            updateDate(dayShift);
+        }
+    });
 
-            /*update time*/
+    $("#on-right").on('click',function () {
+        if(dayShift<7){
+            dayShift++;
+            updateDate(dayShift);
+        }
+    });
+/*
+    $("#on-left").on('mouseout',function(){
+        $("#left-arrow").attr("src","../../../storage/order/leftarrow.png");
+    });
+        
+    $("#on-left").on('mouseover',function(){
+            $("#left-arrow").attr("src","../../../storage/order/leftarrow-main.png");
+    });
+
+    $("#on-right").on('mouseout',function(){
+        $("#right-arrow").attr("src","../../../storage/order/rightarrow.png");
+    });
+
+    $("#on-right").on('mouseover',function(){
+           $("#right-arrow").attr("src","../../../storage/order/rightarrow-main.png");
+    });
+  */      
+
+function updateDate(dayShift){
+                  /*update time*/
             var date_time = new Date();
             date_time.setTime(date_time.getTime() + dayShift * 24*60*60*1000);
 
@@ -144,118 +172,7 @@ $(function () {
                     $("#btn"+i).addClass('button-available');
                 }
             }
-        }
-    });
-
-    $("#on-right").on('click',function () {
-        if(dayShift<7){
-            dayShift++;
-
-            /*update date*/
-            var date_time = new Date();
-            date_time.setTime(date_time.getTime() + dayShift * 24*60*60*1000);
-
-            var month = date_time.getMonth()+1;
-            var day = date_time.getDate();
-            var date_td = month+"月"+day+"日";
-
-            date_time.setTime(date_time.getTime()+24*60*60*1000);//tomorrow
-            var monthtm = date_time.getMonth()+1;
-            var daytm = date_time.getDate();
-            var date_tm = monthtm+"月"+daytm+"日";
- 
-            date_time.setTime(date_time.getTime()-2*24*60*60*1000);//yesterday
-            var monthyt = date_time.getMonth()+1;
-            var dayyt = date_time.getDate();
-            var date_yt = monthyt+"月"+dayyt+"日";
- 
-            //显示在容器里
-            var tm = document.getElementById("tomorrow");
-            var yt = document.getElementById("yesterday");
- 
-            document.getElementById("tomorrow").innerHTML= date_tm;
-            document.getElementById("yesterday").innerHTML= date_yt;
-            var tags = document.getElementsByName("today");
-            for(var i in tags)//对标签进行遍历 
-                tags[i].innerHTML= date_td;
-
-            /*update btn*/
-
-        roomGroup =  document.URL[document.URL.length-3];
-        console.log(roomGroup);
-        switch (roomGroup){
-            case 'z': //zgy
-            startIndex = 1;
-            endIndex = 3;
-                break;
-            case 'h': //dhz9
-            startIndex = 7;
-            endIndex = 10;
-                break;
-            case 'f': //frl
-            startIndex = 4;
-            endIndex = 6;
-                break;
-            case 'd': //dxy
-            startIndex = 1;
-            endIndex = 3;
-                break;
-            default: //dayPage
-            startIndex = 1;
-            endIndex = 10;
-            break;    
-        }
-
-            var r;
-            for(i=startIndex;i<=endIndex;i++)
-            {   
-                //console.log($("#"+i).attr("data-content"));
-                $.ajax({
-                    url: '/isNightBooked/' + $("#"+i).attr("data-content")  + "/"+dayShift,
-                    type: 'GET',
-                    async : false,
-                    success:function(p){
-                        r = p.isBooked;
-                        //console.log( "i: "+i+" r: "+r);
-                    },
-                    error:function(msg){
-                        console.log(msg);
-                    }
-                });
-                console.log('r= '+r);
-                //$("#btn"+i).text(r);
-                $("#btn"+i).attr('data-content',r);
-                if(r==0)
-                {
-                    $("#btn"+i).text('已订出');
-                    $("#btn"+i).addClass('button-occupied');
-                    $("#btn"+i).removeClass('button-available');
-                }
-                else{
-                    $("#btn"+i).text('可使用');
-                    $("#btn"+i).removeClass('button-occupied');
-                    $("#btn"+i).addClass('button-available');
-                }
-            }
-        }
-    });
-/*
-    $("#on-left").on('mouseout',function(){
-        $("#left-arrow").attr("src","../../../storage/order/leftarrow.png");
-    });
-        
-    $("#on-left").on('mouseover',function(){
-            $("#left-arrow").attr("src","../../../storage/order/leftarrow-main.png");
-    });
-
-    $("#on-right").on('mouseout',function(){
-        $("#right-arrow").attr("src","../../../storage/order/rightarrow.png");
-    });
-
-    $("#on-right").on('mouseover',function(){
-           $("#right-arrow").attr("src","../../../storage/order/rightarrow-main.png");
-    });
-  */      
+}
 
     $("#dxy").on('click',function () {
         window.location.href='/getNightRooms/dxy';
@@ -275,6 +192,78 @@ $(function () {
     $("#allHome").on('click',function () {
         window.location.href='/nightPage';
     });
+
+/******************************************/
+
+    var date_time = new Date();  
+    date_time.setTime(date_time.getTime());
+    var pickerText =new Array(8);
+    for (i = 0;i<=7;i++)
+    {
+        pickerText[i] = (date_time.getMonth()+1) + '月' + date_time.getDate()+'日';
+        date_time.setTime(date_time.getTime() + 24*60*60*1000);
+    }
+
+
+    var duration = [
+                {
+                    text: "今日(" + pickerText[0] + ')',
+                    value: 0
+                },
+                {
+                    text: "明日(" + pickerText[1] + ')',
+                    value: 1
+                },
+                {
+                    text: pickerText[2],
+                    value: 2
+                },
+                {
+                    text: pickerText[3],
+                    value: 3
+                },
+                {
+                    text: pickerText[4],
+                    value: 4
+                },
+                {
+                    text: pickerText[5],
+                    value: 5
+                },
+                {
+                    text: pickerText[6],
+                    value: 6
+                },
+                {
+                    text: pickerText[7],
+                    value: 7
+                },
+            ];
+
+            var durationPicker = new Picker({
+                data: [duration],
+                selectIndex: [0],
+                title: '',
+                id: 'durationPicker'
+            });
+
+
+            durationPicker.on('picker.select', function(selectedVal, selectedIndex){
+                durationTime.attr('data-content', duration[selectedIndex[0]].value);
+
+                dayShift = durationTime.attr("data-content");
+                updateDate(dayShift);
+            });
+            
+
+            durationTime = $('#durationTime');
+            
+            durationTime.parent().on('click',function () {
+                durationPicker.show();
+            });
+
+/************************************************/
+
     var validatePhone =$("#validatePhone");
     var phoneN = $("#phoneN");
     validatePhone.on('shown.bs.modal', function () {

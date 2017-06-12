@@ -475,9 +475,6 @@ $(function() {
                         durationPicker.show();
                     }
             });
-            dateTime.parent().on('click', function () {
-                datePicker.show();
-            });
 
             $("#toPay").on('click', function(){
                 if(checkToPay() && $("#toPay button").text()!= '下单中...')

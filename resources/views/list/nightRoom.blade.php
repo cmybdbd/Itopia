@@ -15,7 +15,8 @@
                 <span id="yesterday"></span>
             </div>
             <div id="heute" style="width:33%;height:44px;">
-                <span style="color:white;margin-top:10px;" name="today"></span>
+                <span style="color:white;margin-top:15px;" name="today"></span>
+                <div id="durationTime" class="scrollPicker" data-content="" ></div>
                 <div style="position:absolute;left:0;right:0;margin:auto;top:10px;width:95.5%;height:34px;border-radius:15px;background-color:#1dccb8;z-index:-1;"></div>
             </div>
             <div class="nav-button-top" id="on-right" style="width:33%;height:44px;">
@@ -87,21 +88,6 @@
     </div>
 </div>
 
-<!--
-    <div class="modal fade bs-example-modal-sm heute-content" role="dialog">
-        <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div style="margin-left:5%;margin-right:5%;">
-                        <div id="durationTime" class="scrollPicker" data-content="7200000" >2小时</div>
-                    <button class="m-color font-m"
-                            data-dismiss="modal"
-                              style="border:none;width:100%;height:100%;background-color:white;">朕知道了</button>
-                </div>
-            </div>
-        </div>
-    </div>
--->
 @endsection
 @section('style')
     <style>
@@ -132,11 +118,35 @@
         span.room-state{
             height: 1.6em;
         }
+        .wheel-item{
+            list-style-type:none;
+        }
+        .cancel{
+            color:#aaa;
+            font-size: 16px;
+            height:44px;
+            border: 1px solid #1dccb8;
+            border-radius: 44px;
+            width: 44.5% !important;
+            margin-left:3.7%;
+        }
+        .cancel::after{
+            background-image: none !important;
+        }
+        .confirm{
+            color:white !important;
+            font-size: 16px;
+            height:44px;
+            border: 1px solid #1dccb8;
+            border-radius: 44px;
+            width: 44.5% !important;
+            margin-right:3.7%;
+            background-color: #1dccb8;
+        }
     </style>
     @endsection
 @section('scripts')
     <script src="{{url('js/jssor.slider.min.js')}}"></script>
     <script src="{{url('js/roomList.js')}}"></script>
-    </script>
     <script src="{{url('js/nightRoomClick.js')}}"></script>
 @endsection
