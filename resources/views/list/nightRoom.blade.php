@@ -9,9 +9,7 @@
         <div class="mybtn-group" style="position:fixed;top:0px;z-index:10;height:46px;background-color:white;">
             <div class="nav-button-top" id="on-left" style="width:33%;height:44px;">
                 <img id="left-arrow" style="position:absolute;top:15px;left:15px;width:15px;" src="{{asset('storage/order/leftarrow.png')}}"></img>
-                <span style="margin-top: 1vh">
-                    前一夜
-                </span>
+                <span style="margin-top: 1vh">前一夜</span>
                 <span id="yesterday"></span>
             </div>
             <div id="heute" style="width:33%;height:44px;">
@@ -21,28 +19,20 @@
             </div>
             <div class="nav-button-top" id="on-right" style="width:33%;height:44px;">
                 <img id="right-arrow" style="position:absolute;top:15px;right:15px;width:15px;" src="{{asset('storage/order/rightarrow.png')}}"></img>
-                <span style="margin-top: 1vh">
-                    后一夜
-                </span>
+                <span style="margin-top: 1vh">后一夜</span>
                 <span id="tomorrow"></span>
             </div>
         </div>
         <div class="mybtn-group" style="position:fixed;z-index:10;top:46px;height:44px;background-color:white;">
             <div class="nav-button" id="allHome" style="width:25%;height:44px;">
-                <span style="margin-top: 1vh">
-                    全部
-                </span>
+                <span style="margin-top: 1vh">全部</span>
             </div>
             
             <div class="nav-button" id="zgy" style="width:25%;height:44px;">
-                <span style="margin-top: 1vh">
-                    中关园
-                </span>
+                <span style="margin-top: 1vh">中关园</span>
             </div>
             <div class="nav-button" id="frl" style="width:25%;height:44px;">
-                <span style="margin-top: 1vh">
-                    芙蓉里
-                </span>
+                <span style="margin-top: 1vh">芙蓉里</span>
             </div>
             <div class="nav-button" id="dhzy" style="width:25%;height:44px;">
                 <span style="margin-top: 1vh">大河庄苑</span>
