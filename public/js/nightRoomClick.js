@@ -193,6 +193,12 @@ function updateDate(dayShift){
         window.location.href='/nightPage';
     });
 
+
+    $(document).ready(function(){
+        durationPicker.show();
+    });
+
+
 /******************************************/
 
     var date_time = new Date();  

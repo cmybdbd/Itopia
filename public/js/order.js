@@ -369,9 +369,6 @@ $(function() {
             }
 
 
-            /*startTime.parent().on('click', function () {
-                startPicker.show();
-            });*/
             $(document).ready(function(){
 
                 var st = $("#startTime").attr('data-content')*1.0;
