@@ -74,23 +74,17 @@ function doLoop(){
             $("#toPay").on('click', function(){
                 if(checkToPay() && $("#toPay button").text()!= '下单中...')
                 {
-               var r=confirm("请主人再次确认您的订单：\n"+$('#roomTitle').attr('data-content')+'\n'+showHumanTime(startTime.attr('data-content')*1000) + "-次日11:00\n提前24小时以上才可取消订单哟，主人确认支付吗")
-                if (r==true)
-                {
-                    //alert('系统维护中，请您明日再订~');
-                    //return;
-                    $("#toPay button").text('下单中...');
 
-                    temptime = new Date(dateFormat(new Date(), 'yyyy/mm/dd 00:00:00')).getTime();
-                    if(dateFormat(new Date(), 'HH') > 5)
+                    var dayShift = document.URL[document.URL.length-1];
+                    var st,ed,dt;
+                     temptime = new Date(dateFormat(new Date(), 'yyyy/mm/dd 00:00:00')).getTime();
+                     if(dateFormat(new Date(), 'HH') > 5)
                     {
 
                         temptime += 24*60*60*1000;
                     }
                     console.log('temptime='+temptime);
-                    // night
-                    var dayShift = document.URL[document.URL.length-1];
-                    var st,ed,dt;
+                
                     if(!isNaN(dayShift))
                     {
                         st = $("#startTime").attr('data-content')*1.0 + dayShift*86400;
@@ -102,6 +96,15 @@ function doLoop(){
                         ed = $("#endTime1").attr('data-content')*1.0;
                         dt = temptime/1000;
                     }
+               var r=confirm("请主人再次确认您的订单：\n"+$('#roomTitle').attr('data-content')+'\n'+showHumanTime(st*1000) + "-次日11:00\n提前24小时以上才可取消订单哟，主人确认支付吗")
+                if (r==true)
+                {
+                    //alert('系统维护中，请您明日再订~');
+                    //return;
+                    $("#toPay button").text('下单中...');
+
+                      // night
+                    
                         data = {
                             _token: $("meta[name='csrf-token']").attr('content'),
                             'userId': $("#userId").attr('data-content'),
