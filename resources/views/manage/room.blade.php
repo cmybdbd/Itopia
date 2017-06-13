@@ -122,13 +122,15 @@
                 </div>
                 <div class="mybox" style="box-shadow:none;">
                     <div>时间</div>
+                    <div id="startDayTime" class="scrollPicker"></div>
+                    <button class="btn btn-block btn-default btn-main-secondary" style="position:absolute;top:288px;width:25%;left:60px;height:32px;padding:0;color:#1dccb8;border: 1px solid #777;" id="selectDay" data-content="0">时间列表</button>
                     <div id="durationDayTime" class="scrollPicker"></div>
-                    <button class="btn btn-block btn-default btn-main-secondary" style="position:absolute;top:288px;width:55%;left:60px;height:32px;padding:0;color:#1dccb8;border: 1px solid #777;" id="selectDay" data-content="0">时间列表</button>
-                    
+                    <button class="btn btn-block btn-default btn-main-secondary" style="position:absolute;top:288px;width:25%;left:46%;height:32px;padding:0;color:#1dccb8;border: 1px solid #777;" id="selectDayStart" data-content="0">开始时间</button>
+                   
                     <div style="margin-top:24px;">时长</div>
                     <div id="durationNightTime" class="scrollPicker"></div>
                     <button class="btn btn-block btn-default btn-main-secondary" style="position:absolute;top:328px;width:55%;left:60px;height:32px;padding:0;color:#1dccb8;border: 1px solid #777;" id="selectTime" data-content="0">时长</button>
-                <button id='dayUse' data-content='{{$room->id}}' class="btn btn-default btn-block btn-main-3" style="float:right;padding-top:0px;margin-top:-28px;">使用</button>
+                <button id='dayUse' data-content='{{$room->id}}' class="btn btn-default btn-block btn-main-3" style="float:right;padding-top:0px;margin-top:-28px;">占用</button>
                 </div>
                 
             </div>
@@ -141,10 +143,18 @@
                 <div>日期</div>
                     <div id="durationNight" class="scrollPicker"></div>
                     <button class="btn btn-block btn-default btn-main-secondary" style="position:absolute;top:422px;width:55%;left:60px;height:32px;padding:0;color:#1dccb8;border: 1px solid #777;" id="selectNight" data-content="0">选择日期</button>
-                <button id='nightUse' data-content='{{$room->id}}' class="btn btn-default btn-block btn-main-3" style="float:right;padding-top:0px;margin-top:-24px;">使用</button>
+                <button id='nightUse' data-content='{{$room->id}}' class="btn btn-default btn-block btn-main-3" style="float:right;padding-top:0px;margin-top:-24px;">占用</button>
                 </div>
-                
+                <div id="isNightBook0{{$room->id}}" data-content="{{$room->isNightBooked(0) ? '1':'0'}}"></div>
+                <div id="isNightBook1{{$room->id}}" data-content="{{$room->isNightBooked(1) ? '1':'0'}}"></div>
+                <div id="isNightBook2{{$room->id}}" data-content="{{$room->isNightBooked(2) ? '1':'0'}}"></div>
+                <div id="isNightBook3{{$room->id}}" data-content="{{$room->isNightBooked(3) ? '1':'0'}}"></div>
+                <div id="isNightBook4{{$room->id}}" data-content="{{$room->isNightBooked(4) ? '1':'0'}}"></div>
+                <div id="isNightBook5{{$room->id}}" data-content="{{$room->isNightBooked(5) ? '1':'0'}}"></div>
+                <div id="isNightBook6{{$room->id}}" data-content="{{$room->isNightBooked(6) ? '1':'0'}}"></div>
+                <div id="isNightBook7{{$room->id}}" data-content="{{$room->isNightBooked(7) ? '1':'0'}}"></div>
             </div>
+
         </div>
         @endforeach
     </div>
@@ -154,13 +164,26 @@
     $edTime = $stTime + 12*3600;
 ?>
 <div id="param">
+    <div id="today0am" data-content="{{$tmp}}"></div>
     <div id="startNightTime" data-content="{{$stTime}}"></div>
     <div id="endNightTime" data-content="{{$edTime}}"></div>
 </div>
 @endsection
 @section('scripts')
     <script>
+function showHumanDay(ts)
+            {
+                return dateFormat(ts, "yyyy年mm月dd日");
+            }
+            function showHumanTime(ts)
+            {
 
+                return dateFormat(ts, 'yyyy年mm月dd日 HH:MM');
+            }
+            function showHumanHour(ts)
+            {
+                return dateFormat(ts, 'HH:MM');
+            }
 /*time picker*/
     var duration = [
                 {
@@ -240,7 +263,120 @@
         date_time.setTime(date_time.getTime() + 24*60*60*1000);
     }
 
+/*day start time picker*/
+/*time picker*/
+    var startTime = [
+                {
+                    text: '11:30',
+                    value: 11.5
+                },
+                {
+                    text: '12:00',
+                    value: 12
+                },
+                {
+                    text: '12:30',
+                    value: 12.5
+                },
+                {
+                    text: '13:00',
+                    value: 13
+                },
+                {
+                    text: '13:30',
+                    value: 13.5
+                },
+                {
+                    text: '14:00',
+                    value: 14
+                },
+                {
+                    text: '14:30',
+                    value: 14.5
+                },
+                {
+                    text: '15:00',
+                    value: 15
+                },
+                {
+                    text: '15:30',
+                    value: 15.5
+                },
+                {
+                    text: '16:00',
+                    value: 16
+                },
+                                {
+                    text: '16:30',
+                    value: 16.5
+                },
+                {
+                    text: '17:00',
+                    value: 17
+                },
+                {
+                    text: '17:30',
+                    value: 17.5
+                },
+                {
+                    text: '18:00',
+                    value: 18
+                },
+                {
+                    text: '18:30',
+                    value: 18.5
+                },
+                                {
+                    text: '19:00',
+                    value: 19
+                },
+                                {
+                    text: '19:30',
+                    value: 19.5
+                },
+                {
+                    text: '20:00',
+                    value: 20
+                },
+                {
+                    text: '20:30',
+                    value: 20.5
+                },
+                {
+                    text: '21:00',
+                    value: 21
+                },
+                {
+                    text: '21:30',
+                    value: 21.5
+                }
+            ];
+            var startPicker = new Picker({
+                data: [startTime],
+                selectIndex: [0],
+                title: '',
+                id: 'startPicker'
+            });
 
+
+            startPicker.on('picker.select', function(selectedVal, selectedIndex){
+                $('#selectDayStart').attr('data-content', startTime[selectedIndex[0]].value);
+                $('#selectDayStart').text(startTime[selectedIndex[0]].text);
+            });
+            
+            $('#selectDayStart').on('click',function () {
+                startPicker.show();
+            });
+
+
+ var date_time = new Date();  
+    date_time.setTime(date_time.getTime());
+    var pickerText =new Array(8);
+    for (i = 0;i<=7;i++)
+    {
+        pickerText[i] = (date_time.getMonth()+1) + '月' + date_time.getDate()+'日';
+        date_time.setTime(date_time.getTime() + 24*60*60*1000);
+    }
 
 /*day date picker*/
     var DayDate = [
@@ -256,7 +392,7 @@
                     text: pickerText[2],
                     value: 2
                 },
-                {
+                /*{
                     text: pickerText[3],
                     value: 3
                 },
@@ -275,9 +411,8 @@
                 {
                     text: pickerText[7],
                     value: 7
-                },
+                }*/
             ];
-            var DayDateTime = $('#DurationDayTime');
             var DayDatePicker = new Picker({
                 data: [DayDate],
                 selectIndex: [0],
@@ -298,6 +433,8 @@
 
 
 /*night date picker*/
+
+
     var NightDate = [
                 {
                     text: "今日(" + pickerText[0] + ')',
@@ -332,7 +469,6 @@
                     value: 7
                 },
             ];
-            var NightDateTime = $('#DurationNightTime');
             var NightDatePicker = new Picker({
                 data: [NightDate],
                 selectIndex: [0],
@@ -352,11 +488,16 @@
             });
 
             $('#dayUse').on('click',function(){
-                alert('click dayuse');
+                var st = $('#today0am').attr('data-content')*1.0 + $('#selectDay').attr('data-content')*86400 + $('#selectDayStart').attr('data-content') * 3600;
+                var ed = st + $('#selectTime').attr('data-content') * 3600;
+                //var r = confirm('是否确认占用'+ showHumanTime(st * 1000)+' - '+ showHumanTime(ed * 1000)+'?')
+                //if(r == true)
+                //{
+                
                 data = {
                     'roomId': $(this).attr('data-content'),
-                    'startTime': 1,
-                    'endTime'  : 1,
+                    'startTime': st,
+                    'endTime'  : ed,
                     'duration' : $('#selectTime').attr('data-content'),//+durationTime.attr('data-content')/3600000,
                     'isDay'    : 1
                     };
@@ -371,17 +512,19 @@
                         //alert(' ');
                         if(param['code'] == '200')
                         {
-                            alert('success '+param);
+                            alert('成功占用');
+                            console.log(param);
                         }
                         else
                         {
-                            alert('failed '+param['param']);
+                            alert('占用失败: '+param['param']);
                         }
                     },
                     error: function (e){
                          alert('failed');
                      }
                     });
+            //}//confirm
             });
 
             $('#nightUse').on('click',function(){
@@ -404,7 +547,8 @@
                         //alert(' ');
                         if(param['code'] == '200')
                         {
-                            alert('success '+param);
+                            alert('成功占用');
+                            console.log(param);
                         }
                         else
                         {
