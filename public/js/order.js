@@ -318,16 +318,31 @@ $(function() {
                     if(!p) //no order
                     {
                         switch (tsum){
+                        case 1:
+                            $("#realPrice").text("9.5");
+                            break;
+                        case 1.5:
+                            $("#realPrice").text("14.25");
+                            break;
+                        case 2:
+                            $("#realPrice").text("19");
+                            break;
+                        case 3:
+                            $("#realPrice").text("28.5");
+                            break;
+                        case 4:
+                            $("#realPrice").text("36");
+                            break;
                         case 5:
-                            $("#realPrice").text("85");
+                            $("#realPrice").text("42.5");
                             break;
                         case 6:
-                            $("#realPrice").text("96");
+                            $("#realPrice").text("48");
                             break;
                         default:
-                            $("#realPrice").text("1.7");
+                            $("#realPrice").text("0.01");
                             break;
-                        };
+                    };
                     }
                     else{
 
