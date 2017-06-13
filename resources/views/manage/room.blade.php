@@ -113,7 +113,7 @@
                                 <div id="hourPrice{{$room->id}}" data-content="{{$room->hourPrice}}"></div>
                                 <div id="nightPrice{{$room->id}}" data-content="{{$room->nightPrice}}"></div>
                                 <div id="phoneOfManager{{$room->id}}" data-content="{{$room->phoneOfManager}}"></div>
-                        <button  class="btn btn-default btn-block btn-main-3 roomUpdate"style="float:right;padding-top:0px;margin-top:-28px;">确认</button>
+                        <button  class="btn btn-default btn-block btn-main-3 roomUpdate" data-content="{{$room->id}}"style="float:right;padding-top:0px;margin-top:-28px;">确认</button>
                         </div>
                     </div>
                 <!--</form>-->
@@ -551,13 +551,19 @@ function showHumanDay(ts)
             });
         $('.roomUpdate').on('click',function(){
             alert('click roomUpdate');
-            var room_data = {
-                'id' : 'ae50f8da-225e-11e7-a09c-01163e028801',
-                'hourPrice' : 19,
-                'nightPrice' : 179,
-                'number' : 1995
-            };
-            $.ajax({
+            var r = confirm('是否确认占用'+ showHumanTime(st * 1000)+' - '+ showHumanTime(ed * 1000)+'?')
+            if(r == true)
+            {
+             
+                roomId = $(this).attr('data-content');
+            
+                var room_data = {
+                'id' : roomId,
+                'hourPrice' : $('#hourPrice'+roomId).attr('data-content'),
+                'nightPrice' : $('#nightPrice'+roomId).attr('data-content'),
+                'number' : $('#phoneOfManager'+roomId).attr('data-content')
+                };
+                $.ajax({
                     url:'/manage/roomUpdate',
                     data: room_data,
                     type: 'GET',
@@ -579,6 +585,7 @@ function showHumanDay(ts)
                          alert('failed');
                      }
                 });
+            }
         });
 
     </script>
