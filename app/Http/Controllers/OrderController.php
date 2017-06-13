@@ -115,7 +115,7 @@ class OrderController extends Controller
 
                 'orders' => Order::where(
                         'state', '>=', Constant::$ORDER_STATE['COMPLETE']
-                    )->orderBy('startTime','asc')->get(),
+                    )->orderBy('startTime','desc')->get(),
                 'rooms' => Room::where('state','<>',0)->get()]);
     }
     function getAnotherOrderList()
