@@ -325,7 +325,7 @@ $(function() {
                             $("#realPrice").text("96");
                             break;
                         default:
-                            $("#realPrice").text("0.01");
+                            $("#realPrice").text("1.7");
                             break;
                         };
                     }
