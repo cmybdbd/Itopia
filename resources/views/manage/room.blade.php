@@ -98,18 +98,21 @@
         @foreach($rooms as $key => $room)
         <div role="tabpanel" class="tab-pane {{$key == 0? 'active':''}}" id="{{$room->id}}">
               <div class="mybox" style="box-shadow:none;">
-                <div class="b-color font-xl">
+                <div class="f-color font-xl">
                     房间基本信息
                 </div>
-          
                 <form action="{{url('/manage/room')}}" method="POST">
                     {!! csrf_field() !!}
                     <input type="hidden" name="id" value="{{$room->id}}">
                     <div class="mybox" style="box-shadow:none;">
-                        <div style="margin-bottom:24px;"><span>时租</span><input type="text" class="input-price m-color" name="hourPrice" placeholder="{{$room->hourPrice}}" >
-                            <div style="position:absolute;left:152px;top:138px;"><span>整租</span><input type="text" class="input-price m-color" name="nightPrice" placeholder="{{$room->nightPrice}}"></div>
+                        <div class="f-color">{{$room->title}}</div>
+                        <div style="margin-top:24px;margin-bottom:24px;"><span>时租</span><input type="text" class="input-price m-color" name="hourPrice" placeholder="{{$room->hourPrice}}" >
+                            <div style="position:absolute;left:152px;top:186px;"><span>整租</span><input type="text" class="input-price m-color" name="nightPrice" placeholder="{{$room->nightPrice}}"></div>
                         </div>
                         <div><span>管理手机号</span><input type="text" class="input-phone  m-color" name="number" placeholder="{{$room->phoneOfManager}}">
+                                <div id="hourPrice{{$room->id}}" data-content="{{$room->hourPrice}}"></div>
+                                <div id="nightPrice{{$room->id}}" data-content="{{$room->nightPrice}}"></div>
+                                <div id="phoneOfManager{{$room->id}}" data-content="{{$room->phoneOfManager}}"></div>
                         <button class="btn btn-default btn-block btn-main-3"style="float:right;padding-top:0px;">确认</button>
                         </div>
                     </div>
@@ -117,32 +120,32 @@
             </div>
             <hr class="mysplit">
             <div class="mybox" style="box-shadow:none;">
-                <div class="b-color font-xl">
+                <div class="f-color font-xl">
                     白日房管理
                 </div>
                 <div class="mybox" style="box-shadow:none;">
                     <div>时间</div>
                     <div id="startDayTime" class="scrollPicker"></div>
-                    <button class="btn btn-block btn-default btn-main-secondary" style="position:absolute;top:288px;width:25%;left:60px;height:32px;padding:0;color:#1dccb8;border: 1px solid #777;" id="selectDay" data-content="0">时间列表</button>
+                    <button class="btn btn-block btn-default btn-main-secondary selectDay" style="position:absolute;top:331px;width:25%;left:60px;height:32px;padding:0;color:#1dccb8;border: 1px solid #777;" data-content="0">时间列表</button>
                     <div id="durationDayTime" class="scrollPicker"></div>
-                    <button class="btn btn-block btn-default btn-main-secondary" style="position:absolute;top:288px;width:25%;left:46%;height:32px;padding:0;color:#1dccb8;border: 1px solid #777;" id="selectDayStart" data-content="0">开始时间</button>
+                    <button class="btn btn-block btn-default btn-main-secondary selectDayStart" style="position:absolute;top:331px;width:25%;left:45%;height:32px;padding:0;color:#1dccb8;border: 1px solid #777;" data-content="0">开始时间</button>
                    
                     <div style="margin-top:24px;">时长</div>
                     <div id="durationNightTime" class="scrollPicker"></div>
-                    <button class="btn btn-block btn-default btn-main-secondary" style="position:absolute;top:328px;width:55%;left:60px;height:32px;padding:0;color:#1dccb8;border: 1px solid #777;" id="selectTime" data-content="0">时长</button>
+                    <button class="btn btn-block btn-default btn-main-secondary selectTime" style="position:absolute;top:378px;width:55%;left:60px;height:32px;padding:0;color:#1dccb8;border: 1px solid #777;" data-content="0">时长</button>
                 <button id='dayUse' data-content='{{$room->id}}' class="btn btn-default btn-block btn-main-3" style="float:right;padding-top:0px;margin-top:-28px;">占用</button>
                 </div>
                 
             </div>
             <hr class="mysplit">
             <div class="mybox" style="box-shadow:none;">
-                <div class="b-color font-xl">
+                <div class="f-color font-xl">
                     夜晚管理
                 </div>
                 <div class="mybox" style="box-shadow:none;">
                 <div>日期</div>
                     <div id="durationNight" class="scrollPicker"></div>
-                    <button class="btn btn-block btn-default btn-main-secondary" style="position:absolute;top:422px;width:55%;left:60px;height:32px;padding:0;color:#1dccb8;border: 1px solid #777;" id="selectNight" data-content="0">选择日期</button>
+                    <button class="btn btn-block btn-default btn-main-secondary selectNight" style="position:absolute;top:464px;width:55%;left:60px;height:32px;padding:0;color:#1dccb8;border: 1px solid #777;" data-content="0">选择日期</button>
                 <button id='nightUse' data-content='{{$room->id}}' class="btn btn-default btn-block btn-main-3" style="float:right;padding-top:0px;margin-top:-24px;">占用</button>
                 </div>
                 <div id="isNightBook0{{$room->id}}" data-content="{{$room->isNightBooked(0) ? '1':'0'}}"></div>
@@ -219,7 +222,7 @@ function showHumanDay(ts)
                     value: 4
                 }
             ];
-            var durationTime = $('#DurationTime');
+            
             var durationPicker = new Picker({
                 data: [duration],
                 selectIndex: [0],
@@ -227,13 +230,12 @@ function showHumanDay(ts)
                 id: 'durationPicker'
             });
 
-
             durationPicker.on('picker.select', function(selectedVal, selectedIndex){
-                $('#selectTime').attr('data-content', duration[selectedIndex[0]].value);
-                $('#selectTime').text(duration[selectedIndex[0]].text);
+                $('.selectTime').attr('data-content', duration[selectedIndex[0]].value);
+                $('.selectTime').text(duration[selectedIndex[0]].text);
             });
             
-            $('#selectTime').on('click',function () {
+            $('.selectTime').on('click',function () {
                 durationPicker.show();
             });
 
@@ -342,28 +344,27 @@ function showHumanDay(ts)
                 id: 'startPicker'
             });
 
-
             startPicker.on('picker.select', function(selectedVal, selectedIndex){
-                $('#selectDayStart').attr('data-content', startTime[selectedIndex[0]].value);
-                $('#selectDayStart').text(startTime[selectedIndex[0]].text);
+                $('.selectDayStart').attr('data-content', startTime[selectedIndex[0]].value);
+                $('.selectDayStart').text(startTime[selectedIndex[0]].text);
             });
             
-            $('#selectDayStart').on('click',function () {
+            $('.selectDayStart').on('click',function () {
                 startPicker.show();
             });
 
 
- var date_time = new Date();  
-    date_time.setTime(date_time.getTime());
-    var pickerText =new Array(8);
-    for (i = 0;i<=7;i++)
-    {
-        pickerText[i] = (date_time.getMonth()+1) + '月' + date_time.getDate()+'日';
-        date_time.setTime(date_time.getTime() + 24*60*60*1000);
-    }
+            var date_time = new Date();  
+            date_time.setTime(date_time.getTime());
+            var pickerText =new Array(8);
+            for (i = 0;i<=7;i++)
+            {
+                pickerText[i] = (date_time.getMonth()+1) + '月' + date_time.getDate()+'日';
+                date_time.setTime(date_time.getTime() + 24*60*60*1000);
+            }
 
-/*day date picker*/
-    var DayDate = [
+            /*day date picker*/
+            var DayDate = [
                 {
                     text: "今日(" + pickerText[0] + ')',
                     value: 0
@@ -371,12 +372,12 @@ function showHumanDay(ts)
                 {
                     text: "明日(" + pickerText[1] + ')',
                     value: 1
-                },
+                }/*,
                 {
                     text: pickerText[2],
                     value: 2
                 },
-                /*{
+                {
                     text: pickerText[3],
                     value: 3
                 },
@@ -406,20 +407,17 @@ function showHumanDay(ts)
 
 
             DayDatePicker.on('picker.select', function(selectedVal, selectedIndex){
-                $('#selectDay').attr('data-content', DayDate[selectedIndex[0]].value);
-                $('#selectDay').text(DayDate[selectedIndex[0]].text);
+                $('.selectDay').attr('data-content', DayDate[selectedIndex[0]].value);
+                $('.selectDay').text(DayDate[selectedIndex[0]].text);
             });
             
-
-            $('#selectDay').on('click',function () {
+            $('.selectDay').on('click',function () {
                 DayDatePicker.show();
             });
 
 
-/*night date picker*/
-
-
-    var NightDate = [
+            /*night date picker*/
+            var NightDate = [
                 {
                     text: "今日(" + pickerText[0] + ')',
                     value: 0
@@ -462,18 +460,17 @@ function showHumanDay(ts)
 
 
             NightDatePicker.on('picker.select', function(selectedVal, selectedIndex){
-                $('#selectNight').attr('data-content', NightDate[selectedIndex[0]].value);
-                $('#selectNight').text(NightDate[selectedIndex[0]].text);
+                $('.selectNight').attr('data-content', NightDate[selectedIndex[0]].value);
+                $('.selectNight').text(NightDate[selectedIndex[0]].text);
             });
             
-
-            $('#selectNight').on('click',function () {
+            $('.selectNight').on('click',function () {
                 NightDatePicker.show();
             });
 
-            $('#dayUse').on('click',function(){
-                var st = $('#today0am').attr('data-content')*1.0 + $('#selectDay').attr('data-content')*86400 + $('#selectDayStart').attr('data-content') * 3600;
-                var ed = st + $('#selectTime').attr('data-content') * 3600;
+            $('.dayUse').on('click',function(){
+                var st = $('#today0am').attr('data-content')*1.0 + $('.selectDay').attr('data-content')*86400 + $('.selectDayStart').attr('data-content') * 3600;
+                var ed = st + $('.selectTime').attr('data-content') * 3600;
                 //var r = confirm('是否确认占用'+ showHumanTime(st * 1000)+' - '+ showHumanTime(ed * 1000)+'?')
                 //if(r == true)
                 //{
@@ -482,7 +479,7 @@ function showHumanDay(ts)
                     'roomId': $(this).attr('data-content'),
                     'startTime': st,
                     'endTime'  : ed,
-                    'duration' : $('#selectTime').attr('data-content'),//+durationTime.attr('data-content')/3600000,
+                    'duration' : $('.selectTime').attr('data-content'),//+durationTime.attr('data-content')/3600000,
                     'isDay'    : 1
                     };
                 console.log(data);
