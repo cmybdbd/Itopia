@@ -57,6 +57,7 @@ Route::group(['middleware' => 'auth'], function (){
     Route::post('/manage/room', 'RoomController@updateRoomInfo');
     //Route::get('/manage/order', 'OrderController@manageOrder');
     Route::get('/manage/fakeOrder','OrderController@fakeOrderCreate');
+    Route::get('/manage/roomUpdate','RoomController@roomUpdate');
     Route::get('/manage/anotherOrder', 'OrderController@getAnotherOrderList');
     Route::post('/manage/anotherOrder', 'OrderController@markOrderHistory');
     Route::get('/manage/orderInfo/{id}','OrderController@getOrderInfo');

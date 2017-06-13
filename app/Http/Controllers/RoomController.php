@@ -65,5 +65,36 @@ class RoomController extends Controller
             $res = 1;
         return Response::json(['isBooked' => $res]);
     }
+
+    function roomUpdate(Request $request)
+    {
+        //return Response::json(['code' => '300','param' => '房间号有误']);
+
+        $room = Room::find($request->id);
+        
+        if(empty($room))
+            return Response::json(['code' => '300','param' => '房间号有误']);
+
+        if(!empty($request->hourPrice))
+        {
+            $room->hourPrice = $request->hourPrice;
+        }
+        if(!empty($request->nightPrice))
+        {
+            $room->nightPrice = $request->nightPrice;
+        }
+        if(!empty($request->number))
+        {
+            $room->phoneOfManager = $request->number;
+        }
+        if($room->save())
+        {
+            return Response::json(['code' => '200','param' => '修改成功']);
+        }
+        else
+        {
+            return Response::json(['code' => '300','param' => '保存失败']);
+        }
+    }
     
 }

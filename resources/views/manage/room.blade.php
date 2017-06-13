@@ -101,7 +101,7 @@
                 <div class="f-color font-xl">
                     房间基本信息
                 </div>
-                <form action="{{url('/manage/room')}}" onsubmit="confirm('确认修改'+{{$room->title}}+'的基本信息?')" method="POST">
+                <!--<form action="{{url('/manage/room')}}" onsubmit="confirm('确认修改'+{{$room->title}}+'的基本信息?')" method="POST">-->
                     {!! csrf_field() !!}
                     <input type="hidden" name="id" value="{{$room->id}}">
                     <div class="mybox" style="box-shadow:none;">
@@ -113,10 +113,10 @@
                                 <div id="hourPrice{{$room->id}}" data-content="{{$room->hourPrice}}"></div>
                                 <div id="nightPrice{{$room->id}}" data-content="{{$room->nightPrice}}"></div>
                                 <div id="phoneOfManager{{$room->id}}" data-content="{{$room->phoneOfManager}}"></div>
-                        <button class="btn btn-default btn-block btn-main-3"style="float:right;padding-top:0px;margin-top:-28px;">确认</button>
+                        <button  class="btn btn-default btn-block btn-main-3 roomUpdate"style="float:right;padding-top:0px;margin-top:-28px;">确认</button>
                         </div>
                     </div>
-                </form>
+                <!--</form>-->
             </div>
             <hr class="mysplit">
             <div class="mybox" style="box-shadow:none;">
@@ -524,6 +524,7 @@ function showHumanDay(ts)
                     //'day'      : $('.selectNight').attr('data-content')
                     };
                 console.log(data);
+
                 $.ajax({
                     url:'/manage/fakeOrder',
                     data: data,
@@ -548,6 +549,37 @@ function showHumanDay(ts)
                     });
             }
             });
+        $('.roomUpdate').on('click',function(){
+            alert('click roomUpdate');
+            var room_data = {
+                'id' : 'ae50f8da-225e-11e7-a09c-01163e028801',
+                'hourPrice' : 19,
+                'nightPrice' : 179,
+                'number' : 1995
+            };
+            $.ajax({
+                    url:'/manage/roomUpdate',
+                    data: room_data,
+                    type: 'GET',
+                    datatype: 'json',
+                    success: function(param){
+                        console.log(param);
+                        //alert(' ');
+                        if(param['code'] == '200')
+                        {
+                            ///alert('成功占用');
+                            alert(param['param']);
+                        }
+                        else
+                        {
+                            alert('failed '+param['param']);
+                        }
+                    },
+                    error: function (e){
+                         alert('failed');
+                     }
+                });
+        });
 
     </script>
 
