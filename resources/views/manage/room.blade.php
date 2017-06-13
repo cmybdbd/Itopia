@@ -113,7 +113,7 @@
                                 <div id="hourPrice{{$room->id}}" data-content="{{$room->hourPrice}}"></div>
                                 <div id="nightPrice{{$room->id}}" data-content="{{$room->nightPrice}}"></div>
                                 <div id="phoneOfManager{{$room->id}}" data-content="{{$room->phoneOfManager}}"></div>
-                        <button class="btn btn-default btn-block btn-main-3"style="float:right;padding-top:0px;">确认</button>
+                        <button class="btn btn-default btn-block btn-main-3"style="float:right;padding-top:0px;margin-top:-28px;">确认</button>
                         </div>
                     </div>
                 </form>
@@ -133,7 +133,7 @@
                     <div style="margin-top:24px;">时长</div>
                     <div id="durationNightTime" class="scrollPicker"></div>
                     <button class="btn btn-block btn-default btn-main-secondary selectTime" style="position:absolute;top:378px;width:55%;left:60px;height:32px;padding:0;color:#1dccb8;border: 1px solid #777;" data-content="0">时长</button>
-                <button id='dayUse' data-content='{{$room->id}}' class="btn btn-default btn-block btn-main-3" style="float:right;padding-top:0px;margin-top:-28px;">占用</button>
+                <button data-content='{{$room->id}}' class="btn btn-default btn-block btn-main-3 dayUse" style="float:right;padding-top:0px;margin-top:-28px;">占用</button>
                 </div>
                 
             </div>
@@ -146,7 +146,7 @@
                 <div>日期</div>
                     <div id="durationNight" class="scrollPicker"></div>
                     <button class="btn btn-block btn-default btn-main-secondary selectNight" style="position:absolute;top:464px;width:55%;left:60px;height:32px;padding:0;color:#1dccb8;border: 1px solid #777;" data-content="0">选择日期</button>
-                <button id='nightUse' data-content='{{$room->id}}' class="btn btn-default btn-block btn-main-3" style="float:right;padding-top:0px;margin-top:-24px;">占用</button>
+                <button data-content='{{$room->id}}' class="btn btn-default btn-block btn-main-3 nightUse" style="float:right;padding-top:0px;margin-top:-24px;">占用</button>
                 </div>
                 <div id="isNightBook0{{$room->id}}" data-content="{{$room->isNightBooked(0) ? '1':'0'}}"></div>
                 <div id="isNightBook1{{$room->id}}" data-content="{{$room->isNightBooked(1) ? '1':'0'}}"></div>
@@ -479,9 +479,9 @@ function showHumanDay(ts)
                     'roomId': $(this).attr('data-content'),
                     'startTime': st,
                     'endTime'  : ed,
-                    'duration' : $('#selectTime').attr('data-content'),//+durationTime.attr('data-content')/3600000,
+                    'duration' : $('.selectTime').attr('data-content')*1.0,//+durationTime.attr('data-content')/3600000,
                     'isDay'    : 1,
-                    'day'      : 0
+                    //'day'      : 0
                     };
                 console.log(data);
                 $.ajax({
@@ -508,15 +508,15 @@ function showHumanDay(ts)
             //}//confirm
             });
 
-            $('#nightUse').on('click',function(){
+            $('.nightUse').on('click',function(){
                 //alert('click nightuse');
                 data = {
                     'roomId': $(this).attr('data-content'),
-                    'startTime': $('#endNightTime').attr('data-content')*1.0+ 86400 * $('#selectNight').attr('data-content'),
-                    'endTime'  : $('#startNightTime').attr('data-content')*1.0 + 86400 * $('#selectNight').attr('data-content'),
+                    'startTime': $('#startNightTime').attr('data-content')*1.0+ 86400 * $('.selectNight').attr('data-content'),
+                    'endTime'  : $('#endNightTime').attr('data-content')*1.0 + 86400 * $('.selectNight').attr('data-content'),
                     'duration' : 12,//+durationTime.attr('data-content')/3600000,
                     'isDay'    : 0,
-                    'day'      : $('#selectNight').attr('data-content')
+                    //'day'      : $('.selectNight').attr('data-content')
                     };
                 console.log(data);
                 $.ajax({
