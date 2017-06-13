@@ -122,13 +122,13 @@
                 </div>
                 <div class="mybox" style="box-shadow:none;">
                     <div>时间</div>
-                    <div id="durationDayTime" class="scrollPicker" data-content="" ></div>
-                    <button class="btn btn-block btn-default btn-main-secondary" style="position:absolute;top:288px;width:55%;left:60px;height:32px;padding:0;color:#1dccb8;border: 1px solid #777;" id="selectDay">时间列表</button>
+                    <div id="durationDayTime" class="scrollPicker"></div>
+                    <button class="btn btn-block btn-default btn-main-secondary" style="position:absolute;top:288px;width:55%;left:60px;height:32px;padding:0;color:#1dccb8;border: 1px solid #777;" id="selectDay" data-content="0">时间列表</button>
                     
                     <div style="margin-top:24px;">时长</div>
-                    <div id="durationNightTime" class="scrollPicker" data-content="" ></div>
-                    <button class="btn btn-block btn-default btn-main-secondary" style="position:absolute;top:328px;width:55%;left:60px;height:32px;padding:0;color:#1dccb8;border: 1px solid #777;" id="selectTime">时长</button>
-                <button id='dayUse' class="btn btn-default btn-block btn-main-3" style="float:right;padding-top:0px;margin-top:-28px;">使用</button>
+                    <div id="durationNightTime" class="scrollPicker"></div>
+                    <button class="btn btn-block btn-default btn-main-secondary" style="position:absolute;top:328px;width:55%;left:60px;height:32px;padding:0;color:#1dccb8;border: 1px solid #777;" id="selectTime" data-content="0">时长</button>
+                <button id='dayUse' data-content='{{$room->id}}' class="btn btn-default btn-block btn-main-3" style="float:right;padding-top:0px;margin-top:-28px;">使用</button>
                 </div>
                 
             </div>
@@ -139,16 +139,24 @@
                 </div>
                 <div class="mybox" style="box-shadow:none;">
                 <div>日期</div>
-                    <div id="durationNight" class="scrollPicker" data-content="" ></div>
-                    <button class="btn btn-block btn-default btn-main-secondary" style="position:absolute;top:422px;width:55%;left:60px;height:32px;padding:0;color:#1dccb8;border: 1px solid #777;" id="selectNight">选择日期</button>
-                <button id='nightUse' class="btn btn-default btn-block btn-main-3" style="float:right;padding-top:0px;margin-top:-24px;">使用</button>
+                    <div id="durationNight" class="scrollPicker"></div>
+                    <button class="btn btn-block btn-default btn-main-secondary" style="position:absolute;top:422px;width:55%;left:60px;height:32px;padding:0;color:#1dccb8;border: 1px solid #777;" id="selectNight" data-content="0">选择日期</button>
+                <button id='nightUse' data-content='{{$room->id}}' class="btn btn-default btn-block btn-main-3" style="float:right;padding-top:0px;margin-top:-24px;">使用</button>
                 </div>
                 
             </div>
         </div>
         @endforeach
     </div>
-
+<?php 
+    $tmp = strtotime(date("Y-m-d"));
+    $stTime = $tmp + 23*3600;
+    $edTime = $stTime + 12*3600;
+?>
+<div id="param">
+    <div id="startNightTime" data-content="{{$stTime}}"></div>
+    <div id="endNightTime" data-content="{{$edTime}}"></div>
+</div>
 @endsection
 @section('scripts')
     <script>
@@ -178,6 +186,30 @@
                 {
                     text: '3小时',
                     value: 3
+                },
+                {
+                    text: '3.5小时',
+                    value: 3.5
+                },
+                {
+                    text: '4小时',
+                    value: 4
+                },
+                {
+                    text: '4.5小时',
+                    value: 4.5
+                },
+                {
+                    text: '5小时',
+                    value: 5
+                },
+                                {
+                    text: '5.5小时',
+                    value: 5.5
+                },
+                {
+                    text: '6小时',
+                    value: 6
                 }
             ];
             var durationTime = $('#DurationTime');
@@ -190,7 +222,7 @@
 
 
             durationPicker.on('picker.select', function(selectedVal, selectedIndex){
-                durationTime.attr('data-content', duration[selectedIndex[0]].value);
+                $('#selectTime').attr('data-content', duration[selectedIndex[0]].value);
                 $('#selectTime').text(duration[selectedIndex[0]].text);
             });
             
@@ -255,7 +287,7 @@
 
 
             DayDatePicker.on('picker.select', function(selectedVal, selectedIndex){
-                DayDateTime.attr('data-content', DayDate[selectedIndex[0]].value);
+                $('#selectDay').attr('data-content', DayDate[selectedIndex[0]].value);
                 $('#selectDay').text(DayDate[selectedIndex[0]].text);
             });
             
@@ -310,7 +342,7 @@
 
 
             NightDatePicker.on('picker.select', function(selectedVal, selectedIndex){
-                NightDateTime.attr('data-content', NightDate[selectedIndex[0]].value);
+                $('#selectNight').attr('data-content', NightDate[selectedIndex[0]].value);
                 $('#selectNight').text(NightDate[selectedIndex[0]].text);
             });
             
@@ -322,12 +354,13 @@
             $('#dayUse').on('click',function(){
                 alert('click dayuse');
                 data = {
-                    'roomId': 'ae50f8da-225e-11e7-b09c-01163e028206',
+                    'roomId': $(this).attr('data-content'),
                     'startTime': 1,
                     'endTime'  : 1,
-                    'duration' : 1,//+durationTime.attr('data-content')/3600000,
+                    'duration' : $('#selectTime').attr('data-content'),//+durationTime.attr('data-content')/3600000,
                     'isDay'    : 1
                     };
+                console.log(data);
                 $.ajax({
                     url:'/manage/fakeOrder',
                     data: data,
@@ -354,12 +387,13 @@
             $('#nightUse').on('click',function(){
                 alert('click nightuse');
                 data = {
-                    'roomId': 'ae50f8da-225e-11e7-b09c-01163e028206',
-                    'startTime': 1,
-                    'endTime'  : 1,
-                    'duration' : 1,//+durationTime.attr('data-content')/3600000,
+                    'roomId': $(this).attr('data-content'),
+                    'startTime': $('#endNightTime').attr('data-content')*1.0+ 86400 * $('#selectNight').attr('data-content'),
+                    'endTime'  : $('#startNightTime').attr('data-content')*1.0 + 86400 * $('#selectNight').attr('data-content'),
+                    'duration' : 12,//+durationTime.attr('data-content')/3600000,
                     'isDay'    : 0
                     };
+                console.log(data);
                 $.ajax({
                     url:'/manage/fakeOrder',
                     data: data,
