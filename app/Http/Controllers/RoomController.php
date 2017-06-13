@@ -43,8 +43,14 @@ class RoomController extends Controller
     }
     function manageRoom()
     {
-
-        return view('manage.room')->withRooms(Room::where('state' ,'<>',0)->get());
+        //return Room::where('state' ,'<>',0)->get();
+        $rooms = Room::where('state' ,'<>',0)->get();
+        return view('manage.room')->with('rooms',$rooms)->with('choose',1);
+    }
+    function manageRoomById($rid)
+    {
+        $rooms = Room::where('state' ,'<>',0)->get();
+        return view('manage.room')->with('rooms',$rooms)->with('choose',$rid);
     }
     function getRoomList()
     {}

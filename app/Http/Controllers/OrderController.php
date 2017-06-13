@@ -413,6 +413,7 @@ class OrderController extends Controller
             return Response::json(['code' => '300']);
         }
     }
+
     function restoreOrder(Request $request)
     {
         $this->validate($request, [
@@ -534,14 +535,16 @@ class OrderController extends Controller
     {
         $this->validate($request, [
             'roomId' => 'required',
-            'date' => 'required',
             'startTime' => 'required',
             'endTime' => 'required',
             'duration' => 'required',
             'isDay'  => 'required',
-            'day' => 'required'
         ]);
+        
+        $room = Room::find($request->roomId);
 
+        if( empty($room) || ($request->startTime % 60*30)!=0 || ($request->endTime % 60*30)!=0 )
+            return Response::json(['code' => '300','param' => 'wrong time']);
         $order = Uuid::generate()->string;
         if($request->isDay)
         {

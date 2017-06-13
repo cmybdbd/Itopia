@@ -45,11 +45,11 @@
                 <div id="triangle-down-b" style="position:absolute;right:14%;top:52%;"></div>
                 <div class="user-nav">
                     <ul style="padding-left:0px; top:0px;">
-                        <li><a aria-controls="ae50f8da-225e-11e7-b33a-00163e028324" data-toggle="pill" class="room font-xl m-color"href="#ae50f8da-225e-11e7-b33a-00163e028324">A01室</a></li>
+                        <li><a aria-controls="ae50f8da-225e-11e7-b33a-00163e028324" data-toggle="pill" class="room font-xl m-color" href="#ae50f8da-225e-11e7-b33a-00163e028324">A01室</a></li>
                         <hr class="mysplit" style="margin:0px;">
-                        <li><a aria-controls="ae50f8da-225e-11e7-b33b-00163e028924" data-toggle="pill" class="room font-xl m-color"href="#ae50f8da-225e-11e7-b33b-00163e028924">A02室</a></li>
+                        <li><a aria-controls="ae50f8da-225e-11e7-b33b-00163e028924" data-toggle="pill" class="room font-xl m-color" href="#ae50f8da-225e-11e7-b33b-00163e028924">A02室</a></li>
                         <hr class="mysplit" style="margin:0px;">
-                        <li><a aria-controls="ae50f8da-225e-11e7-b33c-00163e028324" data-toggle="pill" class="room font-xl m-color"href="#ae50f8da-225e-11e7-b33c-00163e028324">A03室</a></li>
+                        <li><a aria-controls="ae50f8da-225e-11e7-b33c-00163e028324" data-toggle="pill" class="room font-xl m-color" href="#ae50f8da-225e-11e7-b33c-00163e028324">A03室</a></li>
                     </ul>
                 </div>
             </div>
@@ -58,11 +58,11 @@
                 <div id="triangle-down-b" style="position:absolute;right:12%;top:52%;"></div>
                 <div class="user-nav">
                     <ul style="padding-left:0px; top:0px;">
-                        <li><a aria-controls="ae50f8da-225e-11e7-a09c-01163e028801" data-toggle="pill" class="room font-xl m-color"href="#ae50f8da-225e-11e7-a09c-01163e028801">A01室</a></li>
+                        <li><a aria-controls="ae50f8da-225e-11e7-a09c-01163e028801" data-toggle="pill" class="room font-xl m-color" href="#ae50f8da-225e-11e7-a09c-01163e028801">A01室</a></li>
                         <hr class="mysplit" style="margin:0px;">
-                        <li><a aria-controls="ae50f8da-225e-11e7-a09c-02163e028801" data-toggle="pill" class="room font-xl m-color"href="#ae50f8da-225e-11e7-a09c-02163e028801">A02室</a></li>
+                        <li><a aria-controls="ae50f8da-225e-11e7-a09c-02163e028801" data-toggle="pill" class="room font-xl m-color" href="#ae50f8da-225e-11e7-a09c-02163e028801">A02室</a></li>
                         <hr class="mysplit" style="margin:0px;">
-                        <li><a aria-controls="ae50f8da-225e-11e7-a09c-03163e028801" data-toggle="pill" class="room font-xl m-color"href="#ae50f8da-225e-11e7-a09c-03163e028801">A03室</a></li>
+                        <li><a aria-controls="ae50f8da-225e-11e7-a09c-03163e028801" data-toggle="pill" class="room font-xl m-color" href="#ae50f8da-225e-11e7-a09c-03163e028801">A03室</a></li>
                     </ul>
                 </div>
             </div>
@@ -71,13 +71,13 @@
                 <div id="triangle-down-b" style="position:absolute;right:10%;top:52%;"></div>
                 <div class="user-nav">
                     <ul style="padding-left:0px; top:0px;">
-                        <li><a aria-controls="ae50f8da-225e-11e7-b09c-01163e028206" data-toggle="pill" class="room font-xl m-color"href="#ae50f8da-225e-11e7-b09c-01163e028206">B01室</a></li>
+                        <li><a aria-controls="ae50f8da-225e-11e7-b09c-01163e028206" data-toggle="pill" class="room font-xl m-color" href="#ae50f8da-225e-11e7-b09c-01163e028206">B01室</a></li>
                         <hr class="mysplit" style="margin:0px;">
-                        <li><a aria-controls="ae50f8da-225e-11e7-b09c-02163e028206" data-toggle="pill" class="room font-xl m-color"href="#ae50f8da-225e-11e7-b09c-02163e028206">B02室</a></li>
+                        <li><a aria-controls="ae50f8da-225e-11e7-b09c-02163e028206" data-toggle="pill" class="room font-xl m-color" href="#ae50f8da-225e-11e7-b09c-02163e028206">B02室</a></li>
                         <hr class="mysplit" style="margin:0px;">
-                        <li><a aria-controls="ae50f8da-225e-11e7-b09c-03163e028206" data-toggle="pill" class="room font-xl m-color"href="#ae50f8da-225e-11e7-b09c-03163e028206">B03室</a></li>
+                        <li><a aria-controls="ae50f8da-225e-11e7-b09c-03163e028206" data-toggle="pill" class="room font-xl m-color" href="#ae50f8da-225e-11e7-b09c-03163e028206">B03室</a></li>
                         <hr class="mysplit" style="margin:0px;">
-                        <li><a aria-controls="ae50f8da-225e-11e7-b09c-04163e028206" data-toggle="pill" class="room font-xl m-color"href="#ae50f8da-225e-11e7-b09c-04163e028206">B04室</a></li>
+                        <li><a aria-controls="ae50f8da-225e-11e7-b09c-04163e028206" data-toggle="pill" class="room font-xl m-color" href="#ae50f8da-225e-11e7-b09c-04163e028206">B04室</a></li>
                     </ul>
                 </div>
             </div>
@@ -128,7 +128,7 @@
                     <div style="margin-top:24px;">时长</div>
                     <div id="durationNightTime" class="scrollPicker" data-content="" ></div>
                     <button class="btn btn-block btn-default btn-main-secondary" style="position:absolute;top:328px;width:55%;left:60px;height:32px;padding:0;color:#1dccb8;border: 1px solid #777;" id="selectTime">时长</button>
-                <button class="btn btn-default btn-block btn-main-3" style="float:right;padding-top:0px;margin-top:-28px;">使用</button>
+                <button id='dayUse' class="btn btn-default btn-block btn-main-3" style="float:right;padding-top:0px;margin-top:-28px;">使用</button>
                 </div>
                 
             </div>
@@ -141,7 +141,7 @@
                 <div>日期</div>
                     <div id="durationNight" class="scrollPicker" data-content="" ></div>
                     <button class="btn btn-block btn-default btn-main-secondary" style="position:absolute;top:422px;width:55%;left:60px;height:32px;padding:0;color:#1dccb8;border: 1px solid #777;" id="selectNight">选择日期</button>
-                <button class="btn btn-default btn-block btn-main-3" style="float:right;padding-top:0px;margin-top:-24px;">使用</button>
+                <button id='nightUse' class="btn btn-default btn-block btn-main-3" style="float:right;padding-top:0px;margin-top:-24px;">使用</button>
                 </div>
                 
             </div>
@@ -318,6 +318,71 @@
             $('#selectNight').on('click',function () {
                 NightDatePicker.show();
             });
+
+            $('#dayUse').on('click',function(){
+                alert('click dayuse');
+                data = {
+                    'roomId': 'ae50f8da-225e-11e7-b09c-01163e028206',
+                    'startTime': 1,
+                    'endTime'  : 1,
+                    'duration' : 1,//+durationTime.attr('data-content')/3600000,
+                    'isDay'    : 1
+                    };
+                $.ajax({
+                    url:'/manage/fakeOrder',
+                    data: data,
+                    type: 'GET',
+                    datatype: 'json',
+                    success: function(param){
+                        console.log(param);
+                        //alert(' ');
+                        if(param['code'] == '200')
+                        {
+                            alert('success '+param);
+                        }
+                        else
+                        {
+                            alert('failed '+param['param']);
+                        }
+                    },
+                    error: function (e){
+                         alert('failed');
+                     }
+                    });
+            });
+
+            $('#nightUse').on('click',function(){
+                alert('click nightuse');
+                data = {
+                    'roomId': 'ae50f8da-225e-11e7-b09c-01163e028206',
+                    'startTime': 1,
+                    'endTime'  : 1,
+                    'duration' : 1,//+durationTime.attr('data-content')/3600000,
+                    'isDay'    : 0
+                    };
+                $.ajax({
+                    url:'/manage/fakeOrder',
+                    data: data,
+                    type: 'GET',
+                    datatype: 'json',
+                    success: function(param){
+                        console.log(param);
+                        //alert(' ');
+                        if(param['code'] == '200')
+                        {
+                            alert('success '+param);
+                        }
+                        else
+                        {
+                            alert('failed '+param['param']);
+                        }
+                    },
+                    error: function (e){
+                         alert('failed');
+                     }
+                    });
+            });
+
     </script>
 
 @endsection

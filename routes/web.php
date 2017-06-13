@@ -52,8 +52,10 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('/getOrderList', 'HomeController@orderList');
 
     Route::get('/manage/room', 'RoomController@manageRoom');
+    Route::get('/manage/room/{rid}', 'RoomController@manageRoomById');
     Route::post('/manage/room', 'RoomController@updateRoomInfo');
     //Route::get('/manage/order', 'OrderController@manageOrder');
+    Route::get('/manage/fakeOrder','OrderController@fakeOrderCreate');
     Route::get('/manage/anotherOrder', 'OrderController@getAnotherOrderList');
     Route::post('/manage/anotherOrder', 'OrderController@markOrderHistory');
     Route::get('/manage/orderInfo/{id}','OrderController@getOrderInfo');
@@ -62,7 +64,7 @@ Route::group(['middleware' => 'auth'], function (){
 
     Route::post('/session/vcode','SMSController@storeCode');
     Route::post('/vcode/validate','SMSController@checkCode');
-    Route::post('/manage/fakeOrder','OrderController@fakeOrderCreate');
+
 
     Route::post('/updatePageView/{page}', 'PageViewController@updatePageView');
     Route::get('test',function(){
