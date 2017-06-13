@@ -479,8 +479,9 @@ function showHumanDay(ts)
                     'roomId': $(this).attr('data-content'),
                     'startTime': st,
                     'endTime'  : ed,
-                    'duration' : $('.selectTime').attr('data-content'),//+durationTime.attr('data-content')/3600000,
-                    'isDay'    : 1
+                    'duration' : $('#selectTime').attr('data-content'),//+durationTime.attr('data-content')/3600000,
+                    'isDay'    : 1,
+                    'day'      : 0
                     };
                 console.log(data);
                 $.ajax({
@@ -493,8 +494,7 @@ function showHumanDay(ts)
                         //alert(' ');
                         if(param['code'] == '200')
                         {
-                            alert('成功占用');
-                            console.log(param);
+                            alert(param['param']);
                         }
                         else
                         {
@@ -509,13 +509,14 @@ function showHumanDay(ts)
             });
 
             $('#nightUse').on('click',function(){
-                alert('click nightuse');
+                //alert('click nightuse');
                 data = {
                     'roomId': $(this).attr('data-content'),
                     'startTime': $('#endNightTime').attr('data-content')*1.0+ 86400 * $('#selectNight').attr('data-content'),
                     'endTime'  : $('#startNightTime').attr('data-content')*1.0 + 86400 * $('#selectNight').attr('data-content'),
                     'duration' : 12,//+durationTime.attr('data-content')/3600000,
-                    'isDay'    : 0
+                    'isDay'    : 0,
+                    'day'      : $('#selectNight').attr('data-content')
                     };
                 console.log(data);
                 $.ajax({
@@ -528,8 +529,8 @@ function showHumanDay(ts)
                         //alert(' ');
                         if(param['code'] == '200')
                         {
-                            alert('成功占用');
-                            console.log(param);
+                            ///alert('成功占用');
+                            alert(param['param']);
                         }
                         else
                         {

@@ -545,6 +545,7 @@ class OrderController extends Controller
 
     function fakeOrderCreate(Request $request)
     {
+
         $this->validate($request, [
             'roomId' => 'required',
             'startTime' => 'required',
@@ -556,8 +557,13 @@ class OrderController extends Controller
         $room = Room::find($request->roomId);
 
         if( empty($room) || ($request->startTime % 60*30)!=0 || ($request->endTime % 60*30)!=0 )
-            return Response::json(['code' => '300','param' => 'wrong time']);
+            return Response::json(['code' => '300','param' => 'wrong']);
         $order = Uuid::generate()->string;
+
+        $today = 0;
+        if(strtotime(date('Y-m-d H:i:s', $request->startTime)) >  time())
+            $today = 1;
+
         if($request->isDay)
         {
             $maxDayTime = strtotime(Order::where([
@@ -568,22 +574,67 @@ class OrderController extends Controller
 
             if(!empty($maxDayTime))
                 if($maxDayTime > strtotime(date('Y-m-d H:i:s', $request->startTime)))
-                    return 'error';
+                    return Response::json(['code' => '300','param' => 'wrong time']);
+            if($today == 0)
+            {
+                if($room->today_nextTime() == -1)
+                    return Response::json(['code' => '300','param' => '今日已满']);
+                if(strtotime(date('Y-m-d H:i:s', $request->startTime)) < $room->today_nextTime())
+                    return Response::json(['code' => '300','param' => '请选择开始时间为'+date('Y-m-d H:i:s', $room->today_nextTime())]);
+            }
+            else
+            {
+                if($room->next_day_time() == -1)
+                    return Response::json(['code' => '300','param' => '今日已满']);
+                if(strtotime(date('Y-m-d H:i:s', $request->startTime)) < $room->next_day_time())
+                    return Response::json(['code' => '300','param' => '请选择开始时间为'+date('Y-m-d H:i:s', $room->next_day_time())]);
+            }
+            
+
+            if(strtotime(date('H:i:s', $request->endTime)) > strtotime(date('23:00:00', time())))
+                return Response::json(['code' => '300','param' => '时间超过包夜时间']);
+
             $fake_order = new Order();
+            $fake_order->Id = $order;
             $fake_order->userId = '0000';
             $fake_order->roomId = $request->roomId;
-            $fake_order->startTime = $request->startTime;
-            $fake_order->endTime = $request->endTime;
+            $fake_order->startTime = date('Y-m-d H:i:s',$request->startTime);
+            $fake_order->endTime = date('Y-m-d H:i:s',$request->endTime);
             $fake_order->duration = $request->duration;
             $fake_order->isDay = $request->isDay;
-            $fake_order->state = $request->state;
+            $fake_order->state = 5;
             $fake_order->payNum = '{"tenantId":"11","tenantOrder":"86886010-4dc6-11e7-b30f-2bc8b6b87266","cardno":"****","bank_name":"****","amount":"0.01","transDate":"2017-06-10 18:21:17","resultCode":"SUCCESS","orderno":"2017061001933649843"}';
             $fake_order->updated_at = date('Y-m-d H:i:s', time());
             $fake_order->created_at = date('Y-m-d H:i:s', time());
-            if($fake_order->save())
-                return 'success';
+            /*if($fake_order->save())
+                return Response::json(['code' => '200','param' => 'success']);
             else
-                return 'error';
+                return Response::json(['code' => '300','param' => '存储失败']);*/
+            
+            DB::beginTransaction();
+            DB::insert('insert into `orders` ' .
+                '(`userId`, `roomId`, `startDate`, `startTime`, `endTime`, `duration`, `price`,`isDay`, `state`, `id`, `updated_at`, `created_at`, `payNum`)' .
+                'values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?)' ,
+                [
+                    $fake_order->userId,
+                    $fake_order->roomId,
+                    $fake_order->startTime,
+                    $fake_order->startTime,
+                    $fake_order->endTime,
+                    $fake_order->duration,
+                    0,
+                    $request->isDay ? 1 : 0,
+                    5,
+                    $order,
+                    date('Y-m-d H:i:s', time()),
+                    date('Y-m-d H:i:s', time()),
+                    $fake_order->payNum
+                ]
+            );
+            //return Response::json(['code' => '300', 'param' => 'isday']);
+            DB::commit();
+            return Response::json(['code' => '200', 'param' => '占用成功']);
+
         }
         else
         {
@@ -593,24 +644,48 @@ class OrderController extends Controller
                 ['state', '>=', Constant::$ORDER_STATE['COMPLETE']]
             ])->where('startTime','>=',date("Y-m-d",$request->startTime+24*60*60*$request->day))->where('startTime','<',date("Y-m-d",$request->startTime+24*60*60*($request->day+1)))->max('startTime'));
             if(!empty($night))
-                return 'error';
+                return Response::json(['code' => '300','param' => '该日已被占用']);
 
             $fake_order = new Order();
+            $fake_order->Id = $order;
             $fake_order->userId = '0000';
             $fake_order->roomId = $request->roomId;
-            $fake_order->startTime = $request->startTime;
-            $fake_order->endTime = $request->endTime;
+            $fake_order->startTime = date('Y-m-d H:i:s',$request->startTime);
+            $fake_order->endTime = date('Y-m-d H:i:s',$request->endTime);
             $fake_order->duration = $request->duration;
             $fake_order->isDay = $request->isDay;
-            $fake_order->state = $request->state;
+            $fake_order->state = 5;
             $fake_order->payNum = '{"tenantId":"11","tenantOrder":"86886010-4dc6-11e7-b30f-2bc8b6b87266","cardno":"****","bank_name":"****","amount":"0.01","transDate":"2017-06-10 18:21:17","resultCode":"SUCCESS","orderno":"2017061001933649843"}';
             $fake_order->updated_at = date('Y-m-d H:i:s', time());
             $fake_order->created_at = date('Y-m-d H:i:s', time());
-
-            if($fake_order->save())
-                return 'success';
+            /*if($fake_order->save())
+                return Response::json(['code' => '200','param' => 'success']);
             else
-                return 'error';
+                return Response::json(['code' => '300','param' => '存储失败']);*/
+            
+            DB::beginTransaction();
+            DB::insert('insert into `orders` ' .
+                '(`userId`, `roomId`, `startDate`, `startTime`, `endTime`, `duration`, `price`,`isDay`, `state`, `id`, `updated_at`, `created_at`, `payNum`)' .
+                'values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?)' ,
+                [
+                    $fake_order->userId,
+                    $fake_order->roomId,
+                    $fake_order->startTime,
+                    $fake_order->startTime,
+                    $fake_order->endTime,
+                    $fake_order->duration,
+                    0,
+                    $request->isDay ? 1 : 0,
+                    5,
+                    $order,
+                    date('Y-m-d H:i:s', time()),
+                    date('Y-m-d H:i:s', time()),
+                    $fake_order->payNum
+                ]
+            );
+            //return Response::json(['code' => '300', 'param' => 'isday']);
+            DB::commit();
+            return Response::json(['code' => '200', 'param' => '占用成功']);
         }
 
     }
