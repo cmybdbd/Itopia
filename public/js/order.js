@@ -301,21 +301,25 @@ $(function() {
                     tsum = durationTime.attr("data-content")/(3600*1000);
                     
                     userId = $("#userId").attr('data-content');
+                    console.log(userId);
+                    
                     var p ;
                     $.ajax({
                         url:'/isFirstOrder/'+userId,
                         type: 'GET',
-                        datatype: 'json',
+                        async : false,
                         success: function(reg){
                             p = reg;
-                            //console.log(reg);
+                            console.log(reg = 'reg');
                         },
                         error: function (e){
                             //alert(e.responseText);
                             //console.log(e.responseText);
                         }
                     });
-                    if(!p) //no order
+                    console.log(p);
+                    console.log(!p);
+                    if(p==0) //no order
                     {
                         switch (tsum){
                         case 1:

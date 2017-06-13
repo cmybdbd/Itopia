@@ -103,9 +103,9 @@ class OrderController extends Controller
             ['state' ,'>=',Constant::$ORDER_STATE['COMPLETE']]
             ])->orderBy('endTime','DESC')->get();
         if (count($orders))
-            return true;
+            return 1;
         else
-            return false;
+            return 0;
     }
 
     function manageOrder()
