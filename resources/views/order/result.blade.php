@@ -3,13 +3,16 @@
 @section('style')
     <style>
         .pwd-group{
+            position: absolute;
+            left:26%;
+            width:70%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 0 6px #dddddd;
-            padding-top: 0.5em;
-            padding-bottom: 0.5em;
-            margin: 0.6em;
+            border:1px solid #1dccb8;
+            border-radius: 4px;
+            padding-top: 4px;
+            padding-bottom: 4px;
         }
         .pwd-group div{
             border: none;
@@ -18,7 +21,7 @@
             text-align: center;
             margin: 0 0 0 0;
             padding: 0;
-            width: 16%;
+            width: 16.5%;
             height: 100%;
             float: left;
         }
@@ -29,7 +32,7 @@
             width: 1px;
             height: 100%;
             /*background-image: -webkit-gradient(linear,0 0, 0 100% ,from(transparent), to(transparent),color-stop(20%, var(--used-color)) , color-stop(80%, var(--used-color)));*/
-            background-image: -webkit-gradient(linear,0 0, 100% 0 ,from(transparent), to(transparent),color-stop(20%,  #1dccb8) , color-stop(80%,  #1dccb8));
+            background-image: -webkit-gradient(linear,0 0, 100% 0 ,from(transparent), to(transparent),color-stop(20%,  #eee) , color-stop(80%,  #eee));
         }
         .pwd-group div:last-child::after{
             content:"";
@@ -120,9 +123,9 @@
         
         <hr class="mysplit">
 
-        <div class="gatepwd b-color font-xl">
-            <div >大门密码</div>
-            <div class="pwd-group font-b m-color">
+        <div class="gatepwd f-color font-xl" style="margin-bottom:24px;">
+            <div style="margin-top:24px;">大门密码</div>
+            <div class="pwd-group font-b m-color" style="top:330px;">
                 <div></div>
                 <div></div>
                 <div></div>
@@ -133,11 +136,9 @@
         </div>
         
         <hr class="mysplit">
-        <div class="roompwd b-color font-xl">
-            <div>
-                房间密码
-            </div>
-            <div class="pwd-group font-b m-color">
+        <div class="roompwd f-color font-xl"style="margin-bottom:24px;">
+            <div style="margin-top:24px;" >房间密码</div>
+            <div class="pwd-group font-b m-color" style="top:410px;">
                 <div></div>
                 <div></div>
                 <div></div>
@@ -149,7 +150,7 @@
 
         <hr class="mysplit">
         <div class="b-color">
-            <div class="b-color font-xl">
+            <div class="f-color font-xl">
                 温馨提示
             </div>
             <div class="mybox" style="box-shadow:none;">
