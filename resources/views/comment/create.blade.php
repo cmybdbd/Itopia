@@ -19,7 +19,6 @@
             border-radius: 17px;
             line-height: 1.5em;
             padding: 6px 24px;
-
         }
 
         .tagDetail > div{
@@ -124,7 +123,7 @@
             </div>
 
             <textarea class="form-control custom-textarea" name="" id="commentText" cols="30" rows="6" onkeyup="countChar(this)"></textarea>
-            <p style="margin-top:12px;"><span id="wordcount">0</span>/100，最少输入15字</p>
+            <p style="margin-top:12px;"><span id="wordcount">0</span>/100，最少输入5字</p>
         </div>
     </div>
     <button class="btn btn-block btn-default btn-main" id="commit">提交</button>
