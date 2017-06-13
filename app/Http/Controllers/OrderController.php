@@ -96,6 +96,18 @@ class OrderController extends Controller
         ['state' ,'>=',Constant::$ORDER_STATE['COMPLETE']]
         ])->orderBy('endTime','DESC')->get());*/
     }
+
+    function isFirstOrder($id)
+    {
+        $orders =Order::with('hasRoom')->where([['userId','=',$id],
+            ['state' ,'>=',Constant::$ORDER_STATE['COMPLETE']]
+            ])->orderBy('endTime','DESC')->get();
+        if (count($orders))
+            return true;
+        else
+            return false;
+    }
+
     function manageOrder()
     {
         return view('manage.order')->with(

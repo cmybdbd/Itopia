@@ -299,7 +299,39 @@ $(function() {
                 {
                     $("#totalPrice").text((+durationTime.attr("data-content"))/(3600*1000) * (+$("#hourPrice").attr("data-content")) );
                     tsum = durationTime.attr("data-content")/(3600*1000);
-                    switch (tsum){
+                    
+                    userId = $("#userId").attr('data-content');
+                    var p ;
+                    $.ajax({
+                        url:'/isFirstOrder/'+userId,
+                        type: 'GET',
+                        datatype: 'json',
+                        success: function(reg){
+                            p = reg;
+                            //console.log(reg);
+                        },
+                        error: function (e){
+                            //alert(e.responseText);
+                            //console.log(e.responseText);
+                        }
+                    });
+                    if(!p) //no order
+                    {
+                        switch (tsum){
+                        case 5:
+                            $("#realPrice").text("85");
+                            break;
+                        case 6:
+                            $("#realPrice").text("96");
+                            break;
+                        default:
+                            $("#realPrice").text("0");
+                            break;
+                        };
+                    }
+                    else{
+
+                        switch (tsum){
                         case 0.5:
                             $("#realPrice").text("9.5");
                             break;
@@ -328,6 +360,7 @@ $(function() {
                             $("#realPrice").text("0");
                             break;
                     };
+                    }
                     
                 }
                 else {

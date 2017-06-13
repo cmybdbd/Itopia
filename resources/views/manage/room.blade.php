@@ -217,22 +217,6 @@ function showHumanDay(ts)
                 {
                     text: '4小时',
                     value: 4
-                },
-                {
-                    text: '4.5小时',
-                    value: 4.5
-                },
-                {
-                    text: '5小时',
-                    value: 5
-                },
-                                {
-                    text: '5.5小时',
-                    value: 5.5
-                },
-                {
-                    text: '6小时',
-                    value: 6
                 }
             ];
             var durationTime = $('#DurationTime');

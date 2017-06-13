@@ -49,6 +49,7 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('/comment/{id}', 'CommentController@create');
     Route::get('/commentResult', 'CommentController@finish');
     Route::get('/orderList/{id}', 'OrderController@getOrderList');
+    Route::get('/isFirstOrder/{id}', 'OrderController@isFirstOrder');
     Route::get('/getOrderList', 'HomeController@orderList');
 
     Route::get('/manage/room', 'RoomController@manageRoom');
