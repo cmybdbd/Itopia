@@ -101,7 +101,7 @@
                 <div class="f-color font-xl">
                     房间基本信息
                 </div>
-                <form action="{{url('/manage/room')}}" method="POST">
+                <form action="{{url('/manage/room')}}" onsubmit="confirm('确认修改'+{{$room->title}}+'的基本信息?')" method="POST">
                     {!! csrf_field() !!}
                     <input type="hidden" name="id" value="{{$room->id}}">
                     <div class="mybox" style="box-shadow:none;">
@@ -471,9 +471,9 @@ function showHumanDay(ts)
             $('.dayUse').on('click',function(){
                 var st = $('#today0am').attr('data-content')*1.0 + $('.selectDay').attr('data-content')*86400 + $('.selectDayStart').attr('data-content') * 3600;
                 var ed = st + $('.selectTime').attr('data-content') * 3600;
-                //var r = confirm('是否确认占用'+ showHumanTime(st * 1000)+' - '+ showHumanTime(ed * 1000)+'?')
-                //if(r == true)
-                //{
+                var r = confirm('是否确认占用'+ showHumanTime(st * 1000)+' - '+ showHumanTime(ed * 1000)+'?')
+                if(r == true)
+                {
                 
                 data = {
                     'roomId': $(this).attr('data-content'),
@@ -505,15 +505,20 @@ function showHumanDay(ts)
                          alert('failed');
                      }
                     });
-            //}//confirm
+            }//confirm
             });
 
             $('.nightUse').on('click',function(){
                 //alert('click nightuse');
+                st = $('#startNightTime').attr('data-content')*1.0+ 86400 * $('.selectNight').attr('data-content');
+                ed = $('#endNightTime').attr('data-content')*1.0 + 86400 * $('.selectNight').attr('data-content');
+                var r = confirm('是否确认占用'+ showHumanTime(st * 1000)+' - '+ showHumanTime(ed * 1000)+'?')
+                if(r == true)
+                {
                 data = {
                     'roomId': $(this).attr('data-content'),
-                    'startTime': $('#startNightTime').attr('data-content')*1.0+ 86400 * $('.selectNight').attr('data-content'),
-                    'endTime'  : $('#endNightTime').attr('data-content')*1.0 + 86400 * $('.selectNight').attr('data-content'),
+                    'startTime': st,
+                    'endTime'  : ed,
                     'duration' : 12,//+durationTime.attr('data-content')/3600000,
                     'isDay'    : 0,
                     //'day'      : $('.selectNight').attr('data-content')
@@ -541,6 +546,7 @@ function showHumanDay(ts)
                          alert('failed');
                      }
                     });
+            }
             });
 
     </script>
