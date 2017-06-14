@@ -19,7 +19,7 @@
         </div>
             <!--onmouseover="getMousePos(event)"-->
         <div>
-            <img id="mapImg" src="{{asset('storage/map/mapPKU.png')}}" style="position:absolute;top:-150px;left:-250px;z-index:-1;height:941px;width:1050px;overflow:hidden;">
+            <img id="mapImg" src="{{asset('storage/map/mapPKU.png')}}" style="position:absolute;top:-150px;left:-250px;z-index:-1;height:941px;width:1050px;overflow:scroll;">
             <div style="position:fixed;top:0px;width:100%;height:700px;z-index:10;" class="e"></div>
 
         <div id = "frl">
@@ -149,17 +149,18 @@
         .e{
             background-image: -webkit-linear-gradient( top,#fff,transparent);
             -moz-background-image: -moz-linear-gradient( top,#fff,transparent);
-           opacity:0.5;
+            opacity:0.5;
         }
 
-        .blend
+        /*.blend
         {
             overflow: hidden;
             background-size:1068px;
             background-image: url({{asset('storage/map/mapPKU.png')}}), -webkit-linear-gradient( top,#aaa,#000);
             -moz-background-image: url({{asset('storage/map/mapPKU.png')}}), -moz-linear-gradient( top,#aaa,#000);
             background-blend-mode: screen;
-        }
+        }*/
+
     </style>
 @endsection
 @section('scripts')
