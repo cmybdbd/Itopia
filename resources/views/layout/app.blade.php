@@ -350,7 +350,7 @@
 <body>
 @yield('content')
 <div class="modal fade bs-example-modal-sm report-content" role="dialog">
-    <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-dialog modal-sm" style="width:70%;" role="document">
     <div class="modal-content">
         <div class="modal-body" style="text-align: center;">
             <div style="margin-left:5%;margin-right:5%;">

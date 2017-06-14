@@ -169,30 +169,6 @@
     </div>
 </div>
 
-
-    <div class="modal fade bs-example-modal-sm confirm-content" role="dialog" style="">
-        <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div style="width: 70vw">
-                        <div>
-                            <div style="text-align:center">
-                                <p>继续订下一单？</p>
-                            </div>
-                            <hr class="mysplit">
-                            <div class="newbtn-group">
-                                <button class="btn btn-default m-color"  data-dismiss="modal">否</button>
-                                <button class="btn btn-default m-color" id="confirmFinish">是</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
     <div id="param">
         <div id="oid" data-content="{{$order->id}}"></div>
         <div id="gatepass" data-content="{{$gatepass}}"></div>
@@ -265,13 +241,6 @@
                 $(gatepwd.children()[i]).text(gatepass[i]);
                 $(roompwd.children()[i]).text(passwd[i]);
             }
-            $("#finish").on('click',function(){
-                if($("#startTime").attr('data-content')*1000 > (new Date().getTime()))
-                {
-                    return;
-                }
-                $(".confirm-content").modal();
-            })
 
             $("#confirmFinish").on('click', function () {
                 window.location.href = '/home';
@@ -330,8 +299,8 @@ function doLoop(){
     if(nums > 0){
         btn.html(hours+':'+mins+':'+secs);
     }else{
-        alert('亲，使用已结束，请带好您的随身物品！');
-        window.location.href='/home';
+        //alert('亲，使用已结束，请带好您的随身物品！');
+        //window.location.href='/home';
     }
 }
 </script>
