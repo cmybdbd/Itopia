@@ -347,7 +347,7 @@ function doLoop(){
       wx.openLocation({
         latitude: lat,
         longitude: lng,
-        name: '蜗壳空间',
+        name: '{{$order->hasRoom->title}}',
         address: '{{$order->hasRoom->address}}',
         scale: 14,
         infoUrl: '/'
