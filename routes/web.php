@@ -52,6 +52,7 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('/orderList/{id}', 'OrderController@getOrderList');
     Route::get('/isFirstOrder/{id}', 'OrderController@isFirstOrder');
     Route::get('/getOrderList', 'HomeController@orderList');
+    Route::get('/getOrderByDay/{day}', 'HomeController@getOrderByDay');
 
     Route::get('/manage/room', 'RoomController@manageRoom');
     Route::get('/manage/room/{rid}', 'RoomController@manageRoomById');
