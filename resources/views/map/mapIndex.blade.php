@@ -65,10 +65,10 @@
 
     </div>
     <div style="position:fixed;width:100%;z-index:100;overflow:scroll;">
-        <div id='day' class="circle" style="text-align:center;position:absolute;bottom:64px;left:20%;">
+        <div id='day' class="circle" style="text-align:center;position:fixed;bottom:64px;left:20%;">
             <p class="font-xl" style="margin-top:16px;font-weight:500;">时租</p>
             <p class="font-l m-color" style="margin-top:-10px;font-weight:500;">19 / 小时</p></div>
-        <div id='night' class="circle" style="text-align:center;position:absolute;bottom:64px;right:20%;">
+        <div id='night' class="circle" style="text-align:center;position:fixed;bottom:64px;right:20%;">
             <p class="font-xl" style="margin-top:16px;font-weight:500;">包夜</p>
             <p class="font-l m-color" style="margin-top:-10px;font-weight:500;">179 / 夜</p></div>
     </div>
