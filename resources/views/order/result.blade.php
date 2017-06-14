@@ -178,131 +178,163 @@
     </div>
 @endsection
 @section('scripts')
-    <script src="{{url('js/jssor.slider.min.js')}}"></script>
-    <script>
-        $(function() {
-            var jssor_1_SlideshowTransitions = [
-                {
-                    $Duration:1000,
-                    x:-0.3,
-                    $During:{$Left:[0.3,0.7]},
-                    $Easing:{$Left:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},
-                    $Opacity:0
-                },
-                {
-                    $Duration:1000,
-                    x:0.3,
-                    $SlideOut:true,
-                    $Easing:{$Left:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},
-                    $Opacity:0
-                }
-            ];
-
-            var jssor_1_options = {
-                $AutoPlay: 1
-            };
-            var jssor_slider = [];
-                jssor_slider= new $JssorSlider$("slide", jssor_1_options);
-
-            // var jssor_2_slider = new $JssorSlider$("jssor_2", jssor_1_options);
-
-            /*responsive code begin*/
-            /*remove responsive code if you don't want the slider scales while window resizing*/
-            function ScaleSlider() {
-                var uload = false;
-                    var refwidth = jssor_slider.$Elmt.parentNode.clientWidth;
-                    var refheight = jssor_slider.$Elmt.parentNode.clientHeight;
-                    if (refwidth) {
-                        if(refheight / refwidth > 1)
-                        {
-                            jssor_slider.$ScaleHeight(Math.min(refheight,200));
-                        }
-                        else
-                        {
-                            jssor_slider.$ScaleWidth(Math.min(refwidth,300));
-                        }
-                    }
-                    else {
-                        uload =true;
-                    }
-                if(uload)
-                    window.setTimeout(ScaleSlider, 30);
-            }
-            ScaleSlider();
-            $(window).bind("load", ScaleSlider);
-            $(window).bind("resize", ScaleSlider);
-            $(window).bind("orientationchange", ScaleSlider);
-
-            var gatepwd = $(".gatepwd>.pwd-group");
-            var roompwd = $(".roompwd>.pwd-group");
-            var gatepass =$("#gatepass").attr("data-content");
-            var passwd = $("#passwd").attr("data-content");
-            for (i = 0; i < 6; i++) {
-                $(gatepwd.children()[i]).text(gatepass[i]);
-                $(roompwd.children()[i]).text(passwd[i]);
-            }
-
-            $("#confirmFinish").on('click', function () {
-                window.location.href = '/home';
-            });
-
-            if($("#endTime").attr('data-content')*1000 <= (new Date().getTime()))
+<script src="{{url('js/jssor.slider.min.js')}}"></script>
+<script>
+    $(function() {
+        var jssor_1_SlideshowTransitions = [
             {
-                $("#countDown > span").text('已结束');
+                $Duration:1000,
+                x:-0.3,
+                $During:{$Left:[0.3,0.7]},
+                $Easing:{$Left:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},
+                $Opacity:0
+            },
+            {
+                $Duration:1000,
+                x:0.3,
+                $SlideOut:true,
+                $Easing:{$Left:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},
+                $Opacity:0
             }
+        ];
 
-            timeCount($("#timeCount"));
+        var jssor_1_options = {
+            $AutoPlay: 1
+        };
+        var jssor_slider = [];
+            jssor_slider= new $JssorSlider$("slide", jssor_1_options);
+
+        // var jssor_2_slider = new $JssorSlider$("jssor_2", jssor_1_options);
+
+        /*responsive code begin*/
+        /*remove responsive code if you don't want the slider scales while window resizing*/
+        function ScaleSlider() {
+            var uload = false;
+                var refwidth = jssor_slider.$Elmt.parentNode.clientWidth;
+                var refheight = jssor_slider.$Elmt.parentNode.clientHeight;
+                if (refwidth) {
+                    if(refheight / refwidth > 1)
+                    {
+                        jssor_slider.$ScaleHeight(Math.min(refheight,200));
+                    }
+                    else
+                    {
+                        jssor_slider.$ScaleWidth(Math.min(refwidth,300));
+                    }
+                }
+                else {
+                    uload =true;
+                }
+            if(uload)
+                window.setTimeout(ScaleSlider, 30);
+        }
+        ScaleSlider();
+        $(window).bind("load", ScaleSlider);
+        $(window).bind("resize", ScaleSlider);
+        $(window).bind("orientationchange", ScaleSlider);
+
+        var gatepwd = $(".gatepwd>.pwd-group");
+        var roompwd = $(".roompwd>.pwd-group");
+        var gatepass =$("#gatepass").attr("data-content");
+        var passwd = $("#passwd").attr("data-content");
+        for (i = 0; i < 6; i++) {
+            $(gatepwd.children()[i]).text(gatepass[i]);
+            $(roompwd.children()[i]).text(passwd[i]);
+        }
+
+        $("#confirmFinish").on('click', function () {
+             window.location.href = '/home';
         });
 
-var btn;
-var clock = '';
-var nums;
+        if($("#endTime").attr('data-content')*1000 <= (new Date().getTime()))
+        {
+            $("#countDown > span").text('已结束');
+        }
 
-function timeCount(thisBtn){
-    btn = thisBtn;
+        timeCount($("#timeCount"));
+    });
 
-    var date_time = new Date();
-    
-    nums = $("#endTime").attr('data-content')*1.0 - date_time.getTime()/1000;
-    nums =parseInt(nums);
-    console.log( nums);
-    clock = setInterval(doLoop, 1000); //一秒执行一次
-}
+    var btn;
+    var clock = '';
+    var nums;
 
-function doLoop(){
-    var hours = 0;
-    var mins = 0;
-    nums--;
-    t = nums;
-    while(t>=3600)
-    {
-        hours++;
-        t=t-3600;
-    }
-    while(t>=60)
-    {
-        mins++;
-        t=t-60;
-    }
-    var secs = t;
+    function timeCount(thisBtn){
+        btn = thisBtn;
 
-    if(hours<10){
-        hours="0"+hours;
-    }
-    if(mins<10){
-        mins="0"+mins;
-    }
-    if(secs<10){
-        secs="0"+secs;
+        var date_time = new Date();
+        console.log(date_time.getTime()/1000);
+        console.log($("#startTime").attr('data-content')*1.0);
+        
+        if(date_time.getTime()/1000 <= $("#startTime").attr('data-content')*1.0){
+            t = $("#endTime").attr('data-content')*1.0 - $("#startTime").attr('data-content')*1.0;
+            var hours = 0;
+            var mins = 0;
+            while(t>=3600)
+            {
+                hours++;
+                t=t-3600;
+            }
+            while(t>=60)
+            {
+                mins++;
+                t=t-60;
+            }
+            var secs = t;
+
+            if(hours<10){
+                hours="0"+hours;
+            }
+            if(mins<10){
+                mins="0"+mins;
+            }
+            if(secs<10){
+                secs="0"+secs;
+            }
+            btn.html(hours+':'+mins+':'+secs);
+            return;
+        }
+        else{
+            nums = $("#endTime").attr('data-content')*1.0 - date_time.getTime()/1000;
+            nums =parseInt(nums);
+            console.log( nums);
+            clock = setInterval(doLoop, 1000); //一秒执行一次
+        }
     }
 
-    if(nums > 0){
-        btn.html(hours+':'+mins+':'+secs);
-    }else{
-        //alert('亲，使用已结束，请带好您的随身物品！');
-        //window.location.href='/home';
+    function doLoop(){
+        var hours = 0;
+        var mins = 0;
+        nums--;
+        t = nums;
+        while(t>=3600)
+        {
+            hours++;
+            t=t-3600;
+        }
+        while(t>=60)
+        {
+            mins++;
+            t=t-60;
+        }
+        var secs = t;
+
+        if(hours<10){
+            hours="0"+hours;
+        }
+        if(mins<10){
+            mins="0"+mins;
+        }
+        if(secs<10){
+            secs="0"+secs;
+        }
+
+        if(nums > 0){
+            btn.html(hours+':'+mins+':'+secs);
+        }else{
+            alert('亲，使用已结束，请带好您的随身物品！');
+            window.location.href='/home';
+        }
     }
-}
 </script>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" charset="utf-8">
