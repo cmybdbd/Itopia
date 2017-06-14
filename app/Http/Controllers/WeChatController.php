@@ -106,7 +106,38 @@ class WeChatController extends Controller
         });
         return $response; // Laravel 里请使用：return $response;
     }
+    public function getToken(){
+        /*$options = [
+        'debug'  => true,
+        'app_id' => 'wxa6e10a805f012943',
+        'secret' => '8eab99771e7587f0ee615476964cf5c6',
+        'token'  => 'easywechat',
+        // 'aes_key' => null, // 可选
+        'log' => [
+            'level' => 'debug',
+            'file'  => '/tmp/easywechat.log', // XXX: 绝对路径！！！！
+        ],
+    ];
+    $app = new Application($options);
+    https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wxa6e10a805f012943&secret=8eab99771e7587f0ee615476964cf5c6
+    */
+        return view('getToken');
+    }
     public function navigation(){
+        /*$options = [
+        'debug'  => true,
+        'app_id' => 'wxa6e10a805f012943',
+        'secret' => '8eab99771e7587f0ee615476964cf5c6',
+        'token'  => 'easywechat',
+        // 'aes_key' => null, // 可选
+        'log' => [
+            'level' => 'debug',
+            'file'  => '/tmp/easywechat.log', // XXX: 绝对路径！！！！
+        ],
+    ];
+    $app = new Application($options);
+    https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wxa6e10a805f012943&secret=8eab99771e7587f0ee615476964cf5c6
+    */
         $wechat = app('wechat');
         $js = $wechat->js;
         return view('map.mapWX')->with('js',$js);
