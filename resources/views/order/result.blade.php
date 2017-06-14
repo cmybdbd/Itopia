@@ -74,15 +74,17 @@
             background-image: -webkit-gradient(linear,0 0, 100% 0 ,from(transparent), to(transparent),color-stop(20%,  #1dccb8) , color-stop(80%,  #1dccb8));
         }
         .xTimer{
-            width: 84%;
+            width: 298px;
             position:absolute;
+            margin-left:-150px;
+            left:50%;
             text-align: center;
-            top:240px;
-            margin: 20px 8% 20px 8%;
+            top:280px;
             padding-top: 10px;
             padding-bottom: 10px;
             background:rgba(0,0,0,0.4);
             box-shadow:none;
+            z-index:100;
         }
     </style>
 @endsection
@@ -100,7 +102,10 @@
             开启导航
         </span>
         </div>
-        
+        <div class="xTimer font-xl w-color" id="countDown">
+                剩余时长&nbsp;&nbsp;&nbsp;
+                <span id="timeCount" class="font-xl"></span>
+        </div>
         <!--<div id="container" style="width:500px; height:300px"></div>-->
         <div class="myrow"  id="slide" style="margin-bottom: 1vh;margin-left:auto;margin-right:auto;display:block;text-align:center;width:auto;height: 200px;overflow:hidden;visibility:hidden;position:relative;top:0px;left:0px;" >
             <div data-u="slides" style="width: 325px;height: 200px; overflow:hidden;position:relative;top:0px;left:0px;">
@@ -116,10 +121,7 @@
             </div>
         </div>
     </div>
-<div class="xTimer font-xl w-color" id="countDown">
-                剩余时长&nbsp;&nbsp;&nbsp;
-                <span id="timeCount" class="cd font-xl"></span>
-            </div>
+    
     <div style="margin:3vw">
         
         <hr class="mysplit">
@@ -154,10 +156,10 @@
             <div class="f-color font-xl">
                 温馨提示
             </div>
-            <div class="mybox" style="box-shadow:none;">
+            <div class="mybox" style="box-shadow:none;text-align:center;">
                 <div>私人空间密码仅在主人使用时段有效哦～</div>
                 <div>主人要爱惜空间，尽量保持安静哦！</div>
-                <div>蜗壳空间是无烟空间哦，请主人不要在屋内吸烟</div>
+                <div>蜗壳空间是无烟空间，请主人不要在屋内吸烟</div>
             </div>
         </div>
     </div>
