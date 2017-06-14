@@ -107,22 +107,8 @@ class WeChatController extends Controller
         return $response; // Laravel 里请使用：return $response;
     }
     public function navigation(){
-        /*$options = [
-        'debug'  => true,
-        'app_id' => 'wxa6e10a805f012943',
-        'secret' => '8eab99771e7587f0ee615476964cf5c6',
-        'token'  => 'easywechat',
-        // 'aes_key' => null, // 可选
-        'log' => [
-            'level' => 'debug',
-            'file'  => '/tmp/easywechat.log', // XXX: 绝对路径！！！！
-        ],
-    ];
-    $app = new Application($options);
-    */
         $wechat = app('wechat');
         $js = $wechat->js;
-        return $js;
-        //return view('map.mapWX')->with('js',$js);
+        return view('map.mapWX')->with('js',$js);
     }
 }
