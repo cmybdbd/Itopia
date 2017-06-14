@@ -96,10 +96,11 @@
         </div>
         <div class="b-color">
             地址：{{$order->hasRoom->address}}
+            <span id="openLocation" class="m-color">
+            开启导航
+        </span>
         </div>
-        <!--<div class="font-s b-color">
-            您可以在微信公众号“查看我的地理位置”中获得精确导航
-        </div>-->
+        
         <!--<div id="container" style="width:500px; height:300px"></div>-->
         <div class="myrow"  id="slide" style="margin-bottom: 1vh;margin-left:auto;margin-right:auto;display:block;text-align:center;width:auto;height: 200px;overflow:hidden;visibility:hidden;position:relative;top:0px;left:0px;" >
             <div data-u="slides" style="width: 325px;height: 200px; overflow:hidden;position:relative;top:0px;left:0px;">
@@ -125,7 +126,7 @@
 
         <div class="gatepwd f-color font-xl" style="margin-bottom:24px;">
             <div style="margin-top:24px;">大门密码</div>
-            <div class="pwd-group font-b m-color" style="top:330px;">
+            <div class="pwd-group font-b m-color" style="top:355px;">
                 <div></div>
                 <div></div>
                 <div></div>
@@ -138,7 +139,7 @@
         <hr class="mysplit">
         <div class="roompwd f-color font-xl"style="margin-bottom:24px;">
             <div style="margin-top:24px;" >房间密码</div>
-            <div class="pwd-group font-b m-color" style="top:410px;">
+            <div class="pwd-group font-b m-color" style="top:432px;">
                 <div></div>
                 <div></div>
                 <div></div>
@@ -341,5 +342,37 @@
         });
 
     </script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8">
+    wx.config(<?php echo $js->config(array('onMenuShareQQ', 'onMenuShareWeibo','openLocation','getLocation'), true) ?>);
+    
+    wx.ready(function(){
+    console.log('成功调用');
+    document.querySelector('#openLocation').onclick = function () {
+      wx.openLocation({
+        latitude: 38.099994,
+        longitude: 115.324520,
+        name: '蜗壳空间',
+        address: '123',
+        scale: 14,
+        infoUrl: 'http://weixin.qq.com'
+      });
+    };
+
+      /*wx.getLocation({
+        success: function (res) {
+          console.log(JSON.stringify(res));
+        },
+        cancel: function (res) {
+          console.log('用户拒绝');
+        }
+      });*/
+  });
+
+  wx.error(function(res){
+        // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
+        console.log(res);
+    });
+</script>
 
 @endsection

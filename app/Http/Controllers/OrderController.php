@@ -12,6 +12,7 @@ use App\Order;
 use App\Room;
 use Illuminate\Http\Request;
 use Webpatser\Uuid\Uuid;
+use EasyWeChat\Foundation\Application;
 
 class OrderController extends Controller
 {
@@ -78,7 +79,9 @@ class OrderController extends Controller
             }
             if(!empty($order->passwd))
             {
-                return view('order.result')->with(['order' => $order, 'gatepass'=>$gatePasswd]);
+                $wechat = app('wechat');
+                $js = $wechat->js;
+                return view('order.result')->with(['order' => $order, 'gatepass'=>$gatePasswd, 'js'=>$js]);
             }
         }
         return "something error";
