@@ -38,16 +38,17 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('/nightPageLocation','HomeController@nightPageLocation');
     Route::get('/getDayRooms/{name}','HomeController@getDayRooms');
     Route::get('/getNightRooms/{name}','HomeController@getNightRooms');
+
     Route::get('/create/{uid}/{rid}', 'OrderController@createOrder');
     Route::get('/create/day/{uid}/{rid}/{day}', 'OrderController@createDayOrder');
     Route::get('/create/night/{uid}/{rid}/{day}', 'OrderController@createNightOrder');
     Route::get('/result/{id}','OrderController@getOrderDetail');
     Route::get('/isNightBooked/{rid}/{day}', 'RoomController@isRoomNightBooked');
-
     Route::post('/order/complete','OrderController@completeOrder');
 
     Route::get('/comment/{id}', 'CommentController@create');
     Route::get('/commentResult', 'CommentController@finish');
+
     Route::get('/orderList/{id}', 'OrderController@getOrderList');
     Route::get('/isFirstOrder/{id}', 'OrderController@isFirstOrder');
     Route::get('/getOrderList', 'HomeController@orderList');
@@ -61,6 +62,8 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('/manage/anotherOrder', 'OrderController@getAnotherOrderList');
     Route::post('/manage/anotherOrder', 'OrderController@markOrderHistory');
     Route::get('/manage/orderInfo/{id}','OrderController@getOrderInfo');
+
+    Route::get('/wxnav','WeChatController@navigation');
 
     Route::get('/idAuth', 'IDAuthController@IDauth');
 

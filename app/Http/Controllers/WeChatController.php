@@ -8,7 +8,6 @@
 
 namespace App\Http\Controllers;
 
-
 //use App\iUser;
 use App\Order;
 use App\User;
@@ -23,7 +22,7 @@ class WeChatController extends Controller
     {
         $wechat = app('wechat');
         $response = $wechat->server->serve();
-// 将响应输出
+        // 将响应输出
         return $response;
     }
 
@@ -107,5 +106,9 @@ class WeChatController extends Controller
         });
         return $response; // Laravel 里请使用：return $response;
     }
-
+    public function navigation(){
+        $wechat = app('wechat');
+        $js = $wechat->js;
+        return view('map.mapWX')->with('js',$js);
+    }
 }

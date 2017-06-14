@@ -82,18 +82,7 @@
                 </div>
             </div>
         </div>
-<!--
-    <ul class="nav nav-pills" role="tablist" style="overflow:auto;display:flex;justify-content: space-between">
-        @foreach($rooms as $key => $room)
-        <li role="presentation" class="{{$key == 0 ? 'active':''}}">
-            <a href="#{{$room->title}}" aria-controls="{{$room->title}}" role="tab"
-               data-toggle="pill">
-                {{$room->title}}
-            </a>
-        </li>
-        @endforeach
-    </ul>
--->
+
     <div class="tab-content">
         @foreach($rooms as $key => $room)
         <div role="tabpanel" class="tab-pane {{$key == 0? 'active':''}}" id="{{$room->id}}">
@@ -101,7 +90,6 @@
                 <div class="f-color font-xl">
                     房间基本信息
                 </div>
-                <!--<form action="{{url('/manage/room')}}" onsubmit="confirm('确认修改'+{{$room->title}}+'的基本信息?')" method="POST">-->
                     {!! csrf_field() !!}
                     <input type="hidden" name="id" value="{{$room->id}}">
                     <div class="mybox" style="box-shadow:none;">
@@ -113,10 +101,9 @@
                                 <div id="hourPrice{{$room->id}}" data-content="{{$room->hourPrice}}"></div>
                                 <div id="nightPrice{{$room->id}}" data-content="{{$room->nightPrice}}"></div>
                                 <div id="phoneOfManager{{$room->id}}" data-content="{{$room->phoneOfManager}}"></div>
-                        <button  class="btn btn-default btn-block btn-main-3 roomUpdate"style="float:right;padding-top:0px;margin-top:-28px;">确认</button>
+                        <button  class="btn btn-default btn-block btn-main-3 roomUpdate" data-content="{{$room->id}}"style="float:right;padding-top:0px;margin-top:-28px;">确认</button>
                         </div>
                     </div>
-                <!--</form>-->
             </div>
             <hr class="mysplit">
             <div class="mybox" style="box-shadow:none;">
@@ -372,31 +359,7 @@ function showHumanDay(ts)
                 {
                     text: "明日(" + pickerText[1] + ')',
                     value: 1
-                }/*,
-                {
-                    text: pickerText[2],
-                    value: 2
-                },
-                {
-                    text: pickerText[3],
-                    value: 3
-                },
-                {
-                    text: pickerText[4],
-                    value: 4
-                },
-                {
-                    text: pickerText[5],
-                    value: 5
-                },
-                {
-                    text: pickerText[6],
-                    value: 6
-                },
-                {
-                    text: pickerText[7],
-                    value: 7
-                }*/
+                }
             ];
             var DayDatePicker = new Picker({
                 data: [DayDate],
@@ -549,15 +512,20 @@ function showHumanDay(ts)
                     });
             }
             });
+
         $('.roomUpdate').on('click',function(){
             alert('click roomUpdate');
-            var room_data = {
-                'id' : 'ae50f8da-225e-11e7-a09c-01163e028801',
-                'hourPrice' : 19,
-                'nightPrice' : 179,
-                'number' : 1995
-            };
-            $.ajax({
+            var r = confirm('是否确认更新房间基本信息?')
+            if(r == true)
+            {
+                roomId = $(this).attr('data-content');
+                var room_data = {
+                'id' : roomId,
+                'hourPrice' : $('#hourPrice'+roomId).attr('data-content'),
+                'nightPrice' : $('#nightPrice'+roomId).attr('data-content'),
+                'number' : $('#phoneOfManager'+roomId).attr('data-content')
+                };
+                $.ajax({
                     url:'/manage/roomUpdate',
                     data: room_data,
                     type: 'GET',
@@ -579,6 +547,7 @@ function showHumanDay(ts)
                          alert('failed');
                      }
                 });
+            }
         });
 
     </script>
