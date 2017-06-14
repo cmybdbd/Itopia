@@ -16,7 +16,7 @@ return [
     /*
      * 账号基本信息，请从微信公众平台/开放平台获取
      */
-    'grant_type' => env('WECHAT_GRANT_TYPE','client_credential'),
+    //'grant_type' => env('WECHAT_GRANT_TYPE','client_credential'),
     'app_id'  => env('WECHAT_APPID', 'wxa6e10a805f012943'),         // AppID
     'secret'  => env('WECHAT_SECRET', '8eab99771e7587f0ee615476964cf5c6'),     // AppSecret
     //'token'   => env('WECHAT_TOKEN', 'whatapity'),          // Tokens
