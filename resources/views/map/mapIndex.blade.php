@@ -18,10 +18,9 @@
             </div>
         </div>
             <!--onmouseover="getMousePos(event)"-->
-        <div style="width:100%;height:100%;">
+        <div>
             <img id="mapImg" src="{{asset('storage/map/mapPKU.png')}}" style="position:absolute;top:-150px;left:-250px;z-index:-1;height:941px;width:1050px;overflow:hidden;">
-            <div style="position:fixed;top:0px;width:100%;height:700px;z-index:10;" class="e">
-        </div>
+            <div style="position:fixed;top:0px;width:100%;height:700px;z-index:10;" class="e"></div>
 
         <div id = "frl">
             <img src="{{asset('storage/map/landmark.png')}}" style="position:absolute;top:250px;left:85px;width:45px;z-index:11;">

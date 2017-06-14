@@ -423,21 +423,21 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
-
+<!--
 <div id="lng" data-content=""></div>
 <div id="lat" data-content=""></div>
-
+-->
 <script src="{{url('js/app.js')}}"></script>
 <script>
     $("#report").on('click',function () {
         $(".report-content").modal();
     });
-    if( $('#lng').attr('data-content') == null || $('#lat').attr('data-content') == null)
+   /* if( $('#lng').attr('data-content') == null || $('#lat').attr('data-content') == null)
     {
         
     /*new BMap.LocalCity().get(function (r) { //定位城市  
         alert("当前定位城市:" + r.name);  
-    });*/
+    });
         new BMap.Geolocation().getCurrentPosition(function (r) { //定位位置  
             if (this.getStatus() == BMAP_STATUS_SUCCESS) {
                 $('#lng').attr('data-content',r.point.lng);
@@ -458,7 +458,7 @@
     //BMAP_STATUS_PERMISSION_DENIED 没有权限。对应数值“6”。(自 1.1 新增)  
     //BMAP_STATUS_SERVICE_UNAVAILABLE   服务不可用。对应数值“7”。(自 1.1 新增)  
     //BMAP_STATUS_TIMEOUT   超时。对应数值“8”。(自 1.1 新增)
-    }
+    }*/
 </script>
 @yield('scripts')
 </body>
