@@ -350,12 +350,12 @@
     console.log('成功调用');
     document.querySelector('#openLocation').onclick = function () {
       wx.openLocation({
-        latitude: 38.099994,
-        longitude: 115.324520,
+        latitude: '{{$order->hasRoom->latitude}}',
+        longitude: '{{$order->hasRoom->longitude}}',
         name: '蜗壳空间',
-        address: '123',
+        address: '{{$order->hasRoom->address}}',
         scale: 14,
-        infoUrl: 'http://weixin.qq.com'
+        infoUrl: '/'
       });
     };
 
