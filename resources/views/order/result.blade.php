@@ -117,8 +117,8 @@
         </div>
     </div>
 <div class="xTimer font-xl w-color" id="countDown">
-                使用计时&nbsp;&nbsp;&nbsp;
-                <span class="cd font-xl"></span>
+                剩余时长&nbsp;&nbsp;&nbsp;
+                <span id="timeCount" class="cd font-xl"></span>
             </div>
     <div style="margin:3vw">
         
@@ -273,86 +273,75 @@
 
             $("#confirmFinish").on('click', function () {
                 window.location.href = '/home';
-/*
-                $.ajax({
-                    url:'/order/complete',
-                    type: 'POST',
-                    data: {
-                        _token: $("meta[name='csrf-token']").attr('content'),
-                        oid:  $("#oid").attr('data-content')
-                    },
-                    success:function(){
-                        window.location.href = window.location.href.replace(
-                            /result/,
-                            'comment'
-                        )
-                    }
-                });
-  */              
             });
-            var wait = -(+$("#startTime").attr("data-content")*1000- (new Date().getTime()));
-            console.log(wait);
-            var finish = $("#finish");
-            function time(o, w) {
-                if(w <= 0)
-                {
-                    if(!finish.hasClass('disabled'))
-                    {
-                        finish.addClass('disabled');
-                    }
-                    o.text("00:00:00");2
-                    setTimeout(function () {
-                            time(o,w)
-                        },
-                        1000)
-                    /*$.ajax({
-                    url:'/order/complete',
-                    type: 'POST',
-                    data: {
-                        _token: $("meta[name='csrf-token']").attr('content'),
-                        oid:  $("#oid").attr('data-content')
-                    },
-                    success:function(){
-                        window.location.href = window.location.href.replace(
-                            /result/,
-                            'comment'
-                        )
-                    }
-                });*/
-                }
-                else
-                {
-                    o.text(((w/(60*60*1000))|0 )+ ':' + (((w%(60*60*1000))/(60*1000))|0) + ':' + ((w %(60*1000))/1000|0));
-                        //dateFormat(w, 'HH:MM:ss'));
-                    w += 1000;
-                    setTimeout(function () {
-                            time(o,w)
-                        },
-                        1000)
-                }
-            }
+
             if($("#endTime").attr('data-content')*1000 <= (new Date().getTime()))
             {
                 $("#countDown > span").text('已结束');
             }
-            else
-            {
-                time($("#countDown > span"),wait);
-            }
+
+            timeCount($("#timeCount"));
         });
 
-    </script>
+var btn;
+var clock = '';
+var nums;
+
+function timeCount(thisBtn){
+    btn = thisBtn;
+
+    var date_time = new Date();
+    
+    nums = $("#endTime").attr('data-content')*1.0 - date_time.getTime()/1000;
+    nums =parseInt(nums);
+    console.log( nums);
+    clock = setInterval(doLoop, 1000); //一秒执行一次
+}
+
+function doLoop(){
+    var hours = 0;
+    var mins = 0;
+    nums--;
+    t = nums;
+    while(t>=3600)
+    {
+        hours++;
+        t=t-3600;
+    }
+    while(t>=60)
+    {
+        mins++;
+        t=t-60;
+    }
+    var secs = t;
+
+    if(hours<10){
+        hours="0"+hours;
+    }
+    if(mins<10){
+        mins="0"+mins;
+    }
+    if(secs<10){
+        secs="0"+secs;
+    }
+
+    if(nums > 0){
+        btn.html(hours+':'+mins+':'+secs);
+    }else{
+        alert('亲，使用已结束，请带好您的随身物品！');
+        window.location.href='/home';
+    }
+}
+</script>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" charset="utf-8">
-    wx.config(<?php echo $js->config(array('onMenuShareQQ', 'onMenuShareWeibo','openLocation','getLocation'), true) ?>);
+    wx.config(<?php echo $js->config(array('onMenuShareQQ', 'onMenuShareWeibo','openLocation','getLocation'), false) ?>);
     
     wx.ready(function(){
         lat = '{{$order->hasRoom->latitude}}' * 1.0;
         lng = '{{$order->hasRoom->longitude}}' * 1.0;
-        alert(lat);
-        alert(lng);
-    console.log('成功调用');
-    document.querySelector('#openLocation').onclick = function () {
+        console.log('成功调用');
+        document.querySelector('#openLocation').onclick = function () {
       wx.openLocation({
         latitude: lat,
         longitude: lng,
