@@ -347,13 +347,15 @@
     wx.config(<?php echo $js->config(array('onMenuShareQQ', 'onMenuShareWeibo','openLocation','getLocation'), true) ?>);
     
     wx.ready(function(){
-        alert('{{$order->hasRoom->latitude}}');
-        alert('{{$order->hasRoom->longitude}}');
+        lat = '{{$order->hasRoom->latitude}}' * 1.0;
+        lng = '{{$order->hasRoom->longitude}}' * 1.0;
+        alert(lat);
+        alert(lng);
     console.log('成功调用');
     document.querySelector('#openLocation').onclick = function () {
       wx.openLocation({
-        latitude: '{{$order->hasRoom->latitude}}',
-        longitude: '{{$order->hasRoom->longitude}}',
+        latitude: lat,
+        longitude: lng,
         name: '蜗壳空间',
         address: '{{$order->hasRoom->address}}',
         scale: 14,
