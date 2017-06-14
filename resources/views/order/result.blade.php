@@ -347,6 +347,8 @@
     wx.config(<?php echo $js->config(array('onMenuShareQQ', 'onMenuShareWeibo','openLocation','getLocation'), true) ?>);
     
     wx.ready(function(){
+        alert('{{$order->hasRoom->latitude}}');
+        alert('{{$order->hasRoom->longitude}}');
     console.log('成功调用');
     document.querySelector('#openLocation').onclick = function () {
       wx.openLocation({
