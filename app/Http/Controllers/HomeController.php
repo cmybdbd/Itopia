@@ -39,6 +39,7 @@ class HomeController extends Controller
 
     function dayPage()
     {
+        PageViewController::updatePageView('useHour');
         $rooms = Room::where('state','<>',0)->orderBy('state','ASC')->get();
         $rooms = $this->arrayDaySort($rooms,0);
         return view('list.dayRoom')->withRooms($rooms);
@@ -46,6 +47,7 @@ class HomeController extends Controller
     }
     function nightPage()
     {
+        PageViewController::updatePageView('useNight');
         $rooms = Room::where('state','<>',0)->orderBy('state','ASC')->get();
         $rooms = $this->arrayNightSort($rooms,0);
         return view('list.nightRoom')->withRooms($rooms);
