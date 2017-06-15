@@ -96,9 +96,15 @@ class HomeController extends Controller
         $id = Auth::id();
         return redirect()->action('OrderController@getOrderList',['id'=>$id]);
     }
-    function getOrderByDay($day)
+    function getOrderByDay($rid,$day)
     {
-        $order = Order::where('state','=',3)->orWhere('state','=',5)->where('startTime', '<=', date('Y-m-d', time() + ($day+1)*24*60*60))->where('startTime', '>', date('Y-m-d', time() + $day*24*60*60))->get();
+        $room = Room::where('id','=',$rid)->get();
+        $order = 0;
+        //return date('Y-m-d', time()+$day*24*60*60);
+        if(empty($room))
+            $order = Order::where('state','>=',3)->Where('state','<=',5)->Where('state','<>',4)->where('startTime', '<=', date('Y-m-d', $day + 24*60*60))->where('startTime', '>', date('Y-m-d', $day))->get();
+        else
+            $order = Order::where('state','>=',3)->Where('state','<=',5)->Where('state','<>',4)->where('startTime', '<=', date('Y-m-d', $day + 24*60*60))->where('startTime', '>', date('Y-m-d', $day))->where('roomId','=',$rid)->get();
         return $order;
     }
     function my_sort($a,$b)
