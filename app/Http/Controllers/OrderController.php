@@ -564,7 +564,7 @@ class OrderController extends Controller
         $order = Uuid::generate()->string;
 
         $today = 0;
-        if(strtotime(date('Y-m-d H:i:s', $request->startTime)) >  time())
+        if(strtotime(date('Y-m-d H:i:s', $request->startTime)) >  strtotime(date('Y-m-d H:i:s', time() + 24*60*60)))
             $today = 1;
 
         if($request->isDay)
@@ -578,8 +578,10 @@ class OrderController extends Controller
             if(!empty($maxDayTime))
                 if($maxDayTime > strtotime(date('Y-m-d H:i:s', $request->startTime)))
                     return Response::json(['code' => '300','param' => 'wrong time']);
+
             if($today == 0)
             {
+
                 if($room->today_nextTime() == -1)
                     return Response::json(['code' => '300','param' => '今日已满']);
                 if(strtotime(date('Y-m-d H:i:s', $request->startTime)) < $room->today_nextTime())
@@ -587,6 +589,7 @@ class OrderController extends Controller
             }
             else
             {
+
                 if($room->next_day_time() == -1)
                     return Response::json(['code' => '300','param' => '今日已满']);
                 if(strtotime(date('Y-m-d H:i:s', $request->startTime)) < $room->next_day_time())
