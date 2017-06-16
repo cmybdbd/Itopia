@@ -28,7 +28,7 @@ class HomeController extends Controller
             {
                 if($ex_order->endTime < date("Y-m-d H:i:s",time()))
                 {
-                    Order::find($ex_order->id)->where('endTime','<',date("Y-m-d H:i:s",time()))->update(['state'=> Constant::$ORDER_STATE['COMPLETE']]);
+                    Order::find($ex_order->id)->where('endTime','<',date("Y-m-d H:i:s",time()))->where('state','=',5)->update(['state'=> Constant::$ORDER_STATE['COMPLETE']]);
                 }
             }
             //return redirect()->action('OrderController@getOrderDetail',['id'=>$exs->id]);
