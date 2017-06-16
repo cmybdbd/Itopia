@@ -6,15 +6,11 @@
         <div class="mybtn-group" style="position:fixed;z-index:1000;top:0px;width:100%;height:60px;">
             <div id="myOrder">
                 <img src="{{asset('storage/map/myOrder.png')}}" style="z-index:1000;position:fixed;width:40px;top:24px;left:30px;" alt="">
-                <span style="font-size:14px;font-weight:500;position:fixed;top:68px;left:22px;">
-                我的订单
-                </span>
+                <span style="font-size:14px;font-weight:500;position:fixed;top:68px;left:22px;">我的订单</span>
             </div>
             <div id="equipment">
-                <img src="{{asset('storage/map/roomFacilities.png')}}" style="z-index:1000;position:fixed;width:40px;top:24px;right:30px;" alt="">
-                <span style="font-size:14px;font-weight:500;position:fixed;top:68px;right:22px;">
-                    小屋设施
-                </span>
+                <img src="{{asset('storage/map/questionMark.png')}}" style="z-index:1000;position:fixed;width:40px;top:24px;right:30px;" alt="">
+                <span style="font-size:14px;font-weight:500;position:fixed;top:68px;right:22px;">使用指南</span>
             </div>
         </div>
             <!--onmouseover="getMousePos(event)"-->
@@ -77,7 +73,33 @@
         <div class="uidN" data-content="{{\Illuminate\Support\Facades\Auth::user()->idnumber}}"></div>
     </div>
 
-    <div class="modal fade bs-example-modal-sm equipment-content" role="dialog">
+<div class="modal fade bs-example-modal-sm equipment-content" role="dialog">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content" style="margin-left:42px;margin-right:42px;">
+                <div class="modal-body">
+                    <div style="margin-left:6px;margin-right:6px;text-align:center;">
+                        <div class="font-l m-color" style="margin-bottom:18px;">使用指南</div>
+                        <img data-dismiss="modal" src="{{asset('storage/map/cross.png')}}" style="cursor:pointer;position:absolute;width:20px;top:20px;right:20px;" alt="">
+                        <div class="font-s m-color">【白天即时使用】</div>
+                        <div class="font-s" style="margin-bottom:18px;line-height:160%;text-align:left;">
+白天11:30-22:30的时间按小时下单使用，由于空间讲求即时使用，您不能跳过未被预约的时间段进行预约，如果您想来蜗壳这儿玩，就随时点进来看看房间是否可用吧！
+                        </div>
+                        <div class="font-s m-color">【晚上整夜预约】</div>
+                        <div class="font-s" style="margin-bottom:18px;line-height:160%;text-align:left;">
+晚上23:00-次日11:00的时间是全部属于您的，您可以预约今天起7天内的夜晚。
+                        </div>
+                        <div class="font-s m-color">【智能管理，一客一扫】</div>
+                        <div class="font-s" style="margin-bottom:18px;line-height:160%;text-align:left;">
+蜗壳私人空间采用O2O智能管理，没有前台，如果您在使用过程中有任何问题，可以在线联系客服或拨打电话13161953877，每一单结束后都会有保洁阿姨为您清扫房间。
+<br><br>最后，小蜗想麻烦您，保持楼道的安静，也保持蜗壳私人空间的整洁卫生！
+                        </div>
+                        <div class="m-color font-s">感谢您对蜗壳私人空间的支持！<br>祝您使用愉快~</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--<div class="modal fade bs-example-modal-sm equipment-content" role="dialog">
         <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
                 <div class="modal-body">
@@ -114,7 +136,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
 @endsection
 @section('style')
     <style>

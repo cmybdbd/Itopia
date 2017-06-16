@@ -339,7 +339,7 @@
 .user-nav ul li:hover,.user-nav ul li:active span{background-position-x:-20px;}
 
 .modal-dialog{
-    margin-top:40%;
+    margin-top:72px;
 }
 .picker .picker-panel{
     height:206px !important;
