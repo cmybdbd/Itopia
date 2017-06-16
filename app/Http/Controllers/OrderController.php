@@ -91,7 +91,7 @@ class OrderController extends Controller
         PageViewController::updatePageView('orderList');
         $orders =Order::with('hasRoom')->where([['userId','=',$id],
             ['state' ,'>=',Constant::$ORDER_STATE['COMPLETE']]
-            ])->orderBy('endTime','DESC')->get();
+            ])->where('payNum','<>',null)->orderBy('endTime','DESC')->get();
         $_orders= $this->arrayOrderSort($orders);
         return view('order.list')->withOrders($_orders);
         /*return view('order.list')->withOrders(Order::with('hasRoom')->where([
