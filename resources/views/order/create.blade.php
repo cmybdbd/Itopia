@@ -39,7 +39,6 @@
             text-align:right;
         }
         .selectPanel{
-
             margin-bottom: 1vh !important;
             padding-left:0.8em;
             padding-top: 1em;

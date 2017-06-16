@@ -73,7 +73,6 @@
         }
         .custom-textarea{
             resize: none;
-
         }
         .mybox .myrow{
             flex-basis: 100%;
@@ -177,7 +176,6 @@
             width: 50%;
             height: 100%;
             float: left;
-
 
             display: -webkit-flex;
             -webkit-flex-direction:column;
@@ -343,7 +341,9 @@
 .modal-dialog{
     margin-top:40%;
 }
-    
+.picker .picker-panel{
+    height:206px !important;
+}
 </style>
     @yield('style')
 </head>
