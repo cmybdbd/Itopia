@@ -20,11 +20,12 @@
                 <span id="tomorrow"></span>
             </div>
         </div>
+        <?php
+                $str = $_SERVER['REQUEST_URI'];
+                $s = $str[strlen($str) - 3] ?>
         <div class="mybtn-group" style="position:fixed;z-index:10;top:48px;height:44px;background-color:white;box-shadow:0 1px 6px #eeeeee">
             <div class="nav-button" id="allHome" style="width:33%;height:44px;">
-                <span style="margin-top: 1vh">
-                    全   部
-                </span>
+                <span style="{{$s == 'a'?'color:#1dccb8;':''}}margin-top: 1vh">全部</span>
             </div>
             <div class="nav-button" id="nearestHome" style="width:33%;height:44px;">
                 <span style="margin-top: 1vh">
@@ -32,7 +33,17 @@
                 </span>
             </div>
             <div class="user nav-button" id="chooseArea" style="width:34%;height:44px;border-right-color:white;border-right-style:solid;border-right-width:5px;">
-                <span style="margin-top: 2vh">选择小区</span>
+                @if($s == 'd')
+                    <span style="margin-top: 2vh;color:#1dccb8">稻香园</span>
+                @elseif($s =='h')
+                    <span style="margin-top: 2vh;color:#1dccb8">大河庄苑</span>
+                @elseif($s =='f')
+                    <span style="margin-top: 2vh;color:#1dccb8">芙蓉里</span>
+                @elseif($s =='z')
+                    <span style="margin-top: 2vh;color:#1dccb8">中关园</span>
+                @else
+                    <span style="margin-top: 2vh">选择小区</span>
+                @endif
                 <div id="triangle-down-b" style="position:absolute;right:14%;top:52%;"></div>
                 <div class="user-nav">
                     <ul style="padding-left:0px; top:0px;">
